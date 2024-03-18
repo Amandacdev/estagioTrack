@@ -1,19 +1,20 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastro Aluno</title>
+    <title>Cadastro Alunos</title>
 </head>
 <body>
 
-<h1>Cadastro de Aluno</h1>
-    <form>
-        Nome: <input type="text"/>
-        Senha: <input type="password"/>
-        <input type="submit"/>
+    <h1>Cadastro de Aluno</h1>
+
+    <form th:action="@{/alunos/save}" method="POST" th:object="${aluno}">
+        Nome: <input type="text" th:field="*{nome}"/>
+        Senha: <input type="password" th:field="*{senha}"/>
+        <input type="submit" value="salvar" />
     </form>
 </body>
 </html>
