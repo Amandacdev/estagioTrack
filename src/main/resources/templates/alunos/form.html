@@ -13,8 +13,37 @@
 
     <form th:action="@{/alunos/save}" method="POST" th:object="${aluno}">
         Nome: <input type="text" th:field="*{nome}"/>
+
+        <label th:field="*{instituicao}">Instituição</label>
+        <select name="instituicao">
+            <option value="ifpb">IFPB</option>
+            <option value="ufpb">UFPB</option>
+            <option value="unipe">UNIPE</option>
+            <option value="outra">Outra</option>
+        </select>
+
+        <fieldset style="margin-right: 70%;">
+            <legend>Selecione suas habilidades/competencias</legend>
+            <div>
+                <input type="checkbox" value="html" th:field="*{html}"/> HTML<br />
+                <input type="checkbox" value="css" th:field="*{css}"/> CSS<br />
+            </div>
+        </fieldset>
+
+
         Senha: <input type="password" th:field="*{senha}"/>
         <input type="submit" value="salvar" />
+
     </form>
+
 </body>
 </html>
+
+<!--
+O aluno informa em formulário próprio dados pessoais (não muitos, escolha alguns) e
+diversas habilidades e competências (defina habilidades e competências da área de
+computação apenas). As habilidades e competências são pré-determinadas pelo sistema (ex:
+Programação Phyton, Design em CSS, Especialista em UX, Programador de testes, etc.). Dois
+dos dados próprios devem ser o nome de usuário (username) e a senha utilizados para futura
+autenticação no sistema.
+-->

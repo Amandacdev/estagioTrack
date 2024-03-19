@@ -23,7 +23,7 @@ public class AlunoController {
     @RequestMapping("/save")
     public String save(Aluno aluno, Model model){
         alunoRepository.save(aluno);
-        model.addAttribute("aluno",alunoRepository.findAll());
+        model.addAttribute("alunos",alunoRepository.findAll());
         return "alunos/list";
     }
 }

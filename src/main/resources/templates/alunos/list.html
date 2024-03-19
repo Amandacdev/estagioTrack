@@ -2,22 +2,39 @@
 <html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <!--
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    -->
+    <title>Lista</title>
 </head>
 <body>
+    <h1>Lista de alunos cadastrados</h1>
+
     <table>
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Nome</th>
+                <th>Instituição</th>
+                <th>HTML</th>
+                <th>CSS</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="aluno: ${alunos}">
                 <td>[[${aluno.id}]]</td>
                 <td th:text="${aluno.nome}"></td>
+                <td th:text="${aluno.instituicao}"></td>
+                <td>
+                    <span th:if="${aluno.html}">Sim</span>
+                    <span th:unless="${aluno.html}">Não</span>
+                </td>
+                <td>
+                    <span th:if="${aluno.css}">Sim</span>
+                    <span th:unless="${aluno.css}">Não</span>
+                </td>
             </tr>
         </tbody>
     </table>

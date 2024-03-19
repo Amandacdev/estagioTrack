@@ -13,11 +13,19 @@ public class Aluno implements Serializable {
     @Getter
     public Integer id;
     public String nome;
+    public String instituicao;
+    public Boolean html;
+    public Boolean css;
     public String senha;
-    public Aluno(Integer id, String nome, String senha){
+
+    public Aluno(Integer id, String nome, String senha, String instituicao, Boolean html, Boolean css){
         this.id = id;
         this.nome = nome;
         this.senha = senha;
+        this.instituicao = instituicao;
+        this.css = css;
+        this.html = html;
+
     }
 
 }
