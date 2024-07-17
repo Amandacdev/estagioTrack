@@ -13,10 +13,13 @@ public class Aluno implements Serializable {
     @Getter
     public Integer id;
     public String nome;
+    public String email;
     public String senha;
-    public Aluno(Integer id, String nome, String senha){
+
+    public Aluno(Integer id, String nome, String email, String senha){
         this.id = id;
         this.nome = nome;
+        this.email = email;
         this.senha = senha;
     }
 

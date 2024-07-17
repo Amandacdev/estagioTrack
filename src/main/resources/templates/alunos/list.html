@@ -8,16 +8,20 @@
     <title>Document</title>
 </head>
 <body>
-    <table>
+    <h1>Alunos Cadastrados</h1>
+    <table border='1'>
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Nome</th>
+                <th>Email</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="aluno: ${alunos}">
                 <td>[[${aluno.id}]]</td>
                 <td th:text="${aluno.nome}"></td>
+                <td th:text="${aluno.email}"></td>
             </tr>
         </tbody>
     </table>
