@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/alunos")
 public class AlunoController {
 
+
     @RequestMapping("/form")
     public String getForm(Aluno aluno, Model model){
         model.addAttribute("aluno", aluno);
