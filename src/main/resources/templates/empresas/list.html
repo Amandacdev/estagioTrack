@@ -6,23 +6,25 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Alunos Cadastrados</title>
+    <title>Empresas Cadastradas</title>
 </head>
 <body>
-    <h1>Alunos Cadastrados</h1>
+    <h1>Empresas Cadastradas</h1>
     <table border='1'>
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Nome</th>
+                <th>Razão social</th>
+                <th>Responsável</th>
                 <th>Email</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="aluno: ${alunos}">
-                <td>[[${aluno.id}]]</td>
-                <td th:text="${aluno.nome}"></td>
-                <td th:text="${aluno.email}"></td>
+            <tr th:each="empresa: ${empresas}">
+                <td>[[${empresa.id}]]</td>
+                <td th:text="${empresa.razaoSocial}"></td>
+                <td th:text="${empresa.responsavel}"></td>
+                <td th:text="${empresa.email}"></td>
             </tr>
         </tbody>
     </table>

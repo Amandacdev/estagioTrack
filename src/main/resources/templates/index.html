@@ -1,11 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Página inicial do estagioTrack</title>
+    <title>EstagioTrack</title>
 </head>
 <body>
 <h2>Bem vindo ao estagioTrack, dev!</h2>
+<button><a th:href="@{/alunos/form}">Cadastrar-se como aluno</a></button>
+<button><a th:href="@{/empresas/form}">Cadastrar-se como empresa</a></button>
+<h3>Já possui uma conta? Faça login ✔</h3>
+ <button><a th:href="@{/login}">Fazer login</a></button> <!-- Não está redirecionando corretamente para o arquivo! -->
 </body>
 </html>
 
