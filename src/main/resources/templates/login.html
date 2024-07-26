@@ -5,9 +5,17 @@
     <title>Fazer login no EstagioTrack</title>
 </head>
 <body>
+
 <h2>Informe seus dados abaixo:</h2>
-Email: <input type="text" th:field="*{email}"/> <br/>
-        Senha: <input type="password" th:field="*{senha}"/> <br/>
-<button><a href="">Fazer login</a></button>
+<!--
+<form th:action="@{/usuarios/get}" method="GET" th:object="${usuario}">
+    Email: <input type="text" th:field="*{usuario.email}"/> <br/>
+    Senha: <input type="password" th:field="*{usuario.senha}"/> <br/>
+
+    <button><a href="">Fazer login</a></button>
+
+</form>
+-->
+
 </body>
 </html>
