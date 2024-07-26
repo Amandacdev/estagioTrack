@@ -1,21 +1,23 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Fazer login no EstagioTrack</title>
 </head>
+
 <body>
 
-<h2>Informe seus dados abaixo:</h2>
-<!--
-<form th:action="@{/usuarios/get}" method="GET" th:object="${usuario}">
-    Email: <input type="text" th:field="*{usuario.email}"/> <br/>
-    Senha: <input type="password" th:field="*{usuario.senha}"/> <br/>
+    <h2>Informe seus dados abaixo:</h2>
 
-    <button><a href="">Fazer login</a></button>
+    <form action="" method="">
+        Email: <input type="text"> <br />
+        Senha: <input type="password"> <br />
+        <button><a href="">Fazer login</a></button>
+        <button><a th:href="@{/form}">Voltar</a></button>
+    </form>
 
-</form>
--->
 
 </body>
+
 </html>
