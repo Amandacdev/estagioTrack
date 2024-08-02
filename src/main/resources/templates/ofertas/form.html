@@ -5,17 +5,17 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastrar Empresas</title>
+    <title>Cadastrar Ofertas</title>
 </head>
 <body>
 
-    <h1>Cadastro de Empresas</h1>
+    <h1>Cadastro de Ofertas</h1>
 
-    <form th:action="@{/empresas/save}" method="POST" th:object="${empresa}">
-        Razão social: <input type="text" th:field="*{razaoSocial}"/> <br/>
-        Responsável: <input type="text" th:field="*{responsavel}"/> <br/>
-        Email: <input type="text" th:field="*{email}"/> <br/>
-        Senha: <input type="password" th:field="*{senha}"/> <br/>
+    <form th:action="@{/ofertas/save}" method="POST" th:object="${oferta}">
+        <!-- Ofertante: <input type="text" th:field="*{ofertante.razaoSocial}"/> <br/> -->
+        Cargo: <input type="text" th:field="*{tituloCargo}"/> <br/>
+        <!-- Valor da bolsa: <input type="text" th:field="*{valorBolsa}"/> <br/> -->
+        Horários: <input type="text" th:field="*{horarios}"/> <br/>
         <input type="submit" value="salvar" />
     </form>
     <button><a th:href="@{/form}">Cancelar</a></button>

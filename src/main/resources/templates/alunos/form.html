@@ -5,11 +5,11 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastro Alunos</title>
+    <title>Cadastrar Alunos</title>
 </head>
 <body>
 
-    <h1>Cadastro de Aluno</h1>
+    <h1>Cadastro de Alunos</h1>
 
     <form th:action="@{/alunos/save}" method="POST" th:object="${aluno}">
         Nome: <input type="text" th:field="*{nome}"/> <br/>
