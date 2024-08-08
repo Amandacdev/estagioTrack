@@ -14,15 +14,15 @@ public class Oferta implements Serializable {
     public Integer id;
     public Empresa ofertante;
     public String tituloCargo;
-    // public double valorBolsa;
-    public String horarios;
+    public String valorBolsa;
+    public String turno;
 
-    public Oferta(Integer id, Empresa ofertante, String tituloCargo, String horarios) {
+    public Oferta(Integer id, Empresa ofertante, String tituloCargo, String valorBolsa, String turno) {
         this.id = id;
         this.ofertante = new Empresa(1, "Empresa Teste", "Responsável Teste", "email@teste.com", "123");
         this.tituloCargo = tituloCargo;
-        // this.valorBolsa = valorBolsa;
-        this.horarios = horarios;
+        this.valorBolsa = valorBolsa;
+        this.turno = turno;
     }
 }
 

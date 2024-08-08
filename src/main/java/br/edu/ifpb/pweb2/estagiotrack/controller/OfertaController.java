@@ -27,7 +27,7 @@ public class OfertaController {
     //Falta ajustar o redirect
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String cadastroOferta(Oferta oferta, Model model, RedirectAttributes attr){
-        if(oferta.getTituloCargo().isEmpty() || oferta.getOfertante().getRazaoSocial().isEmpty() || oferta.horarios.isEmpty()){
+        if(oferta.getTituloCargo().isEmpty() || oferta.getOfertante().getRazaoSocial().isEmpty() || oferta.turno.isEmpty()){
             model.addAttribute("alert", "Por favor preencha todos os campos corretamente.");
             return "ofertas/form";
         } else {

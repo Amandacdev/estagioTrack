@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -14,9 +14,15 @@
     <form th:action="@{/ofertas/save}" method="POST" th:object="${oferta}">
         <!-- Ofertante: <input type="text" th:field="*{ofertante.razaoSocial}"/> <br/> -->
         Cargo: <input type="text" th:field="*{tituloCargo}"/> <br/>
-        <!-- Valor da bolsa: <input type="text" th:field="*{valorBolsa}"/> <br/> -->
-        Horários: <input type="text" th:field="*{horarios}"/> <br/>
-        <input type="submit" value="salvar" />
+        Valor da bolsa: <input type="number" min="0" th:field="*{valorBolsa}"/> <br/>
+        Turno: 
+        <select th:field="*{turno}">
+            <option value="Manhã">Manhã</option>
+            <option value="Tarde">Tarde</option>
+            <option value="A combinar">A combinar</option>
+        </select> 
+        <br/>
+        <input type="submit" value="Salvar" />
     </form>
     <button><a th:href="@{/form}">Cancelar</a></button>
 

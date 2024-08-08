@@ -17,16 +17,16 @@
                 <th>Ofertante</th>
                 <th>Cargo</th>
                 <th>Valor da bolsa</th>
-                <th>Horários</th>
+                <th>Turno</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="oferta: ${ofertas}">
                 <td>[[${oferta.id}]]</td>
-                <!-- <td th:text="${oferta.ofertante.razaoSocial}"></td> -->
-                <td th:text="${oferta.cargo}"></td>
-                <!-- <td th:text="${oferta.valorBolsa}"></td> -->
-                <td th:text="${oferta.horarios}"></td>
+                <td th:text="${oferta.ofertante.razaoSocial}">
+                <td th:text="${oferta.tituloCargo}"></td>
+                <td th:text="${oferta.valorBolsa}"></td>
+                <td th:text="${oferta.turno}"></td>
             </tr>
         </tbody>
     </table>
