@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 @Controller
 @RequestMapping("/alunos")
 public class AlunoController {
 
+    @Autowired
+    private AlunoRepository alunoRepository;
 
     @RequestMapping("/form")
     public String getForm(Aluno aluno, Model model){
@@ -21,10 +22,12 @@ public class AlunoController {
         return "alunos/form";
     }
 
-    @Autowired
-    private AlunoRepository alunoRepository;
+    @RequestMapping("/list")
+    public String getList(Aluno aluno, Model model){
+        model.addAttribute("alunos", alunoRepository.findAll());
+        return "alunos/list";
+    }
 
-    //Falta ajustar o redirect
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String cadastroAluno(Aluno aluno, Model model, RedirectAttributes attr){
         if(aluno.getNome().isEmpty() || aluno.getEmail().isEmpty() || aluno.getSenha().isEmpty()){
@@ -32,10 +35,8 @@ public class AlunoController {
             return "alunos/form";
         } else {
             alunoRepository.save(aluno);
-            model.addAttribute("alunos",alunoRepository.findAll());
-            return "alunos/list";
-            //attr.addFlashAttribute("mensagem", "Aluno cadastrado com sucesso!");
-            //return "redirect:/alunos/list";
+            //attr.addFlashAttribute("success", "Aluno cadastrado com sucesso!");
+            return "redirect:/alunos/list";
         }
 
     }

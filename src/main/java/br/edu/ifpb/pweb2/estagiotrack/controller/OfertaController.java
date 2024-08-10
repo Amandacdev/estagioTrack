@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 @Controller
 @RequestMapping("/ofertas")
 public class OfertaController {
 
+    @Autowired
+    private OfertaRepository ofertaRepository;
 
     @RequestMapping("/form")
     public String getForm(Oferta oferta, Model model){
@@ -21,10 +22,12 @@ public class OfertaController {
         return "ofertas/form";
     }
 
-    @Autowired
-    private OfertaRepository ofertaRepository;
+    @RequestMapping("/list")
+    public String getList(Oferta oferta, Model model){
+        model.addAttribute("ofertas", ofertaRepository.findAll());
+        return "ofertas/list";
+    }
 
-    //Falta ajustar o redirect
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String cadastroOferta(Oferta oferta, Model model, RedirectAttributes attr){
         if(oferta.getTituloCargo().isEmpty() || oferta.getOfertante().getRazaoSocial().isEmpty() || oferta.turno.isEmpty()){
@@ -32,10 +35,8 @@ public class OfertaController {
             return "ofertas/form";
         } else {
             ofertaRepository.save(oferta);
-            model.addAttribute("ofertas",ofertaRepository.findAll());
-            return "ofertas/list";
-            //attr.addFlashAttribute("mensagem", "Aluno cadastrado com sucesso!");
-            //return "redirect:/alunos/list";
+            //attr.addFlashAttribute("mensagem", "Oferta cadastrada com sucesso!");
+            return "redirect:/ofertas/list";
         }
 
     }
