@@ -22,8 +22,8 @@ public class AlunoController {
         return "alunos/form";
     }
 
-    @RequestMapping("/list")
-    public String getList(Aluno aluno, Model model){
+    @RequestMapping()
+    public String getList(Model model){
         model.addAttribute("alunos", alunoRepository.findAll());
         return "alunos/list";
     }
@@ -36,7 +36,7 @@ public class AlunoController {
         } else {
             alunoRepository.save(aluno);
             //attr.addFlashAttribute("success", "Aluno cadastrado com sucesso!");
-            return "redirect:/alunos/list";
+            return "redirect:/alunos";
         }
 
     }

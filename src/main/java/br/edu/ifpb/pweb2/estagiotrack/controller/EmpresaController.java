@@ -22,8 +22,8 @@ public class EmpresaController {
         return "empresas/form";
     }
 
-    @RequestMapping("/list")
-    public String getList(Empresa empresa, Model model){
+    @RequestMapping()
+    public String getList(Model model){
         model.addAttribute("empresas", empresaRepository.findAll());
         return "empresas/list";
     }
@@ -36,7 +36,7 @@ public class EmpresaController {
         } else {
             empresaRepository.save(empresa);
             //attr.addFlashAttribute("mensagem", "Empresa cadastrada com sucesso!");
-            return "redirect:/empresas/list";
+            return "redirect:/empresas";
         }
     }
 }

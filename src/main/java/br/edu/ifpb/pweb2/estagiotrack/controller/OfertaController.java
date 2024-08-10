@@ -22,8 +22,8 @@ public class OfertaController {
         return "ofertas/form";
     }
 
-    @RequestMapping("/list")
-    public String getList(Oferta oferta, Model model){
+    @RequestMapping()
+    public String getList(Model model){
         model.addAttribute("ofertas", ofertaRepository.findAll());
         return "ofertas/list";
     }
@@ -36,7 +36,7 @@ public class OfertaController {
         } else {
             ofertaRepository.save(oferta);
             //attr.addFlashAttribute("mensagem", "Oferta cadastrada com sucesso!");
-            return "redirect:/ofertas/list";
+            return "redirect:/ofertas";
         }
 
     }
