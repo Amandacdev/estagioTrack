@@ -14,6 +14,16 @@ public class EmpresaRepository {
 
     public Empresa findById(Integer id){ return repositorio.get(id);}
 
+    //Parte do workaround para vincular oferta a empresa dinamicamente.
+    public Empresa findByEmail(String email) {
+        for (Empresa empresa : repositorio.values()) {
+            if (empresa.getEmail().equals(email)) {
+                return empresa;
+            }
+        }
+        return null;
+    }
+
     public void save(Empresa empresa){
         Integer id = null;
         id = (empresa.getId() == null) ? this.getMaxId() + 1: empresa.getId();

@@ -39,4 +39,14 @@ public class EmpresaController {
             return "redirect:/empresas";
         }
     }
+
+    //Parte do workaround para vincular oferta a empresa dinamicamente.
+    public Empresa buscarPorEmail(String email) {
+        Empresa empresa = empresaRepository.findByEmail(email);
+        if (empresa != null) {
+            return empresa;
+        } else {
+            return null;
+        }
+    }
 }

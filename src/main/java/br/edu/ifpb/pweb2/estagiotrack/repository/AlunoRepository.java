@@ -14,6 +14,16 @@ public class AlunoRepository {
 
     public Aluno findById(Integer id){ return repositorio.get(id);}
 
+    //Parte do workaround para vincular aluno a oferta dinamicamente.
+    public Aluno findByEmail(String email) { 
+        for (Aluno aluno : repositorio.values()) {
+            if (aluno.getEmail().equals(email)) {
+                return aluno;
+            }
+        }
+        return null;
+    }    
+
     public void save(Aluno aluno){
         Integer id = null;
         id = (aluno.getId() == null) ? this.getMaxId() + 1: aluno.getId();
