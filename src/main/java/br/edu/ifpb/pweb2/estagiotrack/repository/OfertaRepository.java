@@ -37,4 +37,9 @@ public class OfertaRepository {
                .orElseThrow(NoSuchElementException::new);
        return contaMaxId.getId() == null ? 1 : contaMaxId.getId() + 1;
     }
+
+    public void delete(Integer id) {
+        repositorio.remove(id);
+    }
+
 }

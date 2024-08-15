@@ -38,6 +38,17 @@ public class OfertaController {
             //attr.addFlashAttribute("mensagem", "Oferta cadastrada com sucesso!");
             return "redirect:/ofertas";
         }
+    }
 
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public String deletaOferta(Integer ofertaId, RedirectAttributes attr) {
+        Oferta oferta = ofertaRepository.findById(ofertaId);
+        if (oferta != null) {
+            ofertaRepository.delete(ofertaId);
+            attr.addFlashAttribute("mensagem", "Oferta de estágio cancelada com sucesso!");
+        } else {
+            attr.addFlashAttribute("alert", "Oferta de estágio não encontrada.");
+        }
+        return "redirect:/ofertas";
     }
 }
