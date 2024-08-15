@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Candidaturas</title>
+</head>
+<body>
+
+    <h1>Candidaturas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome do Aluno</th>
+                <th>Título da Vaga</th>
+                <th>Status</th> <!-- Quando tivermos atributo status-->
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${candidaturas.isEmpty()}">
+                <td colspan="3">Nenhuma candidatura encontrada</td>
+            </tr>
+            <tr th:each="candidatura : ${candidaturas}">
+                <td th:text="${candidatura.alunoCandidato.nome}">Nome do Estudante</td>
+                <td th:text="${candidatura.ofertaSelecionada.tituloCargo}">Título da Vaga</td>
+                <td th:text="${candidatura.status}">Status</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
+
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

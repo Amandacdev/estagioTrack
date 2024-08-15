@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard do Coordenador</title>
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+</head>
+<body>
+
+  
+    <h1>Bem-vindo à página do Coordenador!</h1>
+    <p>Aqui estão as funcionalidades disponíveis para o coordenador.</p>
+
+    <button class="btn btn-sm btn-outline-secondary">
+        <a class="nav-item nav-link" th:href="@{/ofertas}">Listar Ofertas de Estágio</a>
+    </button>
+
+    <button class="btn btn-sm btn-outline-secondary">
+        <a class="nav-item nav-link" th:href="@{/coordenador/candidaturas}">Listar Candidaturas</a>
+    </button>
+
+</body>
+</html>

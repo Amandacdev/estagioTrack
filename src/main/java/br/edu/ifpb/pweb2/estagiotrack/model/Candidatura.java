@@ -1,8 +1,25 @@
 package br.edu.ifpb.pweb2.estagiotrack.model;
 
-public class Candidatura {
-    //Deve conter os seguintes atributos:
-    // Aluno alunoCandidato;
-    // Oferta ofertaSelecionada;
-    // O listAll dessa classe será usado para o requisito de coordenador ver candidaturas.
+import lombok.Data;
+
+import java.io.Serializable;
+
+@Data
+public class Candidatura implements Serializable {
+
+    private Integer id; 
+
+    private Aluno alunoCandidato;
+    private Oferta ofertaSelecionada;
+
+    public Candidatura(Aluno alunoCandidato, Oferta ofertaSelecionada) {
+        this.alunoCandidato = alunoCandidato;
+        this.ofertaSelecionada = ofertaSelecionada;
+    }
+
+    public Candidatura(Integer id, Aluno alunoCandidato, Oferta ofertaSelecionada) {
+        this.id = id;
+        this.alunoCandidato = alunoCandidato;
+        this.ofertaSelecionada = ofertaSelecionada;
+    }
 }

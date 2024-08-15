@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Acesso à Coordenação</title>
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+</head>
+<body>
+
+    <h2>Acesso à Coordenação</h2>
+    <form action="#" th:action="@{/coordenador/validar}" method="post">
+        <div>
+            <label for="pin">Insira o PIN de acesso:</label>
+            <input type="password" id="pin" name="pin" required>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-sm btn-outline-secondary">Entrar</button>
+        </div>
+    </form>
+
+    <p th:if="${erro}" th:text="${erro}" style="color:red;"></p>
+
+</body>
+</html>
