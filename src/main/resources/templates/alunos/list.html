@@ -10,7 +10,12 @@
 </head>
 <body>
     <h1>Alunos Cadastrados</h1>
-    <table border='1'>
+    
+    <div th:if="${#lists.isEmpty(alunos)}">
+        <p>Nenhum aluno cadastrado</p>
+    </div>
+    
+    <table border='1' th:if="${!#lists.isEmpty(alunos)}">
         <thead>
             <tr>
                 <th>Id</th>
@@ -26,6 +31,7 @@
             </tr>
         </tbody>
     </table>
+    
     <button><a th:href="@{/form}">Voltar</a></button>
 </body>
 </html>

@@ -10,7 +10,12 @@
 </head>
 <body>
     <h1>Ofertas Cadastradas</h1>
-    <table border='1'>
+
+    <div th:if="${#lists.isEmpty(ofertas)}">
+        <p>Nenhuma oferta cadastrada</p>
+    </div>
+
+    <table border='1' th:if="${!#lists.isEmpty(ofertas)}">
         <thead>
             <tr>
                 <th>Id</th>
