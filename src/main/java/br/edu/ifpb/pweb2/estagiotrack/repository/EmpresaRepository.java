@@ -18,6 +18,7 @@ public class EmpresaRepository {
     public Empresa findByEmail(String email) {
         for (Empresa empresa : repositorio.values()) {
             if (empresa.getEmail().equals(email)) {
+                System.out.println("Empresa encontrada" + empresa + email);
                 return empresa;
             }
         }

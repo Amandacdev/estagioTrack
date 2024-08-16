@@ -1,7 +1,11 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
+import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
+import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
 import br.edu.ifpb.pweb2.estagiotrack.repository.AlunoRepository;
+import br.edu.ifpb.pweb2.estagiotrack.repository.CandidaturaRepository;
+import br.edu.ifpb.pweb2.estagiotrack.repository.OfertaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +19,8 @@ public class AlunoController {
 
     @Autowired
     private AlunoRepository alunoRepository;
+    private CandidaturaRepository candidaturaRepository;
+    private OfertaRepository ofertaRepository;
 
     @RequestMapping("/form")
     public String getForm(Aluno aluno, Model model){
@@ -38,6 +44,21 @@ public class AlunoController {
             //attr.addFlashAttribute("success", "Aluno cadastrado com sucesso!");
             return "redirect:/alunos";
         }
+    }
 
+    @RequestMapping("/candidatar")
+    public String candidatarOferta(Integer ofertaId, Integer alunoId, RedirectAttributes attr) {
+        Aluno aluno = alunoRepository.findById(alunoId);
+        Oferta oferta = ofertaRepository.findById(ofertaId);
+
+        if (aluno == null || oferta == null) {
+            attr.addFlashAttribute("alert", "Erro ao candidatar-se à oferta.");
+            return "redirect:/ofertas";
+        }
+
+        Candidatura candidatura = new Candidatura(aluno, oferta);
+        candidaturaRepository.save(candidatura);
+        attr.addFlashAttribute("success", "Candidatura realizada com sucesso!");
+        return "redirect:/ofertas";
     }
 }

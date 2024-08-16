@@ -38,6 +38,10 @@
                         <input type="hidden" name="ofertaId" th:value="${oferta.id}" />
                         <button type="submit">Deletar</button>
                     </form>
+                    <form th:action="@{/alunos/candidatar}" method="post" style="display:inline;">
+                        <input type="hidden" name="ofertaId" th:value="${oferta.id}" />
+                        <button type="submit">Candidatar</button>
+                    </form>
                 </td>
             </tr>
         </tbody>
