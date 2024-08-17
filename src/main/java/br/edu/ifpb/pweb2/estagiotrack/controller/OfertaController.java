@@ -2,6 +2,7 @@ package br.edu.ifpb.pweb2.estagiotrack.controller;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
 import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
+import br.edu.ifpb.pweb2.estagiotrack.repository.EmpresaRepository;
 import br.edu.ifpb.pweb2.estagiotrack.repository.OfertaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,14 +16,20 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class OfertaController {
 
     @Autowired
-    private OfertaRepository ofertaRepository;
+    public OfertaRepository ofertaRepository;
 
     @Autowired
     private EmpresaController empresaController;
 
+    @Autowired
+    private EmpresaRepository empresaRepository;
+
     @RequestMapping("/form")
     public String getForm(Oferta oferta, Model model) {
-        model.addAttribute("oferta", oferta);
+        //Para facilitar os testes estou iniciando o projeto com 2 ofertas sendo inseridas ao acessar cadastrar oferta e voltar.
+        ofertaRepository.save(new Oferta(1, empresaRepository.findById(1),"responsavela@empresa.com", "Exemplo Front-End", "1000", "Manhã"));
+        ofertaRepository.save(new Oferta(2, empresaRepository.findById(2),"responsavelb@empresa.com", "Exemplo Back-End", "1000", "Tarde"));
+        ofertaRepository.save(new Oferta(3, empresaRepository.findById(3),"responsavelc@empresa.com", "Exemplo Full Stack", "1000", "A combinar"));
         return "ofertas/form";
     }
 
@@ -60,5 +67,15 @@ public class OfertaController {
             attr.addFlashAttribute("alert", "Oferta de estágio não encontrada.");
         }
         return "redirect:/ofertas";
+    }
+
+    //Parte do workaround para vincular oferta a empresa dinamicamente.
+    public Oferta buscarPorId(Integer id) {
+        Oferta oferta = ofertaRepository.findById(id);
+        if (oferta != null) {
+            return oferta;
+        } else {
+            return null;
+        }
     }
 }

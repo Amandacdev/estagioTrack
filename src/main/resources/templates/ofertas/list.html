@@ -23,7 +23,7 @@
                 <th>Cargo</th>
                 <th>Valor da bolsa</th>
                 <th>Turno</th>
-                <th>Ações</th>
+                <th colspan="2">Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -37,6 +37,12 @@
                     <form th:action="@{/ofertas/delete}" method="post" style="display:inline;">
                         <input type="hidden" name="ofertaId" th:value="${oferta.id}" />
                         <button type="submit">Deletar</button>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/candidaturas/form}" method="post" style="display:inline;">
+                        <input type="hidden" name="ofertaId" th:value="${oferta.id}" />
+                        <button type="submit">Candidatar</button>
                     </form>
                 </td>
             </tr>

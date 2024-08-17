@@ -10,9 +10,10 @@
     <table>
         <thead>
             <tr>
-                <th>Nome do Aluno</th>
-                <th>Título da Vaga</th>
-                <th>Status</th> <!-- Quando tivermos atributo status-->
+                <th>Aluno</th>
+                <th>Empresa</th>
+                <th>Oferta</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
@@ -21,15 +22,9 @@
             </tr>
             <tr th:each="candidatura : ${candidaturas}">
                 <td th:text="${candidatura.alunoCandidato.nome}">Nome do Estudante</td>
+                <td th:text="${candidatura.ofertaSelecionada.ofertante.razaoSocial}">Empresa</td>
                 <td th:text="${candidatura.ofertaSelecionada.tituloCargo}">Título da Vaga</td>
-                <td th:text="${candidatura.status}">Status</td>
-            </tr>
-        </tbody>
-    </table>
-
-</body>
-</html>
-
+                <!-- <td th:text="${candidatura.status}">Status</td> -->
             </tr>
         </tbody>
     </table>

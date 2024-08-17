@@ -18,6 +18,10 @@ public class EmpresaController {
 
     @RequestMapping("/form")
     public String getForm(Empresa empresa, Model model){
+        //Para facilitar os testes estou iniciando o projeto com 2 empresas inseridas ao acessar cadastrar empresa e voltar.
+        empresaRepository.save(new Empresa(1, "Empresa A", "Responsável Emp A", "responsavela@empresa.com", "123"));
+        empresaRepository.save(new Empresa(2, "Empresa B", "Responsável Emp B", "responsavelb@empresa.com", "123"));
+        empresaRepository.save(new Empresa(3, "Empresa C", "Responsável Emp C", "responsavelc@empresa.com", "123"));
         model.addAttribute("empresa", empresa);
         return "empresas/form";
     }

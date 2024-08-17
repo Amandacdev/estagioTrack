@@ -18,6 +18,11 @@ public class AlunoController {
 
     @RequestMapping("/form")
     public String getForm(Aluno aluno, Model model){
+        //Para facilitar os testes estou iniciando o projeto com 2 alunos sendo inseridos ao acessar cadastrar aluno  e voltar.
+        alunoRepository.save(new Aluno(1, "Amanda Cruz", "amanda@mail.com", "123"));
+        alunoRepository.save(new Aluno(2, "Brian Rafael", "brian@mail.com", "123"));
+        alunoRepository.save(new Aluno(3, "George Lima", "george@mail.com", "123"));
+        alunoRepository.save(new Aluno(4, "Olivia Oliva", "olivia@mail.com", "123"));
         model.addAttribute("aluno", aluno);
         return "alunos/form";
     }
@@ -38,6 +43,15 @@ public class AlunoController {
             //attr.addFlashAttribute("success", "Aluno cadastrado com sucesso!");
             return "redirect:/alunos";
         }
+    }
 
+    //Parte do workaround para vincular oferta a empresa dinamicamente.
+    public Aluno buscarPorEmail(String email) {
+        Aluno aluno = alunoRepository.findByEmail(email);
+        if (aluno != null) {
+            return aluno;
+        } else {
+            return null;
+        }
     }
 }
