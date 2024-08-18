@@ -15,9 +15,8 @@
 
     <form th:action="@{/candidaturas/save}" method="POST" th:object="${candidatura}">
         Oferta selecionada: <select th:field="*{idOferta}">
-            <option th:each="oferta : ${ofertas}" 
-                    th:value="${oferta.id}" 
-                    th:text="${oferta.ofertante.razaoSocial} + ' - ' + ${oferta.tituloCargo}">
+            <option th:each="oferta : ${ofertas}" th:value="${oferta.id}"
+                th:text="${oferta.ofertante.razaoSocial} + ' - ' + ${oferta.tituloCargo}">
             </option>
         </select> <br />
         Digite seu Email para confirmar: <input type="email" th:field="*{emailCandidato}">
