@@ -17,8 +17,9 @@ public class EmpresaController {
     private EmpresaRepository empresaRepository;
 
     @RequestMapping("/form")
-    public String getForm(Empresa empresa, Model model){
-        //Para facilitar os testes estou iniciando o projeto com 2 empresas inseridas ao acessar cadastrar empresa e voltar.
+    public String getForm(Empresa empresa, Model model) {
+        // Para facilitar os testes, iniciamos o projeto com algumas empresas inseridas
+        // ao acessar cadastrar empresa e voltar.
         empresaRepository.save(new Empresa(1, "Empresa A", "Responsável Emp A", "responsavela@empresa.com", "123"));
         empresaRepository.save(new Empresa(2, "Empresa B", "Responsável Emp B", "responsavelb@empresa.com", "123"));
         empresaRepository.save(new Empresa(3, "Empresa C", "Responsável Emp C", "responsavelc@empresa.com", "123"));
@@ -27,24 +28,24 @@ public class EmpresaController {
     }
 
     @RequestMapping()
-    public String getList(Model model){
+    public String getList(Model model) {
         model.addAttribute("empresas", empresaRepository.findAll());
         return "empresas/list";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String cadastroEmpresa(Empresa empresa, Model model, RedirectAttributes attr){
-        if(empresa.getRazaoSocial().isEmpty() || empresa.getEmail().isEmpty() || empresa.getSenha().isEmpty()){
+    public String cadastroEmpresa(Empresa empresa, Model model, RedirectAttributes attr) {
+        if (empresa.getRazaoSocial().isEmpty() || empresa.getEmail().isEmpty() || empresa.getSenha().isEmpty()) {
             model.addAttribute("alert", "Por favor preencha todos os campos corretamente.");
             return "empresas/form";
         } else {
             empresaRepository.save(empresa);
-            //attr.addFlashAttribute("mensagem", "Empresa cadastrada com sucesso!");
+            attr.addFlashAttribute("mensagem", "Empresa cadastrada com sucesso!");
             return "redirect:/empresas";
         }
     }
 
-    //Parte do workaround para vincular oferta a empresa dinamicamente.
+    // Parte do workaround para vincular oferta a empresa dinamicamente.
     public Empresa buscarPorEmail(String email) {
         Empresa empresa = empresaRepository.findByEmail(email);
         if (empresa != null) {

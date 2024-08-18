@@ -22,13 +22,13 @@ public class CoordenadorController {
 
     @GetMapping("/coordenador/acesso")
     public String acessoCoordenador() {
-        return "coordenador/acesso"; 
+        return "coordenador/acesso";
     }
 
     @PostMapping("/coordenador/validar")
     public String validarPin(@RequestParam("pin") String pin, Model model) {
         if (PIN_CORRETO.equals(pin)) {
-            return "redirect:/coordenador/dashboard"; 
+            return "redirect:/coordenador/dashboard";
         } else {
             model.addAttribute("erro", "PIN incorreto. Tente novamente.");
             return "coordenador/acesso";
@@ -37,18 +37,13 @@ public class CoordenadorController {
 
     @GetMapping("/coordenador/dashboard")
     public String dashboardCoordenador() {
-        return "coordenador/dashboard"; 
+        return "coordenador/dashboard";
     }
 
     @GetMapping("/coordenador/candidaturas")
     public String listarCandidaturas(Model model) {
-        // Busca todas as candidaturas usando o repositório
         List<Candidatura> candidaturas = candidaturaRepository.findAll();
-
-        // Adiciona as candidaturas ao Model para disponibilizá-las na view
         model.addAttribute("candidaturas", candidaturas);
-
-        // Retorna o nome do template que será renderizado
         return "candidaturas/list";
     }
 }

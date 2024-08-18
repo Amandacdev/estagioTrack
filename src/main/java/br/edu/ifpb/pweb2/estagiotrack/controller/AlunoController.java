@@ -17,8 +17,9 @@ public class AlunoController {
     private AlunoRepository alunoRepository;
 
     @RequestMapping("/form")
-    public String getForm(Aluno aluno, Model model){
-        //Para facilitar os testes estou iniciando o projeto com 2 alunos sendo inseridos ao acessar cadastrar aluno  e voltar.
+    public String getForm(Aluno aluno, Model model) {
+        // Para facilitar os testes, iniciamos o projeto com alguns alunos sendo
+        // inseridos ao acessar cadastrar aluno e voltar.
         alunoRepository.save(new Aluno(1, "Amanda Cruz", "amanda@mail.com", "123"));
         alunoRepository.save(new Aluno(2, "Brian Rafael", "brian@mail.com", "123"));
         alunoRepository.save(new Aluno(3, "George Lima", "george@mail.com", "123"));
@@ -28,24 +29,24 @@ public class AlunoController {
     }
 
     @RequestMapping()
-    public String getList(Model model){
+    public String getList(Model model) {
         model.addAttribute("alunos", alunoRepository.findAll());
         return "alunos/list";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String cadastroAluno(Aluno aluno, Model model, RedirectAttributes attr){
-        if(aluno.getNome().isEmpty() || aluno.getEmail().isEmpty() || aluno.getSenha().isEmpty()){
+    public String cadastroAluno(Aluno aluno, Model model, RedirectAttributes attr) {
+        if (aluno.getNome().isEmpty() || aluno.getEmail().isEmpty() || aluno.getSenha().isEmpty()) {
             model.addAttribute("alert", "Por favor preencha todos os campos corretamente.");
             return "alunos/form";
         } else {
             alunoRepository.save(aluno);
-            //attr.addFlashAttribute("success", "Aluno cadastrado com sucesso!");
+            attr.addFlashAttribute("success", "Aluno cadastrado com sucesso!");
             return "redirect:/alunos";
         }
     }
 
-    //Parte do workaround para vincular oferta a empresa dinamicamente.
+    // Parte do workaround para vincular oferta a empresa dinamicamente.
     public Aluno buscarPorEmail(String email) {
         Aluno aluno = alunoRepository.findByEmail(email);
         if (aluno != null) {

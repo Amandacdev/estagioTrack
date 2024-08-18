@@ -23,11 +23,4 @@ public class Candidatura implements Serializable {
         this.alunoCandidato = alunoCandidato;
         this.ofertaSelecionada = ofertaSelecionada;
     }
-
-    // public Candidatura(Integer id, Aluno alunoCandidato, Oferta
-    // ofertaSelecionada) {
-    // this.id = id;
-    // this.alunoCandidato = alunoCandidato;
-    // this.ofertaSelecionada = ofertaSelecionada;
-    // }
 }

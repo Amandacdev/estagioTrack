@@ -17,12 +17,11 @@ public class Empresa implements Serializable {
     public String email;
     public String senha;
 
-    public Empresa(Integer id, String razaoSocial, String responsavel, String email, String senha){
+    public Empresa(Integer id, String razaoSocial, String responsavel, String email, String senha) {
         this.id = id;
         this.razaoSocial = razaoSocial;
         this.responsavel = responsavel;
         this.email = email;
         this.senha = senha;
     }
-
 }
