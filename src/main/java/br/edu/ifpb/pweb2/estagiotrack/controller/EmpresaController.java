@@ -20,6 +20,10 @@ public class EmpresaController {
     public String getForm(Empresa empresa, Model model) {
         // Para facilitar os testes, iniciamos o projeto com algumas empresas inseridas
         // ao acessar cadastrar empresa e voltar.
+        // Quando tivermos um banco, mover esses inserts para um trigger rodando na
+        // criação da tabela. Atualmente os registros são reescritos cada vez que a
+        // página de cadastro é aberta. Isso vai dar problema quando tivermos
+        // integridade referencial entre as entidades.
         empresaRepository.save(new Empresa(1, "Empresa A", "Responsável Emp A", "responsavela@empresa.com", "123"));
         empresaRepository.save(new Empresa(2, "Empresa B", "Responsável Emp B", "responsavelb@empresa.com", "123"));
         empresaRepository.save(new Empresa(3, "Empresa C", "Responsável Emp C", "responsavelc@empresa.com", "123"));

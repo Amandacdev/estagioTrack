@@ -20,6 +20,10 @@ public class AlunoController {
     public String getForm(Aluno aluno, Model model) {
         // Para facilitar os testes, iniciamos o projeto com alguns alunos sendo
         // inseridos ao acessar cadastrar aluno e voltar.
+        // Quando tivermos um banco, mover esses inserts para um trigger rodando na
+        // criação da tabela. Atualmente os registros são reescritos cada vez que a
+        // página de cadastro é aberta. Isso vai dar problema quando tivermos
+        // integridade referencial entre as entidades.
         alunoRepository.save(new Aluno(1, "Amanda Cruz", "amanda@mail.com", "123"));
         alunoRepository.save(new Aluno(2, "Brian Rafael", "brian@mail.com", "123"));
         alunoRepository.save(new Aluno(3, "George Lima", "george@mail.com", "123"));

@@ -28,6 +28,10 @@ public class OfertaController {
     public String getForm(Oferta oferta, Model model) {
         // Para facilitar os testes, iniciamos o projeto com algumas ofertas sendo
         // inseridas ao acessar cadastrar oferta e voltar.
+        // Quando tivermos um banco, mover esses inserts para um trigger rodando na
+        // criação da tabela. Atualmente os registros são reescritos cada vez que a
+        // página de cadastro é aberta. Isso vai dar problema quando tivermos
+        // integridade referencial entre as entidades.
         ofertaRepository.save(new Oferta(1, empresaRepository.findById(1), "responsavela@empresa.com",
                 "Exemplo Front-End", "1000", "Manhã"));
         ofertaRepository.save(new Oferta(2, empresaRepository.findById(2), "responsavelb@empresa.com",
