@@ -7,44 +7,45 @@ import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
 @Component
 public class AlunoRepository {
-    private Map<Integer,Aluno> repositorio = new HashMap<Integer, Aluno>();
+    private Map<Integer, Aluno> repositorio = new HashMap<Integer, Aluno>();
 
-    public Aluno findById(Integer id){ return repositorio.get(id);}
+    public Aluno findById(Integer id) {
+        return repositorio.get(id);
+    }
 
-    //Parte do workaround para vincular aluno a oferta dinamicamente.
-    public Aluno findByEmail(String email) { 
+    // Parte do workaround para vincular aluno a oferta dinamicamente.
+    public Aluno findByEmail(String email) {
         for (Aluno aluno : repositorio.values()) {
             if (aluno.getEmail().equals(email)) {
                 return aluno;
             }
         }
         return null;
-    }    
-
-    public void save(Aluno aluno){
-        Integer id = null;
-        id = (aluno.getId() == null) ? this.getMaxId() + 1: aluno.getId();
-        aluno.setId(id);
-        repositorio.put(id,aluno);
     }
 
-    public List<Aluno> findAll(){
+    public void save(Aluno aluno) {
+        Integer id = null;
+        id = (aluno.getId() == null) ? this.getMaxId() + 1 : aluno.getId();
+        aluno.setId(id);
+        repositorio.put(id, aluno);
+    }
+
+    public List<Aluno> findAll() {
         List<Aluno> alunos = repositorio.values().stream().collect(Collectors.toList());
         return alunos;
     }
 
-    public Integer getMaxId(){
+    public Integer getMaxId() {
         List<Aluno> alunos = findAll();
-        if(alunos == null || alunos.isEmpty())
-          return 1;
+        if (alunos == null || alunos.isEmpty())
+            return 1;
 
-       Aluno contaMaxId = alunos
-               .stream()
-               .max(Comparator.comparing(Aluno::getId))
-               .orElseThrow(NoSuchElementException::new);
-       return contaMaxId.getId() == null ? 1 : contaMaxId.getId() + 1;
+        Aluno contaMaxId = alunos
+                .stream()
+                .max(Comparator.comparing(Aluno::getId))
+                .orElseThrow(NoSuchElementException::new);
+        return contaMaxId.getId() == null ? 1 : contaMaxId.getId() + 1;
     }
 }

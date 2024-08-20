@@ -1,20 +1,62 @@
 <!doctype html>
 <html lang="en" xmlns:th="www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastrar Alunos</title>
+    <title>Cadastro de Estudantes</title>
 </head>
+
 <body>
 
-    <h1>Cadastro de Alunos</h1>
+    <h1>Cadastro de Estudantes</h1>
 
     <form th:action="@{/alunos/save}" method="POST" th:object="${aluno}">
-        Nome: <input type="text" th:field="*{nome}"/> <br/>
-        Email: <input type="text" th:field="*{email}"/> <br/>
-        Senha: <input type="password" th:field="*{senha}"/> <br/>
+        Nome completo: <input type="text" th:field="*{nome}" /> <br />
+        Email: <input type="text" th:field="*{email}" /> <br />
+        Nome de usuario: <input type="text" th:field="*{nomeUsuario}"> <br />
+        Senha: <input type="password" th:field="*{senha}" /> <br />
+        Gênero:
+        <input type="radio" id="Masculino" name="genero" value="Masculino">
+        <label for="Masculino">Masculino</label><br>
+        <input type="radio" id="Feminino" name="genero" value="Feminino">
+        <label for="Feminino">Feminino</label><br>
+        <input type="radio" id="Outro" name="genero" value="Outro">
+        <label for="Outro">Outro</label><br>
+
+        Competências:
+        <input type="checkbox" id="C" name="competencias" value="C">
+        <label for="C">C</label><br>
+
+        <input type="checkbox" id="C#" name="competencias" value="C#">
+        <label for="C#">C#</label><br>
+
+        <input type="checkbox" id="C++" name="competencias" value="C++">
+        <label for="C++">C++</label><br>
+
+        <input type="checkbox" id="CSS" name="competencias" value="CSS">
+        <label for="CSS">CSS</label><br>
+
+        <input type="checkbox" id="HTML" name="competencias" value="HTML">
+        <label for="HTML">HTML</label><br>
+
+        <input type="checkbox" id="Java" name="competencias" value="Java">
+        <label for="Java">Java</label><br>
+
+        <input type="checkbox" id="JavaScript" name="competencias" value="JavaScript">
+        <label for="JavaScript">JavaScript</label><br>
+
+        <input type="checkbox" id="Python" name="competencias" value="Python">
+        <label for="Python">Python</label><br>
+
+        <input type="checkbox" id="Ruby" name="competencias" value="Ruby">
+        <label for="Ruby">Ruby</label><br>
+
+        <input type="checkbox" id="SQL" name="competencias" value="SQL">
+        <label for="SQL">SQL</label><br>
+
         <input type="submit" value="salvar" />
     </form>
     <button><a th:href="@{/form}">Cancelar</a></button>
@@ -24,4 +66,6 @@
     </div>
 
 </body>
+
 </html>
+<!-- Pensar em redirecionar para a página inicial ou para ofertas depois do cadastro. Não faz sentido os alunos verem a lista de alunos cadastrados. -->

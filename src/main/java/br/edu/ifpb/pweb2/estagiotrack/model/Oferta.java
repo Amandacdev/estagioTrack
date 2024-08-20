@@ -13,12 +13,13 @@ public class Oferta implements Serializable {
     @Getter
     public Integer id;
     public Empresa ofertante;
-    public String emailOfertante; //Parte do workaround para vincular oferta a empresa dinamicamente.
+    public String emailOfertante; // Parte do workaround para vincular oferta a empresa dinamicamente.
     public String tituloCargo;
     public String valorBolsa;
     public String turno;
 
-    public Oferta(Integer id, Empresa ofertante, String emailOfertante, String tituloCargo, String valorBolsa, String turno) {
+    public Oferta(Integer id, Empresa ofertante, String emailOfertante, String tituloCargo, String valorBolsa,
+            String turno) {
         this.id = id;
         this.ofertante = ofertante;
         this.emailOfertante = emailOfertante;
@@ -27,5 +28,3 @@ public class Oferta implements Serializable {
         this.turno = turno;
     }
 }
-
-//OBS: Mockando uma empresa teste pra assinar as ofertas enquanto não tem login

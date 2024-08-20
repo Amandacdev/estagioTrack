@@ -4,9 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class HomeController{
+public class HomeController {
     @RequestMapping("/form")
-    public String showHomePage(){
+    public String showHomePage() {
         return "index";
     }
 }

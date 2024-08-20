@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 public class Aluno implements Serializable {
@@ -12,15 +13,20 @@ public class Aluno implements Serializable {
     @Setter
     @Getter
     public Integer id;
-    public String nome;
     public String email;
+    public String nomeUsuario;
     public String senha;
+    public String nome;
+    public String genero;
+    public List<String> competencias;
 
-    public Aluno(Integer id, String nome, String email, String senha){
+    public Aluno(Integer id, String email, String nomeUsuario, String senha, String nome, String genero, List<String> competencias) {
         this.id = id;
-        this.nome = nome;
         this.email = email;
+        this.nomeUsuario = nomeUsuario;
         this.senha = senha;
+        this.nome = nome;
+        this.genero = genero;
+        this.competencias = competencias;
     }
-
 }

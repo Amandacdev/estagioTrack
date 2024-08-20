@@ -2,45 +2,42 @@ package br.edu.ifpb.pweb2.estagiotrack.controller;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
 import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
+import br.edu.ifpb.pweb2.estagiotrack.repository.EmpresaRepository;
 import br.edu.ifpb.pweb2.estagiotrack.repository.OfertaRepository;
-import br.edu.ifpb.pweb2.estagiotrack.utils.Filtro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/ofertas")
 public class OfertaController {
 
     @Autowired
-    private OfertaRepository ofertaRepository;
+    public OfertaRepository ofertaRepository;
+
+    @Autowired
     private EmpresaController empresaController;
 
-    @RequestMapping("/filter")
-    public String getFilterForm(Model model) {
-        model.addAttribute("filtro", new Filtro());
-        return "ofertas/filter";
-    }
-
-    @RequestMapping(value = "/filtrar", method = RequestMethod.POST)
-    public String filtrarOfertas(Filtro filtro, Model model) {
-        List<Oferta> ofertasFiltradas = ofertaRepository.findAll().stream()
-                .filter(oferta -> oferta.getTituloCargo().contains(filtro.getTituloCargo()))
-                .filter(oferta -> oferta.getTurno().equals(filtro.getTurno()) || filtro.getTurno().isEmpty())
-                .filter(oferta -> filtro.getRequisitos().isEmpty() || oferta.getTituloCargo().contains(filtro.getRequisitos()))
-                .collect(Collectors.toList());
-        model.addAttribute("ofertas", ofertasFiltradas);
-        return "ofertas/list";
-    }
+    @Autowired
+    private EmpresaRepository empresaRepository;
 
     @RequestMapping("/form")
     public String getForm(Oferta oferta, Model model) {
-        model.addAttribute("oferta", oferta);
+        // Para facilitar os testes, iniciamos o projeto com algumas ofertas sendo
+        // inseridas ao acessar cadastrar oferta e voltar.
+        // Quando tivermos um banco, mover esses inserts para um trigger rodando na
+        // criação da tabela. Atualmente os registros são reescritos cada vez que a
+        // página de cadastro é aberta. Isso vai dar problema quando tivermos
+        // integridade referencial entre as entidades.
+        ofertaRepository.save(new Oferta(1, empresaRepository.findById(1), "responsavela@empresa.com",
+                "Exemplo Front-End", "1000", "Manhã"));
+        ofertaRepository.save(new Oferta(2, empresaRepository.findById(2), "responsavelb@empresa.com",
+                "Exemplo Back-End", "1000", "Tarde"));
+        ofertaRepository.save(new Oferta(3, empresaRepository.findById(3), "responsavelc@empresa.com",
+                "Exemplo Full Stack", "1000", "A combinar"));
         return "ofertas/form";
     }
 
@@ -56,13 +53,16 @@ public class OfertaController {
             model.addAttribute("alert", "Por favor, preencha todos os campos corretamente.");
             return "ofertas/form";
         } else {
-            Empresa empresa = empresaController.buscarPorEmail(oferta.emailOfertante); //Parte do workaround para vincular oferta a empresa dinamicamente.
+            Empresa empresa = empresaController.buscarPorEmail(oferta.emailOfertante); // Parte do workaround para
+                                                                                       // vincular oferta a empresa
+                                                                                       // dinamicamente.
             if (empresa != null) {
                 oferta.setOfertante(empresa);
                 ofertaRepository.save(oferta);
                 return "redirect:/ofertas";
             } else {
-                model.addAttribute("alert", "Email inválido. O email deve corresponder ao informado no cadastro da empresa.");
+                model.addAttribute("alert",
+                        "Email inválido. O email deve corresponder ao informado no cadastro da empresa.");
                 return "ofertas/form";
             }
         }
@@ -78,5 +78,15 @@ public class OfertaController {
             attr.addFlashAttribute("alert", "Oferta de estágio não encontrada.");
         }
         return "redirect:/ofertas";
+    }
+
+    // Parte do workaround para vincular oferta a empresa dinamicamente.
+    public Oferta buscarPorId(Integer id) {
+        Oferta oferta = ofertaRepository.findById(id);
+        if (oferta != null) {
+            return oferta;
+        } else {
+            return null;
+        }
     }
 }
