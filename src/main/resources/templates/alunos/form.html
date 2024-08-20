@@ -6,18 +6,18 @@
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastrar Alunos</title>
+    <title>Cadastro de Estudantes</title>
 </head>
 
 <body>
 
-    <h1>Cadastro de Alunos</h1>
+    <h1>Cadastro de Estudantes</h1>
 
     <form th:action="@{/alunos/save}" method="POST" th:object="${aluno}">
+        Nome completo: <input type="text" th:field="*{nome}" /> <br />
         Email: <input type="text" th:field="*{email}" /> <br />
         Nome de usuario: <input type="text" th:field="*{nomeUsuario}"> <br />
         Senha: <input type="password" th:field="*{senha}" /> <br />
-        Nome completo: <input type="text" th:field="*{nome}" /> <br />
         Gênero:
         <input type="radio" id="Masculino" name="genero" value="Masculino">
         <label for="Masculino">Masculino</label><br>

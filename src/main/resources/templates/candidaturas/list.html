@@ -23,9 +23,9 @@
                 <td colspan="3">Nenhuma candidatura encontrada</td>
             </tr>
             <tr th:each="candidatura : ${candidaturas}">
-                <td th:text="${candidatura.alunoCandidato.nome}">Nome do Estudante</td>
-                <td th:text="${candidatura.ofertaSelecionada.ofertante.razaoSocial}">Empresa</td>
+                <td th:text="${candidatura.alunoCandidato.nome}">Estudante</td>
                 <td th:text="${candidatura.ofertaSelecionada.tituloCargo}">Título da Vaga</td>
+                <td th:text="${candidatura.ofertaSelecionada.ofertante.razaoSocial}">Empresa</td>
                 <!-- <td th:text="${candidatura.status}">Status</td> -->
             </tr>
         </tbody>

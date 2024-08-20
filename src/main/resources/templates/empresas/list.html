@@ -12,6 +12,7 @@
 
 <body>
     <h1>Empresas Cadastradas</h1>
+    <h2>Clique no nome da empresa para ver suas informações completas.</h2>
 
     <div th:if="${#lists.isEmpty(empresas)}">
         <p>Nenhuma empresa cadastrada</p>
@@ -29,7 +30,7 @@
         <tbody>
             <tr th:each="empresa: ${empresas}">
                 <td>[[${empresa.id}]]</td>
-                <td th:text="${empresa.razaoSocial}"></td>
+                <td><a th:href="@{/empresas/detalhes/}+${empresa.id}" th:text="${empresa.razaoSocial}"></a></td>
                 <td th:text="${empresa.responsavel}"></td>
                 <td th:text="${empresa.email}"></td>
             </tr>

@@ -6,12 +6,12 @@
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastrar Candidatura</title>
+    <title>Realizar Candidaturas</title>
 </head>
 
 <body>
 
-    <h1>Realizar candidatura</h1>
+    <h1>Realizar candidaturas</h1>
 
     <form th:action="@{/candidaturas/save}" method="POST" th:object="${candidatura}">
         Oferta selecionada: <select th:field="*{idOferta}">
