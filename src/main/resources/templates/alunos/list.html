@@ -23,13 +23,23 @@
                 <th>Id</th>
                 <th>Nome</th>
                 <th>Email</th>
+                <th>Nome de Usuário</th>
+                <th>Gênero</th>
+                <th>Competências</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="aluno: ${alunos}">
-                <td>[[${aluno.id}]]</td>
+            <tr th:each="aluno : ${alunos}">
+                <td th:text="${aluno.id}"></td>
                 <td th:text="${aluno.nome}"></td>
                 <td th:text="${aluno.email}"></td>
+                <td th:text="${aluno.nomeUsuario}"></td>
+                <td th:text="${aluno.genero}"></td>
+                <td>
+                    <ul>
+                        <li th:each="competencia : ${aluno.competencias}" th:text="${competencia}"></li>
+                    </ul>
+                </td>
             </tr>
         </tbody>
     </table>
