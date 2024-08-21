@@ -32,12 +32,12 @@ public class OfertaController {
         // criação da tabela. Atualmente os registros são reescritos cada vez que a
         // página de cadastro é aberta. Isso vai dar problema quando tivermos
         // integridade referencial entre as entidades.
-        ofertaRepository.save(new Oferta(1, empresaRepository.findById(1), "responsavela@empresa.com",
+        /*ofertaRepository.save(new Oferta(1, empresaRepository.findById(1), "responsavela@empresa.com",
                 "Exemplo Front-End", "1000", "Manhã"));
         ofertaRepository.save(new Oferta(2, empresaRepository.findById(2), "responsavelb@empresa.com",
                 "Exemplo Back-End", "1000", "Tarde"));
         ofertaRepository.save(new Oferta(3, empresaRepository.findById(3), "responsavelc@empresa.com",
-                "Exemplo Full Stack", "1000", "A combinar"));
+                "Exemplo Full Stack", "1000", "A combinar"));*/
         return "ofertas/form";
     }
 

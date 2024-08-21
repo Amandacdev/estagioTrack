@@ -40,7 +40,7 @@ public class CandidaturaController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String cadastroCandidatura(Candidatura candidatura, Model model, RedirectAttributes attr) {
         Aluno aluno = alunoController.buscarPorEmail(candidatura.emailCandidato);
-        Oferta oferta = ofertaController.buscarPorId(candidatura.idOferta);
+        Oferta oferta = ofertaController.buscarPorId(candidatura.getOfertaSelecionada().getId());
 
         if (aluno != null && oferta != null) {
             candidatura.setAlunoCandidato(aluno);
