@@ -1,31 +1,24 @@
-<!doctype html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastrar Empresas</title>
-</head>
-
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+>
 <body>
+    <div layout:fragment="content">
+        <h1>Cadastro de Empresas</h1>
 
-    <h1>Cadastro de Empresas</h1>
+        <form th:action="@{/empresas/save}" method="POST" th:object="${empresa}">
+            Razão social: <input type="text" th:field="*{razaoSocial}" /> <br />
+            Responsável: <input type="text" th:field="*{responsavel}" /> <br />
+            Email: <input type="text" th:field="*{email}" /> <br />
+            Senha: <input type="password" th:field="*{senha}" /> <br />
+            <input type="submit" value="salvar" />
+        </form>
+        <button><a th:href="@{/form}">Cancelar</a></button>
 
-    <form th:action="@{/empresas/save}" method="POST" th:object="${empresa}">
-        Razão social: <input type="text" th:field="*{razaoSocial}" /> <br />
-        Responsável: <input type="text" th:field="*{responsavel}" /> <br />
-        Email: <input type="text" th:field="*{email}" /> <br />
-        Senha: <input type="password" th:field="*{senha}" /> <br />
-        <input type="submit" value="salvar" />
-    </form>
-    <button><a th:href="@{/form}">Cancelar</a></button>
-
-    <div th:if="${alert}" style="color: red;">
-        <p th:text="${alert}"></p>
+        <div th:if="${alert}" style="color: red;">
+            <p th:text="${alert}"></p>
+        </div>
     </div>
-
 </body>
 
 </html>

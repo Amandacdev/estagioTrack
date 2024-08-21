@@ -1,36 +1,33 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Candidaturas</title>
-</head>
-
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+>
 <body>
-    <!-- Alterar essa página para que ela tenha views diferentes para aluno, empresa e coordenador. Aluno deve ser capaz de ver somente as próprias candidaturas. Empresas devem ser capazes de ver somente as candidaturas de suas ofertas, e o coordenador deve ser capaz de ver todas as candidaturas no sistema.-->
-    <h1>Candidaturas</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Aluno</th>
-                <th>Empresa</th>
-                <th>Oferta</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:if="${candidaturas.isEmpty()}">
-                <td colspan="3">Nenhuma candidatura encontrada</td>
-            </tr>
-            <tr th:each="candidatura : ${candidaturas}">
-                <td th:text="${candidatura.alunoCandidato.nome}">Nome do Estudante</td>
-                <td th:text="${candidatura.ofertaSelecionada.ofertante.razaoSocial}">Empresa</td>
-                <td th:text="${candidatura.ofertaSelecionada.tituloCargo}">Título da Vaga</td>
-                <!-- <td th:text="${candidatura.status}">Status</td> -->
-            </tr>
-        </tbody>
-    </table>
-
+<div layout:fragment="content">
+        <!-- Alterar essa página para que ela tenha views diferentes para aluno, empresa e coordenador. Aluno deve ser capaz de ver somente as próprias candidaturas. Empresas devem ser capazes de ver somente as candidaturas de suas ofertas, e o coordenador deve ser capaz de ver todas as candidaturas no sistema.-->
+        <h1>Candidaturas</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Aluno</th>
+                    <th>Empresa</th>
+                    <th>Oferta</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${candidaturas.isEmpty()}">
+                    <td colspan="3">Nenhuma candidatura encontrada</td>
+                </tr>
+                <tr th:each="candidatura : ${candidaturas}">
+                    <td th:text="${candidatura.alunoCandidato.nome}">Nome do Estudante</td>
+                    <td th:text="${candidatura.ofertaSelecionada.ofertante.razaoSocial}">Empresa</td>
+                    <td th:text="${candidatura.ofertaSelecionada.tituloCargo}">Título da Vaga</td>
+                    <!-- <td th:text="${candidatura.status}">Status</td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>
