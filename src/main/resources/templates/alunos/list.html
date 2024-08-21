@@ -4,10 +4,11 @@
 >
 <body>
     <div layout:fragment="content">
-        <h1>Alunos Cadastrados</h1>
+
+        <h1>Estudantes Cadastrados</h1>
 
         <div th:if="${#lists.isEmpty(alunos)}">
-            <p>Nenhum aluno cadastrado</p>
+            <p>Nenhum estudante cadastrado</p>
         </div>
 
         <table border='1' th:if="${!#lists.isEmpty(alunos)}">

@@ -29,16 +29,16 @@ public class AlunoController {
         // criação da tabela. Atualmente os registros são reescritos cada vez que a
         // página de cadastro é aberta. Isso vai dar problema quando tivermos
         // integridade referencial entre as entidades.
-        List<String> competencias1 = Arrays.asList("Java", "Spring Boot", "SQL");
+        List<String> competencias1 = Arrays.asList("C#", "C++", "CSS");
         alunoRepository.save(new Aluno(1, "amanda@mail.com", "amandaCruz", "123",
         "Amanda Cruz", "Feminino", competencias1));
-        List<String> competencias2 = Arrays.asList("HTML", "CSS", "JavaScript");
+        List<String> competencias2 = Arrays.asList("HTML", "Java", "JavaScript");
         alunoRepository.save(new Aluno(2, "brian@mail.com", "brianRafael", "123",
         "Brian Rafael", "Masculino", competencias2));
-        List<String> competencias3 = Arrays.asList("Python", "Ruby", "C#");
+        List<String> competencias3 = Arrays.asList("Python", "Ruby", "SQL");
         alunoRepository.save(new Aluno(3, "george@mail.com", "georgeLima", "123",
         "George Lima", "Masculino", competencias3));
-        List<String> competencias4 = Arrays.asList("C", "C++", "SQL");
+        List<String> competencias4 = Arrays.asList("HTML", "CSS", "JavaScript");
         alunoRepository.save(new Aluno(4, "olivia@mail.com", "oliviaOliva", "123",
         "Olivia Oliva", "Feminino", competencias4));
 

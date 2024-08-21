@@ -4,11 +4,19 @@
 >
 <body>
     <div layout:fragment="content">
-        <h1>Bem-vindo à página do Coordenador!</h1>
-        <p>Aqui estão as funcionalidades disponíveis para o coordenador.</p>
+        <h1>Bem-vindo à página da Coordenação!</h1>
+        <p>Aqui estão as funcionalidades disponíveis para coordenação.</p>
 
         <button class="btn btn-sm btn-outline-secondary">
-            <a class="nav-item nav-link" th:href="@{/ofertas}">Listar Ofertas de Estágio</a>
+            <a class="nav-item nav-link" th:href="@{/alunos/list}">Listar Estudantes</a>
+        </button>
+
+        <button class="btn btn-sm btn-outline-secondary">
+            <a class="nav-item nav-link" th:href="@{/empresas/list}">Listar Empresas</a>
+        </button>
+
+        <button class="btn btn-sm btn-outline-secondary">
+            <a class="nav-item nav-link" th:href="@{/ofertas}">Listar Ofertas</a>
         </button>
 
         <button class="btn btn-sm btn-outline-secondary">

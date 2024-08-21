@@ -4,11 +4,11 @@
 >
 <body>
     <div layout:fragment="content">
+
         <h1>Cadastro de Ofertas</h1>
 
         <form th:action="@{/ofertas/save}" method="POST" th:object="${oferta}">
-            Email do ofertante: <input type="email" th:field="*{emailOfertante}"> <br />
-            <!-- Parte do workaround para vincular oferta a empresa dinamicamente. -->
+            Email da Empresa ofertante: <input type="email" th:field="*{emailOfertante}"> <br />
             Cargo ofertado: <input type="text" th:field="*{tituloCargo}" /> <br />
             Valor da bolsa: <input type="number" min="0" placeholder="Apenas números" th:field="*{valorBolsa}" /> <br />
             Turno:

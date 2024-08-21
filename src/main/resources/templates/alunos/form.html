@@ -5,13 +5,14 @@
 <body>
 <div layout:fragment="content">
 
-    <h1>Cadastro de Alunos</h1>
+    <h1>Cadastro de Estudantes</h1>
 
     <form th:action="@{/alunos/save}" method="POST" th:object="${aluno}">
+
+        Nome completo: <input type="text" th:field="*{nome}" /> <br />
         Email: <input type="text" th:field="*{email}" /> <br />
         Nome de usuario: <input type="text" th:field="*{nomeUsuario}"> <br />
         Senha: <input type="password" th:field="*{senha}" /> <br />
-        Nome completo: <input type="text" th:field="*{nome}" /> <br />
         Gênero:
         <input type="radio" id="Masculino" name="genero" value="Masculino">
         <label for="Masculino">Masculino</label><br>

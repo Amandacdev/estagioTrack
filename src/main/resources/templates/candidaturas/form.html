@@ -4,7 +4,7 @@
 >
 <body>
     <div layout:fragment="content">
-        <h1>Realizar candidatura</h1>
+        <h1>Realizar candidaturas</h1>
 
         <form th:action="@{/candidaturas/save}" method="POST" th:object="${candidatura}">
             Oferta selecionada: <select th:field="*{idOferta}">
