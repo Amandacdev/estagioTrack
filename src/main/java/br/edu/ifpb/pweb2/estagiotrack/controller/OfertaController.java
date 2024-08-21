@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/ofertas")
 public class OfertaController {
@@ -32,11 +34,11 @@ public class OfertaController {
         // criação da tabela. Atualmente os registros são reescritos cada vez que a
         // página de cadastro é aberta. Isso vai dar problema quando tivermos
         // integridade referencial entre as entidades.
-        /*ofertaRepository.save(new Oferta(1, empresaRepository.findById(1), "responsavela@empresa.com",
+        /*ofertaRepository.save(new Oferta(1, empresaRepository.findById(1).orElse(null), "responsavela@empresa.com",
                 "Exemplo Front-End", "1000", "Manhã"));
-        ofertaRepository.save(new Oferta(2, empresaRepository.findById(2), "responsavelb@empresa.com",
+        ofertaRepository.save(new Oferta(2, empresaRepository.findById(2).orElse(null), "responsavelb@empresa.com",
                 "Exemplo Back-End", "1000", "Tarde"));
-        ofertaRepository.save(new Oferta(3, empresaRepository.findById(3), "responsavelc@empresa.com",
+        ofertaRepository.save(new Oferta(3, empresaRepository.findById(3).orElse(null), "responsavelc@empresa.com",
                 "Exemplo Full Stack", "1000", "A combinar"));*/
         return "ofertas/form";
     }
@@ -53,9 +55,9 @@ public class OfertaController {
             model.addAttribute("alert", "Por favor, preencha todos os campos corretamente.");
             return "ofertas/form";
         } else {
-            Empresa empresa = empresaController.buscarPorEmail(oferta.emailOfertante); // Parte do workaround para
-                                                                                       // vincular oferta a empresa
-                                                                                       // dinamicamente.
+            Empresa empresa = empresaController.buscarPorEmail(oferta.getEmailOfertante()); // Parte do workaround para
+            // vincular oferta a empresa
+            // dinamicamente.
             if (empresa != null) {
                 oferta.setOfertante(empresa);
                 ofertaRepository.save(oferta);
@@ -70,9 +72,9 @@ public class OfertaController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String deletaOferta(Integer ofertaId, RedirectAttributes attr) {
-        Oferta oferta = ofertaRepository.findById(ofertaId);
-        if (oferta != null) {
-            ofertaRepository.delete(ofertaId);
+        Optional<Oferta> oferta = ofertaRepository.findById(ofertaId);
+        if (oferta.isPresent()) {
+            ofertaRepository.deleteById(ofertaId);
             attr.addFlashAttribute("mensagem", "Oferta de estágio cancelada com sucesso!");
         } else {
             attr.addFlashAttribute("alert", "Oferta de estágio não encontrada.");
@@ -82,11 +84,8 @@ public class OfertaController {
 
     // Parte do workaround para vincular oferta a empresa dinamicamente.
     public Oferta buscarPorId(Integer id) {
-        Oferta oferta = ofertaRepository.findById(id);
-        if (oferta != null) {
-            return oferta;
-        } else {
-            return null;
-        }
+        Optional<Oferta> oferta = ofertaRepository.findById(id);
+        return oferta.orElse(null);
     }
+
 }

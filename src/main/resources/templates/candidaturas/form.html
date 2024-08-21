@@ -1,26 +1,28 @@
-<html   xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout/layout}"
->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
 <body>
-    <div layout:fragment="content">
-        <h1>Realizar candidaturas</h1>
+<div layout:fragment="content">
+    <h1>Realizar candidaturas</h1>
 
-        <form th:action="@{/candidaturas/save}" method="POST" th:object="${candidatura}">
-            Oferta selecionada: <select th:field="*{idOferta}">
+    <form th:action="@{/candidaturas/save}" method="POST" th:object="${candidatura}">
+        <label for="oferta">Oferta selecionada:</label>
+        <select th:field="*{ofertaSelecionada.id}" id="oferta">
             <option th:each="oferta : ${ofertas}" th:value="${oferta.id}"
                     th:text="${oferta.ofertante.razaoSocial} + ' - ' + ${oferta.tituloCargo}">
             </option>
-        </select> <br />
-            Digite seu Email para confirmar: <input type="email" th:field="*{emailCandidato}">
-            <br />
-            <input type="submit" value="Salvar" />
-        </form>
-        <button><a th:href="@{/form}">Cancelar</a></button>
+        </select>
+        <br />
+        <label for="emailCandidato">Digite seu Email para confirmar:</label>
+        <input type="email" th:field="*{emailCandidato}" id="emailCandidato">
+        <br />
+        <input type="submit" value="Salvar" />
+    </form>
+    <button><a th:href="@{/form}">Cancelar</a></button>
 
-        <div th:if="${alert}" style="color: red;">
-            <p th:text="${alert}"></p>
-        </div>
+    <div th:if="${alert}" style="color: red;">
+        <p th:text="${alert}"></p>
     </div>
+</div>
 </body>
 </html>

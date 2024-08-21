@@ -3,12 +3,15 @@ package br.edu.ifpb.pweb2.estagiotrack.controller;
 import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
 import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
 import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
-import br.edu.ifpb.pweb2.estagiotrack.repository.CandidaturaRepository;
+import br.edu.ifpb.pweb2.estagiotrack.service.AlunoService;
+import br.edu.ifpb.pweb2.estagiotrack.service.CandidaturaService;
+import br.edu.ifpb.pweb2.estagiotrack.service.OfertaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -16,39 +19,40 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class CandidaturaController {
 
     @Autowired
-    private CandidaturaRepository candidaturaRepository;
+    private CandidaturaService candidaturaService;
 
     @Autowired
-    private AlunoController alunoController;
+    private AlunoService alunoService;
 
     @Autowired
-    OfertaController ofertaController;
+    private OfertaService ofertaService;
 
     @RequestMapping("/form")
-    public String getForm(Candidatura candidatura, Model model) {
-        model.addAttribute(("candidatura"), candidatura);
-        model.addAttribute("ofertas", ofertaController.ofertaRepository.findAll());
+    public String getForm(Model model) {
+        model.addAttribute("candidatura", new Candidatura());
+        model.addAttribute("ofertas", ofertaService.findAll());
         return "candidaturas/form";
     }
 
     @RequestMapping()
     public String getList(Model model) {
-        model.addAttribute("candidaturas", candidaturaRepository.findAll());
+        model.addAttribute("candidaturas", candidaturaService.findAll());
         return "candidaturas/list";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String cadastroCandidatura(Candidatura candidatura, Model model, RedirectAttributes attr) {
-        Aluno aluno = alunoController.buscarPorEmail(candidatura.emailCandidato);
-        Oferta oferta = ofertaController.buscarPorId(candidatura.getOfertaSelecionada().getId());
+    @PostMapping("/save")
+    public String cadastroCandidatura(@ModelAttribute Candidatura candidatura, Model model, RedirectAttributes attr) {
+        Aluno aluno = alunoService.findByEmail(candidatura.getEmailCandidato()).orElse(null);
+        Oferta oferta = ofertaService.findById(candidatura.getOfertaSelecionada().getId()).orElse(null);
 
         if (aluno != null && oferta != null) {
             candidatura.setAlunoCandidato(aluno);
             candidatura.setOfertaSelecionada(oferta);
-            candidaturaRepository.save(candidatura);
+            candidaturaService.save(candidatura);
+            attr.addFlashAttribute("success", "Candidatura realizada com sucesso!");
             return "redirect:/candidaturas";
         } else {
-            model.addAttribute("alert", "Email inválido. O email deve corresponder ao informado no cadastro do aluno.");
+            model.addAttribute("alert", "Email inválido ou oferta não encontrada.");
             return "candidaturas/form";
         }
     }

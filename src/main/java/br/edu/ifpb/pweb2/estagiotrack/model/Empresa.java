@@ -20,7 +20,7 @@ public class Empresa implements Serializable {
     @Getter
     @Id
     @GeneratedValue
-    public Integer id;
+    private Integer id;
 
     @NotBlank/*
     @Pattern(

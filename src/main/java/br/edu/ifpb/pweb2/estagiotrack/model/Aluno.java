@@ -22,20 +22,20 @@ public class Aluno implements Serializable {
 
     @Email
     @NotBlank(message= "Campo obrigatório!")
-    private String email;
+    public String email;
 
     @NotBlank(message= "Campo obrigatório!")
-    private String nomeUsuario;
+    public String nomeUsuario;
 
     @NotBlank(message= "A senha não pode ser vazia!")
     private String senha;
 
     @NotBlank(message= "Campo obrigatório!")
-    private String nome;
+    public String nome;
 
     @NotBlank(message= "Campo obrigatório!")
-    private String genero;
+    public String genero;
 
     @ElementCollection
-    private List<String> competencias;
+    public List<String> competencias;
 }

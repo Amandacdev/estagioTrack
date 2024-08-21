@@ -19,16 +19,16 @@ public class Estagio implements Serializable {
     private Integer id;
 
     @ManyToOne
-    private Aluno alunoAprovado;
+    public Aluno alunoAprovado;
 
     @ManyToOne
-    private Oferta ofertaSelecionada;
+    public Oferta ofertaSelecionada;
 
     public Estagio(){
         encerrarOferta();
     }
 
-    private void encerrarOferta(){
+    public void encerrarOferta(){
         if (ofertaSelecionada != null && ofertaSelecionada.getStatus() == StatusOferta.ABERTA) {
             ofertaSelecionada.encerrar();
         }

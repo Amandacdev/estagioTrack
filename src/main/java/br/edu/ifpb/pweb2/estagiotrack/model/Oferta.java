@@ -18,22 +18,22 @@ public class Oferta implements Serializable {
     @Getter
     @Id
     @GeneratedValue
-    public Integer id;
+    private Integer id;
 
     @ManyToOne
-    public Empresa ofertante;
+    private Empresa ofertante;
 
     @Email
-    public String emailOfertante;
+    private String emailOfertante;
 
     @NotBlank(message = "O Nome do cargo não pode ser vazio")
-    public String tituloCargo;
+    private String tituloCargo;
 
     @NotBlank(message = "O valor da bolsa não pode ser vazio")
-    public String valorBolsa;
+    private String valorBolsa;
 
     @NotBlank
-    public String turno;
+    private String turno;
 
     @Enumerated(EnumType.STRING)
     private StatusOferta statusOferta;

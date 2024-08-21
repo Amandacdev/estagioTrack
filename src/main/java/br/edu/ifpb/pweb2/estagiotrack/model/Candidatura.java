@@ -13,11 +13,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class Candidatura implements Serializable {
 
-    @Setter
-    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer id;
+    private Integer id;
 
     @Email
     public String emailCandidato;
@@ -29,5 +27,5 @@ public class Candidatura implements Serializable {
     public Oferta ofertaSelecionada;
 
     @Enumerated(EnumType.STRING)
-    private StatusCandidatura statusCandidatura;
+    public StatusCandidatura statusCandidatura;
 }

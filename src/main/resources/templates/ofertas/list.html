@@ -30,13 +30,13 @@
                     <td th:text="${oferta.turno}"></td>
                     <td>
                         <form th:action="@{/ofertas/delete}" method="post" style="display:inline;">
-                            <input type="hidden" name="ofertaId" th:value="${oferta.id}" />
+                            <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
                             <button type="submit">Deletar</button>
                         </form>
                     </td>
                     <td>
                         <form th:action="@{/candidaturas/form}" method="post" style="display:inline;">
-                            <input type="hidden" name="ofertaId" th:value="${oferta.id}" />
+                            <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
                             <button type="submit">Candidatar</button>
                         </form>
                     </td>
