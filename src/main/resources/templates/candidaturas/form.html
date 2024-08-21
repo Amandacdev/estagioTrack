@@ -1,34 +1,26 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Realizar Candidaturas</title>
-</head>
-
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+>
 <body>
+    <div layout:fragment="content">
+        <h1>Realizar candidaturas</h1>
 
-    <h1>Realizar candidaturas</h1>
-
-    <form th:action="@{/candidaturas/save}" method="POST" th:object="${candidatura}">
-        Oferta selecionada: <select th:field="*{idOferta}">
+        <form th:action="@{/candidaturas/save}" method="POST" th:object="${candidatura}">
+            Oferta selecionada: <select th:field="*{idOferta}">
             <option th:each="oferta : ${ofertas}" th:value="${oferta.id}"
-                th:text="${oferta.ofertante.razaoSocial} + ' - ' + ${oferta.tituloCargo}">
+                    th:text="${oferta.ofertante.razaoSocial} + ' - ' + ${oferta.tituloCargo}">
             </option>
         </select> <br />
-        Digite seu Email para confirmar: <input type="email" th:field="*{emailCandidato}">
-        <br />
-        <input type="submit" value="Salvar" />
-    </form>
-    <button><a th:href="@{/form}">Cancelar</a></button>
+            Digite seu Email para confirmar: <input type="email" th:field="*{emailCandidato}">
+            <br />
+            <input type="submit" value="Salvar" />
+        </form>
+        <button><a th:href="@{/form}">Cancelar</a></button>
 
-    <div th:if="${alert}" style="color: red;">
-        <p th:text="${alert}"></p>
+        <div th:if="${alert}" style="color: red;">
+            <p th:text="${alert}"></p>
+        </div>
     </div>
-
 </body>
-
 </html>

@@ -1,152 +1,146 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastrar Empresas</title>
-</head>
-
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+>
 <body>
+    <div layout:fragment="content">
+        <h1>Cadastro de Empresas</h1>
 
-    <h1>Cadastro de Empresas</h1>
+        <form th:action="@{/empresas/save}" method="POST" th:object="${empresa}" id="form">
+            Nome da Empresa: <input type="text" th:field="*{razaoSocial}" required /> <br />
+            CNPJ: <input type="number" th:field="*{cnpj}" placeholder="Apenas números" required /> <br />
+            Nome da pessoa responsável: <input type="text" th:field="*{responsavel}" required /> <br />
+            Email da pessoa responsável: <input type="email" th:field="*{email}" required /> <br />
+            Senha: <input type="password" th:field="*{senha}" required /> <br />
+            CEP: <input type="number" th:field="*{cep}" placeholder="Apenas números" id="cep" required /> <br />
+            Logradouro: <input type="text" th:field="*{logradouro}" id="logradouro" required /> <br />
+            Número do imóvel: <input type="number" th:field="*{numeroImovel}" required /> <br />
+            Bairro: <input type="text" th:field="*{bairro}" id="bairro" required /> <br />
+            Cidade: <input type="text" th:field="*{cidade}" id="cidade" required /> <br />
+            Estado:
+            <select th:field="*{estado}" id="estado" required>
+                <option value="" disabled selected>Selecione o estado</option>
+                <option value="AC">Acre (AC)</option>
+                <option value="AL">Alagoas (AL)</option>
+                <option value="AP">Amapá (AP)</option>
+                <option value="AM">Amazonas (AM)</option>
+                <option value="BA">Bahia (BA)</option>
+                <option value="CE">Ceará (CE)</option>
+                <option value="DF">Distrito Federal (DF)</option>
+                <option value="ES">Espírito Santo (ES)</option>
+                <option value="GO">Goiás (GO)</option>
+                <option value="MA">Maranhão (MA)</option>
+                <option value="MT">Mato Grosso (MT)</option>
+                <option value="MS">Mato Grosso do Sul (MS)</option>
+                <option value="MG">Minas Gerais (MG)</option>
+                <option value="PA">Pará (PA)</option>
+                <option value="PB">Paraíba (PB)</option>
+                <option value="PR">Paraná (PR)</option>
+                <option value="PE">Pernambuco (PE)</option>
+                <option value="PI">Piauí (PI)</option>
+                <option value="RJ">Rio de Janeiro (RJ)</option>
+                <option value="RN">Rio Grande do Norte (RN)</option>
+                <option value="RS">Rio Grande do Sul (RS)</option>
+                <option value="RO">Rondônia (RO)</option>
+                <option value="RR">Roraima (RR)</option>
+                <option value="SC">Santa Catarina (SC)</option>
+                <option value="SP">São Paulo (SP)</option>
+                <option value="SE">Sergipe (SE)</option>
+                <option value="TO">Tocantins (TO)</option>
+            </select>
+            <br />
 
-    <form th:action="@{/empresas/save}" method="POST" th:object="${empresa}" id="form">
-        Nome da Empresa: <input type="text" th:field="*{razaoSocial}" required /> <br />
-        CNPJ: <input type="number" th:field="*{cnpj}" placeholder="Apenas números" required /> <br />
-        Nome da pessoa responsável: <input type="text" th:field="*{responsavel}" required /> <br />
-        Email da pessoa responsável: <input type="email" th:field="*{email}" required /> <br />
-        Senha: <input type="password" th:field="*{senha}" required /> <br />
-        CEP: <input type="number" th:field="*{cep}" placeholder="Apenas números" id="cep" required /> <br />
-        Logradouro: <input type="text" th:field="*{logradouro}" id="logradouro" required /> <br />
-        Número do imóvel: <input type="number" th:field="*{numeroImovel}" required /> <br />
-        Bairro: <input type="text" th:field="*{bairro}" id="bairro" required /> <br />
-        Cidade: <input type="text" th:field="*{cidade}" id="cidade" required /> <br />
-        Estado:
-        <select th:field="*{estado}" id="estado" required>
-            <option value="" disabled selected>Selecione o estado</option>
-            <option value="AC">Acre (AC)</option>
-            <option value="AL">Alagoas (AL)</option>
-            <option value="AP">Amapá (AP)</option>
-            <option value="AM">Amazonas (AM)</option>
-            <option value="BA">Bahia (BA)</option>
-            <option value="CE">Ceará (CE)</option>
-            <option value="DF">Distrito Federal (DF)</option>
-            <option value="ES">Espírito Santo (ES)</option>
-            <option value="GO">Goiás (GO)</option>
-            <option value="MA">Maranhão (MA)</option>
-            <option value="MT">Mato Grosso (MT)</option>
-            <option value="MS">Mato Grosso do Sul (MS)</option>
-            <option value="MG">Minas Gerais (MG)</option>
-            <option value="PA">Pará (PA)</option>
-            <option value="PB">Paraíba (PB)</option>
-            <option value="PR">Paraná (PR)</option>
-            <option value="PE">Pernambuco (PE)</option>
-            <option value="PI">Piauí (PI)</option>
-            <option value="RJ">Rio de Janeiro (RJ)</option>
-            <option value="RN">Rio Grande do Norte (RN)</option>
-            <option value="RS">Rio Grande do Sul (RS)</option>
-            <option value="RO">Rondônia (RO)</option>
-            <option value="RR">Roraima (RR)</option>
-            <option value="SC">Santa Catarina (SC)</option>
-            <option value="SP">São Paulo (SP)</option>
-            <option value="SE">Sergipe (SE)</option>
-            <option value="TO">Tocantins (TO)</option>
-        </select>
-        <br />
+            Telefone: <input type="number" th:field="*{telefone}" placeholder="Apenas números" required /> <br />
 
-        Telefone: <input type="number" th:field="*{telefone}" placeholder="Apenas números" required /> <br />
+            Atividade principal:
+            <select th:field="*{atividadePrincipal}" required>
+                <option value="" disabled selected>Selecione a atividade principal</option>
+                <option value="Desenvolvimento de Software">Desenvolvimento de Software</option>
+                <option value="Consultoria em TI">Consultoria em TI</option>
+                <option value="Suporte Técnico">Suporte Técnico</option>
+                <option value="Infraestrutura de TI">Infraestrutura de TI</option>
+                <option value="Desenvolvimento de Aplicativos">Desenvolvimento de Aplicativos</option>
+                <option value="Segurança da Informação">Segurança da Informação</option>
+                <option value="Big Data e Analytics">Big Data e Analytics</option>
+                <option value="Computação em Nuvem">Computação em Nuvem</option>
+                <option value="Inteligência Artificial">Inteligência Artificial</option>
+                <option value="Internet das Coisas (IoT)">Internet das Coisas (IoT)</option>
+            </select>
+            <br />
 
-        Atividade principal:
-        <select th:field="*{atividadePrincipal}" required>
-            <option value="" disabled selected>Selecione a atividade principal</option>
-            <option value="Desenvolvimento de Software">Desenvolvimento de Software</option>
-            <option value="Consultoria em TI">Consultoria em TI</option>
-            <option value="Suporte Técnico">Suporte Técnico</option>
-            <option value="Infraestrutura de TI">Infraestrutura de TI</option>
-            <option value="Desenvolvimento de Aplicativos">Desenvolvimento de Aplicativos</option>
-            <option value="Segurança da Informação">Segurança da Informação</option>
-            <option value="Big Data e Analytics">Big Data e Analytics</option>
-            <option value="Computação em Nuvem">Computação em Nuvem</option>
-            <option value="Inteligência Artificial">Inteligência Artificial</option>
-            <option value="Internet das Coisas (IoT)">Internet das Coisas (IoT)</option>
-        </select>
-        <br />
+            Site: <input type="text" th:field="*{site}" /> <br />
+            Comprovante de endereço: <input type="file" th:field="*{comprovanteEndereco}" /> <br />
+            <input type="submit" value="Salvar" />
+        </form>
 
-        Site: <input type="text" th:field="*{site}" /> <br />
-        Comprovante de endereço: <input type="file" th:field="*{comprovanteEndereco}" /> <br />
-        <input type="submit" value="Salvar" />
-    </form>
+        <button><a th:href="@{/form}">Cancelar</a></button>
 
-    <button><a th:href="@{/form}">Cancelar</a></button>
+        <div th:if="${alert}" style="color: red;">
+            <p th:text="${alert}"></p>
+        </div>
 
-    <div th:if="${alert}" style="color: red;">
-        <p th:text="${alert}"></p>
-    </div>
+        <style>
+            /* Esse CSS remove os botões de alteração de valor nos inputs type number */
+            input[type=number]::-webkit-outer-spin-button,
+            input[type=number]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
 
-    <style>
-        /* Esse CSS remove os botões de alteração de valor nos inputs type number */
-        input[type=number]::-webkit-outer-spin-button,
-        input[type=number]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-    
-        input[type=number] {
-            -moz-appearance: textfield;
-        }
-    </style>
+            input[type=number] {
+                -moz-appearance: textfield;
+            }
+        </style>
 
-    <script>
-        //Código responsável por buscar o endereço a partir do cep
-        let cep = document.getElementById('cep')
-        cep.addEventListener('focusout', lerCEP)
+        <script>
+            //Código responsável por buscar o endereço a partir do cep
+            let cep = document.getElementById('cep')
+            cep.addEventListener('focusout', lerCEP)
 
-        function lerCEP() {
-            let cepValue = cep.value
-            let cepGuardado = cepValue
-            let cepLido = `https://viacep.com.br/ws/${cepValue}/json/`
-            getCEP(cepLido, cepGuardado)
-        }
+            function lerCEP() {
+                let cepValue = cep.value
+                let cepGuardado = cepValue
+                let cepLido = `https://viacep.com.br/ws/${cepValue}/json/`
+                getCEP(cepLido, cepGuardado)
+            }
 
-        async function getCEP(cepLido, cepGuardado) {
-            try {
-                const response = await fetch(cepLido)
-                const json = await response.json()
-                showContent(json)
-                cep.style.border = ''
-                if (json.uf == undefined) {
-                    erroCEP(cepGuardado)
+            async function getCEP(cepLido, cepGuardado) {
+                try {
+                    const response = await fetch(cepLido)
+                    const json = await response.json()
+                    showContent(json)
+                    cep.style.border = ''
+                    if (json.uf == undefined) {
+                        erroCEP(cepGuardado)
+                    }
+                } catch {
+                    erroCEP()
                 }
-            } catch {
-                erroCEP()
             }
-        }
 
-        function showContent(json) {
-            let logradouro = document.getElementById('logradouro')
-            logradouro.value = json.logradouro
-            let bairro = document.getElementById('bairro')
-            bairro.value = json.bairro
-            let cidade = document.getElementById('cidade')
-            cidade.value = json.localidade
-            let estado = document.getElementById('estado')
-            estado.value = json.uf
-        }
-
-        function erroCEP(cepGuardado) {
-            cep.style.border = '1px solid red'
-            let form = document.getElementById('form')
-            form.reset()
-            cep.placeholder = 'CEP inválido ou incorreto.'
-            cep.value = cepGuardado
-            if (cep.value == cepGuardado) {
-                window.alert('CEP digitado não existe. Favor corrigir.')
+            function showContent(json) {
+                let logradouro = document.getElementById('logradouro')
+                logradouro.value = json.logradouro
+                let bairro = document.getElementById('bairro')
+                bairro.value = json.bairro
+                let cidade = document.getElementById('cidade')
+                cidade.value = json.localidade
+                let estado = document.getElementById('estado')
+                estado.value = json.uf
             }
-        }
-    </script>
+
+            function erroCEP(cepGuardado) {
+                cep.style.border = '1px solid red'
+                let form = document.getElementById('form')
+                form.reset()
+                cep.placeholder = 'CEP inválido ou incorreto.'
+                cep.value = cepGuardado
+                if (cep.value == cepGuardado) {
+                    window.alert('CEP digitado não existe. Favor corrigir.')
+                }
+            }
+        </script>
+    </div>
 </body>
 
 </html>

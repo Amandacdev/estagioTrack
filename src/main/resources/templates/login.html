@@ -1,23 +1,18 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Fazer login no EstagioTrack</title>
-</head>
-
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+>
 <body>
-
+<div layout:fragment="content">
     <h2>Informe seus dados abaixo:</h2>
-
     <form action="" method="">
         Email: <input type="text"> <br />
         Senha: <input type="password"> <br />
         <button><a href="">Fazer login</a></button>
         <button><a th:href="@{/form}">Voltar</a></button>
     </form>
-
-
+</div>
 </body>
-
 </html>
+
+

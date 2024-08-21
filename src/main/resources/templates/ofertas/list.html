@@ -1,60 +1,50 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <title>Ofertas Cadastradas</title>
-</head>
-
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+>
 <body>
-    <h1>Ofertas Cadastradas</h1>
+    <div layout:fragment="content">
+        <h1>Ofertas Cadastradas</h1>
 
-    <div th:if="${#lists.isEmpty(ofertas)}">
-        <p>Nenhuma oferta cadastrada</p>
+        <div th:if="${#lists.isEmpty(ofertas)}">
+            <p>Nenhuma oferta cadastrada</p>
+        </div>
+
+        <table border='1' th:if="${!#lists.isEmpty(ofertas)}">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Ofertante</th>
+                    <th>Cargo</th>
+                    <th>Valor da bolsa</th>
+                    <th>Turno</th>
+                    <th colspan="2">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="oferta: ${ofertas}">
+                    <td>[[${oferta.id}]]</td>
+                    <td th:text="${oferta.ofertante.razaoSocial}">
+                    <td th:text="${oferta.tituloCargo}"></td>
+                    <td th:text="${oferta.valorBolsa}"></td>
+                    <td th:text="${oferta.turno}"></td>
+                    <td>
+                        <form th:action="@{/ofertas/delete}" method="post" style="display:inline;">
+                            <input type="hidden" name="ofertaId" th:value="${oferta.id}" />
+                            <button type="submit">Deletar</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/candidaturas/form}" method="post" style="display:inline;">
+                            <input type="hidden" name="ofertaId" th:value="${oferta.id}" />
+                            <button type="submit">Candidatar</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button><a th:href="@{/form}">Voltar</a></button>
     </div>
-
-    <table border='1' th:if="${!#lists.isEmpty(ofertas)}">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Ofertante</th>
-                <th>Cargo</th>
-                <th>Valor da bolsa</th>
-                <th>Turno</th>
-                <th colspan="2">Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="oferta: ${ofertas}">
-                <td>[[${oferta.id}]]</td>
-                <td th:text="${oferta.ofertante.razaoSocial}">
-                <td th:text="${oferta.tituloCargo}"></td>
-                <td th:text="${oferta.valorBolsa}"></td>
-                <td th:text="${oferta.turno}"></td>
-                <td>
-                    <form th:action="@{/ofertas/delete}" method="post" style="display:inline;">
-                        <input type="hidden" name="ofertaId" th:value="${oferta.id}" />
-                        <button type="submit">Deletar</button>
-                    </form>
-                    <form th:action="@{/alunos/candidatar}" method="post" style="display:inline;">
-                        <input type="hidden" name="ofertaId" th:value="${oferta.id}" />
-                        <button type="submit">Candidatar</button>
-                    </form>
-                </td>
-                <td>
-                    <form th:action="@{/candidaturas/form}" method="post" style="display:inline;">
-                        <input type="hidden" name="ofertaId" th:value="${oferta.id}" />
-                        <button type="submit">Candidatar</button>
-                    </form>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <button><a th:href="@{/form}">Voltar</a></button>
 </body>
 
 </html>
