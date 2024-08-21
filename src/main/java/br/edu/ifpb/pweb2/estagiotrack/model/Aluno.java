@@ -1,14 +1,11 @@
 package br.edu.ifpb.pweb2.estagiotrack.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import org.hibernate.mapping.Set;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.List;
 
 @Data
