@@ -36,7 +36,7 @@ public class Oferta implements Serializable {
     private String turno;
 
     @Enumerated(EnumType.STRING)
-    private StatusOferta statusOferta;
+    private StatusOferta statusOferta = StatusOferta.ABERTA;
 
     public void encerrar() {
         this.statusOferta = StatusOferta.ENCERRADA;

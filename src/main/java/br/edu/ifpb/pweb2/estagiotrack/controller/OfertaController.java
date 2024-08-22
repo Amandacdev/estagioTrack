@@ -1,8 +1,10 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
+import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
 import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
 import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
-import br.edu.ifpb.pweb2.estagiotrack.repository.EmpresaRepository;
+import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusCandidatura;
+import br.edu.ifpb.pweb2.estagiotrack.repository.CandidaturaRepository;
 import br.edu.ifpb.pweb2.estagiotrack.repository.OfertaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -21,25 +24,13 @@ public class OfertaController {
     public OfertaRepository ofertaRepository;
 
     @Autowired
-    private EmpresaController empresaController;
+    private CandidaturaRepository candidaturaRepository;
 
     @Autowired
-    private EmpresaRepository empresaRepository;
+    private EmpresaController empresaController;
 
     @RequestMapping("/form")
     public String getForm(Oferta oferta, Model model) {
-        // Para facilitar os testes, iniciamos o projeto com algumas ofertas sendo
-        // inseridas ao acessar cadastrar oferta e voltar.
-        // Quando tivermos um banco, mover esses inserts para um trigger rodando na
-        // criação da tabela. Atualmente os registros são reescritos cada vez que a
-        // página de cadastro é aberta. Isso vai dar problema quando tivermos
-        // integridade referencial entre as entidades.
-        /*ofertaRepository.save(new Oferta(1, empresaRepository.findById(1).orElse(null), "responsavela@empresa.com",
-                "Exemplo Front-End", "1000", "Manhã"));
-        ofertaRepository.save(new Oferta(2, empresaRepository.findById(2).orElse(null), "responsavelb@empresa.com",
-                "Exemplo Back-End", "1000", "Tarde"));
-        ofertaRepository.save(new Oferta(3, empresaRepository.findById(3).orElse(null), "responsavelc@empresa.com",
-                "Exemplo Full Stack", "1000", "A combinar"));*/
         return "ofertas/form";
     }
 
@@ -55,9 +46,7 @@ public class OfertaController {
             model.addAttribute("alert", "Por favor, preencha todos os campos corretamente.");
             return "ofertas/form";
         } else {
-            Empresa empresa = empresaController.buscarPorEmail(oferta.getEmailOfertante()); // Parte do workaround para
-            // vincular oferta a empresa
-            // dinamicamente.
+            Empresa empresa = empresaController.buscarPorEmail(oferta.getEmailOfertante());
             if (empresa != null) {
                 oferta.setOfertante(empresa);
                 ofertaRepository.save(oferta);
@@ -70,22 +59,30 @@ public class OfertaController {
         }
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public String deletaOferta(Integer ofertaId, RedirectAttributes attr) {
-        Optional<Oferta> oferta = ofertaRepository.findById(ofertaId);
-        if (oferta.isPresent()) {
-            ofertaRepository.deleteById(ofertaId);
-            attr.addFlashAttribute("mensagem", "Oferta de estágio cancelada com sucesso!");
+    @RequestMapping(value = "/desativar", method = RequestMethod.POST)
+    public String desativarOferta(Integer ofertaId, RedirectAttributes attr) {
+        Optional<Oferta> ofertaOptional = ofertaRepository.findById(ofertaId);
+        if (ofertaOptional.isPresent()) {
+            Oferta oferta = ofertaOptional.get();
+            List<Candidatura> candidaturas = candidaturaRepository.findByOfertaSelecionada(oferta);
+            if (!candidaturas.isEmpty()) {
+                for (Candidatura candidatura : candidaturas) {
+                    candidatura.setStatusCandidatura(StatusCandidatura.REJEITADA);
+                    candidaturaRepository.save(candidatura);
+                }
+            }
+            oferta.encerrar();
+            ofertaRepository.save(oferta);
+
+            attr.addFlashAttribute("mensagem", "Oferta de estágio desativada com sucesso!");
         } else {
             attr.addFlashAttribute("alert", "Oferta de estágio não encontrada.");
         }
         return "redirect:/ofertas";
     }
 
-    // Parte do workaround para vincular oferta a empresa dinamicamente.
     public Oferta buscarPorId(Integer id) {
         Optional<Oferta> oferta = ofertaRepository.findById(id);
         return oferta.orElse(null);
     }
-
 }

@@ -27,5 +27,5 @@ public class Candidatura implements Serializable {
     public Oferta ofertaSelecionada;
 
     @Enumerated(EnumType.STRING)
-    public StatusCandidatura statusCandidatura;
+    public StatusCandidatura statusCandidatura = StatusCandidatura.PENDENTE;
 }
