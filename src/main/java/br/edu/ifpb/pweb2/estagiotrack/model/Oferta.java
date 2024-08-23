@@ -8,6 +8,8 @@ import lombok.*;
 
 import java.io.Serializable;
 
+import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -20,11 +22,14 @@ public class Oferta implements Serializable {
     @GeneratedValue
     private Integer id;
 
+    @Email
+    private String emailOfertante;
+
     @ManyToOne
     private Empresa ofertante;
 
-    @Email
-    private String emailOfertante;
+    @NotBlank(message = "Selecione uma área de atividade")
+    private String atividadePrincipal;
 
     @NotBlank(message = "O Nome do cargo não pode ser vazio")
     private String tituloCargo;
@@ -33,7 +38,14 @@ public class Oferta implements Serializable {
     private String valorBolsa;
 
     @NotBlank
-    private String turno;
+    private String cargaHoraria;
+
+    private String valeTransporte;
+
+    private String requisitos;
+
+    @ElementCollection
+    private List<String> competencias;
 
     @Enumerated(EnumType.STRING)
     private StatusOferta statusOferta = StatusOferta.ABERTA;

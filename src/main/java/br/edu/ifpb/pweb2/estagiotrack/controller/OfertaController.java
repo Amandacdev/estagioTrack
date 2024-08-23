@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -35,15 +36,24 @@ public class OfertaController {
         return "ofertas/form";
     }
 
-    @RequestMapping()
-    public String getList(Model model) {
-        model.addAttribute("ofertas", ofertaRepository.findAll());
+    @RequestMapping(method = RequestMethod.GET)
+    public String getList(@RequestParam(value = "competencias", required = false) List<String> competencias,
+            Model model) {
+        List<Oferta> ofertas;
+        if (competencias == null || competencias.isEmpty()) {
+            ofertas = ofertaRepository.findAll();
+        } else {
+            ofertas = ofertaRepository.findByCompetencias(competencias);
+        }
+        model.addAttribute("ofertas", ofertas);
         return "ofertas/list";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String cadastroOferta(Oferta oferta, Model model, RedirectAttributes attr) {
-        if (oferta.getTituloCargo().isEmpty() || oferta.getEmailOfertante().isEmpty() || oferta.getTurno().isEmpty()) {
+    public String cadastroOferta(@RequestParam List<String> competencias, Oferta oferta, Model model,
+            RedirectAttributes attr) {
+        if (oferta.getTituloCargo().isEmpty() || oferta.getEmailOfertante().isEmpty()
+                || oferta.getCargaHoraria().isEmpty()) {
             model.addAttribute("alert", "Por favor, preencha todos os campos corretamente.");
             return "ofertas/form";
         } else {
