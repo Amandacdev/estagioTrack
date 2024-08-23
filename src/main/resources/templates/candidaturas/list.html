@@ -5,14 +5,13 @@
 <body>
     <div layout:fragment="content">
 
-        <!-- Alterar essa página para que ela tenha views diferentes para aluno, empresa e coordenador. Aluno deve ser capaz de ver somente as próprias candidaturas. Empresas devem ser capazes de ver somente as candidaturas de suas ofertas, e o coordenador deve ser capaz de ver todas as candidaturas no sistema.-->
         <h1>Candidaturas</h1>
         <table>
             <thead>
                 <tr>
                     <th>Aluno</th>
-                    <th>Empresa</th>
                     <th>Oferta</th>
+                    <th>Empresa</th>
                     <th>Status</th>
                 </tr>
             </thead>
@@ -24,7 +23,7 @@
                     <td th:text="${candidatura.alunoCandidato.nome}">Estudante</td>
                     <td th:text="${candidatura.ofertaSelecionada.tituloCargo}">Título da Vaga</td>
                     <td th:text="${candidatura.ofertaSelecionada.ofertante.razaoSocial}">Empresa</td>
-                    <!-- <td th:text="${candidatura.status}">Status</td> -->
+                    <td th:text="${candidatura.statusCandidatura}">Status</td>
                 </tr>
             </tbody>
         </table>

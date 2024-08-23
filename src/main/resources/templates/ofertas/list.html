@@ -1,6 +1,6 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}">
+
 <body>
     <div layout:fragment="content">
         <h1>Ofertas Cadastradas</h1>
@@ -17,23 +17,37 @@
                     <th>Cargo</th>
                     <th>Valor da bolsa</th>
                     <th>Turno</th>
-                    <th colspan="2">Ações</th>
+                    <th>Status</th>
+                    <th colspan="3">Ações</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="oferta : ${ofertas}" th:class="${oferta.statusOferta != 'ABERTA'} ? 'inactive'">
+                <tr th:each="oferta: ${ofertas}">
                     <td>[[${oferta.id}]]</td>
                     <td th:text="${oferta.ofertante.razaoSocial}"></td>
                     <td th:text="${oferta.tituloCargo}"></td>
                     <td th:text="${oferta.valorBolsa}"></td>
                     <td th:text="${oferta.turno}"></td>
-                    <td>
+                    <td th:text="${oferta.statusOferta}"></td>
+
+                    <!-- Botão Encerrar -->
+                    <td th:if="${oferta.statusOferta == 'ABERTA'}">
                         <form th:action="@{/ofertas/desativar}" method="post" style="display:inline;">
                             <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
-                            <button type="submit">Desativar</button>
+                            <button type="submit">Encerrar</button>
                         </form>
                     </td>
-                    <td th:if="${oferta.statusOferta == 'ABERTA'}">
+
+                    <!-- Botão Reativar -->
+                    <td th:if="${oferta.statusOferta == 'ENCERRADA'}">
+                        <form th:action="@{/ofertas/reativar}" method="post" style="display:inline;">
+                            <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
+                            <button type="submit">Reativar</button>
+                        </form>
+                    </td>
+
+                    <!-- Botão Candidatar -->
+                    <td>
                         <form th:action="@{/candidaturas/form}" method="post" style="display:inline;">
                             <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
                             <button type="submit">Candidatar</button>
@@ -42,15 +56,9 @@
                 </tr>
             </tbody>
         </table>
+
         <button><a th:href="@{/form}">Voltar</a></button>
     </div>
-
-    <style>
-        .inactive {
-            background-color: #f8d7da; /* Cor de fundo para ofertas inativas */
-            color: #721c24; /* Cor do texto para ofertas inativas */
-            text-decoration: line-through; /* Texto riscado para indicar que não é selecionável */
-        }
-    </style>
 </body>
+
 </html>

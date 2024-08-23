@@ -4,6 +4,7 @@ import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
 import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
 import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
 import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusCandidatura;
+import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusOferta;
 import br.edu.ifpb.pweb2.estagiotrack.repository.CandidaturaRepository;
 import br.edu.ifpb.pweb2.estagiotrack.repository.OfertaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,20 @@ public class OfertaController {
             ofertaRepository.save(oferta);
 
             attr.addFlashAttribute("mensagem", "Oferta de estágio desativada com sucesso!");
+        } else {
+            attr.addFlashAttribute("alert", "Oferta de estágio não encontrada.");
+        }
+        return "redirect:/ofertas";
+    }
+
+    @RequestMapping(value = "/reativar", method = RequestMethod.POST)
+    public String reativarOferta(Integer ofertaId, RedirectAttributes attr) {
+        Optional<Oferta> ofertaOptional = ofertaRepository.findById(ofertaId);
+        if (ofertaOptional.isPresent()) {
+            Oferta oferta = ofertaOptional.get();
+            oferta.setStatusOferta(StatusOferta.ABERTA);
+            ofertaRepository.save(oferta);
+            attr.addFlashAttribute("mensagem", "Oferta de estágio reativada com sucesso!");
         } else {
             attr.addFlashAttribute("alert", "Oferta de estágio não encontrada.");
         }

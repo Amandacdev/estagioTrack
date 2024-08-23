@@ -53,7 +53,7 @@ public class AlunoController {
         } else {
             alunoService.salvarAluno(aluno, competencias);
             attr.addFlashAttribute("success", "Aluno cadastrado com sucesso!");
-            return "redirect:/alunos";
+            return "redirect:/ofertas";
         }
     }
 
