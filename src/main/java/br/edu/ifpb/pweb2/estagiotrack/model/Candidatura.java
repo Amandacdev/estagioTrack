@@ -18,14 +18,18 @@ public class Candidatura implements Serializable {
     private Integer id;
 
     @Email
-    public String emailCandidato;
+    private String emailCandidato;
 
     @ManyToOne
-    public Aluno alunoCandidato;
+    private Aluno alunoCandidato;
 
     @ManyToOne
-    public Oferta ofertaSelecionada;
+    private Oferta ofertaSelecionada;
 
     @Enumerated(EnumType.STRING)
-    public StatusCandidatura statusCandidatura = StatusCandidatura.PENDENTE;
+    private StatusCandidatura statusCandidatura = StatusCandidatura.PENDENTE;
+
+    public StatusCandidatura getStatus() {
+        return this.statusCandidatura;
+    }
 }

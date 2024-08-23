@@ -30,23 +30,21 @@
                     <td th:text="${oferta.turno}"></td>
                     <td th:text="${oferta.statusOferta}"></td>
 
-                    <!-- Botão Encerrar -->
-                    <td th:if="${oferta.statusOferta == 'ABERTA'}">
+                    <td th:if="${oferta.statusOferta.name() == 'ABERTA'}">
                         <form th:action="@{/ofertas/desativar}" method="post" style="display:inline;">
                             <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
                             <button type="submit">Encerrar</button>
                         </form>
                     </td>
 
-                    <!-- Botão Reativar -->
-                    <td th:if="${oferta.statusOferta == 'ENCERRADA'}">
+                    <td th:if="${oferta.statusOferta.name() == 'ENCERRADA'}">
                         <form th:action="@{/ofertas/reativar}" method="post" style="display:inline;">
                             <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
                             <button type="submit">Reativar</button>
                         </form>
                     </td>
 
-                    <!-- Botão Candidatar -->
+
                     <td>
                         <form th:action="@{/candidaturas/form}" method="post" style="display:inline;">
                             <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />

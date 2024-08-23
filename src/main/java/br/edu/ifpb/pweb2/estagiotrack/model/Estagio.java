@@ -19,10 +19,10 @@ public class Estagio implements Serializable {
     private Integer id;
 
     @ManyToOne
-    public Aluno alunoAprovado;
+    private Aluno alunoAprovado;
 
-    @ManyToOne
-    public Oferta ofertaSelecionada;
+    @ManyToOne //Deveria ser 1:1 já que no nosso caso nossas ofertas não têm quantidade de vagas, então cada uma só gera 1 estágio.
+    private Oferta ofertaSelecionada;
 
     public Estagio(){
         encerrarOferta();

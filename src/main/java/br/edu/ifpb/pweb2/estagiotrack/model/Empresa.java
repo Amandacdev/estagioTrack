@@ -16,58 +16,62 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class Empresa implements Serializable {
 
-    @Setter
-    @Getter
-    @Id
-    @GeneratedValue
-    private Integer id;
+        @Setter
+        @Getter
+        @Id
+        @GeneratedValue
+        private Integer id;
 
-    @NotBlank/*
-    @Pattern(
-            regexp = "\\d{2}\\.\\d{3}\\.\\d{3}/\\d{4}-\\d{2}|\\d{14}",
-            message = "CNPJ deve estar no formato 99.999.999/9999-99"
-    )*/
-    public String cnpj;
+        @NotBlank /*
+                   * @Pattern(
+                   * regexp = "\\d{2}\\.\\d{3}\\.\\d{3}/\\d{4}-\\d{2}|\\d{14}",
+                   * message = "CNPJ deve estar no formato 99.999.999/9999-99"
+                   * )
+                   */
+        private String cnpj;
 
-    @NotBlank
-    public String cep;
+        @NotBlank
+        private String cep;
 
-    @NotBlank
-    public String logradouro;
+        @NotBlank
+        private String logradouro;
 
-    public String numeroImovel;
+        private String numeroImovel;
 
-    @NotBlank
-    public String bairro;
+        @NotBlank
+        private String bairro;
 
-    @NotBlank
-    public String cidade;
+        @NotBlank
+        private String cidade;
 
-    @NotBlank
-    public String estado;
+        @NotBlank
+        private String estado;
 
-    @NotBlank
-    /*@Pattern(
-            regexp = "\\(\\d{2}\\) \\d{5}-\\d{4}|\\d{5}-\\d{4}|\\d{10}",
-            message = "Número de celular deve estar no formato (99) 99999-9999"
-    )*/
-    public String telefone;
+        @NotBlank
+        /*
+         * @Pattern(
+         * regexp = "\\(\\d{2}\\) \\d{5}-\\d{4}|\\d{5}-\\d{4}|\\d{10}",
+         * message = "Número de celular deve estar no formato (99) 99999-9999"
+         * )
+         */
+        private String telefone;
 
-    public String atividadePrincipal;
-    public String site;
-    public byte[] comprovanteEndereco;
+        @NotBlank
+        private String atividadePrincipal;
+        private String site;
+        private byte[] comprovanteEndereco;
 
-    @NotBlank
-    public String razaoSocial;
+        @NotBlank
+        private String razaoSocial;
 
-    @NotBlank
-    public String responsavel;
+        @NotBlank
+        private String responsavel;
 
-    @NotBlank
-    @Email
-    public String email;
+        @NotBlank
+        @Email
+        private String email;
 
-    @NotBlank
-    public String senha;
+        @NotBlank
+        private String senha;
 
 }

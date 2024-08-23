@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -22,20 +21,8 @@ public class AlunoController {
 
     @RequestMapping("/form")
     public String getForm(Model model) {
-        // Test data setup if needed
-        // List<String> competencias1 = Arrays.asList("C#", "C++", "CSS");
-        // alunoService.salvarAluno(new Aluno(null, "amanda@mail.com", "amandaCruz", "123", "Amanda Cruz", "Feminino", competencias1), competencias1);
 
-        // List<String> competencias2 = Arrays.asList("HTML", "Java", "JavaScript");
-        // alunoService.salvarAluno(new Aluno(null, "brian@mail.com", "brianRafael", "123", "Brian Rafael", "Masculino", competencias2), competencias2);
-
-        // List<String> competencias3 = Arrays.asList("Python", "Ruby", "SQL");
-        // alunoService.salvarAluno(new Aluno(null, "george@mail.com", "georgeLima", "123", "George Lima", "Masculino", competencias3), competencias3);
-
-        // List<String> competencias4 = Arrays.asList("HTML", "CSS", "JavaScript");
-        // alunoService.salvarAluno(new Aluno(null, "olivia@mail.com", "oliviaOliva", "123", "Olivia Oliva", "Feminino", competencias4), competencias4);
-
-        model.addAttribute("aluno", new Aluno()); // Prepare an empty aluno for the form
+        model.addAttribute("aluno", new Aluno());
         return "alunos/form";
     }
 
@@ -46,7 +33,8 @@ public class AlunoController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String cadastroAluno(@RequestParam List<String> competencias, Aluno aluno, Model model, RedirectAttributes attr) {
+    public String cadastroAluno(@RequestParam List<String> competencias, Aluno aluno, Model model,
+            RedirectAttributes attr) {
         if (!alunoService.validarAluno(aluno)) {
             model.addAttribute("alert", "Por favor preencha todos os campos corretamente.");
             return "alunos/form";

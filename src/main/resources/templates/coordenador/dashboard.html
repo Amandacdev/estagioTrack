@@ -1,27 +1,32 @@
-<html   xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout/layout}"
->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}">
+
 <body>
     <div layout:fragment="content">
         <h1>Bem-vindo à página da Coordenação!</h1>
         <p>Aqui estão as funcionalidades disponíveis para coordenação.</p>
 
-        <button class="btn btn-sm btn-outline-secondary">
-            <a class="nav-item nav-link" th:href="@{/alunos}">Listar Estudantes</a>
-        </button>
+        <a class="nav-item nav-link" th:href="@{/alunos}"><button class="btn btn-sm btn-outline-secondary">
+                Listar Estudantes
+            </button>
+        </a>
 
-        <button class="btn btn-sm btn-outline-secondary">
-            <a class="nav-item nav-link" th:href="@{/empresas}">Listar Empresas</a>
-        </button>
+        <a class="nav-item nav-link" th:href="@{/empresas}"><button class="btn btn-sm btn-outline-secondary">
+                Listar Empresas
+            </button>
+        </a>
 
-        <button class="btn btn-sm btn-outline-secondary">
-            <a class="nav-item nav-link" th:href="@{/ofertas}">Listar Ofertas</a>
-        </button>
+        <a class="nav-item nav-link" th:href="@{/ofertas}">
+            <button class="btn btn-sm btn-outline-secondary">
+                Listar Ofertas
+            </button>
+        </a>
 
-        <button class="btn btn-sm btn-outline-secondary">
-            <a class="nav-item nav-link" th:href="@{/coordenador/candidaturas}">Listar Candidaturas</a>
-        </button>
+        <a class="nav-item nav-link" th:href="@{/coordenador/candidaturas}">
+            <button class="btn btn-sm btn-outline-secondary">
+                Listar Candidaturas
+            </button>
+        </a>
     </div>
 </body>
 

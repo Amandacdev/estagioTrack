@@ -12,7 +12,8 @@
             Nome da pessoa responsável: <input type="text" th:field="*{responsavel}" required /> <br />
             Email da pessoa responsável: <input type="email" th:field="*{email}" required /> <br />
             Senha: <input type="password" th:field="*{senha}" required /> <br />
-            CEP: <input type="number" th:field="*{cep}" placeholder="Apenas números" id="cep" required /> <br />
+            CEP: <input type="number" th:field="*{cep}" placeholder="Apenas números." id="cep" required /> <br />
+            <label for="cep">Digite um CEP válido para autocompletar o endereço.</label> <br />
             Logradouro: <input type="text" th:field="*{logradouro}" id="logradouro" required /> <br />
             Número do imóvel: <input type="number" th:field="*{numeroImovel}" required /> <br />
             Bairro: <input type="text" th:field="*{bairro}" id="bairro" required /> <br />
