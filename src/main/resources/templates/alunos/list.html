@@ -1,50 +1,45 @@
-<!doctype html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <title>Estudantes Cadastrados</title>
-</head>
-
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+>
 <body>
-    <h1>Estudantes Cadastrados</h1>
+    <div layout:fragment="content">
 
-    <div th:if="${#lists.isEmpty(alunos)}">
-        <p>Nenhum estudante cadastrado</p>
+        <h1>Estudantes Cadastrados</h1>
+
+        <div th:if="${#lists.isEmpty(alunos)}">
+            <p>Nenhum estudante cadastrado</p>
+        </div>
+
+        <table border='1' th:if="${!#lists.isEmpty(alunos)}">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Nome de Usuário</th>
+                    <th>Gênero</th>
+                    <th>Competências</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="aluno : ${alunos}">
+                    <td th:text="${aluno.id}"></td>
+                    <td th:text="${aluno.nome}"></td>
+                    <td th:text="${aluno.email}"></td>
+                    <td th:text="${aluno.nomeUsuario}"></td>
+                    <td th:text="${aluno.genero}"></td>
+                    <td>
+                        <ul>
+                            <li th:each="competencia : ${aluno.competencias}" th:text="${competencia}"></li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button><a th:href="@{/form}">Voltar</a></button>
     </div>
-
-    <table border='1' th:if="${!#lists.isEmpty(alunos)}">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nome</th>
-                <th>Email</th>
-                <th>Nome de Usuário</th>
-                <th>Gênero</th>
-                <th>Competências</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="aluno : ${alunos}">
-                <td th:text="${aluno.id}"></td>
-                <td th:text="${aluno.nome}"></td>
-                <td th:text="${aluno.email}"></td>
-                <td th:text="${aluno.nomeUsuario}"></td>
-                <td th:text="${aluno.genero}"></td>
-                <td>
-                    <ul>
-                        <li th:each="competencia : ${aluno.competencias}" th:text="${competencia}"></li>
-                    </ul>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <button><a th:href="@{/form}">Voltar</a></button>
 </body>
 
 </html>

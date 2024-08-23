@@ -1,19 +1,14 @@
-<!doctype html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastro de Estudantes</title>
-</head>
-
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+>
 <body>
+<div layout:fragment="content">
 
     <h1>Cadastro de Estudantes</h1>
 
     <form th:action="@{/alunos/save}" method="POST" th:object="${aluno}">
+
         Nome completo: <input type="text" th:field="*{nome}" /> <br />
         Email: <input type="text" th:field="*{email}" /> <br />
         Nome de usuario: <input type="text" th:field="*{nomeUsuario}"> <br />
@@ -64,7 +59,7 @@
     <div th:if="${alert}" style="color: red;">
         <p th:text="${alert}"></p>
     </div>
-
+</div>
 </body>
 
 </html>

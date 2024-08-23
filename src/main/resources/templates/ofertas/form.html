@@ -1,37 +1,31 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastrar Ofertas</title>
-</head>
-
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+>
 <body>
+    <div layout:fragment="content">
 
-    <h1>Cadastro de Ofertas</h1>
+        <h1>Cadastro de Ofertas</h1>
 
-    <form th:action="@{/ofertas/save}" method="POST" th:object="${oferta}">
-        Email da Empresa ofertante: <input type="email" th:field="*{emailOfertante}"> <br />
-        Cargo ofertado: <input type="text" th:field="*{tituloCargo}" /> <br />
-        Valor da bolsa: <input type="number" min="0" placeholder="Apenas números" th:field="*{valorBolsa}" /> <br />
-        Turno:
-        <select th:field="*{turno}">
-            <option value="Manhã">Manhã</option>
-            <option value="Tarde">Tarde</option>
-            <option value="A combinar">A combinar</option>
-        </select>
-        <br />
-        <input type="submit" value="Salvar" />
-    </form>
-    <button><a th:href="@{/form}">Cancelar</a></button>
+        <form th:action="@{/ofertas/save}" method="POST" th:object="${oferta}">
+            Email da Empresa ofertante: <input type="email" th:field="*{emailOfertante}"> <br />
+            Cargo ofertado: <input type="text" th:field="*{tituloCargo}" /> <br />
+            Valor da bolsa: <input type="number" min="0" placeholder="Apenas números" th:field="*{valorBolsa}" /> <br />
+            Turno:
+            <select th:field="*{turno}">
+                <option value="Manhã">Manhã</option>
+                <option value="Tarde">Tarde</option>
+                <option value="A combinar">A combinar</option>
+            </select>
+            <br />
+            <input type="submit" value="Salvar" />
+        </form>
+        <button><a th:href="@{/form}">Cancelar</a></button>
 
-    <div th:if="${alert}" style="color: red;">
-        <p th:text="${alert}"></p>
+        <div th:if="${alert}" style="color: red;">
+            <p th:text="${alert}"></p>
+        </div>
     </div>
-
 </body>
 
 </html>

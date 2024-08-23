@@ -1,36 +1,27 @@
 package br.edu.ifpb.pweb2.estagiotrack.repository;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
-import org.springframework.stereotype.Component;
+import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
-// Falta implementar inscrição em ofertas
-@Component
-public class CandidaturaRepository {
+import java.util.List;
+import java.util.Optional;
 
-    private Map<Integer, Candidatura> repositorio = new HashMap<Integer, Candidatura>();
+@Repository
+public interface CandidaturaRepository extends JpaRepository<Candidatura, Integer> {
 
-    public Candidatura findById(Integer id) {
-        return repositorio.get(id);
-    }
+    // Consulta para encontrar a candidatura por email do candidato
+    @Query("SELECT c FROM Candidatura c WHERE c.emailCandidato = :email")
+    Optional<Candidatura> findByEmail(@Param("email") String email);
 
-    public void save(Candidatura candidatura) {
-        Integer id = (candidatura.getId() == null) ? this.getMaxId() + 1 : candidatura.getId();
-        candidatura.setId(id);
-        repositorio.put(id, candidatura);
-    }
+    // Consulta para obter o ID máximo
+    @Query("SELECT COALESCE(MAX(c.id), 0) FROM Candidatura c")
+    Integer getMaxId();
+    
+    List<Candidatura> findByOfertaSelecionada(Oferta oferta);
 
-    public List<Candidatura> findAll() {
-        return repositorio.values().stream().collect(Collectors.toList());
-    }
-
-    private Integer getMaxId() {
-        return repositorio.keySet().stream().max(Integer::compareTo).orElse(0);
-    }
-
-    public void delete(Integer id) {
-        repositorio.remove(id);
-    }
 }

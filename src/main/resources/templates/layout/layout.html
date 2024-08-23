@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="pt_BR"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta th:insert="~{/fragments/base ::files}">
+</head>
+
+<body>
+    <div th:replace="~{/fragments/base ::menu}" />
+
+    <div layout:fragment="content" class="conteudo">
+        <h1>Conteúdo entra aqui</h1>
+    </div>
+
+    <div th:replace="~{/fragments/base ::footer}" />
+</body>
+</html>

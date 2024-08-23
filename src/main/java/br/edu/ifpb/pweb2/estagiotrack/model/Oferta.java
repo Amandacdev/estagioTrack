@@ -1,30 +1,48 @@
 package br.edu.ifpb.pweb2.estagiotrack.model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusOferta;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
 
 import java.io.Serializable;
 
 @Data
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Oferta implements Serializable {
 
     @Setter
     @Getter
-    public Integer id;
-    public Empresa ofertante;
-    public String emailOfertante; // Parte do workaround para vincular oferta a empresa dinamicamente.
-    public String tituloCargo;
-    public String valorBolsa;
-    public String turno;
+    @Id
+    @GeneratedValue
+    private Integer id;
 
-    public Oferta(Integer id, Empresa ofertante, String emailOfertante, String tituloCargo, String valorBolsa,
-            String turno) {
-        this.id = id;
-        this.ofertante = ofertante;
-        this.emailOfertante = emailOfertante;
-        this.tituloCargo = tituloCargo;
-        this.valorBolsa = valorBolsa;
-        this.turno = turno;
+    @ManyToOne
+    private Empresa ofertante;
+
+    @Email
+    private String emailOfertante;
+
+    @NotBlank(message = "O Nome do cargo não pode ser vazio")
+    private String tituloCargo;
+
+    @NotBlank(message = "O valor da bolsa não pode ser vazio")
+    private String valorBolsa;
+
+    @NotBlank
+    private String turno;
+
+    @Enumerated(EnumType.STRING)
+    private StatusOferta statusOferta = StatusOferta.ABERTA;
+
+    public void encerrar() {
+        this.statusOferta = StatusOferta.ENCERRADA;
+    }
+
+    public StatusOferta getStatus() {
+        return this.statusOferta;
     }
 }
