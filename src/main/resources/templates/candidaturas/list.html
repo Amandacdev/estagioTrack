@@ -1,7 +1,6 @@
-<html   xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout/layout}"
->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}">
+
 <body>
     <div layout:fragment="content">
 
@@ -20,9 +19,11 @@
                     <td colspan="3">Nenhuma candidatura encontrada</td>
                 </tr>
                 <tr th:each="candidatura : ${candidaturas}">
-                    <td th:text="${candidatura.alunoCandidato.nome}">Estudante</td>
-                    <td th:text="${candidatura.ofertaSelecionada.tituloCargo}">Título da Vaga</td>
-                    <td th:text="${candidatura.ofertaSelecionada.ofertante.razaoSocial}">Empresa</td>
+                    <td><a th:href="@{/alunos/detalhes/}+${candidatura.alunoCandidato.id}"
+                            th:text="${candidatura.alunoCandidato.nome}"></a></td>
+                    <td><a th:href="@{/ofertas/detalhes/}+${candidatura.ofertaSelecionada.id}" th:text="${candidatura.ofertaSelecionada.tituloCargo}"></a></td>
+                    <td><a th:href="@{/empresas/detalhes/}+${candidatura.ofertaSelecionada.ofertante.id}"
+                            th:text="${candidatura.ofertaSelecionada.ofertante.razaoSocial}"></a></td>
                     <td th:text="${candidatura.statusCandidatura}">Status</td>
                 </tr>
             </tbody>

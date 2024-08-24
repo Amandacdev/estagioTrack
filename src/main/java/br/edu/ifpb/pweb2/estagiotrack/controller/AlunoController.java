@@ -3,8 +3,11 @@ package br.edu.ifpb.pweb2.estagiotrack.controller;
 import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
 import br.edu.ifpb.pweb2.estagiotrack.service.AlunoService;
 import lombok.RequiredArgsConstructor;
+
+import java.util.Optional;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,5 +50,17 @@ public class AlunoController {
 
     public Aluno buscarPorEmail(String email) {
         return alunoService.findByEmail(email).orElse(null);
+    }
+
+    @RequestMapping("/detalhes/{id}")
+    public String getDetalhesAluno(@PathVariable("id") Integer id, Model model) {
+        Optional<Aluno> aluno = alunoService.findById(id);
+        if (aluno.isPresent()) {
+            model.addAttribute("aluno", aluno.get());
+            return "alunos/detalhes";
+        } else {
+            model.addAttribute("alert", "Estudante não encontrado");
+            return "redirect:/alunos";
+        }
     }
 }

@@ -7,9 +7,12 @@ import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusCandidatura;
 import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusOferta;
 import br.edu.ifpb.pweb2.estagiotrack.repository.CandidaturaRepository;
 import br.edu.ifpb.pweb2.estagiotrack.repository.OfertaRepository;
+import br.edu.ifpb.pweb2.estagiotrack.service.OfertaService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +30,9 @@ public class OfertaController {
 
     @Autowired
     private CandidaturaRepository candidaturaRepository;
+
+    @Autowired
+    private OfertaService ofertaService;
 
     @Autowired
     private EmpresaController empresaController;
@@ -109,5 +115,17 @@ public class OfertaController {
     public Oferta buscarPorId(Integer id) {
         Optional<Oferta> oferta = ofertaRepository.findById(id);
         return oferta.orElse(null);
+    }
+
+    @RequestMapping("/detalhes/{id}")
+    public String getDetalhesOferta(@PathVariable("id") Integer id, Model model) {
+        Optional<Oferta> oferta = ofertaService.findById(id);
+        if (oferta.isPresent()) {
+            model.addAttribute("oferta", oferta.get());
+            return "ofertas/detalhes";
+        } else {
+            model.addAttribute("alert", "Oferta não encontrada");
+            return "redirect:/ofertas";
+        }
     }
 }

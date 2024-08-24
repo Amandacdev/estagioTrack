@@ -1,0 +1,20 @@
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+>
+<body>
+    <div layout:fragment="content">
+
+        <h1>Detalhes do Estudante</h1>
+
+        <p><strong>Nome:</strong> <span th:text="${aluno.nome}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${aluno.email}"></span></p>
+        <p><strong>Usuário:</strong> <span th:text="${aluno.nomeUsuario}"></span></p>
+        <p><strong>Gênero:</strong> <span th:text="${aluno.genero}"></span></p>
+        <p><strong>Competências:</strong> <span th:text="${aluno.competencias}"></span></p>
+
+        <button><a th:href="@{/alunos}">Voltar para lista</a></button>
+    </div>
+</body>
+
+</html>
