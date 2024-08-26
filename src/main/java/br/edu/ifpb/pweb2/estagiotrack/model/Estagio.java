@@ -19,7 +19,6 @@ public class Estagio{
     private Aluno alunoAprovado;
 
     @OneToOne
-    //Deveria ser 1:1 já que no nosso caso nossas ofertas não têm quantidade de vagas, então cada uma só gera 1 estágio.
     private Oferta ofertaSelecionada;
 
     public Estagio(){

@@ -4,38 +4,38 @@ import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusOferta;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.io.Serializable;
-
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Oferta {
+public class Oferta{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Email
+    @Email(message = "O e-mail do ofertante deve estar no formato correto.")
     private String emailOfertante;
 
     @ManyToOne
     private Empresa ofertante;
 
-    @NotBlank(message = "Selecione uma área de atividade")
+    @NotBlank(message = "A área de atividade é obrigatória.")
     private String atividadePrincipal;
 
-    @NotBlank(message = "O Nome do cargo não pode ser vazio")
+    @NotBlank(message = "O nome do cargo é obrigatório.")
     private String tituloCargo;
 
-    @NotBlank(message = "O valor da bolsa não pode ser vazio")
+    @NotBlank(message = "O valor da bolsa é obrigatório.")
     private String valorBolsa;
 
-    @NotBlank
+    @NotBlank(message = "A carga horária é obrigatória.")
     private String cargaHoraria;
 
     private String valeTransporte;
@@ -43,6 +43,7 @@ public class Oferta {
     private String requisitos;
 
     @ElementCollection
+    @NotEmpty(message = "Pelo menos uma competência deve ser selecionada.")
     private List<String> competencias;
 
     @Enumerated(EnumType.STRING)
