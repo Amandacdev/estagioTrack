@@ -16,7 +16,7 @@ import java.util.List;
 public class Oferta{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Integer id;
 
     @Email(message = "O e-mail do ofertante deve estar no formato correto.")
