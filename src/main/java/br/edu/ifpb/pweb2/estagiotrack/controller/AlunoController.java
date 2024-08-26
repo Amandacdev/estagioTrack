@@ -2,11 +2,16 @@ package br.edu.ifpb.pweb2.estagiotrack.controller;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
 import br.edu.ifpb.pweb2.estagiotrack.service.AlunoService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
+
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +23,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/alunos")
 @RequiredArgsConstructor
+@Validated
 public class AlunoController {
 
     private final AlunoService alunoService;
@@ -36,17 +42,25 @@ public class AlunoController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String cadastroAluno(@RequestParam List<String> competencias, Aluno aluno, Model model,
-            RedirectAttributes attr) {
-        if (!alunoService.validarAluno(aluno)) {
+    public String cadastroAluno(@RequestParam List<String> competencias,
+                                @Valid Aluno aluno,
+                                BindingResult bindingResult,
+                                Model model,
+                                RedirectAttributes attr) {
+        if (bindingResult.hasErrors()) {
             model.addAttribute("alert", "Por favor preencha todos os campos corretamente.");
             return "alunos/form";
         } else {
+            if (alunoService.existsByEmail(aluno.getEmail()) || alunoService.existsByNomeUsuario(aluno.getNomeUsuario())) {
+                model.addAttribute("alert", "Email ou nome de usuário já existente.");
+                return "alunos/form";
+            }
             alunoService.salvarAluno(aluno, competencias);
             attr.addFlashAttribute("success", "Aluno cadastrado com sucesso!");
             return "redirect:/ofertas";
         }
     }
+
 
     public Aluno buscarPorEmail(String email) {
         return alunoService.findByEmail(email).orElse(null);

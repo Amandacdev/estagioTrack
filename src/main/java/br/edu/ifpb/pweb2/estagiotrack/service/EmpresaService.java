@@ -26,6 +26,14 @@ public class EmpresaService {
         return empresaRepository.findByEmail(email);
     }
 
+    public boolean existsByEmail(String email) {
+        return empresaRepository.findByEmail(email).isPresent();
+    }
+
+    public boolean existsByCnpj(String cnpj) {
+        return empresaRepository.findByCnpj(cnpj).isPresent();
+    }
+
     public Empresa save(Empresa empresa) {
         return empresaRepository.save(empresa);
     }
