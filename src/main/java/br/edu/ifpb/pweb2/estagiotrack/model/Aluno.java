@@ -4,6 +4,7 @@ import br.edu.ifpb.pweb2.estagiotrack.validation.Unique;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.io.Serializable;
@@ -13,7 +14,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Aluno implements Serializable {
+public class Aluno {
 
     @Setter
     @Getter
@@ -23,11 +24,11 @@ public class Aluno implements Serializable {
 
     @Email
     @NotBlank(message= "Campo obrigatório!")
-    @Unique(message = "Já existe alguém com este email")
+    @Column(unique = true, nullable = false)
     private String email;
 
     @NotBlank(message= "Campo obrigatório!")
-    @Unique(message = "Já existe alguém com esse nome de usuário")
+    @Column(unique = true, nullable = false)
     private String nomeUsuario;
 
     @NotBlank(message= "A senha não pode ser vazia!")
@@ -40,6 +41,6 @@ public class Aluno implements Serializable {
     private String genero;
 
     @ElementCollection
-    @NotBlank(message="Selecione pelo menos um competência")
+    @NotEmpty(message="Selecione pelo menos um competência")
     private List<String> competencias;
 }

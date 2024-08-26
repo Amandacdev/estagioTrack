@@ -45,23 +45,25 @@ public class AlunoController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String cadastroAluno(@RequestParam List<String> competencias, @Valid Aluno aluno, BindingResult bindingResult, RedirectAttributes attr) {
+    public String cadastroAluno(@RequestParam List<String> competencias,
+                                @Valid Aluno aluno,
+                                BindingResult bindingResult,
+                                Model model,
+                                RedirectAttributes attr) {
         if (bindingResult.hasErrors()) {
-            ModelAndView mav = new ModelAndView("alunos/form");
-
-            List<String> msg = new ArrayList<>();
-
-            for (ObjectError error : bindingResult.getAllErrors()) {
-                msg.add(error.getDefaultMessage());
-            }
-
-            mav.addObject("msg", msg);
+            model.addAttribute("alert", "Por favor preencha todos os campos corretamente.");
             return "alunos/form";
         } else {
+            if (alunoService.existsByEmail(aluno.getEmail()) || alunoService.existsByNomeUsuario(aluno.getNomeUsuario())) {
+                model.addAttribute("alert", "Email ou nome de usuário já existente.");
+                return "alunos/form";
+            }
             alunoService.salvarAluno(aluno, competencias);
+            attr.addFlashAttribute("success", "Aluno cadastrado com sucesso!");
             return "redirect:/ofertas";
         }
     }
+
 
     public Aluno buscarPorEmail(String email) {
         return alunoService.findByEmail(email).orElse(null);

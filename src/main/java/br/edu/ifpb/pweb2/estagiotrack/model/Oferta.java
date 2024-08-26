@@ -11,13 +11,11 @@ import java.io.Serializable;
 import java.util.List;
 
 @Data
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Oferta implements Serializable {
+@Entity
+public class Oferta {
 
-    @Setter
-    @Getter
     @Id
     @GeneratedValue
     private Integer id;
