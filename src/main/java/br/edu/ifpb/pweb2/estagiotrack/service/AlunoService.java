@@ -34,11 +34,5 @@ public class AlunoService {
     public void deleteAluno(Integer id) {
         alunoRepository.deleteById(id);
     }
-
-    public boolean validarAluno(Aluno aluno) {
-        return aluno.getNome() != null && !aluno.getNome().isEmpty()
-                && aluno.getEmail() != null && !aluno.getEmail().isEmpty()
-                && aluno.getSenha() != null && !aluno.getSenha().isEmpty();
-    }
 }
 

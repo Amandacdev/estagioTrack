@@ -58,7 +58,7 @@
                     </td>
                     <td th:text="${oferta.statusOferta}"></td>
 
-                    <td th:if="${oferta.statusOferta.name() == 'ABERTA'}">
+                   <!-- <td th:if="${oferta.statusOferta.name() == 'ABERTA'}">
                         <form th:action="@{/ofertas/desativar}" method="post" style="display:inline;">
                             <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
                             <button type="submit">Encerrar</button>
@@ -70,7 +70,7 @@
                             <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
                             <button type="submit">Reativar</button>
                         </form>
-                    </td>
+                    </td>-->
 
                     <td>
                         <form th:action="@{/candidaturas/form}" method="post" style="display:inline;">

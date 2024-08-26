@@ -9,6 +9,12 @@
 
     <form th:action="@{/alunos/save}" method="POST" th:object="${aluno}">
 
+        <br/>
+            <div th:each = "m : ${msg}">
+                <span th:text = "${msg}"></span>
+            </div>
+        <br/>
+
         Nome completo: <input type="text" th:field="*{nome}" /> <br />
         Email: <input type="text" th:field="*{email}" /> <br />
         Nome de usuario: <input type="text" th:field="*{nomeUsuario}"> <br />

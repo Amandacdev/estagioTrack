@@ -1,5 +1,6 @@
 package br.edu.ifpb.pweb2.estagiotrack.model;
 
+import br.edu.ifpb.pweb2.estagiotrack.validation.Unique;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -22,9 +23,11 @@ public class Aluno implements Serializable {
 
     @Email
     @NotBlank(message= "Campo obrigatório!")
+    @Unique(message = "Já existe alguém com este email")
     private String email;
 
     @NotBlank(message= "Campo obrigatório!")
+    @Unique(message = "Já existe alguém com esse nome de usuário")
     private String nomeUsuario;
 
     @NotBlank(message= "A senha não pode ser vazia!")
@@ -37,5 +40,6 @@ public class Aluno implements Serializable {
     private String genero;
 
     @ElementCollection
+    @NotBlank(message="Selecione pelo menos um competência")
     private List<String> competencias;
 }
