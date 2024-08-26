@@ -30,8 +30,8 @@ public class EmpresaService {
         return empresaRepository.findByEmail(email).isPresent();
     }
 
-    public boolean existsByRazaoSocial(String razaoSocial) {
-        return empresaRepository.findByRazaoSocial(razaoSocial).isPresent();
+    public boolean existsByCnpj(String cnpj) {
+        return empresaRepository.findByCnpj(cnpj).isPresent();
     }
 
     public Empresa save(Empresa empresa) {

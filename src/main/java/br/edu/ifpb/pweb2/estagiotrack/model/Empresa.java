@@ -25,6 +25,7 @@ public class Empresa implements Serializable {
            message = "O CNPJ deve estar no formato 99.999.999/9999-99 ou 99999999999999."
    )*/
    @NotBlank(message = "O CNPJ é obrigatório.")
+   @Column(unique = true, nullable = false)
    private String cnpj;
 
    @NotBlank(message = "O CEP é obrigatório.")
@@ -59,7 +60,6 @@ public class Empresa implements Serializable {
    private byte[] comprovanteEndereco;
 
    @NotBlank(message = "A razão social é obrigatória.")
-   @Column(unique = true, nullable = false)
    private String razaoSocial;
 
    @NotBlank(message = "O nome do responsável é obrigatório.")

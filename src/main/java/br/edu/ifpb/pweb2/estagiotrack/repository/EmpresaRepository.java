@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface EmpresaRepository extends JpaRepository<Empresa, Integer> {
     Optional<Empresa> findByEmail(String email);
 
-    Optional<Empresa> findByRazaoSocial(String razaoSocial);
+    Optional<Empresa> findByCnpj(String cnpj);
 }
