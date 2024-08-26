@@ -1,6 +1,6 @@
 package br.edu.ifpb.pweb2.estagiotrack.model;
 
-import br.edu.ifpb.pweb2.estagiotrack.validation.Unique;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -41,6 +41,6 @@ public class Aluno {
     private String genero;
 
     @ElementCollection
-    @NotEmpty(message="Selecione pelo menos um competência")
+    @NotEmpty(message="Selecione pelo menos uma competência")
     private List<String> competencias;
 }

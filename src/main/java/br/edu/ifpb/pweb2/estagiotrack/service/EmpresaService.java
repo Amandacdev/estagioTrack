@@ -26,6 +26,14 @@ public class EmpresaService {
         return empresaRepository.findByEmail(email);
     }
 
+    public boolean existsByEmail(String email) {
+        return empresaRepository.findByEmail(email).isPresent();
+    }
+
+    public boolean existsByRazaoSocial(String razaoSocial) {
+        return empresaRepository.findByRazaoSocial(razaoSocial).isPresent();
+    }
+
     public Empresa save(Empresa empresa) {
         return empresaRepository.save(empresa);
     }

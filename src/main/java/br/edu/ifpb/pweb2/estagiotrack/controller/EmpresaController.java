@@ -2,9 +2,11 @@ package br.edu.ifpb.pweb2.estagiotrack.controller;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
 import br.edu.ifpb.pweb2.estagiotrack.service.EmpresaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,14 +34,23 @@ public class EmpresaController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String cadastroEmpresa(Empresa empresa, Model model, RedirectAttributes attr) {
-        if (empresa.getEmail().isEmpty() || empresa.getRazaoSocial().isEmpty()) {
+    public String cadastroEmpresa(@Valid Empresa empresa,
+                                  BindingResult bindingResult,
+                                  Model model,
+                                  RedirectAttributes attr) {
+        if (bindingResult.hasErrors()) {
             model.addAttribute("alert", "Por favor, preencha todos os campos corretamente.");
             return "empresas/form";
-        } else {
-            empresaService.save(empresa);
-            return "redirect:/empresas";
         }
+
+        if (empresaService.existsByEmail(empresa.getEmail()) || empresaService.existsByRazaoSocial(empresa.getRazaoSocial())) {
+            model.addAttribute("alert", "Email ou razão social já existente.");
+            return "empresas/form";
+        }
+
+        empresaService.save(empresa);
+        attr.addFlashAttribute("success", "Empresa cadastrada com sucesso!");
+        return "redirect:/empresas";
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
