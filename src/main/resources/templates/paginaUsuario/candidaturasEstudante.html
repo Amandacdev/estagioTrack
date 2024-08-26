@@ -6,8 +6,8 @@
     <h1>Minhas Aplicações - Estudante</h1>
 
     <h2>Dados do Estudante</h2>
-    <p>Nome: <span th:text="${aluno.nome}"></span></p>
-    <p>Email: <span th:text="${aluno.email}"></span></p>
+    <!-- <p>Nome: <span th:text="${alunoCandidato.nome}"></span></p>
+    <p>Email: <span th:text="${alunoCandidato.email}"></span></p> -->
 
     <h2>Candidaturas</h2>
     <table>
@@ -20,11 +20,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${candidaturas.isEmpty()}">
+        <tr th:if="${#lists.isEmpty(candidaturas)}">
             <td colspan="4">Nenhuma candidatura encontrada</td>
         </tr>
         <tr th:each="candidatura : ${candidaturas}">
-            <td th:text="${aluno.nome}"></td>
+            <td th:text="${candidatura.alunoCandidato.nome}"></td>
             <td>
                 <a th:if="${candidatura.ofertaSelecionada != null}"
                    th:href="@{/ofertas/detalhes/}+${candidatura.ofertaSelecionada.id}"
