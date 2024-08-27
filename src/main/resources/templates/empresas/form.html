@@ -142,7 +142,12 @@
             }
 
             input[type=number] {
-                -moz-appearance: textfield;
+                /* Standard appearance property */
+                appearance: textfield;
+                /* Vendor prefixes for browser compatibility */
+                -webkit-appearance: textfield; /* For Safari and Chrome */
+                -moz-appearance: textfield; /* For Firefox */
+                -ms-appearance: textfield; /* For Internet Explorer and Edge Legacy */
             }
         </style>
     </div>
