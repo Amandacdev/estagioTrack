@@ -107,8 +107,9 @@
             </div>
 
             <input type="submit" value="Salvar" class="form-button" />
+            <button class="form-button-cancel"><a th:href="@{/form}" class="cancel-link">Cancelar</a></button>
         </form>
-        <button class="form-button-cancel"><a th:href="@{/form}" class="cancel-link">Cancelar</a></button>
+        
 
         <div th:if="${alert}" class="alert">
             <p th:text="${alert}"></p>
