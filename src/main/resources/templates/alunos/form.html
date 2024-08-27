@@ -9,6 +9,12 @@
 
     <form th:action="@{/alunos/save}" method="POST" th:object="${aluno}">
 
+        <br/>
+        <div th:if="${alert}" style="color: red;">
+            <p th:text="${alert}"></p>
+        </div>
+        <br/>
+
         Nome completo: <input type="text" th:field="*{nome}" /> <br />
         Email: <input type="text" th:field="*{email}" /> <br />
         Nome de usuario: <input type="text" th:field="*{nomeUsuario}"> <br />
@@ -56,9 +62,6 @@
     </form>
     <button><a th:href="@{/form}">Cancelar</a></button>
 
-    <div th:if="${alert}" style="color: red;">
-        <p th:text="${alert}"></p>
-    </div>
 </div>
 </body>
 

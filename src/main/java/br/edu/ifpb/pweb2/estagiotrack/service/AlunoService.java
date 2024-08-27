@@ -31,6 +31,14 @@ public class AlunoService {
         return alunoRepository.findByEmail(email);
     }
 
+    public boolean existsByEmail(String email) {
+        return alunoRepository.findByEmail(email).isPresent();
+    }
+
+    public boolean existsByNomeUsuario(String nomeUsuario) {
+        return alunoRepository.findBynomeUsuario(nomeUsuario).isPresent();
+    }
+
     public void deleteAluno(Integer id) {
         alunoRepository.deleteById(id);
     }
@@ -41,4 +49,3 @@ public class AlunoService {
                 && aluno.getSenha() != null && !aluno.getSenha().isEmpty();
     }
 }
-

@@ -1,19 +1,14 @@
 package br.edu.ifpb.pweb2.estagiotrack.model;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusOferta;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.io.Serializable;
 
 @Data
 @Entity
 @AllArgsConstructor
-public class Estagio implements Serializable {
+public class Estagio{
     @Id
     @GeneratedValue
     private Integer id;
@@ -21,7 +16,7 @@ public class Estagio implements Serializable {
     @ManyToOne
     private Aluno alunoAprovado;
 
-    @ManyToOne //Deveria ser 1:1 já que no nosso caso nossas ofertas não têm quantidade de vagas, então cada uma só gera 1 estágio.
+    @OneToOne
     private Oferta ofertaSelecionada;
 
     public Estagio(){

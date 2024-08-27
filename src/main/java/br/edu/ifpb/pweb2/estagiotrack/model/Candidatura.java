@@ -5,13 +5,11 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
 
-import java.io.Serializable;
-
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Candidatura implements Serializable {
+public class Candidatura{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

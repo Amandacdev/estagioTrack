@@ -4,6 +4,14 @@
 >
 <body>
     <div layout:fragment="content">
+
+        <br/>
+        <div th:if="${alert}" style="color: red;">
+            <p th:text="${alert}"></p>
+        </div>
+        <br/>
+
+
         <h1>Cadastro de Empresas</h1>
 
         <form th:action="@{/empresas/save}" method="POST" th:object="${empresa}" id="form">
