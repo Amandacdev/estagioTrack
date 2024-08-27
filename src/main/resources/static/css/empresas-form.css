@@ -1,0 +1,70 @@
+/* Estilo específico para o formulário de empresas */
+.form-empresa {
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    /* Cor de fundo clara */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
+}
+
+.form-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+    /* Cor do texto */
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    /* Borda cinza clara */
+    border-radius: 5px;
+}
+
+.form-button {
+    background-color: #007bff;
+    /* Cor do botão */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-button:hover {
+    background-color: #0056b3;
+    /* Cor do botão ao passar o mouse */
+}
+
+.form-button-cancel {
+    background-color: transparent;
+    color: #007bff;
+    padding: 10px 20px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.form-button-cancel a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.form-button-cancel:hover {
+    background-color: #e6f2ff;
+}
+
+body {
+    color: #ccc
+}
+
+.title{
+    margin-bottom: 30px;
+}

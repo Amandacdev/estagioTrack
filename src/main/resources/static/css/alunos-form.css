@@ -1,0 +1,160 @@
+/* Estilo geral para a página */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0f1728;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #1e293b;
+    border-radius: 10px;
+    border: 2px solid #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Título do formulário */
+.form-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-size: 1.8rem;
+}
+
+/* Formulário */
+.form-student {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* Ajuste do espaçamento entre os grupos de formulário */
+}
+
+/* Grupos de formulário */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Label dos inputs */
+.form-label {
+    margin-bottom: 4px;
+    /* Ajuste do espaçamento abaixo dos labels */
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Inputs de texto e senha */
+.form-input {
+    padding: 8px;
+    /* Ajuste do padding interno dos inputs */
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    background-color: #334155;
+    color: #ffffff;
+    transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+    border-color: #7dd3fc;
+}
+
+/* Grupo de rádio e checkbox */
+.form-radio-group,
+.form-checkbox-group {
+    margin-bottom: 10px;
+    /* Ajuste do espaçamento entre os grupos de rádio e checkbox */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    /* Ajuste do espaçamento entre os checkboxes e radio buttons */
+    align-items: center;
+}
+
+/* Estilo para labels de rádio e checkbox */
+.form-radio-label,
+.form-checkbox-label {
+    margin-bottom: 0;
+    /* Remoção do espaçamento inferior para melhor alinhamento */
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+}
+
+/* Inputs de rádio e checkbox */
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 5px;
+    /* Ajuste do espaçamento à direita dos inputs */
+}
+
+/* Botões */
+.form-button {
+    padding: 10px;
+    /* Ajuste do padding interno do botão */
+    background-color: #2563eb;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 10px;
+    /* Espaço acima do botão */
+}
+
+.form-button:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+/* Botão de cancelar */
+.form-button-cancel {
+    padding: 8px;
+    /* Ajuste do padding interno do botão cancelar */
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    /* Espaço acima do botão cancelar */
+    font-size: 1rem;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.form-button-cancel:hover {
+    background-color: #475569;
+    transform: translateY(-2px);
+}
+
+.form-button-cancel a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.form-button-cancel:hover a {
+    color: #ffffff;
+}
+
+/* Link do botão de cancelar */
+.cancel-link {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.cancel-link:hover {
+    text-decoration: underline;
+}
+
+/* Alertas */
+.alert {
+    color: red;
+    margin-bottom: 10px;
+    /* Ajuste do espaçamento abaixo do alerta */
+}

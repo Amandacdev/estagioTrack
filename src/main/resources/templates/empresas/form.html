@@ -2,32 +2,54 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorate="~{layout/layout}"
 >
+<head>
+    <link rel="stylesheet" th:href="@{/css/empresas-form.css}">
+</head>
 <body>
     <div layout:fragment="content">
-
         <br/>
         <div th:if="${alert}" style="color: red;">
             <p th:text="${alert}"></p>
         </div>
         <br/>
 
+        <h1 class="title">Cadastro de Empresas</h1>
 
-        <h1>Cadastro de Empresas</h1>
+        <form th:action="@{/empresas/save}" method="POST" th:object="${empresa}" id="form" class="form-empresa">
+            <label for="razaoSocial" class="form-label">Nome da Empresa:</label>
+            <input type="text" th:field="*{razaoSocial}" class="form-input" required /> <br />
 
-        <form th:action="@{/empresas/save}" method="POST" th:object="${empresa}" id="form">
-            Nome da Empresa: <input type="text" th:field="*{razaoSocial}" required /> <br />
-            CNPJ: <input type="number" th:field="*{cnpj}" placeholder="Apenas números" required /> <br />
-            Nome da pessoa responsável: <input type="text" th:field="*{responsavel}" required /> <br />
-            Email da pessoa responsável: <input type="email" th:field="*{email}" required /> <br />
-            Senha: <input type="password" th:field="*{senha}" required /> <br />
-            CEP: <input type="number" th:field="*{cep}" placeholder="Apenas números." id="cep" required /> <br />
-            <label for="cep">Digite um CEP válido para autocompletar o endereço.</label> <br />
-            Logradouro: <input type="text" th:field="*{logradouro}" id="logradouro" required /> <br />
-            Número do imóvel: <input type="number" th:field="*{numeroImovel}" required /> <br />
-            Bairro: <input type="text" th:field="*{bairro}" id="bairro" required /> <br />
-            Cidade: <input type="text" th:field="*{cidade}" id="cidade" required /> <br />
-            Estado:
-            <select th:field="*{estado}" id="estado" required>
+            <label for="cnpj" class="form-label">CNPJ:</label>
+            <input type="number" th:field="*{cnpj}" class="form-input" placeholder="Apenas números" required /> <br />
+
+            <label for="responsavel" class="form-label">Nome da pessoa responsável:</label>
+            <input type="text" th:field="*{responsavel}" class="form-input" required /> <br />
+
+            <label for="email" class="form-label">Email da pessoa responsável:</label>
+            <input type="email" th:field="*{email}" class="form-input" required /> <br />
+
+            <label for="senha" class="form-label">Senha:</label>
+            <input type="password" th:field="*{senha}" class="form-input" required /> <br />
+
+            <label for="cep" class="form-label">CEP:</label>
+            <input type="number" th:field="*{cep}" class="form-input" placeholder="Apenas números" id="cep" required /> <br />
+
+            <label for="cep" class="form-label">Digite um CEP válido para autocompletar o endereço.</label> <br />
+
+            <label for="logradouro" class="form-label">Logradouro:</label>
+            <input type="text" th:field="*{logradouro}" class="form-input" id="logradouro" required /> <br />
+
+            <label for="numeroImovel" class="form-label">Número do imóvel:</label>
+            <input type="number" th:field="*{numeroImovel}" class="form-input" required /> <br />
+
+            <label for="bairro" class="form-label">Bairro:</label>
+            <input type="text" th:field="*{bairro}" class="form-input" id="bairro" required /> <br />
+
+            <label for="cidade" class="form-label">Cidade:</label>
+            <input type="text" th:field="*{cidade}" class="form-input" id="cidade" required /> <br />
+
+            <label for="estado" class="form-label">Estado:</label>
+            <select th:field="*{estado}" id="estado" class="form-input" required>
                 <option value="" disabled selected>Selecione o estado</option>
                 <option value="AC">Acre (AC)</option>
                 <option value="AL">Alagoas (AL)</option>
@@ -59,10 +81,11 @@
             </select>
             <br />
 
-            Telefone: <input type="number" th:field="*{telefone}" placeholder="Apenas números" required /> <br />
+            <label for="telefone" class="form-label">Telefone:</label>
+            <input type="number" th:field="*{telefone}" class="form-input" placeholder="Apenas números" required /> <br />
 
-            Atividade principal:
-            <select th:field="*{atividadePrincipal}" required>
+            <label for="atividadePrincipal" class="form-label">Atividade principal:</label>
+            <select th:field="*{atividadePrincipal}" class="form-input" required>
                 <option value="" disabled selected>Selecione a atividade principal</option>
                 <option value="Desenvolvimento de Software">Desenvolvimento de Software</option>
                 <option value="Consultoria em TI">Consultoria em TI</option>
@@ -77,19 +100,23 @@
             </select>
             <br />
 
-            Site: <input type="text" th:field="*{site}" /> <br />
-            Comprovante de endereço: <input type="file" th:field="*{comprovanteEndereco}" /> <br />
-            <input type="submit" value="Salvar" />
+            <label for="site" class="form-label">Site:</label>
+            <input type="text" th:field="*{site}" class="form-input" /> <br />
+
+            <label for="comprovanteEndereco" class="form-label">Comprovante de endereço:</label>
+            <input type="file" th:field="*{comprovanteEndereco}" class="form-input" /> <br />
+
+            <input type="submit" value="Salvar" class="form-button" />
         </form>
 
-        <button><a th:href="@{/form}">Cancelar</a></button>
+        <button class="form-button-cancel"><a th:href="@{/form}">Cancelar</a></button>
 
         <div th:if="${alert}" style="color: red;">
             <p th:text="${alert}"></p>
         </div>
 
         <style>
-            /* Esse CSS remove os botões de alteração de valor nos inputs type number */
+            /* Remove os botões de alteração de valor nos inputs type number */
             input[type=number]::-webkit-outer-spin-button,
             input[type=number]::-webkit-inner-spin-button {
                 -webkit-appearance: none;
@@ -102,7 +129,6 @@
         </style>
 
         <script>
-            //Código responsável por buscar o endereço a partir do cep
             let cep = document.getElementById('cep')
             cep.addEventListener('focusout', lerCEP)
 
@@ -151,5 +177,4 @@
         </script>
     </div>
 </body>
-
 </html>
