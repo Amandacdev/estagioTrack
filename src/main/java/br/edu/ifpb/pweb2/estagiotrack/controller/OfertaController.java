@@ -103,6 +103,13 @@ public class OfertaController {
         Optional<Oferta> ofertaOptional = ofertaRepository.findById(ofertaId);
         if (ofertaOptional.isPresent()) {
             Oferta oferta = ofertaOptional.get();
+            List<Candidatura> candidaturas = candidaturaRepository.findByOfertaSelecionada(oferta);
+            if (!candidaturas.isEmpty()) {
+                for (Candidatura candidatura : candidaturas) {
+                    candidatura.setStatusCandidatura(StatusCandidatura.PENDENTE);
+                    candidaturaRepository.save(candidatura);
+                }
+            }
             oferta.setStatusOferta(StatusOferta.ABERTA);
             ofertaRepository.save(oferta);
             attr.addFlashAttribute("mensagem", "Oferta de estágio reativada com sucesso!");
