@@ -128,4 +128,11 @@ public class OfertaController {
             return "redirect:/ofertas";
         }
     }
+    
+    @RequestMapping("/listOfertasAbertas")
+    public String getOfertasAbertas(Model model) {
+        List<Oferta> ofertasAbertas = ofertaService.listarOfertasAbertas();
+        model.addAttribute("ofertas", ofertasAbertas);
+        return "ofertas/listOfertasAbertas";
+    }
 }

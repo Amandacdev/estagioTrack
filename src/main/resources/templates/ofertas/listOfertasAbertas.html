@@ -1,0 +1,70 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}">
+<head>
+    <link rel="stylesheet" th:href="@{/css/ofertas-list.css}">
+</head>
+<body>
+    <div layout:fragment="content" class="container">
+        <h1 class="page-title">Ofertas Cadastradas</h1>
+
+        <!-- Filtro de Competências -->
+        <form th:action="@{/ofertas}" method="get" class="filter-form">
+            <fieldset class="filter-fieldset">
+                <legend>Filtrar por Competências:</legend>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="competencias" value="C"> C</label>
+                    <label><input type="checkbox" name="competencias" value="C#"> C#</label>
+                    <label><input type="checkbox" name="competencias" value="C++"> C++</label>
+                    <label><input type="checkbox" name="competencias" value="CSS"> CSS</label>
+                    <label><input type="checkbox" name="competencias" value="HTML"> HTML</label>
+                    <label><input type="checkbox" name="competencias" value="Java"> Java</label>
+                    <label><input type="checkbox" name="competencias" value="JavaScript"> JavaScript</label>
+                    <label><input type="checkbox" name="competencias" value="Python"> Python</label>
+                    <label><input type="checkbox" name="competencias" value="Ruby"> Ruby</label>
+                    <label><input type="checkbox" name="competencias" value="SQL"> SQL</label>
+                </div>
+            </fieldset>
+            <button type="submit" class="form-button">Filtrar</button>
+        </form>
+
+        <div th:if="${#lists.isEmpty(ofertas)}">
+            <p>Nenhuma oferta cadastrada</p>
+        </div>
+
+        <table class="offers-table" th:if="${!#lists.isEmpty(ofertas)}">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Email da Empresa</th>
+                    <th>Cargo</th>
+                    <th>Valor da bolsa</th>
+                    <th>Carga horária</th>
+                    <th>Vale Transporte</th>
+                    <th>Requisitos específicos</th>
+                    <th>Competências</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="oferta: ${ofertas}" th:if="${oferta.statusOferta.name() == 'ABERTA'}">
+                    <td>[[${oferta.id}]]</td>
+                    <td th:text="${oferta.emailOfertante}"></td>
+                    <td th:text="${oferta.tituloCargo}"></td>
+                    <td th:text="${oferta.valorBolsa}"></td>
+                    <td th:text="${oferta.cargaHoraria}"></td>
+                    <td th:text="${oferta.valeTransporte}"></td>
+                    <td th:text="${oferta.requisitos}"></td>
+                    <td>
+                        <ul class="competencies-list">
+                            <li th:each="competencia : ${oferta.competencias}" th:text="${competencia}"></li>
+                        </ul>
+                    </td>
+                    <td th:text="${oferta.statusOferta}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button class="form-button-cancel"><a th:href="@{/form}" class="cancel-link">Voltar</a></button>
+    </div>
+</body>
+</html>
