@@ -128,6 +128,23 @@ public class OfertaController {
             return "redirect:/ofertas";
         }
     }
+
+
+    //Esse método recebe um objeto empresa, obtem as ofertas desse usuário fornecido e direciona à página de visualização dessas ofertas
+    @RequestMapping("/paginaUsuario")
+    public String getListOfertasUsuario(Model model, Empresa empresa) {
+        List<Oferta> ofertas = ofertaService.findAll();
+
+        List<Oferta> ofertasUsuario = ofertas.stream()
+                .filter(oferta -> oferta.getEmailOfertante().equals(empresa.getEmail()))
+                .toList();
+
+        model.addAttribute("ofertas",ofertasUsuario);
+        model.addAttribute("empresa",empresa);
+
+        return "paginaUsuario/ofertasEmpresa";
+
+    }
     
     @RequestMapping("/listOfertasAbertas")
     public String getOfertasAbertas(Model model) {

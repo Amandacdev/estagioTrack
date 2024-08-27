@@ -26,7 +26,8 @@ public class CandidaturaService {
     }
 
     public Candidatura findByEmail(String email) {
-        return candidaturaRepository.findByEmail(email).orElse(null);
+        return (Candidatura) candidaturaRepository.findByEmail(email);
+        /*.orElse(null);*/
     }
 
 }
