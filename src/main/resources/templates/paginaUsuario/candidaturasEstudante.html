@@ -1,11 +1,47 @@
-<html   xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout/layout}"
->
-<body>
-<div layout:fragment="content">
-    <h1>Minhas aplicaçãoes - Estudante</h1>
-</div>
-</body>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
 
+<body>
+    <div layout:fragment="content">
+        <h1>Minhas Aplicações | Estudante</h1>
+
+        <h2>Dados do Estudante</h2>
+        <p>Nome: <span th:text="${aluno.nome}"></span></p>
+        <p>Email: <span th:text="${aluno.email}"></span></p>
+
+        <h2>Candidaturas</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Aluno</th>
+                <th>Oferta</th>
+                <th>Empresa</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:if="${#lists.isEmpty(candidaturas)}">
+                <td colspan="4">Nenhuma candidatura encontrada</td>
+            </tr>
+            <tr th:each="candidatura : ${candidaturas}">
+                <td th:text="${candidatura.alunoCandidato.nome}"></td>
+                <td>
+                    <a th:if="${candidatura.ofertaSelecionada != null}"
+                       th:href="@{/ofertas/detalhes/}+${candidatura.ofertaSelecionada.id}"
+                       th:text="${candidatura.ofertaSelecionada.tituloCargo}"></a>
+                </td>
+                <td>
+                    <a th:if="${candidatura.ofertaSelecionada != null and candidatura.ofertaSelecionada.ofertante != null}"
+                       th:href="@{/empresas/detalhes/}+${candidatura.ofertaSelecionada.ofertante.id}"
+                       th:text="${candidatura.ofertaSelecionada.ofertante.razaoSocial}"></a>
+                </td>
+                <td th:text="${candidatura.statusCandidatura}">Status</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</body>
 </html>
+

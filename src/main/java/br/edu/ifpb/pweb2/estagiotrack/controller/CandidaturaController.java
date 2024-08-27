@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/candidaturas")
 public class CandidaturaController {
@@ -56,4 +58,22 @@ public class CandidaturaController {
             return "candidaturas/form";
         }
     }
+
+    // Esse método recebe um objeto aluno, obtem as candidaturas desse usuário
+    // fornecido e direciona à página de visualização dessas candidaturas
+    @RequestMapping("/paginaUsuario")
+    public String getListCandidaturasUsuario(Model model, Aluno aluno) {
+        List<Candidatura> candidaturas = candidaturaService.findAll();
+
+        List<Candidatura> candidaturasUsuario = candidaturas.stream()
+                .filter(candidatura -> candidatura.getEmailCandidato().equals(aluno.getEmail()))
+                .toList();
+
+        model.addAttribute("candidaturas", candidaturasUsuario);
+        model.addAttribute("aluno", aluno);
+
+        return "paginaUsuario/candidaturasEstudante";
+
+    }
+
 }
