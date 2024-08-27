@@ -1,11 +1,12 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <body>
-    <div layout:fragment="content">
+    <div layout:fragment="content" class="container">
 
-        <h1>Candidaturas</h1>
-        <table>
+        <h1 class="title">Candidaturas</h1>
+
+        <table class="table">
             <thead>
                 <tr>
                     <th>Aluno</th>
@@ -16,7 +17,7 @@
             </thead>
             <tbody>
                 <tr th:if="${candidaturas.isEmpty()}">
-                    <td colspan="3">Nenhuma candidatura encontrada</td>
+                    <td colspan="4" class="no-data">Nenhuma candidatura encontrada</td>
                 </tr>
                 <tr th:each="candidatura : ${candidaturas}">
                     <td><a th:href="@{/alunos/detalhes/}+${candidatura.alunoCandidato.id}"
@@ -28,7 +29,8 @@
                 </tr>
             </tbody>
         </table>
-        <button><a th:href="@{/coordenador/dashboard}">Voltar</a></button>
+
+        <button class="form-button-cancel"><a th:href="@{/coordenador/dashboard}">Voltar</a></button>
     </div>
 </body>
 

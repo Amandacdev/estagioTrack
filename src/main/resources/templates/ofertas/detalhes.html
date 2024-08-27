@@ -1,25 +1,25 @@
-<html   xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout/layout}"
->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
 <body>
-    <div layout:fragment="content">
+    <div layout:fragment="content" class="container">
 
-        <h1>Detalhes da Oferta</h1>
-
-        <p><strong>Cargo:</strong> <span th:text="${oferta.tituloCargo}"></span></p>
-        <p><strong>Empresa:</strong> <span th:text="${oferta.ofertante.razaoSocial}"></span></p>
-        <p><strong>Email:</strong> <span th:text="${oferta.emailOfertante}"></span></p>
-        <p><strong>Atividade principal:</strong> <span th:text="${oferta.atividadePrincipal}"></span></p>
-        <p><strong>Valor da bolsa:</strong> <span th:text="${oferta.valorBolsa} + ' R$'"></span></p>
-        <p><strong>Carga horária:</strong> <span th:text="${oferta.cargaHoraria} + ' horas'"></span></p>
-        <p><strong>Vale-transporte:</strong> <span th:text="${oferta.valeTransporte}"></span></p>
-        <p><strong>Requisitos:</strong> <span th:text="${oferta.requisitos}"></span></p>
-        <p><strong>Competências necessárias:</strong> <span th:text="${oferta.competencias}"></span></p>
-        <p><strong>Status:</strong> <span th:text="${oferta.statusOferta}"></span></p>
-        
-        <button><a th:href="@{/ofertas}">Voltar para lista</a></button>
+        <h1 class="title">Detalhes da Oferta</h1>
+        <div class="details">
+            <p><strong>Cargo:</strong> <span th:text="${oferta.tituloCargo}"></span></p>
+            <p><strong>Empresa:</strong> <span th:text="${oferta.ofertante.razaoSocial}"></span></p>
+            <p><strong>Email:</strong> <span th:text="${oferta.emailOfertante}"></span></p>
+            <p><strong>Atividade principal:</strong> <span th:text="${oferta.atividadePrincipal}"></span></p>
+            <p><strong>Valor da bolsa:</strong> <span th:text="${oferta.valorBolsa} + ' R$'"></span></p>
+            <p><strong>Carga horária:</strong> <span th:text="${oferta.cargaHoraria} + ' horas'"></span></p>
+            <p><strong>Vale-transporte:</strong> <span th:text="${oferta.valeTransporte}"></span></p>
+            <p><strong>Requisitos:</strong> <span th:text="${oferta.requisitos}"></span></p>
+            <p><strong>Competências necessárias:</strong> <span th:text="${oferta.competencias}"></span></p>
+            <p><strong>Status:</strong> <span th:text="${oferta.statusOferta}"></span></p>
+        </div>
+        <button class="form-button-cancel">
+            <a th:href="@{/ofertas}" class="cancel-link">Voltar para lista</a>
+        </button>
     </div>
 </body>
-
 </html>

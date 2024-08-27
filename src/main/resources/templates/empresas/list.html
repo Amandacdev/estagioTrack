@@ -1,37 +1,37 @@
-<html   xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout/layout}"
->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
 <body>
-    <div layout:fragment="content">
+    <div layout:fragment="content" class="container">
+        <h1 class="title">Empresas Cadastradas</h1>
+        <h2 class="subtitle">Clique no nome da empresa para ver suas informações completas.</h2>
 
-        <h1>Empresas Cadastradas</h1>
-        <h2>Clique no nome da empresa para ver suas informações completas.</h2>
-
-        <div th:if="${#lists.isEmpty(empresas)}">
+        <div th:if="${#lists.isEmpty(empresas)}" class="alert">
             <p>Nenhuma empresa cadastrada</p>
         </div>
 
-        <table border='1' th:if="${!#lists.isEmpty(empresas)}">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Razão social</th>
-                    <th>Responsável</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="empresa: ${empresas}">
-                    <td>[[${empresa.id}]]</td>
-                    <td><a th:href="@{/empresas/detalhes/}+${empresa.id}" th:text="${empresa.razaoSocial}"></a></td>
-                    <td th:text="${empresa.responsavel}"></td>
-                    <td th:text="${empresa.email}"></td>
-                </tr>
-            </tbody>
-        </table>
-        <button><a th:href="@{/coordenador/dashboard}">Voltar</a></button>
+        <div th:if="${!#lists.isEmpty(empresas)}">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Razão social</th>
+                        <th>Responsável</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="empresa: ${empresas}">
+                        <td>[[${empresa.id}]]</td>
+                        <td><a th:href="@{/empresas/detalhes/}+${empresa.id}" th:text="${empresa.razaoSocial}"></a></td>
+                        <td th:text="${empresa.responsavel}"></td>
+                        <td th:text="${empresa.email}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <button class="form-button-cancel"><a th:href="@{/coordenador/dashboard}" class="cancel-link">Voltar</a></button>
     </div>
 </body>
-
 </html>

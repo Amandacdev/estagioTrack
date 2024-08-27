@@ -1,10 +1,3 @@
-body{
-  color: white;
-  background: #0f1728;
-  margin: 50px 100px 50px 100px;
-  height: 100%;
-}
-
 /*HEADER-MENU*/
 .menu {
   top: 0;
@@ -17,56 +10,472 @@ body{
   font-size: 12px;
   display: flex;
 }
+
 .menu h2 {
   font-size: 40px;
   text-align: center;
 }
+
 .menu nav li {
   margin: 0 14px;
   text-decoration: none;
   color: black;
 }
-.menu nav a{
+
+.menu nav a {
   font-size: 16px;
   color: black;
 }
+
 .menu li:first-child {
   margin-left: 10px;
 }
+
 .menu li:last-child {
   margin-right: 10px;
 }
-.menu nav{
+
+.menu nav {
   border-radius: 20px;
 }
+
 .icon {
   padding: 10px;
 }
 
-/*Conteudo*/
-.conteudo{
-  border: 2px solid white;
-  border-radius: 20px;
-  margin: 8% 20% 15% 20%;
-  padding: 50px;
+/* General Page Style */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0f1728;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Container */
+.container {
+  flex: 1;
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #1e293b;
+  border-radius: 10px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.title {
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.1);
+  margin-bottom: 20px;
+  color: #ffffff;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
 }
-.conteudo button{
-  margin: 15px;
+
+/* Form Styles */
+.form-empresa,
+.form-student {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Form Labels */
+.form-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #ffffff;
+}
+
+/* Form Inputs */
+.form-input,
+.form-select {
+  padding: 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  background-color: #334155;
+  color: #ffffff;
+  margin-bottom: 15px;
+  transition: border-color 0.3s ease;
+  width: 100%;
+}
+
+.form-input:focus,
+.form-select:focus {
+  border-color: #7dd3fc;
+}
+
+.container-start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.container-start .title {
+  margin-bottom: 20px;
+}
+
+/* Start Button */
+.start-button {
+  background-color: #007bff;
+  color: white;
+  font-size: large;
+  padding: 10px 20px;
+  border: 2px solid #7dd3fc;
   border-radius: 20px;
-  border: 4px solid #31d2f2;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 60px;
+  display: block;
 }
-.conteudo button a{
-  color: inherit;
+
+.start-button-link {
+  color: white;
   text-decoration: none;
-  margin: 15px;
+}
+
+.start-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Form Buttons */
+.form-button,
+.form-button-cancel {
+  grid-column: span 2;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.form-button-cancel {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #007bff;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.form-button-cancel:hover {
+  background-color: #475569;
+  transform: translateY(-2px);
+}
+
+/* Additional Styling */
+.alert {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.menu {
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 60px;
+  font-size: 12px;
+  display: flex;
+}
+
+.menu h2 {
+  font-size: 40px;
+  text-align: center;
+}
+
+.menu nav li {
+  margin: 0 14px;
+  text-decoration: none;
+  color: black;
+}
+
+.menu nav a {
+  font-size: 16px;
+  color: black;
+}
+
+.menu li:first-child {
+  margin-left: 10px;
+}
+
+.menu li:last-child {
+  margin-right: 10px;
+}
+
+.menu nav {
+  border-radius: 20px;
+}
+
+.icon {
+  padding: 10px;
+}
+
+/* Subtitle */
+.subtitle {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+/* Table Styling */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #1e293b;
+  border: 2px solid #ffffff;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ffffff;
+}
+
+.table th {
+  background-color: #334155;
+  color: #ffffff;
+}
+
+.table td a {
+  color: #1b5f81;
+  text-decoration: underline;
+}
+
+.table td a:hover {
+  text-decoration: underline;
+}
+
+/*Dashboard*/
+/* Description Text */
+.description {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* Button Group */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Form Button */
+.form-button-group {
+  width: 250px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  border: 2px solid #7dd3fc;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 20px;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.form-button-group:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* List Ofertas Page Styles */
+
+/* General Page Style */
+body.listofertas {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0f1728;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container */
+.container.listofertas {
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #1e293b;
+  border-radius: 10px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Page Title */
+.page-title.listofertas {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffffff;
+  font-size: 2.3rem;
+}
+
+/* Filter Form */
+.filter-form.listofertas {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Filter Fieldset */
+.filter-fieldset.listofertas {
+  border: 1px solid #0f1728;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Checkbox Group */
+.checkbox-group.listofertas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* Filter Label */
+.filter-label.listofertas {
+  margin: 0 10px 10px 0;
+  color: #ffffff;
+}
+
+/* Offers Table */
+.offers-table.listofertas {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.offers-table.listofertas th,
+.offers-table.listofertas td {
+  border: 2px solid #0f1728;
+  padding: 10px;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+.offers-table.listofertas th {
+  background-color: #3c4858;
+}
+
+.offers-table.listofertas tbody tr:nth-child(even) {
+  background-color: #3d4761;
+}
+
+/* Competencies List */
+.competencies-list.listofertas {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.competencies-list.listofertas li {
+  color: #ffffff;
+}
+
+/* Form Button */
+.form-button.listofertas {
+  padding: 8px 16px;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.form-button.listofertas:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+/* Form Button Cancel */
+.form-button-cancel.listofertas {
+  padding: 8px 16px;
+  background-color: transparent;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.form-button-cancel.listofertas:hover {
+  background-color: #475569;
+  transform: translateY(-2px);
+}
+
+.form-button-cancel.listofertas a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.form-button-cancel.listofertas:hover a {
+  color: #ffffff;
+}
+
+/* Cancel Link */
+.cancel-link.listofertas {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.cancel-link.listofertas:hover {
+  text-decoration: underline;
+}
+
+/* Alert */
+.alert.listofertas {
+  color: red;
+  margin-bottom: 10px;
 }
 
 /*Footer*/
-footer{
+footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0 10% 0 10%;
+  margin: 0 10%;
+  color: #7dd3fc;
+  padding: 20px; 
 }

@@ -1,11 +1,9 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/layout}">
-<head>
-    <link rel="stylesheet" th:href="@{/css/empresas-form.css}">
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
 <body>
     <div class="container" layout:fragment="content">
-        <div th:if="${alert}" style="color: red;">
+        <div th:if="${alert}" class="alert">
             <p th:text="${alert}"></p>
         </div>
 
@@ -130,7 +128,7 @@
             </div>
 
             <button type="submit" class="form-button">Salvar</button>
-            <button class="form-button-cancel"><a th:href="@{/form}">Cancelar</a></button>
+            <button class="form-button-cancel"><a th:href="@{/form}" class="cancel-link">Cancelar</a></button>
         </form>
 
         <style>
@@ -142,12 +140,10 @@
             }
 
             input[type=number] {
-                /* Standard appearance property */
                 appearance: textfield;
-                /* Vendor prefixes for browser compatibility */
-                -webkit-appearance: textfield; /* For Safari and Chrome */
-                -moz-appearance: textfield; /* For Firefox */
-                -ms-appearance: textfield; /* For Internet Explorer and Edge Legacy */
+                -webkit-appearance: textfield; /* Safari and Chrome */
+                -moz-appearance: textfield; /* Firefox */
+                -ms-appearance: textfield; /* Internet Explorer and Edge Legacy */
             }
         </style>
     </div>

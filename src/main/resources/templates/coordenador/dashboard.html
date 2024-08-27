@@ -2,31 +2,23 @@
     layout:decorate="~{layout/layout}">
 
 <body>
-    <div layout:fragment="content">
-        <h1>Bem-vindo à página da Coordenação!</h1>
-        <p>Aqui estão as funcionalidades disponíveis para coordenação.</p>
-
-        <a class="nav-item nav-link" th:href="@{/alunos}"><button class="btn btn-sm btn-outline-secondary">
-                Listar Estudantes
-            </button>
-        </a>
-
-        <a class="nav-item nav-link" th:href="@{/empresas}"><button class="btn btn-sm btn-outline-secondary">
-                Listar Empresas
-            </button>
-        </a>
-
-        <a class="nav-item nav-link" th:href="@{/ofertas}">
-            <button class="btn btn-sm btn-outline-secondary">
-                Listar Ofertas
-            </button>
-        </a>
-
-        <a class="nav-item nav-link" th:href="@{/coordenador/candidaturas}">
-            <button class="btn btn-sm btn-outline-secondary">
-                Listar Candidaturas
-            </button>
-        </a>
+    <div layout:fragment="content" class="container">
+        <h1 class="title">Bem-vindo à página da Coordenação!</h1>
+        <p class="description">Aqui estão as funcionalidades disponíveis para coordenação.</p>
+        <div class="button-group">
+            <a class="nav-item nav-link" th:href="@{/alunos}">
+                <button class="form-button-group">Listar Estudantes</button>
+            </a>
+            <a class="nav-item nav-link" th:href="@{/empresas}">
+                <button class="form-button-group">Listar Empresas</button>
+            </a>
+            <a class="nav-item nav-link" th:href="@{/ofertas}">
+                <button class="form-button-group">Listar Ofertas</button>
+            </a>
+            <a class="nav-item nav-link" th:href="@{/coordenador/candidaturas}">
+                <button class="form-button-group">Listar Candidaturas</button>
+            </a>
+        </div>
     </div>
 </body>
 

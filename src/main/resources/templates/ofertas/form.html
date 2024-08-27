@@ -1,15 +1,11 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/layout}">
-<head>
-    <link rel="stylesheet" th:href="@{/css/ofertas-form.css}">
-</head>
+      layout:decorate="~{layout/layout}">
 <body>
     <div layout:fragment="content" class="container">
 
-        <h1 class="form-title">Cadastro de Ofertas</h1>
+        <h1 class="title">Cadastro de Ofertas</h1>
 
-        <form th:action="@{/ofertas/save}" method="POST" th:object="${oferta}" class="form-student">
-
+        <form th:action="@{/ofertas/save}" method="POST" th:object="${oferta}" class="form-empresa">
             <div class="form-group">
                 <label class="form-label" for="emailOfertante">Email da Empresa ofertante:</label>
                 <input required type="email" th:field="*{emailOfertante}" class="form-input">
@@ -45,67 +41,67 @@
             <div class="form-group">
                 <label class="form-label" for="cargaHoraria">Carga horária:</label>
                 <input required type="number" th:field="*{cargaHoraria}" min="0" max="30" placeholder="Apenas números"
-                    class="form-input">
+                       class="form-input">
             </div>
 
             <div class="form-radio-group">
                 <label class="form-label">Vale Transporte:</label>
                 <div class="radio-item">
-                    <input type="radio" id="valeSim" name="valeTransporte" value="Sim">
+                    <input type="radio" th:field="*{valeTransporte}" id="valeSim" value="Sim" class="form-radio">
                     <label for="valeSim" class="form-radio-label">Sim</label>
                 </div>
                 <div class="radio-item">
-                    <input type="radio" id="valeNao" name="valeTransporte" value="Não">
+                    <input type="radio" th:field="*{valeTransporte}" id="valeNao" value="Não" class="form-radio">
                     <label for="valeNao" class="form-radio-label">Não</label>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="form-label" for="requisitosEspecificos">Requisitos específicos:</label>
+                <label class="form-label" for="requisitos">Requisitos específicos:</label>
                 <textarea th:field="*{requisitos}" name="requisitosEspecificos" rows="10" cols="50"
-                    class="form-input"></textarea>
+                          class="form-input"></textarea>
             </div>
 
             <div class="form-checkbox-group">
                 <label class="form-label">Competências:</label>
                 <div class="checkbox-item">
-                    <input type="checkbox" id="C" name="competencias" value="C">
+                    <input type="checkbox" th:field="*{competencias}" id="C" value="C" class="form-checkbox">
                     <label for="C" class="form-checkbox-label">C</label>
                 </div>
                 <div class="checkbox-item">
-                    <input type="checkbox" id="C#" name="competencias" value="C#">
+                    <input type="checkbox" th:field="*{competencias}" id="C#" value="C#" class="form-checkbox">
                     <label for="C#" class="form-checkbox-label">C#</label>
                 </div>
                 <div class="checkbox-item">
-                    <input type="checkbox" id="C++" name="competencias" value="C++">
+                    <input type="checkbox" th:field="*{competencias}" id="C++" value="C++" class="form-checkbox">
                     <label for="C++" class="form-checkbox-label">C++</label>
                 </div>
                 <div class="checkbox-item">
-                    <input type="checkbox" id="CSS" name="competencias" value="CSS">
+                    <input type="checkbox" th:field="*{competencias}" id="CSS" value="CSS" class="form-checkbox">
                     <label for="CSS" class="form-checkbox-label">CSS</label>
                 </div>
                 <div class="checkbox-item">
-                    <input type="checkbox" id="HTML" name="competencias" value="HTML">
+                    <input type="checkbox" th:field="*{competencias}" id="HTML" value="HTML" class="form-checkbox">
                     <label for="HTML" class="form-checkbox-label">HTML</label>
                 </div>
                 <div class="checkbox-item">
-                    <input type="checkbox" id="Java" name="competencias" value="Java">
+                    <input type="checkbox" th:field="*{competencias}" id="Java" value="Java" class="form-checkbox">
                     <label for="Java" class="form-checkbox-label">Java</label>
                 </div>
                 <div class="checkbox-item">
-                    <input type="checkbox" id="JavaScript" name="competencias" value="JavaScript">
+                    <input type="checkbox" th:field="*{competencias}" id="JavaScript" value="JavaScript" class="form-checkbox">
                     <label for="JavaScript" class="form-checkbox-label">JavaScript</label>
                 </div>
                 <div class="checkbox-item">
-                    <input type="checkbox" id="Python" name="competencias" value="Python">
+                    <input type="checkbox" th:field="*{competencias}" id="Python" value="Python" class="form-checkbox">
                     <label for="Python" class="form-checkbox-label">Python</label>
                 </div>
                 <div class="checkbox-item">
-                    <input type="checkbox" id="Ruby" name="competencias" value="Ruby">
+                    <input type="checkbox" th:field="*{competencias}" id="Ruby" value="Ruby" class="form-checkbox">
                     <label for="Ruby" class="form-checkbox-label">Ruby</label>
                 </div>
                 <div class="checkbox-item">
-                    <input type="checkbox" id="SQL" name="competencias" value="SQL">
+                    <input type="checkbox" th:field="*{competencias}" id="SQL" value="SQL" class="form-checkbox">
                     <label for="SQL" class="form-checkbox-label">SQL</label>
                 </div>
             </div>
@@ -119,5 +115,4 @@
         </div>
     </div>
 </body>
-
 </html>
