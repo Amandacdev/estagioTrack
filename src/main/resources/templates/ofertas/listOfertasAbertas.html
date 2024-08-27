@@ -38,6 +38,7 @@
                     <th>Requisitos específicos</th>
                     <th>Competências</th>
                     <th>Status</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,6 +56,12 @@
                         </ul>
                     </td>
                     <td th:text="${oferta.statusOferta}"></td>
+                    <td>
+                        <form th:action="@{/candidaturas/form}" method="post" class="action-form listofertas">
+                            <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
+                            <button type="submit" class="form-button listofertas">Candidatar</button>
+                        </form>
+                    </td>
                 </tr>
             </tbody>
         </table>
