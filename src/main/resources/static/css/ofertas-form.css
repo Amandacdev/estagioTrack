@@ -7,7 +7,7 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 600px;
     margin: 50px auto;
     padding: 30px;
     background-color: #1e293b;
@@ -16,17 +16,17 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.title {
+.form-title {
     text-align: center;
     margin-bottom: 20px;
     color: #ffffff;
     font-size: 1.8rem;
 }
 
-.form-empresa {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+.form-student {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .form-group {
@@ -35,56 +35,75 @@ body {
 }
 
 .form-label {
+    margin-bottom: 4px;
     font-weight: bold;
-    margin-bottom: 5px;
     color: #ffffff;
 }
 
-.form-input,
-.form-select {
+.form-input {
     padding: 8px;
     border: 1px solid #cbd5e1;
     border-radius: 5px;
     background-color: #334155;
     color: #ffffff;
-    margin-bottom: 15px;
     transition: border-color 0.3s ease;
-    width: 100%;
 }
 
-.form-input:focus,
-.form-select:focus {
+.form-input:focus {
     border-color: #7dd3fc;
 }
 
-.form-button,
-.form-button-cancel {
-    grid-column: span 2;
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
+.form-radio-group,
+.form-checkbox-group {
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.radio-item,
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.form-radio-label,
+.form-checkbox-label {
+    margin-bottom: 0;
+    color: #ffffff;
+}
+
+.form-button {
+    padding: 10px;
+    background-color: #2563eb;
+    color: #ffffff;
+    border: 2px solid #ffffff;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
-    text-align: center;
+    font-size: 1rem;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 10px;
 }
 
 .form-button:hover {
-    background-color: #0056b3;
+    background-color: #1d4ed8;
     transform: translateY(-2px);
 }
 
 .form-button-cancel {
+    padding: 10px;
     background-color: transparent;
-    color: #007bff;
-    border: 1px solid #007bff;
+    color: #1d4ed8;
+    border: 2px solid #ffffff;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 1rem;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 5px;
 }
 
-.form-button-cancel:hover {
-    background-color: #e6f2ff;
+.form-button-cancel:hover{
+    background-color: #ffffff;
     transform: translateY(-2px);
 }

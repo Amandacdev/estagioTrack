@@ -7,76 +7,84 @@ body {
 }
 
 .container {
-    max-width: 600px;
+    max-width: 1100px;
     margin: 50px auto;
     padding: 30px;
     background-color: #1e293b;
     border-radius: 10px;
     border: 2px solid #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
-.form-title {
+.page-title {
     text-align: center;
     margin-bottom: 20px;
     color: #ffffff;
-    font-size: 1.8rem;
+    font-size: 2.3rem;
 }
 
-.form-student {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.filter-form {
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-label {
-    margin-bottom: 4px;
-    font-weight: bold;
-    color: #ffffff;
-}
-
-.form-input {
-    padding: 8px;
-    border: 1px solid #cbd5e1;
+.filter-fieldset {
+    border: 1px solid #ffffff;
+    padding: 10px;
     border-radius: 5px;
-    background-color: #334155;
-    color: #ffffff;
-    transition: border-color 0.3s ease;
-}
-
-.form-input:focus {
-    border-color: #7dd3fc;
-}
-
-.form-radio-group,
-.form-checkbox-group {
     margin-bottom: 10px;
+    text-align: center;
+}
+
+.checkbox-group {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
-    align-items: center;
+    margin-bottom: 10px;
 }
 
-.form-radio-label,
-.form-checkbox-label {
-    margin-bottom: 0;
+.filter-label {
+    margin: 0 10px 10px 0;
     color: #ffffff;
-    display: flex;
-    align-items: center;
 }
 
-input[type="radio"],
-input[type="checkbox"] {
-    margin-right: 5px;
+.offers-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.offers-table th,
+.offers-table td {
+    border: 1px solid #ffffff;
+    padding: 10px;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.offers-table th {
+    background-color: #334155;
+}
+
+.offers-table tbody tr:nth-child(even) {
+    background-color: #293846;
+}
+
+.competencies-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.competencies-list li {
+    color: #ffffff;
 }
 
 .form-button {
-    padding: 10px;
+    padding: 8px 16px;
     background-color: #2563eb;
     color: #ffffff;
     border: 2px solid #ffffff;
@@ -85,6 +93,7 @@ input[type="checkbox"] {
     font-size: 1rem;
     transition: background-color 0.3s ease, transform 0.3s ease;
     margin-top: 10px;
+    display: inline-block;
 }
 
 .form-button:hover {
@@ -93,16 +102,17 @@ input[type="checkbox"] {
 }
 
 .form-button-cancel {
-    padding: 8px;
+    padding: 8px 16px;
     background-color: transparent;
     color: #ffffff;
     border: 2px solid #ffffff;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
     font-size: 1rem;
     text-align: center;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 10px;
+    display: inline-block;
 }
 
 .form-button-cancel:hover {

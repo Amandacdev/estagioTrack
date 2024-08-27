@@ -1,33 +1,37 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layout/layout}">
-
+<head>
+    <link rel="stylesheet" th:href="@{/css/ofertas-list.css}">
+</head>
 <body>
-    <div layout:fragment="content">
-        <h1>Ofertas Cadastradas</h1>
+    <div layout:fragment="content" class="container">
+        <h1 class="page-title">Ofertas Cadastradas</h1>
 
         <!-- Filtro de Competências -->
-        <form th:action="@{/ofertas}" method="get">
-            <fieldset>
+        <form th:action="@{/ofertas}" method="get" class="filter-form">
+            <fieldset class="filter-fieldset">
                 <legend>Filtrar por Competências:</legend>
-                <label><input type="checkbox" name="competencias" value="C"> C</label>
-                <label><input type="checkbox" name="competencias" value="C#"> C#</label>
-                <label><input type="checkbox" name="competencias" value="C++"> C++</label>
-                <label><input type="checkbox" name="competencias" value="CSS"> CSS</label>
-                <label><input type="checkbox" name="competencias" value="HTML"> HTML</label>
-                <label><input type="checkbox" name="competencias" value="Java"> Java</label>
-                <label><input type="checkbox" name="competencias" value="JavaScript"> JavaScript</label>
-                <label><input type="checkbox" name="competencias" value="Python"> Python</label>
-                <label><input type="checkbox" name="competencias" value="Ruby"> Ruby</label>
-                <label><input type="checkbox" name="competencias" value="SQL"> SQL</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="competencias" value="C"> C</label>
+                    <label><input type="checkbox" name="competencias" value="C#"> C#</label>
+                    <label><input type="checkbox" name="competencias" value="C++"> C++</label>
+                    <label><input type="checkbox" name="competencias" value="CSS"> CSS</label>
+                    <label><input type="checkbox" name="competencias" value="HTML"> HTML</label>
+                    <label><input type="checkbox" name="competencias" value="Java"> Java</label>
+                    <label><input type="checkbox" name="competencias" value="JavaScript"> JavaScript</label>
+                    <label><input type="checkbox" name="competencias" value="Python"> Python</label>
+                    <label><input type="checkbox" name="competencias" value="Ruby"> Ruby</label>
+                    <label><input type="checkbox" name="competencias" value="SQL"> SQL</label>
+                </div>
             </fieldset>
-            <button type="submit">Filtrar</button>
+            <button type="submit" class="form-button">Filtrar</button>
         </form>
 
         <div th:if="${#lists.isEmpty(ofertas)}">
             <p>Nenhuma oferta cadastrada</p>
         </div>
 
-        <table border='1' th:if="${!#lists.isEmpty(ofertas)}">
+        <table class="offers-table" th:if="${!#lists.isEmpty(ofertas)}">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -52,37 +56,37 @@
                     <td th:text="${oferta.valeTransporte}"></td>
                     <td th:text="${oferta.requisitos}"></td>
                     <td>
-                        <ul>
+                        <ul class="competencies-list">
                             <li th:each="competencia : ${oferta.competencias}" th:text="${competencia}"></li>
                         </ul>
                     </td>
                     <td th:text="${oferta.statusOferta}"></td>
 
                     <td th:if="${oferta.statusOferta.name() == 'ABERTA'}">
-                        <form th:action="@{/ofertas/desativar}" method="post" style="display:inline;">
+                        <form th:action="@{/ofertas/desativar}" method="post" class="action-form">
                             <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
-                            <button type="submit">Encerrar</button>
+                            <button type="submit" class="form-button">Encerrar</button>
                         </form>
                     </td>
 
                     <td th:if="${oferta.statusOferta.name() == 'ENCERRADA'}">
-                        <form th:action="@{/ofertas/reativar}" method="post" style="display:inline;">
+                        <form th:action="@{/ofertas/reativar}" method="post" class="action-form">
                             <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
-                            <button type="submit">Reativar</button>
+                            <button type="submit" class="form-button">Reativar</button>
                         </form>
                     </td>
 
                     <td>
-                        <form th:action="@{/candidaturas/form}" method="post" style="display:inline;">
+                        <form th:action="@{/candidaturas/form}" method="post" class="action-form">
                             <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
-                            <button type="submit">Candidatar</button>
+                            <button type="submit" class="form-button">Candidatar</button>
                         </form>
                     </td>
                 </tr>
             </tbody>
         </table>
 
-        <button><a th:href="@{/form}">Voltar</a></button>
+        <button class="form-button-cancel"><a th:href="@{/form}" class="cancel-link">Voltar</a></button>
     </div>
 </body>
 
