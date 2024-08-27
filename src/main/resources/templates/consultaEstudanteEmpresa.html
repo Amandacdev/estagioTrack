@@ -4,8 +4,8 @@
 >
 <body>
 <div layout:fragment="content">
-    <h2>Identifique-se consulta seus inf:</h2>
-    <form action="#" th:action="@{/identificar}" method="post">
+    <h2>Identifique-se para realizar sua consulta.</h2>
+    <form  method="post" action="#"  th:action="@{/paginaUsuario/identificar}">
         <div>
             <label for="emailFiltro">Insira o seu email de cadastro:</label>
             <input type="email" id="emailFiltro" name="emailFiltro" required>
@@ -15,7 +15,6 @@
             <button type="submit" class="btn btn-sm btn-outline-secondary">Pesquisar</button>
         </div>
     </form>
-
     <p th:if="${erro}" th:text="${erro}" style="color:red;"></p>
 </div>
 </body>
