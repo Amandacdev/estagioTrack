@@ -44,7 +44,7 @@ public class EmpresaController {
         }
 
         if (empresaService.existsByEmail(empresa.getEmail()) || empresaService.existsByCnpj(empresa.getCnpj())) {
-            model.addAttribute("alert", "Email ou razão social já existente.");
+            model.addAttribute("alert", "Email ou CNPJ já cadastrado.");
             return "empresas/form";
         }
 
