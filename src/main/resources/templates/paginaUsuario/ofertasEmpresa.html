@@ -1,53 +1,67 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout}">
+    layout:decorate="~{layout/layout}">
 
 <body>
-<div layout:fragment="content">
-    <h1>Minhas ofertas | Empresa</h1>
+    <div layout:fragment="content">
+        <h1>Minhas ofertas | Empresa</h1>
 
-    <h2>Dados da Empresa</h2>
-    <p>CNPJ: <span th:text="${empresa.cnpj}"></span></p>
-    <p>Email: <span th:text="${empresa.email}"></span></p>
+        <h2>Dados da Empresa</h2>
+        <p>CNPJ: <span th:text="${empresa.cnpj}"></span></p>
+        <p>Email: <span th:text="${empresa.email}"></span></p>
 
-    <h2>Ofertas</h2>
+        <h2>Ofertas</h2>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email da Empresa</th>
-                <th>Cargo</th>
-                <th>Valor da bolsa</th>
-                <th>Carga horária</th>
-                <th>Vale Transporte</th>
-                <th>Requisitos específicos</th>
-                <th>Competências</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${#lists.isEmpty(ofertas)}">
-            <td colspan="4">Nenhuma oferta encontrada</td>
-        </tr>
-        <tr th:each="oferta : ${ofertas}">
-            <td th:text="${oferta.id}"></td>
-            <td th:text="${oferta.emailOfertante}"></td>
-            <td th:text="${oferta.tituloCargo}"></td>
-            <td th:text="${oferta.valorBolsa}"></td>
-            <td th:text="${oferta.cargaHoraria}"></td>
-            <td th:text="${oferta.valeTransporte}"></td>
-            <td th:text="${oferta.requisitos}"></td>
-            <td>
-                <ul>
-                    <li th:each="competencia : ${oferta.competencias}" th:text="${competencia}"></li>
-                </ul>
-            </td>
-            <td th:text="${oferta.status}"></td>
-        </tr>
-        </tbody>
-    </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Email da Empresa</th>
+                    <th>Cargo</th>
+                    <th>Valor da bolsa</th>
+                    <th>Carga horária</th>
+                    <th>Vale Transporte</th>
+                    <th>Requisitos específicos</th>
+                    <th>Competências</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${#lists.isEmpty(ofertas)}">
+                    <td colspan="4">Nenhuma oferta encontrada</td>
+                </tr>
+                <tr th:each="oferta : ${ofertas}">
+                    <td th:text="${oferta.id}"></td>
+                    <td th:text="${oferta.emailOfertante}"></td>
+                    <td th:text="${oferta.tituloCargo}"></td>
+                    <td th:text="${oferta.valorBolsa}"></td>
+                    <td th:text="${oferta.cargaHoraria}"></td>
+                    <td th:text="${oferta.valeTransporte}"></td>
+                    <td th:text="${oferta.requisitos}"></td>
+                    <td>
+                        <ul>
+                            <li th:each="competencia : ${oferta.competencias}" th:text="${competencia}"></li>
+                        </ul>
+                    </td>
+                    <td th:text="${oferta.status}"></td>
+                    <td th:if="${oferta.statusOferta.name() == 'ABERTA'}">
+                        <form th:action="@{/ofertas/desativar}" method="post" style="display:inline;">
+                            <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
+                            <button type="submit">Encerrar</button>
+                        </form>
+                    </td>
 
-</div>
+                    <td th:if="${oferta.statusOferta.name() == 'ENCERRADA'}">
+                        <form th:action="@{/ofertas/reativar}" method="post" style="display:inline;">
+                            <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
+                            <button type="submit">Reativar</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
 </body>
-</html>
 
+</html>
