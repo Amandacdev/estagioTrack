@@ -42,7 +42,7 @@
             </thead>
             <tbody>
                 <tr th:each="oferta: ${ofertas}" th:if="${oferta.statusOferta.name() == 'ABERTA'}">
-                    <td th:text="${oferta.tituloCargo}"></td>
+                    <td><a th:href="@{/ofertas/detalhes/}+${oferta.id}" th:text="${oferta.tituloCargo}"></a></td>
                     <td th:text="${oferta.valorBolsa}"></td>
                     <td th:text="${oferta.cargaHoraria}"></td>
                     <td th:text="${oferta.valeTransporte}"></td>
