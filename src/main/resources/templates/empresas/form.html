@@ -5,7 +5,7 @@
 >
 <body>
     <div class="container" layout:fragment="content">
-        <div th:if="${alert}" class="alert">
+        <div th:if="${alert}" class="alert" id="alertPopup">
             <p th:text="${alert}"></p>
         </div>
 

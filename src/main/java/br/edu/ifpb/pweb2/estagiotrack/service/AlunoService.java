@@ -46,6 +46,7 @@ public class AlunoService {
     public boolean validarAluno(Aluno aluno) {
         return aluno.getNome() != null && !aluno.getNome().isEmpty()
                 && aluno.getEmail() != null && !aluno.getEmail().isEmpty()
-                && aluno.getSenha() != null && !aluno.getSenha().isEmpty();
+                && aluno.getSenha() != null && !aluno.getSenha().isEmpty()
+                && aluno.getCompetencias() != null && !aluno.getCompetencias().isEmpty();
     }
 }

@@ -42,25 +42,24 @@ public class AlunoController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String cadastroAluno(@RequestParam List<String> competencias,
+    public String cadastroAluno(@RequestParam(required = false, defaultValue = "") List<String> competencias,
                                 @Valid Aluno aluno,
-                                BindingResult bindingResult,
                                 Model model,
                                 RedirectAttributes attr) {
-        if (bindingResult.hasErrors()) {
+        if (!alunoService.validarAluno(aluno)) {
             model.addAttribute("alert", "Por favor preencha todos os campos corretamente.");
             return "alunos/form";
-        } else {
-            if (alunoService.existsByEmail(aluno.getEmail()) || alunoService.existsByNomeUsuario(aluno.getNomeUsuario())) {
-                model.addAttribute("alert", "Email ou nome de usuário já existente.");
-                return "alunos/form";
-            }
-            alunoService.salvarAluno(aluno, competencias);
-            attr.addFlashAttribute("success", "Aluno cadastrado com sucesso!");
-            return getDetalhesAluno(aluno.getId(), model);
         }
-    }
 
+        if (alunoService.existsByEmail(aluno.getEmail()) || alunoService.existsByNomeUsuario(aluno.getNomeUsuario())) {
+            model.addAttribute("alert", "Email ou nome de usuário já existente.");
+            return "alunos/form";
+        }
+
+        alunoService.salvarAluno(aluno, competencias);
+        attr.addFlashAttribute("success", "Aluno cadastrado com sucesso!");
+        return "redirect:/alunos/detalhes/" + aluno.getId();
+    }
 
     public Aluno buscarPorEmail(String email) {
         return alunoService.findByEmail(email).orElse(null);
