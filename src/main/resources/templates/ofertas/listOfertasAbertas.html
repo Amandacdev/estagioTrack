@@ -1,5 +1,8 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout}">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}"
+      th:with="titulo='Ofertas Cadastradas'">
+
 <body class="listofertas">
     <div layout:fragment="content" class="container listofertas">
         <h1 class="page-title listofertas">Ofertas Cadastradas</h1>
@@ -41,7 +44,7 @@
             </thead>
             <tbody>
                 <tr th:each="oferta: ${ofertas}" th:if="${oferta.statusOferta.name() == 'ABERTA'}">
-                    <td th:text="${oferta.tituloCargo}"></td>
+                    <td><a th:href="@{/ofertas/detalhes/}+${oferta.id}" th:text="${oferta.tituloCargo}"></a></td>
                     <td th:text="${oferta.valorBolsa}"></td>
                     <td th:text="${oferta.cargaHoraria}"></td>
                     <td th:text="${oferta.valeTransporte}"></td>
@@ -53,16 +56,20 @@
                     </td>
                     <td th:text="${oferta.statusOferta}"></td>
                     <td>
-                        <form th:action="@{/candidaturas/form}" method="post" class="action-form listofertas">
+                        <form th:action="@{/candidaturas/form(ofertaId=${oferta.id})}" method="post"
+                            class="action-form listofertas">
                             <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
                             <button type="submit" class="form-button listofertas">Candidatar</button>
                         </form>
+
                     </td>
                 </tr>
             </tbody>
         </table>
 
-        <button class="form-button-cancel listofertas"><a th:href="@{/form}" class="cancel-link listofertas">Voltar</a></button>
+        <button class="form-button-cancel listofertas"><a th:href="@{/form}"
+                class="cancel-link listofertas">Voltar</a></button>
     </div>
 </body>
+
 </html>

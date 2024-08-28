@@ -1,6 +1,8 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout}">
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+        th:with="titulo='Empresa'"
+>
 <body>
     <div layout:fragment="content" class="container">
 
@@ -24,4 +26,5 @@
         <button class="form-button-cancel"><a th:href="@{/empresas}" class="cancel-link">Voltar para lista</a></button>
     </div>
 </body>
+
 </html>

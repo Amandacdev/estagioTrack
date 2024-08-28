@@ -3,10 +3,11 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <meta th:insert="~{/fragments/base ::files}">
+    <meta th:insert="~{/fragments/base ::files(${titulo})}">
 </head>
 
 <body>
+    <link rel="icon" href="/css/assets/pin.png"/>
     <div th:replace="~{/fragments/base ::menu}" />
 
     <div layout:fragment="content" class="conteudo">
