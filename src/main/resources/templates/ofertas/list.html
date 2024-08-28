@@ -1,12 +1,8 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout}"
-      th:with="titulo='Ofertas Cadastradas'"
->
-
-<body>
-    <div layout:fragment="content">
-        <h1>Ofertas Cadastradas</h1>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<body class="listofertas">
+    <div layout:fragment="content" class="container listofertas">
+        <h1 class="page-title listofertas">Ofertas Cadastradas</h1>
 
         <!-- Filtro de Competências -->
         <form th:action="@{/ofertas}" method="get" class="filter-form listofertas">
