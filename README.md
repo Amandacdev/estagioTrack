@@ -23,7 +23,10 @@ candidatura a estas ofertas por parte de alunos cadastrados. Conta também com a
 
 ## Pré-requisitos
 
-Para executar esse projeto é necessário .....
+Para executar esse projeto é necessário:
+- Java 17 ou superior
+- Apache Tomcat
+- PostgreSQL
 
 Atenção: no arquivo estagioTrack\src\main\resources\application.properties existem configurações referentes ao banco de dados local, configure os campos necessários de acordo as configurações do seu banco de dados.  
 
