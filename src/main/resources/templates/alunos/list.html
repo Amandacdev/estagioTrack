@@ -13,7 +13,6 @@
         <table class="table" th:if="${!#lists.isEmpty(alunos)}">
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Nome</th>
                     <th>Email</th>
                     <th>Nome de Usuário</th>
@@ -23,7 +22,6 @@
             </thead>
             <tbody>
                 <tr th:each="aluno : ${alunos}">
-                    <td th:text="${aluno.id}"></td>
                     <td><a th:href="@{/alunos/detalhes/}+${aluno.id}" th:text="${aluno.nome}"></a></td>
                     <td th:text="${aluno.email}"></td>
                     <td th:text="${aluno.nomeUsuario}"></td>

@@ -1,6 +1,6 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}">
+
 <body>
     <div class="container" layout:fragment="content">
         <div th:if="${alert}" class="alert">
@@ -37,7 +37,8 @@
 
             <div class="form-group">
                 <label for="cep" class="form-label">CEP:</label>
-                <input type="number" th:field="*{cep}" class="form-input" placeholder="Apenas números" id="cep" required />
+                <input type="number" th:field="*{cep}" class="form-input" placeholder="Apenas números" id="cep"
+                    required />
                 <label for="cep" class="form-label">Digite um CEP válido para autocompletar o endereço.</label>
             </div>
 
@@ -141,11 +142,62 @@
 
             input[type=number] {
                 appearance: textfield;
-                -webkit-appearance: textfield; /* Safari and Chrome */
-                -moz-appearance: textfield; /* Firefox */
-                -ms-appearance: textfield; /* Internet Explorer and Edge Legacy */
+                -webkit-appearance: textfield;
+                /* Safari and Chrome */
+                -moz-appearance: textfield;
+                /* Firefox */
+                -ms-appearance: textfield;
+                /* Internet Explorer and Edge Legacy */
             }
         </style>
+        <script>
+            let cep = document.getElementById('cep')
+            cep.addEventListener('focusout', lerCEP)
+
+            function lerCEP() {
+                let cepValue = cep.value
+                let cepGuardado = cepValue
+                let cepLido = `https://viacep.com.br/ws/${cepValue}/json/`
+                getCEP(cepLido, cepGuardado)
+            }
+
+            async function getCEP(cepLido, cepGuardado) {
+                try {
+                    const response = await fetch(cepLido)
+                    const json = await response.json()
+                    showContent(json)
+                    cep.style.border = ''
+                    if (json.uf == undefined) {
+                        erroCEP(cepGuardado)
+                    }
+                } catch {
+                    erroCEP()
+                }
+            }
+
+            function showContent(json) {
+                let logradouro = document.getElementById('logradouro')
+                logradouro.value = json.logradouro
+                let bairro = document.getElementById('bairro')
+                bairro.value = json.bairro
+                let cidade = document.getElementById('cidade')
+                cidade.value = json.localidade
+                let estado = document.getElementById('estado')
+                estado.value = json.uf
+            }
+
+            function erroCEP(cepGuardado) {
+                cep.style.border = '1px solid red'
+                let form = document.getElementById('form')
+                form.reset()
+                cep.placeholder = 'CEP inválido ou incorreto.'
+                cep.value = cepGuardado
+                if (cep.value == cepGuardado) {
+                    window.alert('CEP digitado não existe. Favor corrigir.')
+                }
+            }
+        </script>
     </div>
 </body>
+
 </html>

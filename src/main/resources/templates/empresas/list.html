@@ -14,18 +14,16 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Razão social</th>
                         <th>Responsável</th>
-                        <th>Email</th>
+                        <th>Atividade principal</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="empresa: ${empresas}">
-                        <td>[[${empresa.id}]]</td>
                         <td><a th:href="@{/empresas/detalhes/}+${empresa.id}" th:text="${empresa.razaoSocial}"></a></td>
                         <td th:text="${empresa.responsavel}"></td>
-                        <td th:text="${empresa.email}"></td>
+                        <td th:text="${empresa.atividadePrincipal}"></td>
                     </tr>
                 </tbody>
             </table>

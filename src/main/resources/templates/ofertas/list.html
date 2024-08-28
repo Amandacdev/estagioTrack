@@ -31,8 +31,6 @@
         <table class="offers-table listofertas" th:if="${!#lists.isEmpty(ofertas)}">
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Email da Empresa</th>
                     <th>Cargo</th>
                     <th>Valor da bolsa</th>
                     <th>Carga horária</th>
@@ -45,8 +43,6 @@
             </thead>
             <tbody>
                 <tr th:each="oferta: ${ofertas}">
-                    <td>[[${oferta.id}]]</td>
-                    <td th:text="${oferta.emailOfertante}"></td>
                     <td th:text="${oferta.tituloCargo}"></td>
                     <td th:text="${oferta.valorBolsa}"></td>
                     <td th:text="${oferta.cargaHoraria}"></td>
