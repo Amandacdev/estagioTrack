@@ -27,7 +27,7 @@
                     <td th:text="${aluno.nomeUsuario}"></td>
                     <td th:text="${aluno.genero}"></td>
                     <td>
-                        <ul>
+                        <ul class="competencies-list listofertas">
                             <li th:each="competencia : ${aluno.competencias}" th:text="${competencia}"></li>
                         </ul>
                     </td>
