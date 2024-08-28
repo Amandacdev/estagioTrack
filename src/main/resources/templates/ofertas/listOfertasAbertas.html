@@ -1,5 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout}">
+    layout:decorate="~{layout/layout}">
+
 <body class="listofertas">
     <div layout:fragment="content" class="container listofertas">
         <h1 class="page-title listofertas">Ofertas Cadastradas</h1>
@@ -53,16 +54,20 @@
                     </td>
                     <td th:text="${oferta.statusOferta}"></td>
                     <td>
-                        <form th:action="@{/candidaturas/form}" method="post" class="action-form listofertas">
+                        <form th:action="@{/candidaturas/form(ofertaId=${oferta.id})}" method="post"
+                            class="action-form listofertas">
                             <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
                             <button type="submit" class="form-button listofertas">Candidatar</button>
                         </form>
+
                     </td>
                 </tr>
             </tbody>
         </table>
 
-        <button class="form-button-cancel listofertas"><a th:href="@{/form}" class="cancel-link listofertas">Voltar</a></button>
+        <button class="form-button-cancel listofertas"><a th:href="@{/form}"
+                class="cancel-link listofertas">Voltar</a></button>
     </div>
 </body>
+
 </html>

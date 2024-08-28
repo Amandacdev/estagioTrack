@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -30,9 +31,16 @@ public class CandidaturaController {
     private OfertaService ofertaService;
 
     @RequestMapping("/form")
-    public String getForm(Model model) {
-        model.addAttribute("candidatura", new Candidatura());
+    public String getForm(@RequestParam("ofertaId") Integer ofertaId, Model model) {
+        Candidatura candidatura = new Candidatura();
+
+        Oferta ofertaSelecionada = ofertaService.findById(ofertaId).orElse(null);
+
+        candidatura.setOfertaSelecionada(ofertaSelecionada);
+
+        model.addAttribute("candidatura", candidatura);
         model.addAttribute("ofertas", ofertaService.findAll());
+
         return "candidaturas/form";
     }
 

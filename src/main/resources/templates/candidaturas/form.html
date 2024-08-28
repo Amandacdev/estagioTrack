@@ -10,8 +10,9 @@
             <label for="oferta" class="form-label">Oferta selecionada:</label>
             <select th:field="*{ofertaSelecionada.id}" id="oferta" class="form-input">
                 <option th:each="oferta : ${ofertas}" th:value="${oferta.id}"
-                        th:text="${oferta.ofertante.razaoSocial} + ' - ' + ${oferta.tituloCargo}"></option>
-            </select>
+                        th:text="${oferta.ofertante.razaoSocial} + ' - ' + ${oferta.tituloCargo}"
+                        th:selected="${oferta.id == candidatura.ofertaSelecionada.id}"></option>
+            </select>            
         </div>
 
         <div class="form-group">
