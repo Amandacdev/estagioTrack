@@ -68,7 +68,7 @@ public class OfertaController {
                 oferta.setOfertante(empresa);
                 ofertaRepository.save(oferta);
                 attr.addFlashAttribute("success", "Oferta de estágio cadastrada com sucesso!");
-                return "redirect:/ofertas/detalhes" + oferta.getId();
+                return "redirect:/ofertas/detalhes/" + oferta.getId();
             } else {
                 model.addAttribute("alert",
                         "Email inválido. O email deve corresponder ao informado no cadastro da empresa.");

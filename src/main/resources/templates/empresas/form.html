@@ -19,8 +19,14 @@
 
             <div class="form-group">
                 <label for="cnpj" class="form-label">CNPJ:</label>
-                <input type="number" th:field="*{cnpj}" class="form-input" placeholder="Apenas números" required />
-            </div>
+                <input type="text" th:field="*{cnpj}" class="form-input" 
+                       placeholder="Apenas os 14 dígitos numéricos"
+                       required 
+                       minlength="14" 
+                       maxlength="14" 
+                       pattern="\d{14}" 
+                       title="O CNPJ deve ter exatamente 14 dígitos numéricos" />
+            </div>            
 
             <div class="form-group">
                 <label for="responsavel" class="form-label">Nome da pessoa responsável:</label>

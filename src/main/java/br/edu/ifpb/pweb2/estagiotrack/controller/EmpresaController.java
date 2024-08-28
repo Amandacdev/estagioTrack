@@ -2,7 +2,6 @@ package br.edu.ifpb.pweb2.estagiotrack.controller;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
 import br.edu.ifpb.pweb2.estagiotrack.service.EmpresaService;
-import br.edu.ifpb.pweb2.estagiotrack.utils.validation.ComprovanteEnderecoValidator;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartException;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
@@ -37,18 +34,12 @@ public class EmpresaController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String cadastroEmpresa(/*@RequestParam("comprovanteEndereco") MultipartFile comprovanteEndereco,*/
-                                  @Valid Empresa empresa,
-                                  BindingResult bindingResult,
-                                  Model model,
-                                  RedirectAttributes attr) {
+    public String cadastroEmpresa(
+            @Valid Empresa empresa,
+            BindingResult bindingResult,
+            Model model,
+            RedirectAttributes attr) {
 
-        /*try {
-            ComprovanteEnderecoValidator.validatePdf(comprovanteEndereco);
-        } catch (MultipartException e) {
-            model.addAttribute("alert", e.getMessage());
-            return "empresas/form";
-        }*/
         if (bindingResult.hasErrors()) {
             model.addAttribute("alert", "Por favor, preencha todos os campos corretamente.");
             return "empresas/form";
