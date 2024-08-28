@@ -100,7 +100,7 @@
 
             <div class="form-group">
                 <label for="telefone" class="form-label">Telefone:</label>
-                <input type="number" th:field="*{telefone}" class="form-input" placeholder="Apenas números" required />
+                <input type="text" id="telefone" class="form-input" placeholder="(00) 00000-0000" required />
             </div>
 
             <div class="form-group">
@@ -198,6 +198,24 @@
                     window.alert('CEP digitado não existe. Favor corrigir.')
                 }
             }
+
+            function applyPhoneMask(event) {
+                let input = event.target;
+                let value = input.value.replace(/\D/g, '');
+                if (value.length > 11) {
+                    value = value.slice(0, 11);
+                }
+                if (value.length <= 10) {
+                    value = value.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+                    value = value.replace(/(\d{5})(\d{0,4})/, '$1-$2');
+                } else {
+                    value = value.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+                    value = value.replace(/(\d{5})(\d{0,4})/, '$1-$2');
+                }
+                input.value = value;
+            }
+
+            document.getElementById('telefone').addEventListener('input', applyPhoneMask);
         </script>
     </div>
 </body>
