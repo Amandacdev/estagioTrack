@@ -1,5 +1,8 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/layout}">
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+        th:with="titulo='Acesso Coordenação'"
+>
 <body>
     <div layout:fragment="content" class="container">
         <h2 class="title">Acesso à Coordenação</h2>
@@ -9,8 +12,8 @@
                 <input type="password" id="pin" name="pin" class="form-input" required>
                 <button type="submit" class="form-button">Entrar</button>
             </div>
-                
-            
+
+
         </form>
         <p th:if="${erro}" th:text="${erro}" class="alert"></p>
     </div>

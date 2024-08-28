@@ -1,5 +1,8 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout}">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}"
+      th:with="titulo='Cadastro de Ofertas'">
+
 <body>
     <div layout:fragment="content" class="container">
 
@@ -109,7 +112,7 @@
             <input type="submit" value="Salvar" class="form-button" />
             <button class="form-button-cancel"><a th:href="@{/form}" class="cancel-link">Cancelar</a></button>
         </form>
-        
+
 
         <div th:if="${alert}" class="alert">
             <p th:text="${alert}"></p>

@@ -1,7 +1,8 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout}">
-
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+        th:with="titulo='Cadastro Estudante'"
+>
 <body>
 <div layout:fragment="content" class="container">
 
@@ -37,10 +38,10 @@
             <div class="form-radio-group">
                 <input type="radio" th:field="*{genero}" id="Masculino" value="Masculino" class="form-radio">
                 <label for="Masculino" class="form-radio-label">Masculino</label>
-                
+
                 <input type="radio" th:field="*{genero}" id="Feminino" value="Feminino" class="form-radio">
                 <label for="Feminino" class="form-radio-label">Feminino</label>
-                
+
                 <input type="radio" th:field="*{genero}" id="Outro" value="Outro" class="form-radio">
                 <label for="Outro" class="form-radio-label">Outro</label>
             </div>
