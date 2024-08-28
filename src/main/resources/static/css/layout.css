@@ -231,50 +231,6 @@ body {
   opacity: 0;
 }
 
-.menu {
-  top: 0;
-  left: 0;
-  z-index: 10;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 60px;
-  font-size: 12px;
-  display: flex;
-}
-
-.menu h2 {
-  font-size: 40px;
-  text-align: center;
-}
-
-.menu nav li {
-  margin: 0 14px;
-  text-decoration: none;
-  color: black;
-}
-
-.menu nav a {
-  font-size: 16px;
-  color: black;
-}
-
-.menu li:first-child {
-  margin-left: 10px;
-}
-
-.menu li:last-child {
-  margin-right: 10px;
-}
-
-.menu nav {
-  border-radius: 20px;
-}
-
-.icon {
-  padding: 10px;
-}
-
 /* Subtitle */
 .subtitle {
   margin-top: 10px;
