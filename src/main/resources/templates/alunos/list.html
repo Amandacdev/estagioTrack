@@ -1,20 +1,18 @@
-<html   xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout/layout}"
->
-<body>
-    <div layout:fragment="content">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
 
-        <h1>Estudantes Cadastrados</h1>
+<body>
+    <div layout:fragment="content" class="container">
+
+        <h1 class="title">Estudantes Cadastrados</h1>
 
         <div th:if="${#lists.isEmpty(alunos)}">
             <p>Nenhum estudante cadastrado</p>
         </div>
 
-        <table border='1' th:if="${!#lists.isEmpty(alunos)}">
+        <table class="table" th:if="${!#lists.isEmpty(alunos)}">
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Nome</th>
                     <th>Email</th>
                     <th>Nome de Usuário</th>
@@ -24,7 +22,6 @@
             </thead>
             <tbody>
                 <tr th:each="aluno : ${alunos}">
-                    <td th:text="${aluno.id}"></td>
                     <td><a th:href="@{/alunos/detalhes/}+${aluno.id}" th:text="${aluno.nome}"></a></td>
                     <td th:text="${aluno.email}"></td>
                     <td th:text="${aluno.nomeUsuario}"></td>
@@ -38,7 +35,7 @@
             </tbody>
         </table>
 
-        <button><a th:href="@{/form}">Voltar</a></button>
+        <button class="form-button-cancel"><a th:href="@{/coordenador/dashboard}">Voltar</a></button>
     </div>
 </body>
 

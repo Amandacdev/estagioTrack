@@ -1,69 +1,89 @@
-<html   xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout/layout}"
->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
 <body>
-<div layout:fragment="content">
+<div layout:fragment="content" class="container">
 
-    <h1>Cadastro de Estudantes</h1>
+    <h1 class="title">Cadastro de Estudantes</h1>
 
-    <form th:action="@{/alunos/save}" method="POST" th:object="${aluno}">
-
-        <br/>
-        <div th:if="${alert}" style="color: red;">
+    <form th:action="@{/alunos/save}" method="POST" th:object="${aluno}" class="form-student">
+        <div th:if="${alert}" class="alert">
             <p th:text="${alert}"></p>
         </div>
-        <br/>
 
-        Nome completo: <input type="text" th:field="*{nome}" /> <br />
-        Email: <input type="text" th:field="*{email}" /> <br />
-        Nome de usuario: <input type="text" th:field="*{nomeUsuario}"> <br />
-        Senha: <input type="password" th:field="*{senha}" /> <br />
-        Gênero:
-        <input type="radio" id="Masculino" name="genero" value="Masculino">
-        <label for="Masculino">Masculino</label><br>
-        <input type="radio" id="Feminino" name="genero" value="Feminino">
-        <label for="Feminino">Feminino</label><br>
-        <input type="radio" id="Outro" name="genero" value="Outro">
-        <label for="Outro">Outro</label><br>
+        <div class="form-group">
+            <label for="nome" class="form-label">Nome completo:</label>
+            <input type="text" th:field="*{nome}" class="form-input" id="nome" required />
+        </div>
 
-        Competências:
-        <input type="checkbox" id="C" name="competencias" value="C">
-        <label for="C">C</label><br>
+        <div class="form-group">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" th:field="*{email}" class="form-input" id="email" required />
+        </div>
 
-        <input type="checkbox" id="C#" name="competencias" value="C#">
-        <label for="C#">C#</label><br>
+        <div class="form-group">
+            <label for="nomeUsuario" class="form-label">Nome de usuário:</label>
+            <input type="text" th:field="*{nomeUsuario}" class="form-input" id="nomeUsuario" required />
+        </div>
 
-        <input type="checkbox" id="C++" name="competencias" value="C++">
-        <label for="C++">C++</label><br>
+        <div class="form-group">
+            <label for="senha" class="form-label">Senha:</label>
+            <input type="password" th:field="*{senha}" class="form-input" id="senha" required />
+        </div>
 
-        <input type="checkbox" id="CSS" name="competencias" value="CSS">
-        <label for="CSS">CSS</label><br>
+        <div class="form-group">
+            <label class="form-label">Gênero:</label>
+            <div class="form-radio-group">
+                <input type="radio" th:field="*{genero}" id="Masculino" value="Masculino" class="form-radio">
+                <label for="Masculino" class="form-radio-label">Masculino</label>
+                
+                <input type="radio" th:field="*{genero}" id="Feminino" value="Feminino" class="form-radio">
+                <label for="Feminino" class="form-radio-label">Feminino</label>
+                
+                <input type="radio" th:field="*{genero}" id="Outro" value="Outro" class="form-radio">
+                <label for="Outro" class="form-radio-label">Outro</label>
+            </div>
+        </div>
 
-        <input type="checkbox" id="HTML" name="competencias" value="HTML">
-        <label for="HTML">HTML</label><br>
+        <div class="form-group">
+            <label class="form-label">Competências:</label>
+            <div class="form-checkbox-group">
+                <input type="checkbox" th:field="*{competencias}" id="C" value="C" class="form-checkbox">
+                <label for="C" class="form-checkbox-label">C</label>
 
-        <input type="checkbox" id="Java" name="competencias" value="Java">
-        <label for="Java">Java</label><br>
+                <input type="checkbox" th:field="*{competencias}" id="C#" value="C#" class="form-checkbox">
+                <label for="C#" class="form-checkbox-label">C#</label>
 
-        <input type="checkbox" id="JavaScript" name="competencias" value="JavaScript">
-        <label for="JavaScript">JavaScript</label><br>
+                <input type="checkbox" th:field="*{competencias}" id="C++" value="C++" class="form-checkbox">
+                <label for="C++" class="form-checkbox-label">C++</label>
 
-        <input type="checkbox" id="Python" name="competencias" value="Python">
-        <label for="Python">Python</label><br>
+                <input type="checkbox" th:field="*{competencias}" id="CSS" value="CSS" class="form-checkbox">
+                <label for="CSS" class="form-checkbox-label">CSS</label>
 
-        <input type="checkbox" id="Ruby" name="competencias" value="Ruby">
-        <label for="Ruby">Ruby</label><br>
+                <input type="checkbox" th:field="*{competencias}" id="HTML" value="HTML" class="form-checkbox">
+                <label for="HTML" class="form-checkbox-label">HTML</label>
 
-        <input type="checkbox" id="SQL" name="competencias" value="SQL">
-        <label for="SQL">SQL</label><br>
+                <input type="checkbox" th:field="*{competencias}" id="Java" value="Java" class="form-checkbox">
+                <label for="Java" class="form-checkbox-label">Java</label>
 
-        <input type="submit" value="salvar" />
+                <input type="checkbox" th:field="*{competencias}" id="JavaScript" value="JavaScript" class="form-checkbox">
+                <label for="JavaScript" class="form-checkbox-label">JavaScript</label>
+
+                <input type="checkbox" th:field="*{competencias}" id="Python" value="Python" class="form-checkbox">
+                <label for="Python" class="form-checkbox-label">Python</label>
+
+                <input type="checkbox" th:field="*{competencias}" id="Ruby" value="Ruby" class="form-checkbox">
+                <label for="Ruby" class="form-checkbox-label">Ruby</label>
+
+                <input type="checkbox" th:field="*{competencias}" id="SQL" value="SQL" class="form-checkbox">
+                <label for="SQL" class="form-checkbox-label">SQL</label>
+            </div>
+        </div>
+
+        <input type="submit" value="Salvar" class="form-button" />
+        <button class="form-button-cancel"><a th:href="@{/form}" class="cancel-link">Cancelar</a></button>
     </form>
-    <button><a th:href="@{/form}">Cancelar</a></button>
-
 </div>
 </body>
-
 </html>
-<!-- Pensar em redirecionar para a página inicial ou para ofertas depois do cadastro. Não faz sentido os alunos verem a lista de alunos cadastrados. -->

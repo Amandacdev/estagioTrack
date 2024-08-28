@@ -3,8 +3,6 @@
 <body class="listofertas">
     <div layout:fragment="content" class="container listofertas">
         <h1 class="page-title listofertas">Ofertas Cadastradas</h1>
-
-        <!-- Filtro de Competências -->
         <form th:action="@{/ofertas}" method="get" class="filter-form listofertas">
             <fieldset class="filter-fieldset listofertas">
                 <legend>Filtrar por Competências:</legend>
@@ -38,11 +36,11 @@
                     <th>Requisitos específicos</th>
                     <th>Competências</th>
                     <th>Status</th>
-                    <th colspan="3">Ações</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="oferta: ${ofertas}">
+                <tr th:each="oferta: ${ofertas}" th:if="${oferta.statusOferta.name() == 'ABERTA'}">
                     <td th:text="${oferta.tituloCargo}"></td>
                     <td th:text="${oferta.valorBolsa}"></td>
                     <td th:text="${oferta.cargaHoraria}"></td>
@@ -54,25 +52,17 @@
                         </ul>
                     </td>
                     <td th:text="${oferta.statusOferta}"></td>
-
-                    <td th:if="${oferta.statusOferta.name() == 'ABERTA'}">
-                        <form th:action="@{/ofertas/desativar}" method="post" class="action-form listofertas">
+                    <td>
+                        <form th:action="@{/candidaturas/form}" method="post" class="action-form listofertas">
                             <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
-                            <button type="submit" class="form-button listofertas">Encerrar</button>
-                        </form>
-                    </td>
-
-                    <td th:if="${oferta.statusOferta.name() == 'ENCERRADA'}">
-                        <form th:action="@{/ofertas/reativar}" method="post" class="action-form listofertas">
-                            <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
-                            <button type="submit" class="form-button listofertas">Reativar</button>
+                            <button type="submit" class="form-button listofertas">Candidatar</button>
                         </form>
                     </td>
                 </tr>
             </tbody>
         </table>
 
-        <button class="form-button-cancel listofertas"><a th:href="@{/coordenador/dashboard}" class="cancel-link listofertas">Voltar</a></button>
+        <button class="form-button-cancel listofertas"><a th:href="@{/form}" class="cancel-link listofertas">Voltar</a></button>
     </div>
 </body>
 </html>

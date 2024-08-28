@@ -67,7 +67,8 @@ public class OfertaController {
             if (empresa != null) {
                 oferta.setOfertante(empresa);
                 ofertaRepository.save(oferta);
-                return "redirect:/ofertas";
+                return getDetalhesOferta(oferta.getId(), model);
+                // return "redirect:/ofertas";
             } else {
                 model.addAttribute("alert",
                         "Email inválido. O email deve corresponder ao informado no cadastro da empresa.");
@@ -77,7 +78,7 @@ public class OfertaController {
     }
 
     @RequestMapping(value = "/desativar", method = RequestMethod.POST)
-    public String desativarOferta(Integer ofertaId, RedirectAttributes attr) {
+    public String desativarOferta(Integer ofertaId, RedirectAttributes attr, Model model) {
         Optional<Oferta> ofertaOptional = ofertaRepository.findById(ofertaId);
         if (ofertaOptional.isPresent()) {
             Oferta oferta = ofertaOptional.get();
@@ -92,6 +93,7 @@ public class OfertaController {
             ofertaRepository.save(oferta);
 
             attr.addFlashAttribute("mensagem", "Oferta de estágio desativada com sucesso!");
+            return getDetalhesOferta(oferta.getId(), model);
         } else {
             attr.addFlashAttribute("alert", "Oferta de estágio não encontrada.");
         }
@@ -99,7 +101,7 @@ public class OfertaController {
     }
 
     @RequestMapping(value = "/reativar", method = RequestMethod.POST)
-    public String reativarOferta(Integer ofertaId, RedirectAttributes attr) {
+    public String reativarOferta(Integer ofertaId, RedirectAttributes attr, Model model) {
         Optional<Oferta> ofertaOptional = ofertaRepository.findById(ofertaId);
         if (ofertaOptional.isPresent()) {
             Oferta oferta = ofertaOptional.get();
@@ -113,6 +115,7 @@ public class OfertaController {
             oferta.setStatusOferta(StatusOferta.ABERTA);
             ofertaRepository.save(oferta);
             attr.addFlashAttribute("mensagem", "Oferta de estágio reativada com sucesso!");
+            return getDetalhesOferta(oferta.getId(), model);
         } else {
             attr.addFlashAttribute("alert", "Oferta de estágio não encontrada.");
         }
@@ -151,5 +154,12 @@ public class OfertaController {
 
         return "paginaUsuario/ofertasEmpresa";
 
+    }
+    
+    @RequestMapping("/listOfertasAbertas")
+    public String getOfertasAbertas(Model model) {
+        List<Oferta> ofertasAbertas = ofertaService.listarOfertasAbertas();
+        model.addAttribute("ofertas", ofertasAbertas);
+        return "ofertas/listOfertasAbertas";
     }
 }

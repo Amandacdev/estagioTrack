@@ -1,28 +1,27 @@
-<html   xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout/layout}"
->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
 <body>
-    <div layout:fragment="content">
+    <div layout:fragment="content" class="container">
 
-        <h1>Detalhes da Empresa</h1>
+        <h1 class="title">Detalhes da Empresa</h1>
 
-        <p><strong>Razão Social:</strong> <span th:text="${empresa.razaoSocial}"></span></p>
-        <p><strong>Responsável:</strong> <span th:text="${empresa.responsavel}"></span></p>
-        <p><strong>CNPJ:</strong> <span th:text="${empresa.cnpj}"></span></p>
-        <p><strong>CEP:</strong> <span th:text="${empresa.cep}"></span></p>
-        <p><strong>Logradouro:</strong> <span th:text="${empresa.logradouro}"></span></p>
-        <p><strong>Número do imóvel:</strong> <span th:text="${empresa.numeroImovel}"></span></p>
-        <p><strong>Bairro:</strong> <span th:text="${empresa.bairro}"></span></p>
-        <p><strong>Cidade:</strong> <span th:text="${empresa.cidade}"></span></p>
-        <p><strong>Estado:</strong> <span th:text="${empresa.estado}"></span></p>
-        <p><strong>Telefone:</strong> <span th:text="${empresa.telefone}"></span></p>
-        <p><strong>Atividade Principal:</strong> <span th:text="${empresa.atividadePrincipal}"></span></p>
-        <p><strong>Site:</strong> <span th:text="${empresa.site}"></span></p>
-        <p><strong>Email:</strong> <span th:text="${empresa.email}"></span></p>
+        <div class="details">
+            <p><strong>Razão Social:</strong> <span th:text="${empresa.razaoSocial}"></span></p>
+            <p><strong>Responsável:</strong> <span th:text="${empresa.responsavel}"></span></p>
+            <p><strong>CNPJ:</strong> <span th:text="${empresa.cnpj}"></span></p>
+            <p><strong>CEP:</strong> <span th:text="${empresa.cep}"></span></p>
+            <p><strong>Logradouro:</strong> <span th:text="${empresa.logradouro}"></span></p>
+            <p><strong>Número do imóvel:</strong> <span th:text="${empresa.numeroImovel}"></span></p>
+            <p><strong>Bairro:</strong> <span th:text="${empresa.bairro}"></span></p>
+            <p><strong>Cidade:</strong> <span th:text="${empresa.cidade}"></span></p>
+            <p><strong>Estado:</strong> <span th:text="${empresa.estado}"></span></p>
+            <p><strong>Telefone:</strong> <span th:text="${empresa.telefone}"></span></p>
+            <p><strong>Atividade Principal:</strong> <span th:text="${empresa.atividadePrincipal}"></span></p>
+            <p><strong>Site:</strong> <span th:text="${empresa.site}"></span></p>
+        </div>
 
-        <button><a th:href="@{/empresas}">Voltar para lista</a></button>
+        <button class="form-button-cancel"><a th:href="@{/empresas}" class="cancel-link">Voltar para lista</a></button>
     </div>
 </body>
-
 </html>

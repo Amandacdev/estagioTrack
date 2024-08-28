@@ -57,7 +57,7 @@ public class AlunoController {
             }
             alunoService.salvarAluno(aluno, competencias);
             attr.addFlashAttribute("success", "Aluno cadastrado com sucesso!");
-            return "redirect:/ofertas";
+            return getDetalhesAluno(aluno.getId(), model);
         }
     }
 

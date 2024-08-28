@@ -52,7 +52,7 @@ public class CandidaturaController {
             candidatura.setOfertaSelecionada(oferta);
             candidaturaService.save(candidatura);
             attr.addFlashAttribute("success", "Candidatura realizada com sucesso!");
-            return "redirect:/candidaturas";
+            return getListCandidaturasUsuario(model, aluno);
         } else {
             model.addAttribute("alert", "Email inválido ou oferta não encontrada.");
             return "candidaturas/form";
