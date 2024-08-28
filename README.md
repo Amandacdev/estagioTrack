@@ -2,7 +2,7 @@
 
 ## :pushpin: Descrição do Projeto:
 
-Bem-vindo ao **EstagioTrack**, projeto desenvolvido durante a disciplina Programação.
+Bem-vindo ao **EstagioTrack**, projeto desenvolvido durante a disciplina [Programação para a Web II](https://estudante.ifpb.edu.br/media/cursos/39/disciplina/Programa%C3%A7%C3%A3o_para_Web_II_H71j8S5.pdf), ministrada pelo Professor [Frederico Pereira](https://buscatextual.cnpq.br/buscatextual/visualizacv.do?metodo=apresentar&id=K4723616D6).
 Essa aplicação web realiza o controle de ofertas de estágio por empresas e a
 candidatura a estas ofertas por parte de alunos cadastrados.
 
