@@ -30,24 +30,20 @@ Para executar esse projeto é necessário:
 
 Atenção: no arquivo estagioTrack\src\main\resources\application.properties existem configurações referentes ao banco de dados local, configure os campos necessários de acordo as configurações do seu banco de dados.  
 
-```bash
-git clone https://github.com/rahuldkjain/github-profile-readme-generator.git
-```
-
 ## :pushpin: Linguagens e Tecnologias utilizadas:
 
 - Maven
 - Git
 - InteliJ IDEA
 - Bootstrap
-- Postgres
+- PostgreSQL
 - Thymeleaf
 - Hibernate
 - Spring Security
 - HTML
 - CSS
 - JAVA
-- Spring MVC ou Spring Boot
+- Spring Boot
 
 ## :pushpin: Equipe de Desenvolvimento:
 
