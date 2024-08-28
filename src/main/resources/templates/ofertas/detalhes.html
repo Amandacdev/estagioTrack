@@ -6,6 +6,10 @@
 <body>
     <div layout:fragment="content" class="container">
 
+        <div th:if="${success}" class="alert alert-success" id="successPopup">
+            <p th:text="${success}"></p>
+        </div>
+
         <h1 class="title">Detalhes da Oferta</h1>
         <div class="details">
             <p><strong>Cargo:</strong> <span th:text="${oferta.tituloCargo}"></span></p>
@@ -20,7 +24,7 @@
             <p><strong>Status:</strong> <span th:text="${oferta.statusOferta}"></span></p>
         </div>
         <button class="form-button-cancel">
-            <a th:href="@{/ofertas}" class="cancel-link">Voltar para lista</a>
+            <a th:href="@{/ofertas/listOfertasAbertas}" class="cancel-link">Voltar para lista</a>
         </button>
     </div>
 </body>

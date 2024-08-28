@@ -15,7 +15,9 @@
 
 
         </form>
-        <p th:if="${erro}" th:text="${erro}" class="alert"></p>
+        <div th:if="${erro}" class="alert" id="alertPopup">
+            <p th:text="${erro}"></p>
+        </div>
     </div>
 </body>
 </html>

@@ -5,6 +5,11 @@
 
 <body>
 <div layout:fragment="content" class="container">
+
+    <div th:if="${alert}" class="alert" id="alertPopup">
+        <p th:text="${alert}"></p>
+    </div>
+
     <h1 class="title">Realizar candidaturas</h1>
 
     <form th:action="@{/candidaturas/save}" method="POST" th:object="${candidatura}" class="form-student">

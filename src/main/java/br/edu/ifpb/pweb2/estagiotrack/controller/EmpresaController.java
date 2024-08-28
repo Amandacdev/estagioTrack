@@ -34,10 +34,12 @@ public class EmpresaController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String cadastroEmpresa(@Valid Empresa empresa,
-                                  BindingResult bindingResult,
-                                  Model model,
-                                  RedirectAttributes attr) {
+    public String cadastroEmpresa(
+            @Valid Empresa empresa,
+            BindingResult bindingResult,
+            Model model,
+            RedirectAttributes attr) {
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("alert", "Por favor, preencha todos os campos corretamente.");
             return "empresas/form";
@@ -50,7 +52,7 @@ public class EmpresaController {
 
         empresaService.save(empresa);
         attr.addFlashAttribute("success", "Empresa cadastrada com sucesso!");
-        return getDetalhesEmpresa(empresa.getId(), model);
+        return "redirect:/empresas/detalhes/" + empresa.getId();
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)

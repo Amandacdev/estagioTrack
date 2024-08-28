@@ -6,6 +6,10 @@
 <body>
 <div layout:fragment="content" class="container">
 
+    <div th:if="${alert}" class="alert" id="alertPopup">
+        <p th:text="${alert}"></p>
+    </div>
+
     <h1 class="title">Cadastro de Estudantes</h1>
 
     <!-- Adicionada a classe exclusiva `student-form-page` -->
