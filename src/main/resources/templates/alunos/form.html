@@ -12,8 +12,13 @@
 
     <h1 class="title">Cadastro de Estudantes</h1>
 
-    <form th:action="@{/alunos/save}" method="POST" th:object="${aluno}" class="form-student">
+    <!-- Adicionada a classe exclusiva `student-form-page` -->
+    <form th:action="@{/alunos/save}" method="POST" th:object="${aluno}" class="form-student student-form-page">
+        <div th:if="${alert}" class="alert">
+            <p th:text="${alert}"></p>
+        </div>
 
+        <!-- Dados do Estudante -->
         <div class="form-group">
             <label for="nome" class="form-label">Nome completo:</label>
             <input type="text" th:field="*{nome}" class="form-input" id="nome" required />
@@ -34,7 +39,8 @@
             <input type="password" th:field="*{senha}" class="form-input" id="senha" required />
         </div>
 
-        <div class="form-group">
+        <!-- Gênero -->
+        <div class="form-group-full">
             <label class="form-label">Gênero:</label>
             <div class="form-radio-group">
                 <input type="radio" th:field="*{genero}" id="Masculino" value="Masculino" class="form-radio">
@@ -48,40 +54,83 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="form-label">Competências:</label>
-            <div class="form-checkbox-group">
-                <input type="checkbox" th:field="*{competencias}" id="C" value="C" class="form-checkbox">
-                <label for="C" class="form-checkbox-label">C</label>
-
-                <input type="checkbox" th:field="*{competencias}" id="C#" value="C#" class="form-checkbox">
-                <label for="C#" class="form-checkbox-label">C#</label>
-
-                <input type="checkbox" th:field="*{competencias}" id="C++" value="C++" class="form-checkbox">
-                <label for="C++" class="form-checkbox-label">C++</label>
-
-                <input type="checkbox" th:field="*{competencias}" id="CSS" value="CSS" class="form-checkbox">
-                <label for="CSS" class="form-checkbox-label">CSS</label>
-
-                <input type="checkbox" th:field="*{competencias}" id="HTML" value="HTML" class="form-checkbox">
-                <label for="HTML" class="form-checkbox-label">HTML</label>
-
-                <input type="checkbox" th:field="*{competencias}" id="Java" value="Java" class="form-checkbox">
-                <label for="Java" class="form-checkbox-label">Java</label>
-
-                <input type="checkbox" th:field="*{competencias}" id="JavaScript" value="JavaScript" class="form-checkbox">
-                <label for="JavaScript" class="form-checkbox-label">JavaScript</label>
-
-                <input type="checkbox" th:field="*{competencias}" id="Python" value="Python" class="form-checkbox">
-                <label for="Python" class="form-checkbox-label">Python</label>
-
-                <input type="checkbox" th:field="*{competencias}" id="Ruby" value="Ruby" class="form-checkbox">
-                <label for="Ruby" class="form-checkbox-label">Ruby</label>
-
-                <input type="checkbox" th:field="*{competencias}" id="SQL" value="SQL" class="form-checkbox">
-                <label for="SQL" class="form-checkbox-label">SQL</label>
-            </div>
+        <!-- Competências -->
+<div class="form-group-full">
+    <label class="form-label">Competências:</label>
+    <div class="form-checkbox-group">
+        <div class="checkbox-item">
+            <input type="checkbox" th:field="*{competencias}" id="C" value="C" class="form-checkbox">
+            <label for="C" class="form-checkbox-label">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C" title="C">
+            </label>
         </div>
+
+        <div class="checkbox-item">
+            <input type="checkbox" th:field="*{competencias}" id="C#" value="C#" class="form-checkbox">
+            <label for="C#" class="form-checkbox-label">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#" title="C#">
+            </label>
+        </div>
+
+        <div class="checkbox-item">
+            <input type="checkbox" th:field="*{competencias}" id="C++" value="C++" class="form-checkbox">
+            <label for="C++" class="form-checkbox-label">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" title="C++">
+            </label>
+        </div>
+
+        <div class="checkbox-item">
+            <input type="checkbox" th:field="*{competencias}" id="CSS" value="CSS" class="form-checkbox">
+            <label for="CSS" class="form-checkbox-label">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS"  title="CSS">
+            </label>
+        </div>
+
+        <div class="checkbox-item">
+            <input type="checkbox" th:field="*{competencias}" id="HTML" value="HTML" class="form-checkbox">
+            <label for="HTML" class="form-checkbox-label">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" title="HTML">
+            </label>
+        </div>
+
+        <div class="checkbox-item">
+            <input type="checkbox" th:field="*{competencias}" id="Java" value="Java" class="form-checkbox">
+            <label for="Java" class="form-checkbox-label">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java"  title="Java">
+            </label>
+        </div>
+
+        <div class="checkbox-item">
+            <input type="checkbox" th:field="*{competencias}" id="JavaScript" value="JavaScript" class="form-checkbox">
+            <label for="JavaScript" class="form-checkbox-label">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"  title="JavaScript">
+            </label>
+        </div>
+
+        <div class="checkbox-item">
+            <input type="checkbox" th:field="*{competencias}" id="Python" value="Python" class="form-checkbox">
+            <label for="Python" class="form-checkbox-label">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"  title="Python">
+            </label>
+        </div>
+
+        <div class="checkbox-item">
+            <input type="checkbox" th:field="*{competencias}" id="Ruby" value="Ruby" class="form-checkbox">
+            <label for="Ruby" class="form-checkbox-label">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ruby/ruby-original.svg" alt="Ruby" title="Ruby">
+            </label>
+        </div>
+
+        <div class="checkbox-item">
+            <input type="checkbox" th:field="*{competencias}" id="SQL" value="SQL" class="form-checkbox">
+            <label for="SQL" class="form-checkbox-label">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL" title="SQL">
+            </label>
+        </div>
+    </div>
+</div>
+
+
 
         <input type="submit" value="Salvar" class="form-button" />
         <button class="form-button-cancel"><a th:href="@{/form}" class="cancel-link">Cancelar</a></button>

@@ -79,8 +79,7 @@ body {
 }
 
 /* Form Styles */
-.form-empresa,
-.form-student {
+.form-empresa{
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
@@ -116,6 +115,7 @@ body {
   border-color: #7dd3fc;
 }
 
+/*Pagina Inicial*/
 .container-start {
   display: flex;
   flex-direction: column;
@@ -312,6 +312,76 @@ body {
   text-decoration: underline;
 }
 
+/*Form Aluno*/
+/* Estilos específicos para a página de cadastro de estudantes */
+.student-form-page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.student-form-page .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.student-form-page .form-group-full {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+
+/* Competências em duas linhas */
+.student-form-page .form-checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.student-form-page .checkbox-item {
+  display: flex;
+  align-items: center;
+}
+
+.student-form-page .form-checkbox-label {
+  margin-left: 8px;
+  /* Espaçamento entre o checkbox e o ícone */
+}
+
+.student-form-page .form-checkbox-group img {
+  width: 40px;
+  height: 40px;
+}
+
+/* Form Labels */
+.student-form-page .form-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #ffffff;
+}
+
+/* Form Inputs */
+.student-form-page .form-input,
+.student-form-page .form-select {
+  padding: 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  background-color: #334155;
+  color: #ffffff;
+  margin-bottom: 15px;
+  transition: border-color 0.3s ease;
+  width: 100%;
+}
+
+
+
+.student-form-page .form-radio-group {
+  display: flex;
+  gap: 15px;
+}
+
 /*Dashboard*/
 /* Description Text */
 .description {
@@ -432,7 +502,7 @@ body.listofertas {
 }
 
 .offers-table.listofertas tbody tr:nth-child(even) {
-  background-color: #3d4761;
+  background-color: #282b36;
 }
 
 /* Competencies List */
@@ -443,7 +513,13 @@ body.listofertas {
 }
 
 .competencies-list.listofertas li {
+  color: black;
+  list-style: none;
+}
+
+.competencies-list-white.listofertas li {
   color: #ffffff;
+  list-style: none;
 }
 
 /* Form Button */

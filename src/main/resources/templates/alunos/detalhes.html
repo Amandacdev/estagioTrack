@@ -17,7 +17,12 @@
             <p><strong>Email:</strong> <span th:text="${aluno.email}"></span></p>
             <p><strong>Usuário:</strong> <span th:text="${aluno.nomeUsuario}"></span></p>
             <p><strong>Gênero:</strong> <span th:text="${aluno.genero}"></span></p>
-            <p><strong>Competências:</strong> <span th:text="${aluno.competencias}"></span></p>
+            <p><strong>Competências:</strong>
+                <span th:each="competencia, iterStat : ${aluno.competencias}">
+                    <span th:text="${competencia}"></span><span th:if="${!iterStat.last}">, </span>
+                </span>
+            </p>
+
         </div>
 
         <button class="form-button-cancel"><a th:href="@{/alunos}" class="cancel-link">Voltar para lista</a></button>
