@@ -6,6 +6,10 @@
 <body>
     <div layout:fragment="content" class="container">
 
+        <div th:if="${success}" class="alert alert-success" id="successPopup">
+            <p th:text="${success}"></p>
+        </div>
+
         <h1 class="title">Detalhes da Oferta</h1>
         <div class="details">
             <p><strong>Cargo:</strong> <span th:text="${oferta.tituloCargo}"></span></p>

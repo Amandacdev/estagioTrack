@@ -50,7 +50,7 @@ public class EmpresaController {
 
         empresaService.save(empresa);
         attr.addFlashAttribute("success", "Empresa cadastrada com sucesso!");
-        return getDetalhesEmpresa(empresa.getId(), model);
+        return "redirect:/empresas/detalhes/" + empresa.getId();
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)

@@ -67,8 +67,8 @@ public class OfertaController {
             if (empresa != null) {
                 oferta.setOfertante(empresa);
                 ofertaRepository.save(oferta);
-                return getDetalhesOferta(oferta.getId(), model);
-                // return "redirect:/ofertas";
+                attr.addFlashAttribute("success", "Oferta de estágio cadastrada com sucesso!");
+                return "redirect:/ofertas/detalhes" + oferta.getId();
             } else {
                 model.addAttribute("alert",
                         "Email inválido. O email deve corresponder ao informado no cadastro da empresa.");
@@ -92,7 +92,7 @@ public class OfertaController {
             oferta.encerrar();
             ofertaRepository.save(oferta);
 
-            attr.addFlashAttribute("mensagem", "Oferta de estágio desativada com sucesso!");
+            attr.addFlashAttribute("success", "Oferta de estágio desativada com sucesso!");
             return getDetalhesOferta(oferta.getId(), model);
         } else {
             attr.addFlashAttribute("alert", "Oferta de estágio não encontrada.");
