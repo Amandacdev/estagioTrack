@@ -126,8 +126,8 @@
             </div>
 
             <div class="form-group">
-                <label for="comprovanteEndereco" class="form-label">Comprovante de endereço:</label>
-                <input type="file" th:field="*{comprovanteEndereco}" class="form-input" />
+                <label for="comprovanteEndereco" class="form-label">Comprovante de endereço(apenas PDF):</label>
+                <input type="file" th:field="*{comprovanteEndereco}" class="form-input" accept=".pdf" />
             </div>
 
             <button type="submit" class="form-button">Salvar</button>
