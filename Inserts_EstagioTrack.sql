@@ -1,7 +1,22 @@
 --Poando o banco de dados do EstagioTrack
 
 --Para limpar seu banco, execute o comando a seguir
---TRUNCATE TABLE aluno, aluno_competencias, empresa, oferta, oferta_competencias, candidatura  CASCADE;
+--TRUNCATE TABLE aluno, aluno_competencias, empresa, oferta, oferta_competencias, candidatura, competencia_template  CASCADE;
+
+-- SQL para popular a tabela read-only de competências a ser utilizada nos templates.-
+INSERT INTO competencia_template (id, nome, icone_url) VALUES
+(1, 'C', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg'),
+(2, 'C#', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg'),
+(3, 'C++', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg'),
+(4, 'CSS', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg'),
+(5, 'HTML', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg'),
+(6, 'Java', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg'),
+(7, 'JavaScript', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg'),
+(8, 'Python', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg'),
+(9, 'Ruby', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ruby/ruby-original.svg'),
+(10, 'SQL', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg');
+
+--SELECT * FROM competencia_template
 
 INSERT INTO aluno values
 ( 1,'amanda@gmail.com','Feminino','Amanda Cruz','amandaCruz','123'),
@@ -47,7 +62,7 @@ INSERT into empresa VALUES
 
 INSERT INTO oferta VALUES
 (1,	'havaianas@gmail.com', 'ABERTA','Desenvolvedor', null, '500.00', 1 ,'Desenvolvimento de Software', '28', '','Sim'),
-(2,	'apple@gmail.com','ABERTA', 'Suporte',  null , '600.00', 4 ,'Computação em Nuvem','25', 'Disponibilidade para viagens' ,'Sim'),
+(2,	'apple@gmail.com','ENCERRADA', 'Suporte',  null , '600.00', 4 ,'Computação em Nuvem','25', 'Disponibilidade para viagens' ,'Sim'),
 (3,	'amazon@gmail.com','ABERTA','Analista',null, '750.00',	6,'Big Data e Analytics', '20', '', 'Não');
 
 INSERT INTO oferta_competencias values
@@ -62,13 +77,13 @@ INSERT INTO oferta_competencias values
 INSERT INTO candidatura VALUES 
 (1,'amanda@gmail.com','PENDENTE',1,1),
 (2,'george@gmail.com','PENDENTE',2,1),
-(3,'mariana@gmail.com','PENDENTE',5,2),
+(3,'mariana@gmail.com','REJEITADA',5,2),
 (4,'mariana@gmail.com','PENDENTE',5,3),
 (5,'mariana@gmail.com','PENDENTE',5,1),
 (6,'luana@gmail.com','PENDENTE',10,3),
 (7,'brian.com','PENDENTE',3,3),
 (8,'olivia@gmail.com','PENDENTE',4,1),
-(9,'olivia@gmail.com','PENDENTE',4,2);
+(9,'olivia@gmail.com','REJEITADA',4,2);
 
 select * from aluno;
 select * from aluno_competencias;
@@ -80,3 +95,4 @@ select * from oferta_competencias;
 
 select * from candidatura;
 
+select * from competencia_template;
