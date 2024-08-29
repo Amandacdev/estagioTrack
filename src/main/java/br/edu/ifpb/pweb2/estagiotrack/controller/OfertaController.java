@@ -74,6 +74,10 @@ public class OfertaController {
         } else {
             Empresa empresa = empresaController.buscarPorEmail(oferta.getEmailOfertante());
             if (empresa != null) {
+                if (oferta.getId() == null) {
+                    Integer maxId = ofertaService.findMaxId();
+                    oferta.setId(maxId + 1);
+                }
                 oferta.setOfertante(empresa);
                 ofertaRepository.save(oferta);
                 attr.addFlashAttribute("success", "Oferta de estágio cadastrada com sucesso!");

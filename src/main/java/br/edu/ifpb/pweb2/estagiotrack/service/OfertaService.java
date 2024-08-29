@@ -31,4 +31,8 @@ public class OfertaService {
         // Filtra ofertas com status ABERTA usando o enum
         return ofertaRepository.findByStatusOferta(StatusOferta.ABERTA);
     }
+
+    public Integer findMaxId() {
+        return ofertaRepository.findMaxId();
+    }
 }

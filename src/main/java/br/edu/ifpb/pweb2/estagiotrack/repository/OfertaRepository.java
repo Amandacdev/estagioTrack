@@ -13,12 +13,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OfertaRepository extends JpaRepository<Oferta, Integer> {
 
-    @Query("SELECT COALESCE(MAX(o.id), 0) FROM Oferta o")
-    Integer getMaxId();
-
     @Query("SELECT o FROM Oferta o JOIN o.competencias c WHERE c IN :competencias GROUP BY o HAVING COUNT(c) > 0")
     List<Oferta> findByCompetencias(List<String> competencias);
 
     // Método para buscar pelo status
     List<Oferta> findByStatusOferta(StatusOferta status);
+
+    @Query("SELECT COALESCE(MAX(o.id), 0) FROM Oferta o")
+    Integer findMaxId();
 }
