@@ -45,4 +45,8 @@ public class EmpresaService {
     public boolean existsById(Integer id) {
         return empresaRepository.existsById(id);
     }
+
+    public Integer findMaxId() {
+        return empresaRepository.findMaxId();
+    }
 }

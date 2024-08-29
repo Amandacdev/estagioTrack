@@ -17,7 +17,6 @@ import java.io.Serializable;
 public class Empresa implements Serializable {
 
         @Id
-        @GeneratedValue
         private Integer id;
         @NotBlank(message = "O CNPJ é obrigatório.")
         @Column(unique = true, nullable = false)

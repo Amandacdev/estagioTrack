@@ -50,7 +50,7 @@ public class AlunoService {
                 && aluno.getCompetencias() != null && !aluno.getCompetencias().isEmpty();
     }
 
-    public Integer findMaxId()  {
+    public Integer findMaxId() {
         return alunoRepository.findMaxId();
     }
 }

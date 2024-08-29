@@ -49,6 +49,10 @@ public class EmpresaController {
             model.addAttribute("alert", "Email ou CNPJ já cadastrado.");
             return "empresas/form";
         }
+        if (empresa.getId() == null) {
+            Integer maxId = empresaService.findMaxId();
+            empresa.setId(maxId + 1);
+        }
 
         empresaService.save(empresa);
         attr.addFlashAttribute("success", "Empresa cadastrada com sucesso!");
