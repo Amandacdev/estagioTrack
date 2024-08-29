@@ -153,49 +153,47 @@
             }
         </style>
         <script>
-            let cep = document.getElementById('cep')
-            cep.addEventListener('focusout', lerCEP)
+            let cep = document.getElementById('cep');
+            cep.addEventListener('focusout', lerCEP);
 
             function lerCEP() {
-                let cepValue = cep.value
-                let cepGuardado = cepValue
-                let cepLido = `https://viacep.com.br/ws/${cepValue}/json/`
-                getCEP(cepLido, cepGuardado)
+                let cepValue = cep.value;
+                let cepGuardado = cepValue;
+                let cepLido = `https://viacep.com.br/ws/${cepValue}/json/`;
+                getCEP(cepLido, cepGuardado);
             }
 
             async function getCEP(cepLido, cepGuardado) {
                 try {
-                    const response = await fetch(cepLido)
-                    const json = await response.json()
-                    showContent(json)
-                    cep.style.border = ''
-                    if (json.uf == undefined) {
-                        erroCEP(cepGuardado)
+                    const response = await fetch(cepLido);
+                    const json = await response.json();
+                    if (json.erro) {
+                        erroCEP(cepGuardado);
+                    } else {
+                        showContent(json);
+                        cep.style.border = '';
                     }
                 } catch {
-                    erroCEP()
+                    erroCEP(cepGuardado);
                 }
             }
 
             function showContent(json) {
-                let logradouro = document.getElementById('logradouro')
-                logradouro.value = json.logradouro
-                let bairro = document.getElementById('bairro')
-                bairro.value = json.bairro
-                let cidade = document.getElementById('cidade')
-                cidade.value = json.localidade
-                let estado = document.getElementById('estado')
-                estado.value = json.uf
+                let logradouro = document.getElementById('logradouro');
+                logradouro.value = json.logradouro;
+                let bairro = document.getElementById('bairro');
+                bairro.value = json.bairro;
+                let cidade = document.getElementById('cidade');
+                cidade.value = json.localidade;
+                let estado = document.getElementById('estado');
+                estado.value = json.uf;
             }
 
             function erroCEP(cepGuardado) {
-                cep.style.border = '1px solid red'
-                let form = document.getElementById('form')
-                form.reset()
-                cep.placeholder = 'CEP inválido ou incorreto.'
-                cep.value = cepGuardado
-                if (cep.value == cepGuardado) {
-                    window.alert('CEP digitado não existe. Favor corrigir.')
+                cep.style.border = '1px solid red';
+                cep.placeholder = 'CEP inválido ou incorreto.';
+                if (cep.value === cepGuardado) {
+                    window.alert('CEP digitado não existe. Favor corrigir.');
                 }
             }
 

@@ -58,6 +58,10 @@ public class CandidaturaController {
         if (aluno != null && oferta != null) {
             candidatura.setAlunoCandidato(aluno);
             candidatura.setOfertaSelecionada(oferta);
+            if (candidatura.getId() == null) {
+                Integer maxId = candidaturaService.findMaxId();
+                candidatura.setId(maxId + 1);
+            }
             candidaturaService.save(candidatura);
             attr.addFlashAttribute("success", "Candidatura realizada com sucesso!");
             return getListCandidaturasUsuario(model, aluno);

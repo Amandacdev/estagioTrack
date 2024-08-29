@@ -29,4 +29,7 @@ public class CandidaturaService {
         return (Candidatura) candidaturaRepository.findByEmail(email);
     }
 
+    public Integer findMaxId() {
+        return candidaturaRepository.findMaxId();
+    }
 }

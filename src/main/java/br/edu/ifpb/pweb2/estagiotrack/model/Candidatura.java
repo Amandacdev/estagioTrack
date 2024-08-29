@@ -12,7 +12,6 @@ import lombok.*;
 public class Candidatura {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Email
