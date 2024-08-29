@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -34,11 +35,11 @@ public class AlunoController {
     private CompetenciasTemplateService competenciasTemplateService;
 
     @GetMapping("/form")
-    public String showForm(Model model) {
-        List<CompetenciaTemplate> competencias = competenciasTemplateService.findAll();
-        model.addAttribute("aluno", new Aluno());
-        model.addAttribute("competencias", competencias);
-        return "alunos/form";
+    public ModelAndView showForm(ModelAndView modelAndView) {
+        modelAndView.addObject("competenciasTemplate",  competenciasTemplateService.findAll());
+        modelAndView.addObject("aluno", new Aluno());
+        modelAndView.setViewName("alunos/form");
+        return modelAndView;
     }
 
     @RequestMapping()

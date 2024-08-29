@@ -11,31 +11,25 @@ import lombok.*;
 public class CompetenciaTemplate {
 
     @Id
-    private String id;
+    private Integer id;
 
     private String nome;
 
     private String iconeUrl;
 }
 
-// SQL para gerar e popular a tabela read-only de competências a ser utilizada nos templates.
+// SQL para popular a tabela read-only de competências a ser utilizada nos templates. Deve ser executado após iniciar a aplicação.
 
-// CREATE TABLE competenciasTemplate (
-//     id VARCHAR(50) PRIMARY KEY,
-//     nome VARCHAR(100) NOT NULL,
-//     icone_url VARCHAR(255) NOT NULL
-// );
+// INSERT INTO competencia_template (id, nome, icone_url) VALUES
+// (1, 'C', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg'),
+// (2, 'C#', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg'),
+// (3, 'C++', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg'),
+// (4, 'CSS', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg'),
+// (5, 'HTML', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg'),
+// (6, 'Java', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg'),
+// (7, 'JavaScript', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg'),
+// (8, 'Python', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg'),
+// (9, 'Ruby', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ruby/ruby-original.svg'),
+// (10, 'SQL', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg');
 
-// INSERT INTO competenciasTemplate (id, nome, icone_url) VALUES
-// ('C', 'C', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg'),
-// ('C#', 'C#', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg'),
-// ('C++', 'C++', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg'),
-// ('CSS', 'CSS', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg'),
-// ('HTML', 'HTML', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg'),
-// ('Java', 'Java', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg'),
-// ('JavaScript', 'JavaScript', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg'),
-// ('Python', 'Python', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg'),
-// ('Ruby', 'Ruby', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ruby/ruby-original.svg'),
-// ('SQL', 'SQL', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg');
-
-// SELECT * FROM competenciasTemplate
+// SELECT * FROM competencia_template

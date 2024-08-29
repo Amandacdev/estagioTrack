@@ -54,8 +54,9 @@
             <!-- Competências -->
             <div class="form-group-full">
                 <label class="form-label">Competências:</label>
+                <p th:text="${#lists.size(competenciasTemplate)} + ' competências carregadas'"></p>
                 <div class="form-checkbox-group">
-                    <div class="checkbox-item" th:each="competencia : ${competencias}">
+                    <div class="checkbox-item" th:each="competencia : ${competenciasTemplate}">
                         <input type="checkbox" th:field="*{competencias}" th:id="${competencia.nome}"
                             th:value="${competencia.nome}" class="form-checkbox">
                         <label th:for="${competencia.nome}" class="form-checkbox-label">
