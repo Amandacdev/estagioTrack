@@ -1,20 +1,24 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
+import br.edu.ifpb.pweb2.estagiotrack.model.CompetenciaTemplate;
 import br.edu.ifpb.pweb2.estagiotrack.service.AlunoService;
+import br.edu.ifpb.pweb2.estagiotrack.service.CompetenciasTemplateService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -27,11 +31,15 @@ public class AlunoController {
 
     private final AlunoService alunoService;
 
-    @RequestMapping("/form")
-    public String getForm(Model model) {
+    @Autowired
+    private CompetenciasTemplateService competenciasTemplateService;
 
-        model.addAttribute("aluno", new Aluno());
-        return "alunos/form";
+    @GetMapping("/form")
+    public ModelAndView showForm(ModelAndView modelAndView) {
+        modelAndView.addObject("competenciasTemplate",  competenciasTemplateService.findAll());
+        modelAndView.addObject("aluno", new Aluno());
+        modelAndView.setViewName("alunos/form");
+        return modelAndView;
     }
 
     @RequestMapping()

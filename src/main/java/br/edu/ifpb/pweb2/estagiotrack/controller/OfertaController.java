@@ -1,12 +1,14 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
+import br.edu.ifpb.pweb2.estagiotrack.model.CompetenciaTemplate;
 import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
 import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
 import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusCandidatura;
 import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusOferta;
 import br.edu.ifpb.pweb2.estagiotrack.repository.CandidaturaRepository;
 import br.edu.ifpb.pweb2.estagiotrack.repository.OfertaRepository;
+import br.edu.ifpb.pweb2.estagiotrack.service.CompetenciasTemplateService;
 import br.edu.ifpb.pweb2.estagiotrack.service.OfertaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +39,13 @@ public class OfertaController {
     @Autowired
     private EmpresaController empresaController;
 
+    @Autowired
+    private CompetenciasTemplateService competenciasTemplateService;
+
     @RequestMapping("/form")
     public String getForm(Oferta oferta, Model model) {
+        List<CompetenciaTemplate> competenciasTemplate = competenciasTemplateService.findAll();
+        model.addAttribute("competenciasTemplate", competenciasTemplate);
         return "ofertas/form";
     }
 
@@ -51,6 +58,8 @@ public class OfertaController {
         } else {
             ofertas = ofertaRepository.findByCompetencias(competencias);
         }
+        List<CompetenciaTemplate> competenciasTemplate = competenciasTemplateService.findAll();
+        model.addAttribute("competenciasTemplate", competenciasTemplate);
         model.addAttribute("ofertas", ofertas);
         return "ofertas/list";
     }
@@ -159,6 +168,8 @@ public class OfertaController {
     @RequestMapping("/listOfertasAbertas")
     public String getOfertasAbertas(Model model) {
         List<Oferta> ofertasAbertas = ofertaService.listarOfertasAbertas();
+        List<CompetenciaTemplate> competenciasTemplate = competenciasTemplateService.findAll();
+        model.addAttribute("competenciasTemplate", competenciasTemplate);
         model.addAttribute("ofertas", ofertasAbertas);
         return "ofertas/listOfertasAbertas";
     }
