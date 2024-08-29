@@ -1,38 +1,37 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout}"
-      th:with="titulo='Cadastro Candidatura'">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}" th:with="titulo='Cadastro Candidatura'">
 
 <body>
-<div layout:fragment="content" class="container">
+    <div layout:fragment="content" class="container">
 
-    <div th:if="${alert}" class="alert" id="alertPopup">
-        <p th:text="${alert}"></p>
-    </div>
+        <div th:if="${alert}" class="alert" id="alertPopup">
+            <p th:text="${alert}"></p>
+        </div>
 
-    <h1 class="title">Realizar candidaturas</h1>
+        <h1 class="title">Realizar candidaturas</h1>
 
-    <form th:action="@{/candidaturas/save}" method="POST" th:object="${candidatura}" class="form-student">
-        <div class="form-group">
-            <label for="oferta" class="form-label">Oferta selecionada:</label>
-            <select th:field="*{ofertaSelecionada.id}" id="oferta" class="form-input">
-                <option th:each="oferta : ${ofertas}" th:value="${oferta.id}"
+        <form th:action="@{/candidaturas/save}" method="POST" th:object="${candidatura}" class="form-student">
+            <div class="form-group">
+                <label for="oferta" class="form-label">Oferta selecionada:</label>
+                <select th:field="*{ofertaSelecionada.id}" id="oferta" class="form-input">
+                    <option th:each="oferta : ${ofertas}" th:value="${oferta.id}"
                         th:text="${oferta.ofertante.razaoSocial} + ' - ' + ${oferta.tituloCargo}"
                         th:selected="${oferta.id == candidatura.ofertaSelecionada.id}"></option>
-            </select>            
-        </div>
+                </select>
+            </div>
 
-        <div class="form-group">
-            <label for="emailCandidato" class="form-label">Digite seu Email para confirmar:</label>
-            <input type="email" th:field="*{emailCandidato}" id="emailCandidato" class="form-input">
-        </div>
+            <div class="form-group">
+                <label for="emailCandidato" class="form-label">Digite seu Email para confirmar:</label>
+                <input type="email" th:field="*{emailCandidato}" id="emailCandidato" class="form-input">
+            </div>
 
-        <input type="submit" value="Salvar" class="form-button" />
-        <button class="form-button-cancel"><a th:href="@{/form}" class="cancel-link">Cancelar</a></button>
-    </form>
-    <div th:if="${alert}" class="alert">
-        <p th:text="${alert}"></p>
+            <input type="submit" value="Salvar" class="form-button" />
+            <button class="form-button-cancel"><a th:href="@{/form}" class="cancel-link">Cancelar</a></button>
+        </form>
+        <div th:if="${alert}" class="alert">
+            <p th:text="${alert}"></p>
+        </div>
     </div>
-</div>
 </body>
+
 </html>

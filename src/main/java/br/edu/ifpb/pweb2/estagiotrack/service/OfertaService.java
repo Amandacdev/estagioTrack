@@ -26,9 +26,9 @@ public class OfertaService {
     public Oferta save(Oferta oferta) {
         return ofertaRepository.save(oferta);
     }
-    
+
     public List<Oferta> listarOfertasAbertas() {
-    // Filtra ofertas com status ABERTA usando o enum
-    return ofertaRepository.findByStatusOferta(StatusOferta.ABERTA);
+        // Filtra ofertas com status ABERTA usando o enum
+        return ofertaRepository.findByStatusOferta(StatusOferta.ABERTA);
     }
 }

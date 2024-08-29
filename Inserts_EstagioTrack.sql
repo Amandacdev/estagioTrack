@@ -19,7 +19,7 @@ INSERT INTO competencia_template (id, nome, icone_url) VALUES
 --SELECT * FROM competencia_template
 
 INSERT INTO aluno values
-( 1,'amanda@gmail.com','Feminino','Amanda Cruz','amandaCruz','123'),
+(1,'amanda@gmail.com','Feminino','Amanda Cruz','amandaCruz','123'),
 (2,'george@gmail.com','Masculino','George Barbosa','georgeD','123'),
 (3,'brian.com','Masculino','Brian Rafael','brian','123'),
 (4,'olivia@gmail.com','Feminino','Olivia Oliva','oliviaO','123'),
@@ -66,13 +66,13 @@ INSERT INTO oferta VALUES
 (3,	'amazon@gmail.com','ABERTA','Analista',null, '750.00',	6,'Big Data e Analytics', '20', '', 'Não');
 
 INSERT INTO oferta_competencias values
-( 1, 'Java'),
-( 1, 'HTML'),
-( 1, 'JavaScript'),
-( 2, 'Python'),
-( 2, 'SQL'),
-( 3, 'C++'),
-( 3, 'Python');
+(1, 'Java'),
+(1, 'HTML'),
+(1, 'JavaScript'),
+(2, 'Python'),
+(2, 'SQL'),
+(3, 'C++'),
+(3, 'Python');
 
 INSERT INTO candidatura VALUES 
 (1,'amanda@gmail.com','PENDENTE',1,1),

@@ -1,19 +1,19 @@
-<html   xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout/layout}"
-        th:with="titulo='Consulta'">>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}" th:with="titulo='Consulta'">>
 >
+
 <body>
-<div layout:fragment="content" class="container">
-    <h2 class="title">Identifique-se para realizar sua consulta.</h2>
-    <form method="post" action="#" th:action="@{/paginaUsuario/identificar}">
-        <div class="form-group">
-            <label for="emailFiltro" class="form-label">Insira o seu email de cadastro:</label>
-            <input type="email" id="emailFiltro" name="emailFiltro" required class="form-input">
-        </div>
-        <button type="submit" class="form-button">Pesquisar</button>
-    </form>
-    <p th:if="${erro}" th:text="${erro}" class="alert"></p>
-</div>
+    <div layout:fragment="content" class="container">
+        <h2 class="title">Identifique-se para realizar sua consulta.</h2>
+        <form method="post" action="#" th:action="@{/paginaUsuario/identificar}">
+            <div class="form-group">
+                <label for="emailFiltro" class="form-label">Insira o seu email de cadastro:</label>
+                <input type="email" id="emailFiltro" name="emailFiltro" required class="form-input">
+            </div>
+            <button type="submit" class="form-button">Pesquisar</button>
+        </form>
+        <p th:if="${erro}" th:text="${erro}" class="alert"></p>
+    </div>
 </body>
+
 </html>

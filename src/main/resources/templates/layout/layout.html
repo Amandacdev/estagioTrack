@@ -1,14 +1,13 @@
 <!doctype html>
-<html lang="pt_BR"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="pt_BR" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
     <link rel="icon" th:href="@{/css/assets/pin.png}" type="image/png">
     <meta th:replace="~{/fragments/base ::files(${titulo})}">
 </head>
 
 <body>
-    <link rel="icon" href="/css/assets/pin.png"/>
+    <link rel="icon" href="/css/assets/pin.png" />
     <div th:replace="~{/fragments/base ::menu}" />
 
     <div layout:fragment="content" class="conteudo">
@@ -17,4 +16,5 @@
 
     <div th:replace="~{/fragments/base ::footer}" />
 </body>
+
 </html>

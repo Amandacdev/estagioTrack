@@ -49,7 +49,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #0f1728;
   color: #ffffff;
   margin: 0;
@@ -79,7 +79,7 @@ body {
 }
 
 /* Form Styles */
-.form-empresa{
+.form-empresa {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
@@ -288,7 +288,6 @@ body {
   margin-bottom: 20px;
 }
 
-
 /* Competências em duas linhas */
 .student-form-page .form-checkbox-group {
   display: grid;
@@ -330,8 +329,6 @@ body {
   transition: border-color 0.3s ease;
   width: 100%;
 }
-
-
 
 .student-form-page .form-radio-group {
   display: flex;
@@ -380,7 +377,7 @@ body {
 
 /* General Page Style */
 body.listofertas {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #0f1728;
   color: #ffffff;
   margin: 0;
@@ -549,5 +546,5 @@ footer {
   justify-content: space-between;
   margin: 0 10%;
   color: #7dd3fc;
-  padding: 20px; 
+  padding: 20px;
 }

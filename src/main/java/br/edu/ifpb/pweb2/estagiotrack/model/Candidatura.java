@@ -9,7 +9,7 @@ import lombok.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Candidatura{
+public class Candidatura {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

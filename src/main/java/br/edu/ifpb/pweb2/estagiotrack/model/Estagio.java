@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @Entity
 @AllArgsConstructor
-public class Estagio{
+public class Estagio {
     @Id
     @GeneratedValue
     private Integer id;
@@ -19,11 +19,11 @@ public class Estagio{
     @OneToOne
     private Oferta ofertaSelecionada;
 
-    public Estagio(){
+    public Estagio() {
         encerrarOferta();
     }
 
-    public void encerrarOferta(){
+    public void encerrarOferta() {
         if (ofertaSelecionada != null && ofertaSelecionada.getStatus() == StatusOferta.ABERTA) {
             ofertaSelecionada.encerrar();
         }

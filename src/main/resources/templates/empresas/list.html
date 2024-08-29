@@ -1,8 +1,6 @@
-<html   xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout/layout}"
-        th:with="titulo='Lista de Empresas'"
->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}" th:with="titulo='Lista de Empresas'">
+
 <body>
     <div layout:fragment="content" class="container">
         <h1 class="title">Empresas Cadastradas</h1>
@@ -31,7 +29,9 @@
             </table>
         </div>
 
-        <button class="form-button-cancel"><a th:href="@{/coordenador/dashboard}" class="cancel-link">Voltar</a></button>
+        <button class="form-button-cancel"><a th:href="@{/coordenador/dashboard}"
+                class="cancel-link">Voltar</a></button>
     </div>
 </body>
+
 </html>

@@ -20,7 +20,7 @@ public interface CandidaturaRepository extends JpaRepository<Candidatura, Intege
     // Consulta para obter o ID máximo
     @Query("SELECT COALESCE(MAX(c.id), 0) FROM Candidatura c")
     Integer getMaxId();
-    
+
     List<Candidatura> findByOfertaSelecionada(Oferta oferta);
 
 }

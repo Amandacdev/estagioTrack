@@ -27,7 +27,6 @@ public class CandidaturaService {
 
     public Candidatura findByEmail(String email) {
         return (Candidatura) candidaturaRepository.findByEmail(email);
-        /*.orElse(null);*/
     }
 
 }

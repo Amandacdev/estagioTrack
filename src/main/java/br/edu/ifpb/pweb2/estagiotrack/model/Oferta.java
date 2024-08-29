@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Oferta{
+public class Oferta {
 
     @Id
     @GeneratedValue

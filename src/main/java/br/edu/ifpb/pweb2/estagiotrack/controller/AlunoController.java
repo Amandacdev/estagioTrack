@@ -1,7 +1,6 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
-import br.edu.ifpb.pweb2.estagiotrack.model.CompetenciaTemplate;
 import br.edu.ifpb.pweb2.estagiotrack.service.AlunoService;
 import br.edu.ifpb.pweb2.estagiotrack.service.CompetenciasTemplateService;
 import jakarta.validation.Valid;
@@ -36,7 +35,7 @@ public class AlunoController {
 
     @GetMapping("/form")
     public ModelAndView showForm(ModelAndView modelAndView) {
-        modelAndView.addObject("competenciasTemplate",  competenciasTemplateService.findAll());
+        modelAndView.addObject("competenciasTemplate", competenciasTemplateService.findAll());
         modelAndView.addObject("aluno", new Aluno());
         modelAndView.setViewName("alunos/form");
         return modelAndView;
@@ -50,9 +49,9 @@ public class AlunoController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String cadastroAluno(@RequestParam(required = false, defaultValue = "") List<String> competencias,
-                                @Valid Aluno aluno,
-                                Model model,
-                                RedirectAttributes attr) {
+            @Valid Aluno aluno,
+            Model model,
+            RedirectAttributes attr) {
         if (!alunoService.validarAluno(aluno)) {
             model.addAttribute("alert", "Por favor preencha todos os campos corretamente.");
             return "alunos/form";
