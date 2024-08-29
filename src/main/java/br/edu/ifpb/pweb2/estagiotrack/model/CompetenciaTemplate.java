@@ -18,7 +18,8 @@ public class CompetenciaTemplate {
     private String iconeUrl;
 }
 
-// SQL para popular a tabela read-only de competências a ser utilizada nos templates. Deve ser executado após iniciar a aplicação.
+// SQL para popular a tabela read-only de competências a ser utilizada nos templates.
+// IMPORTANTE: Deve ser executado após iniciar a aplicação.
 
 // INSERT INTO competencia_template (id, nome, icone_url) VALUES
 // (1, 'C', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg'),
