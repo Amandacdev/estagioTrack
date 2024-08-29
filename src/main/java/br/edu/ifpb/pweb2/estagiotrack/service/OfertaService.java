@@ -28,7 +28,6 @@ public class OfertaService {
     }
 
     public List<Oferta> listarOfertasAbertas() {
-        // Filtra ofertas com status ABERTA usando o enum
         return ofertaRepository.findByStatusOferta(StatusOferta.ABERTA);
     }
 

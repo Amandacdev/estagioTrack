@@ -23,7 +23,6 @@ public class LoginController {
     }
 
     @RequestMapping("/formParaFiltroPesquisa")
-    // @GetMapping("/formParaFiltroPesquisa")
     public String showFiltroPage() {
         return "consultaEstudanteEmpresa";
     }

@@ -62,7 +62,7 @@ public class AlunoController {
             return "alunos/form";
         }
         if (aluno.getId() == null) {
-            Integer maxId = alunoService.findMaxId(); // Supondo que exista um método no repositório que retorna o maior ID
+            Integer maxId = alunoService.findMaxId();
             System.out.println(maxId);
             aluno.setId(maxId + 1);
         }

@@ -13,11 +13,9 @@ import java.util.List;
 @Repository
 public interface CandidaturaRepository extends JpaRepository<Candidatura, Integer> {
 
-    // Consulta para encontrar a candidatura por email do candidato
     @Query("SELECT c FROM Candidatura c WHERE c.emailCandidato = :email")
     List<Candidatura> findByEmail(@Param("email") String email);
 
-    // Consulta para obter o ID máximo
     @Query("SELECT COALESCE(MAX(c.id), 0) FROM Candidatura c")
     Integer findMaxId();
 

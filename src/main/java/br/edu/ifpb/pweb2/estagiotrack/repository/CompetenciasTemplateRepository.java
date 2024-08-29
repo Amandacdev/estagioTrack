@@ -9,6 +9,5 @@ import java.util.List;
 @Repository
 public interface CompetenciasTemplateRepository extends JpaRepository<CompetenciaTemplate, String> {
 
-    // Método para recuperar todas as competências
     List<CompetenciaTemplate> findAll();
 }
