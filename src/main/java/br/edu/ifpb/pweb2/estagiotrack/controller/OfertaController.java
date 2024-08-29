@@ -144,7 +144,9 @@ public class OfertaController {
     public String getDetalhesOferta(@PathVariable("id") Integer id, Model model) {
         Optional<Oferta> oferta = ofertaService.findById(id);
         if (oferta.isPresent()) {
+            List<Candidatura> candidaturas = candidaturaRepository.findByOfertaSelecionada(oferta.get());
             model.addAttribute("oferta", oferta.get());
+            model.addAttribute("candidaturas", candidaturas);
             return "ofertas/detalhes";
         } else {
             model.addAttribute("alert", "Oferta não encontrada");

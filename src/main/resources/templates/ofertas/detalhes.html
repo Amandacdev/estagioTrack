@@ -21,6 +21,20 @@
             <p><strong>Competências necessárias:</strong> <span th:text="${oferta.competencias}"></span></p>
             <p><strong>Status:</strong> <span th:text="${oferta.statusOferta}"></span></p>
         </div>
+
+        <div th:if="${!#lists.isEmpty(candidaturas)}">
+            <h2>Candidatos</h2>
+            <div class="candidatos">
+                <ul>
+                    <li th:each="candidatura : ${candidaturas}">
+                        <p><strong>Nome:</strong> <span th:text="${candidatura.alunoCandidato.nome}"></span></p>
+                        <p><strong>Email:</strong> <span th:text="${candidatura.emailCandidato}"></span></p>
+                        <p><strong>Status:</strong> <span th:text="${candidatura.statusCandidatura}"></span></p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
         <button class="form-button-cancel">
             <a th:href="@{/ofertas/listOfertasAbertas}" class="cancel-link">Voltar para lista</a>
         </button>
