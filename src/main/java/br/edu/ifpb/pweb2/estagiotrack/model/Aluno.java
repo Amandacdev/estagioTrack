@@ -15,7 +15,6 @@ import java.util.List;
 public class Aluno {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Email(message = "Por favor, insira um email válido.")

@@ -61,7 +61,11 @@ public class AlunoController {
             model.addAttribute("alert", "Email ou nome de usuário já existente.");
             return "alunos/form";
         }
-
+        if (aluno.getId() == null) {
+            Integer maxId = alunoService.findMaxId(); // Supondo que exista um método no repositório que retorna o maior ID
+            System.out.println(maxId);
+            aluno.setId(maxId + 1);
+        }
         alunoService.salvarAluno(aluno, competencias);
         attr.addFlashAttribute("success", "Aluno cadastrado com sucesso!");
         return "redirect:/alunos/detalhes/" + aluno.getId();

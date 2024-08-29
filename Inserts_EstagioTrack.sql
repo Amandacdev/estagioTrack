@@ -52,18 +52,18 @@ INSERT INTO aluno_competencias values
 ( 10, 'JavaScript');
 
 INSERT into empresa VALUES
-(1,'Desenvolvimento de Software','Expedicionários', '58041060','João Pessoa','74512589678546','' ,'havaianas@gmail.com','PB','Avenida Capitão João FreirE','4','Havaianas','Carla','123'),
-(2,'Big Data e Analytics','Expedicionários', '58041060','João Pessoa','74512589678546','' ,'lg@gmail.com','PB','Avenida Capitão João FreirE','4','LG','Fernadno','123'),
-(3,'Inteligência Artificial','Expedicionários', '58041060','João Pessoa','74512589678546','' ,'google@gmail.com','PB','Avenida Capitão João FreirE','4','Google','Henry','123'),
-(4, 'Computação em Núvem', 'Tambaú', '58039070', 'João Pessoa', '74512589678900', '', 'apple@gmail.com', 'PB', 'Rua das Acácias', '50', 'Apple', 'John', '124'),
-(5, 'Suporte Técnico', 'Manaíra', '58038100', 'João Pessoa', '74512589678899', '', 'ibm@gmail.com', 'PB', 'Rua do Sol', '12', 'IBM', 'Alice', '125'),
-(6, 'Segurança da Informação', 'Cabo Branco', '58045200', 'João Pessoa', '74512589678888', '', 'amazon@gmail.com', 'PB', 'Avenida Atlântica', '30', 'Amazon', 'Sophia', '126'),
+(1,'Desenvolvimento de Software','Expedicionários', '58041060','João Pessoa','74512589678541','' ,'havaianas@gmail.com','PB','Avenida Capitão João FreirE','4','Havaianas','Carla','123'),
+(2,'Big Data e Analytics','Expedicionários', '58041060','João Pessoa','74512589678542','' ,'lg@gmail.com','PB','Avenida Capitão João FreirE','4','LG','Fernadno','123'),
+(3,'Inteligência Artificial','Expedicionários', '58041060','João Pessoa','74512589678543','' ,'google@gmail.com','PB','Avenida Capitão João FreirE','4','Google','Henry','123'),
+(4, 'Computação em Núvem', 'Tambaú', '58039070', 'João Pessoa', '74512589678904', '', 'apple@gmail.com', 'PB', 'Rua das Acácias', '50', 'Apple', 'John', '124'),
+(5, 'Suporte Técnico', 'Manaíra', '58038100', 'João Pessoa', '74512589678895', '', 'ibm@gmail.com', 'PB', 'Rua do Sol', '12', 'IBM', 'Alice', '125'),
+(6, 'Segurança da Informação', 'Cabo Branco', '58045200', 'João Pessoa', '74512589678886', '', 'amazon@gmail.com', 'PB', 'Avenida Atlântica', '30', 'Amazon', 'Sophia', '126'),
 (7, 'Inteligência Artificial', 'Altiplano', '58045100', 'João Pessoa', '74512589678777', '', 'nintendo@gmail.com', 'PB', 'Rua das Flores', '120', 'Nintendo', 'Luigi', '127');
 
 INSERT INTO oferta VALUES
-(1,	'havaianas@gmail.com', 'ABERTA','Desenvolvedor', null, '500.00', 1 ,'Desenvolvimento de Software', '28', '','Sim'),
-(2,	'apple@gmail.com','ENCERRADA', 'Suporte',  null , '600.00', 4 ,'Computação em Nuvem','25', 'Disponibilidade para viagens' ,'Sim'),
-(3,	'amazon@gmail.com','ABERTA','Analista',null, '750.00',	6,'Big Data e Analytics', '20', '', 'Não');
+(1,	'Desenvolvimento de Software', '28', 'havaianas@gmail.com', null, 'ABERTA', 'Desenvolvedor', 'Sim', '500.00', 1),
+(2,	'Computação em Nuvem', '25', 'apple@gmail.com', 'Disponibilidade para viagens', 'ENCERRADA', 'Suporte', 'Sim', '600.00', 4),
+(3,	'Big Data e Analytics', '20', 'amazon@gmail.com', null, 'ABERTA', 'Analista', 'Não', '750.00', 6);
 
 INSERT INTO oferta_competencias values
 (1, 'Java'),

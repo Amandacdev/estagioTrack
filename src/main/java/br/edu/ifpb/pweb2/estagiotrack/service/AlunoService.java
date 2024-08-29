@@ -49,4 +49,8 @@ public class AlunoService {
                 && aluno.getSenha() != null && !aluno.getSenha().isEmpty()
                 && aluno.getCompetencias() != null && !aluno.getCompetencias().isEmpty();
     }
+
+    public Integer findMaxId()  {
+        return alunoRepository.findMaxId();
+    }
 }
