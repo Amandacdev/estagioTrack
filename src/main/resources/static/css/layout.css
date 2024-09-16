@@ -475,6 +475,78 @@ body.listofertas {
   list-style: none;
 }
 
+/* Aluno Details */
+
+
+.details-curriculo {
+  margin-top: 20px;
+  padding: 20px;
+  color: #ffffff;
+}
+
+/* Estilo para o nome do estudante */
+.student-name {
+  font-size: 35px;
+  text-align: center;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+/* Estilo para cada seção */
+.section {
+  margin-bottom: 20px;
+}
+
+/* Estilo para os títulos das seções */
+.section h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #333;
+  /* Linha divisória */
+  padding-bottom: 5px;
+}
+
+/* Estilo para cada item de detalhe */
+.detail-item {
+  margin: 5px 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Estilo para o título principal */
+.detail-title {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffffff;
+  /* Título em branco */
+}
+
+/* Estilo para o botão */
+.form-button-cancel {
+  display: inline-block;
+  text-align: center;
+  padding: 10px 20px;
+  background-color: transparent;
+  color: #007bff;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.form-button-cancel a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.form-button-cancel:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+
 /* Form Button */
 .form-button.listofertas {
   padding: 8px 16px;
