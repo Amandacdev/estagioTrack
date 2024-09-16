@@ -23,7 +23,7 @@
         </form>
 
         <div th:if="${#lists.isEmpty(ofertas)}">
-            <p>Nenhuma oferta cadastrada</p>
+            <p>Nenhuma oferta disponível, volte em outro momento!</p>
         </div>
 
         <table class="offers-table listofertas" th:if="${!#lists.isEmpty(ofertas)}">
@@ -35,7 +35,6 @@
                     <th>Vale Transporte</th>
                     <th>Requisitos específicos</th>
                     <th>Competências</th>
-                    <th>Status</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -51,7 +50,6 @@
                             <li th:each="competencia : ${oferta.competencias}" th:text="${competencia}"></li>
                         </ul>
                     </td>
-                    <td th:text="${oferta.statusOferta}"></td>
                     <td>
                         <form th:action="@{/candidaturas/form(ofertaId=${oferta.id})}" method="post"
                             class="action-form listofertas">

@@ -27,16 +27,16 @@
             <div class="candidatos">
                 <ul>
                     <li th:each="candidatura : ${candidaturas}">
-                        <p><strong>Nome:</strong> <span th:text="${candidatura.alunoCandidato.nome}"></span></p>
-                        <p><strong>Email:</strong> <span th:text="${candidatura.emailCandidato}"></span></p>
-                        <p><strong>Status:</strong> <span th:text="${candidatura.statusCandidatura}"></span></p>
+                        <p class="detailsinfo">Nome: <span th:text="${candidatura.alunoCandidato.nome}"></span></p>
+                        <p class="detailsinfo">Email: <span th:text="${candidatura.emailCandidato}"></span></p>
+                        <p class="detailsinfo">Status: <span th:text="${candidatura.statusCandidatura}"></span></p>
                     </li>
                 </ul>
             </div>
 
         </div>
         <button class="form-button-cancel">
-            <a th:href="@{/ofertas/listOfertasAbertas}" class="cancel-link">Voltar para lista</a>
+            <a th:href="@{/ofertas}" class="cancel-link">Voltar para lista</a>
         </button>
     </div>
 </body>
