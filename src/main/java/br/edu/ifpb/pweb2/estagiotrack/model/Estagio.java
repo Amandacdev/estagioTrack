@@ -1,7 +1,10 @@
 package br.edu.ifpb.pweb2.estagiotrack.model;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusOferta;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -13,7 +16,7 @@ public class Estagio {
     @GeneratedValue
     private Integer id;
 
-    @ManyToOne
+    @OneToOne
     private Aluno alunoAprovado;
 
     @OneToOne

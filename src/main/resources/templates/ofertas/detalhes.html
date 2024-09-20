@@ -25,13 +25,25 @@
         <div th:if="${!#lists.isEmpty(candidaturas)}">
             <h2>Candidatos</h2>
             <div class="candidatos">
-                <ul>
-                    <li th:each="candidatura : ${candidaturas}">
-                        <p><strong>Nome:</strong> <span th:text="${candidatura.alunoCandidato.nome}"></span></p>
-                        <p><strong>Email:</strong> <span th:text="${candidatura.emailCandidato}"></span></p>
-                        <p><strong>Status:</strong> <span th:text="${candidatura.statusCandidatura}"></span></p>
-                    </li>
-                </ul>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="candidatura: ${candidaturas}">
+                            <td th:text="${candidatura.alunoCandidato.nome}"></td>
+                            <td th:text="${candidatura.emailCandidato}"></td>
+                            <td th:text="${candidatura.statusCandidatura}"></td>
+                            <td th:if="${candidatura.statusCandidatura}"></td>
+                            <td th:if="${candidatura.statusCandidatura.name() == 'PENDENTE'}"><button>Aprovar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
         </div>
