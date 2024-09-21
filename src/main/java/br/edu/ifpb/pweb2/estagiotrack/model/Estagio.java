@@ -7,11 +7,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import java.time.LocalDate;
 
 @Data
 @Entity
+@NoArgsConstructor
 @AllArgsConstructor
 public class Estagio {
+
     @Id
     @GeneratedValue
     private Integer id;
@@ -22,13 +28,14 @@ public class Estagio {
     @OneToOne
     private Oferta ofertaSelecionada;
 
-    public Estagio() {
-        encerrarOferta();
-    }
+    @OneToOne
+    private Candidatura candidaturaSelecionada;
 
-    public void encerrarOferta() {
-        if (ofertaSelecionada != null && ofertaSelecionada.getStatus() == StatusOferta.ABERTA) {
-            ofertaSelecionada.encerrar();
-        }
-    }
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dataInicio;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dataFim;
+
+    private String observacoes;
 }

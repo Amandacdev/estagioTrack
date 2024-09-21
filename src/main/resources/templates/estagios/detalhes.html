@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalhes do Estágio</title>
+</head>
+<body>
+    <h1>Detalhes do Estágio</h1>
+    <div>
+        <p><strong>Aluno:</strong> <span th:text="${estagio.alunoAprovado.nome}"></span></p>
+        <p><strong>Oferta:</strong> <span th:text="${estagio.ofertaSelecionada.tituloCargo}"></span></p>
+        <p><strong>Data de Início:</strong> <span th:text="${#temporals.format(estagio.dataInicio, 'dd/MM/yyyy')}"></span></p>
+        <p><strong>Data de Término:</strong> <span th:text="${#temporals.format(estagio.dataFim, 'dd/MM/yyyy')}"></span></p>
+        <p><strong>Observações:</strong> <span th:text="${estagio.observacoes}"></span></p>
+    </div>
+    <button>
+        <a th:href="@{/estagios}">Voltar para lista</a>
+    </button>
+</body>
+</html>

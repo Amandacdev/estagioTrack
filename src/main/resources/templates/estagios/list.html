@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Lista de Estágios</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>Lista de Estágios</h1>
+
+        <div th:if="${estagios.isEmpty()}">
+            <p>Nenhum estágio cadastrado.</p>
+        </div>
+
+        <div th:if="${!estagios.isEmpty()}">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aluno</th>
+                        <th>Cargo</th>
+                        <th>Data de Início</th>
+                        <th>Data de Término</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="estagio : ${estagios}">
+                        <td th:text="${estagio.alunoAprovado.nome}"></td>
+                        <td th:text="${estagio.ofertaSelecionada.tituloCargo}"></td>
+                        <td th:text="${#temporals.format(estagio.dataInicio, 'dd/MM/yyyy')}"></td>
+                        <td th:text="${#temporals.format(estagio.dataFim, 'dd/MM/yyyy')}"></td>
+                        <td>
+                            <a th:href="@{/estagios/detalhes/{id}(id=${estagio.id})}">
+                                <button>Detalhes</button>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
