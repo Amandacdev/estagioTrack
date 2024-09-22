@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <title>Lista de Estágios</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}"
+      th:with="titulo='Lista de Estágios'">
 
 <body>
-    <div class="container">
+    <div layout:fragment="content" class="container">
         <h1>Lista de Estágios</h1>
 
         <div th:if="${estagios.isEmpty()}">
@@ -15,7 +12,7 @@
         </div>
 
         <div th:if="${!estagios.isEmpty()}">
-            <table>
+            <table  class="offers-table listofertas"-+>
                 <thead>
                     <tr>
                         <th>Aluno</th>
@@ -33,7 +30,7 @@
                         <td th:text="${#temporals.format(estagio.dataFim, 'dd/MM/yyyy')}"></td>
                         <td>
                             <a th:href="@{/estagios/detalhes/{id}(id=${estagio.id})}">
-                                <button>Detalhes</button>
+                                <button  class="form-button-cancel">Detalhes</button>
                             </a>
                         </td>
                     </tr>

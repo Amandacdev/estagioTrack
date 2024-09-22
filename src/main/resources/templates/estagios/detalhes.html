@@ -1,19 +1,22 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Detalhes do Estágio</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}"
+      th:with="titulo='Detalhes do Estágio'">
+
 <body>
-    <h1>Detalhes do Estágio</h1>
-    <div>
-        <p><strong>Aluno:</strong> <span th:text="${estagio.alunoAprovado.nome}"></span></p>
-        <p><strong>Oferta:</strong> <span th:text="${estagio.ofertaSelecionada.tituloCargo}"></span></p>
-        <p><strong>Data de Início:</strong> <span th:text="${#temporals.format(estagio.dataInicio, 'dd/MM/yyyy')}"></span></p>
-        <p><strong>Data de Término:</strong> <span th:text="${#temporals.format(estagio.dataFim, 'dd/MM/yyyy')}"></span></p>
-        <p><strong>Observações:</strong> <span th:text="${estagio.observacoes}"></span></p>
+    <div layout:fragment="content" class="container">
+        <h1 class="title">Detalhes do Estágio</h1>
+        <div class="form-group">
+            <p><strong>Aluno:</strong> <span th:text="${estagio.alunoAprovado.nome}"></span></p>
+            <p><strong>Oferta:</strong> <span th:text="${estagio.ofertaSelecionada.tituloCargo}"></span></p>
+            <p><strong>Data de Início:</strong> <span th:text="${#temporals.format(estagio.dataInicio, 'dd/MM/yyyy')}"></span></p>
+            <p><strong>Data de Término:</strong> <span th:text="${#temporals.format(estagio.dataFim, 'dd/MM/yyyy')}"></span></p>
+            <p><strong>Observações:</strong> <span th:text="${estagio.observacoes}"></span></p>
+        </div>
+
+        <a  th:href="@{/estagios}">
+            <button  class="form-button-cancel">Voltar para lista</button>
+        </a>
     </div>
-    <button>
-        <a th:href="@{/estagios}">Voltar para lista</a>
-    </button>
 </body>
 </html>
