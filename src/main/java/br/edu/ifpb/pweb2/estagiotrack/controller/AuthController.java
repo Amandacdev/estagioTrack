@@ -2,6 +2,7 @@ package br.edu.ifpb.pweb2.estagiotrack.controller;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
 import br.edu.ifpb.pweb2.estagiotrack.repository.AlunoRepository;
+import br.edu.ifpb.pweb2.estagiotrack.util.PasswordUtil;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,6 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
-    /*
 
     @Autowired
     private AlunoRepository alunoRepositorio;
@@ -31,12 +31,12 @@ public class AuthController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView valide(Aluno aluno, HttpSession session, ModelAndView modelAndView, RedirectAttributes redirectAttts) {
+    public ModelAndView valide(Aluno aluno, HttpSession session, ModelAndView modelAndView, RedirectAttributes redirectAttrs) {
         if ((aluno = this.isValido(aluno)) != null){
             session.setAttribute("aluno", aluno);
             modelAndView.setViewName("redirect:/home");
         } else {
-            redirectAttts.addFlashAttribute("mensagem","Login e/ou senha inválidos");
+            redirectAttrs.addFlashAttribute("mensagem","Login e/ou senha inválidos");
             modelAndView.setViewName("redirect:/auth");
         }
         return modelAndView;
@@ -50,17 +50,16 @@ public class AuthController {
     }
 
     private Aluno isValido(Aluno aluno) {
-        Aluno alunoBD = alunoRepositorio.findByEmail(aluno.getEmail());
-        boolean valido = false;
-        if(alunoBD != null){
-            if(PasswordUtil.checkPass(aluno.getSenha(), alunoBD.getSenha())){
-                valido = true;
+        Optional<Aluno> alunoBD = alunoRepositorio.findByEmail(aluno.getEmail());
+
+        if (alunoBD.isPresent()) {
+            if (PasswordUtil.checkPass(aluno.getSenha(), alunoBD.get().getSenha())) {
+                return alunoBD.get();
             }
         }
-        return valido ? alunoBD : null;
-    }
+        return null;
 
- */
+    }
 
 
 }

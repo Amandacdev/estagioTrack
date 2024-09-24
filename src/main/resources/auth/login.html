@@ -44,13 +44,12 @@ data-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;><span ariahidden=&q
                                     </div>
 
                                     <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="email" id="form2Example17" class="form-control form-control-lg" required autofocus name="username" placeholder="Email"/>
+                                        <input type="email" id="form2Example17" class="form-control form-control-lg" required autofocus th:field="*{email}" name="username" placeholder="Email"/>
                                     </div>
 
 
                                     <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="password" id="form2Example27" class="form-control form-control-lg" placeholder="Senha" required
-                                               name="password"/>
+                                        <input type="password" id="form2Example27" class="form-control form-control-lg" placeholder="Senha" required th:field="*{senha}"  name="password"/>
                                     </div>
 
                                     <div class="checkbox mb-3">

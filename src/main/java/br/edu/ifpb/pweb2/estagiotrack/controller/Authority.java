@@ -16,7 +16,7 @@ import java.io.Serializable;
 public class Authority {
 
     @EmbeddedId
-    private Authority id;
+    private AuthorityId id;
 
     @ManyToOne
     @JoinColumn(name = "username",
@@ -38,6 +38,4 @@ public class Authority {
         private String username;
         private String authority;
     }
-
-
 }
