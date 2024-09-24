@@ -1,13 +1,5 @@
 package br.edu.ifpb.pweb2.estagiotrack.config;
 
-import br.edu.ifpb.pweb2.estagiotrack.controller.Authority;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,11 +17,10 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
-import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-public class EstagioTrackSecurityConfig {
+public class WebSecurityConfig {
     @Autowired
     private DataSource dataSource;
 
@@ -36,10 +28,10 @@ public class EstagioTrackSecurityConfig {
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/css/**","/imagens/**").permitAll()
+                        .requestMatchers("/css/**","/imagens/**",  "/auth/login", "/acesso-negado").permitAll()
                         .anyRequest().authenticated())
                 .formLogin((form) -> form
-                        .loginPage("/auth/login")
+                        .loginPage("/auth")
                         .defaultSuccessUrl("/home",true)
                         .permitAll())
                 .logout((logout) -> logout.logoutUrl("/auth/logout"));

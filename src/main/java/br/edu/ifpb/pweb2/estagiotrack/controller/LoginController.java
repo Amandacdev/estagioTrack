@@ -19,10 +19,14 @@ public class LoginController {
     @Autowired
     private EmpresaController empresaController;
 
+
     @GetMapping("/login")
     public String showLoginPage() {
-        return "login";
+        //return "login";
+        return "auth/login";
     }
+
+
 
     @RequestMapping("/formParaFiltroPesquisa")
     public String showFiltroPage() {
@@ -51,7 +55,7 @@ public class LoginController {
 
     @PostMapping("/validar")
     public String login(@RequestParam String email, @RequestParam String senha, ModelAndView modelAndView, RedirectAttributes attr) {
-      return "/login";
+      return "auth/login";
         /*
         if (usuarioService.validarLogin(email, senha)) {
             return "";

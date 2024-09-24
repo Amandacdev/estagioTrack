@@ -1,5 +1,6 @@
-package br.edu.ifpb.pweb2.estagiotrack.controller;
+package br.edu.ifpb.pweb2.estagiotrack.model;
 
+import br.edu.ifpb.pweb2.estagiotrack.controller.User;
 import jakarta.persistence.*;
 import jdk.jfr.Enabled;
 import lombok.AllArgsConstructor;

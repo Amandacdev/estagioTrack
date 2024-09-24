@@ -1,5 +1,6 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
+import br.edu.ifpb.pweb2.estagiotrack.model.Authority;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
