@@ -18,6 +18,7 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
+    /*
 
     @Autowired
     private AlunoRepository alunoRepositorio;
@@ -58,6 +59,8 @@ public class AuthController {
         }
         return valido ? alunoBD : null;
     }
+
+ */
 
 
 }
