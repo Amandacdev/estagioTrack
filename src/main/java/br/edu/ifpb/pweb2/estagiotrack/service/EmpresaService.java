@@ -2,6 +2,7 @@ package br.edu.ifpb.pweb2.estagiotrack.service;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
 import br.edu.ifpb.pweb2.estagiotrack.repository.EmpresaRepository;
+import br.edu.ifpb.pweb2.estagiotrack.util.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,7 @@ public class EmpresaService {
     }
 
     public Empresa save(Empresa empresa) {
+        empresa.setSenha(PasswordUtil.hashPassword(empresa.getSenha()));
         return empresaRepository.save(empresa);
     }
 

@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.io.Serializable;
@@ -59,6 +60,7 @@ public class Empresa implements Serializable {
         @Column(unique = true, nullable = false)
         private String email;
 
+        @Size(max = 60)
         @NotBlank(message = "A senha é obrigatória.")
         private String senha;
 

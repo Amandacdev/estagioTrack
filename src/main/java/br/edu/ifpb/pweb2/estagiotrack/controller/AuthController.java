@@ -26,14 +26,14 @@ public class AuthController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getForm(ModelAndView modelAndView) {
         modelAndView.setViewName("auth/login");
-        modelAndView.addObject("aluno", new Aluno());
+        modelAndView.addObject("usuario", new Aluno());
         return modelAndView;
     }
-
+/*
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView valide(Aluno aluno, HttpSession session, ModelAndView modelAndView, RedirectAttributes redirectAttrs) {
         if ((aluno = this.isValido(aluno)) != null){
-            session.setAttribute("aluno", aluno);
+            session.setAttribute("usuario", aluno);
             modelAndView.setViewName("redirect:/home");
         } else {
             redirectAttrs.addFlashAttribute("mensagem","Login e/ou senha inválidos");
@@ -41,6 +41,8 @@ public class AuthController {
         }
         return modelAndView;
     }
+
+
 
     @RequestMapping("/logout")
     public ModelAndView logout(ModelAndView mav, HttpSession session) {
@@ -50,16 +52,17 @@ public class AuthController {
     }
 
     private Aluno isValido(Aluno aluno) {
-        Optional<Aluno> alunoBD = alunoRepositorio.findByEmail(aluno.getEmail());
+        Aluno alunoBD = alunoRepositorio.findByEmail(aluno.getEmail());
 
-        if (alunoBD.isPresent()) {
-            if (PasswordUtil.checkPass(aluno.getSenha(), alunoBD.get().getSenha())) {
-                return alunoBD.get();
+        if (alunoBD  != null) {
+            if (PasswordUtil.checkPass(aluno.getSenha(), alunoBD.getSenha())) {
+                return alunoBD;
             }
         }
         return null;
-
     }
+
+ */
 
 
 }
