@@ -1,9 +1,21 @@
+<!--
 <html   xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorate="~{layout/layout}"
         th:with="titulo='Login'">
     <body>
     <div layout:fragment="content">
+    -->
+<!doctype html>
+<html lang="pt_BR">
+<head th:replace="~{/fragments/base :: headfiles('Autenticação', ~{::link})}">
+    <link th:href="@{/css/auth.css}" rel="stylesheet">
+</head>
+<body class="text-center">
+
+
+
+<form class="form-signin" th:action="@{/auth}" method="POST" th:object=${usuario}>
         <div class="row d-flex justify-content-center align-items-center h-50">
             <div class="col col-xl-20">
 
@@ -25,17 +37,30 @@
 
                                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Entre na sua conta</h5>
 
+                                    <div th:if="${not #strings.isEmpty(mensagem)}"
+                                         th:utext="${mensagem} +'<button type=&quot;button&quot; class=&quot;close&quot;
+data-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;><span ariahidden=&quot;true&quot;>&times;</span></button>'"
+                                         class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    </div>
+
                                     <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="email" id="form2Example17" class="form-control form-control-lg" placeholder="Email"/>
+                                        <input type="email" id="form2Example17" class="form-control form-control-lg" required autofocus name="username" placeholder="Email"/>
                                     </div>
 
 
                                     <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="password" id="form2Example27" class="form-control form-control-lg" placeholder="Senha"/>
+                                        <input type="password" id="form2Example27" class="form-control form-control-lg" placeholder="Senha" required
+                                               name="password"/>
+                                    </div>
+
+                                    <div class="checkbox mb-3">
+                                        <label> <input type="checkbox" value="lembrar">
+                                            Lembrar-me
+                                        </label>
                                     </div>
 
                                     <div class="pt-1 mb-4">
-                                        <button data-mdb-button-init data-mdb-ripple-init class="form-control form-control-lg btn btn-dark btn-lg btn-block"  type="submit">Login</button>
+                                        <button type="submit" data-mdb-button-init data-mdb-ripple-init class="form-control form-control-lg btn btn-dark btn-lg btn-block" >Login</button>
                                     </div>
 
                                     <p class="mb-5 pb-lg-2" style="color: #393f81; display: grid;">Não possui conta?
@@ -49,7 +74,8 @@
                 </div>
             </div>
         </div>
-    </div>
+</form>
+
 
 </body>
 </html>
