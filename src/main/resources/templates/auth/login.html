@@ -7,7 +7,7 @@
 <body class="text-center">
 
 
-<form class="form-signin" th:action="@{/auth/valide}" method="POST" th:object="${usuario}">
+<form class="form-signin" th:action="@{/auth}" method="POST" th:object="${usuario}">
         <div class="row d-flex justify-content-center align-items-center h-50">
             <div class="col col-xl-20">
 
@@ -34,7 +34,6 @@
                                          class="alert alert-danger alert-dismissible fade show" role="alert">
                                     </div>
 
-                                    <!--
 
                                     <div data-mdb-input-init class="form-outline mb-4">
                                         <input type="email" id="form2Example17" class="form-control form-control-lg" required autofocus th:field="*{email}" name="email" placeholder="Email"/>
@@ -42,14 +41,7 @@
                                     <div data-mdb-input-init class="form-outline mb-4">
                                         <input type="password" id="form2Example27" class="form-control form-control-lg" placeholder="Senha" required th:field="*{senha}"  name="password"/>
                                     </div>
-                                    -->
 
-                                    <label  class="sr-only" style="text-align: left; display: block;">Login</label>
-                                    <input type="text" class="form-control input-login" placeholder="Login" required autofocus
-                                           name="username">
-                                    <label class="sr-only mt-3" style="text-align: left; display: block;">Senha</label>
-                                    <input type="password" class="form-control input-login" placeholder="Senha" required
-                                           name="password">
 
 
                                     <div class="checkbox mb-3">

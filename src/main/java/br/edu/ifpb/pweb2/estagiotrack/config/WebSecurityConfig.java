@@ -21,6 +21,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+
     @Autowired
     private DataSource dataSource;
 
@@ -28,7 +29,7 @@ public class WebSecurityConfig {
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/css/**","/imagens/**",  "/auth/login", "/acesso-negado").permitAll()
+                        .requestMatchers("/css/**",  "/auth/login", "/acesso-negado").permitAll()
                         .anyRequest().authenticated())
                 .formLogin((form) -> form
                         .loginPage("/auth")

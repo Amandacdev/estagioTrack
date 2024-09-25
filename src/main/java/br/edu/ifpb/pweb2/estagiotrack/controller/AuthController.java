@@ -51,11 +51,11 @@ public class AuthController {
     public ModelAndView valide(Aluno aluno, HttpSession session, ModelAndView modelAndView, RedirectAttributes redirectAttrs) {
 
         if ((aluno = this.isValido(aluno)) != null){
-            System.out.println("Tentativa de login com email - VALIDE - :"+ aluno.getEmail());
+            //System.out.println("Tentativa de login com email - VALIDE - :"+ aluno.getEmail());
             session.setAttribute("usuario", aluno);
             modelAndView.setViewName("redirect:/home");
         } else {
-            System.out.println("Tentativa sem aluno");
+            //System.out.println("Tentativa sem aluno");
             redirectAttrs.addFlashAttribute("mensagem","Login e/ou senha inválidos");
             modelAndView.setViewName("redirect:/auth");
         }
@@ -70,7 +70,7 @@ public class AuthController {
     }
 
     private Aluno isValido(Aluno aluno) {
-        System.out.println("Tentativa de login com email: - ISVALIDE - "+ aluno.getEmail());
+        //System.out.println("Tentativa de login com email: - ISVALIDE - "+ aluno.getEmail());
         Optional<Aluno> alunoBDOptional = alunoRepositorio.findByEmail(aluno.getEmail());
 
         if (alunoBDOptional.isPresent()) {
@@ -82,4 +82,7 @@ public class AuthController {
         return null;
     }
 
+
+
 }
+

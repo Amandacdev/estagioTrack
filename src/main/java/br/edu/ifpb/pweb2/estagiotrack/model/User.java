@@ -1,4 +1,4 @@
-package br.edu.ifpb.pweb2.estagiotrack.controller;
+package br.edu.ifpb.pweb2.estagiotrack.model;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Authority;
 import jakarta.persistence.Entity;
@@ -18,12 +18,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
+
     @Id
     private String username;
     private String password;
-    private boolean enabled;
+    private Boolean enabled;
 
     @OneToMany(mappedBy = "username")
     @ToString.Exclude
-    List<Authority> authorities;
+    List<Authority> authories;
 }

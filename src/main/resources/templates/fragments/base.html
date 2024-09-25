@@ -30,7 +30,9 @@
                             aria-expanded="false"><i class="bi bi-cursor-fill icon"></i>
                             Cadastro
                         </a>
+
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <!--
                             <li><a class="dropdown-item" href="#" th:href="@{/empresas/form}">Cadastrar-se como
                                     Empresa</a></li>
                             <li><a class="dropdown-item" href="#" th:href="@{/alunos/form}">Cadastrar-se como
@@ -38,7 +40,8 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#" th:href="@{/ofertas/form}">Cadastrar uma Oferta</a>
+                            -->
+                            <li><a th:if="${session.usuario != null and session.usuario.admin}" class="dropdown-item" href="#" th:href="@{/ofertas/form}">Cadastrar uma Oferta</a>
                             </li>
                         </ul>
                     </li>
@@ -48,7 +51,7 @@
                             Consulta
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#" th:href="@{/empresas}">Empresas cadastradas</a></li>
+                            <li><a class="dropdown-item" href="#" th:if="${session.usuario != null and session.usuario.admin}" th:href="@{/empresas}">Empresas cadastradas</a></li>
                             <li><a class="dropdown-item" href="#" th:href="@{/ofertas/listOfertasAbertas}">Ofertas
                                     cadastradas</a></li>
                             <li>
@@ -78,7 +81,7 @@
                     <div>
                         <span th:if="${session.usuario != null}" th:text="${session.usuario.email}"></span>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#" th:href="@{/templates/auth/logout}">Sair</a>
+                            <a class="nav-link active" aria-current="page" href="#" th:href="@{/auth/logout}">Sair</a>
                         </li>
                     </div>
 
