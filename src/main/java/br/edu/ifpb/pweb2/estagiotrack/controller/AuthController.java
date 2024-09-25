@@ -22,13 +22,13 @@ import java.util.Optional;
 @RequestMapping("/auth")
 public class AuthController {
 
-    @Autowired
-    private AlunoRepository alunoRepositorio;
+    //@Autowired
+    //private AlunoRepository alunoRepositorio;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getForm(ModelAndView modelAndView) {
         modelAndView.setViewName("auth/login");
-        modelAndView.addObject("usuario", new Aluno());
+        //modelAndView.addObject("usuario", new Aluno());
         return modelAndView;
     }
 /*
@@ -44,7 +44,7 @@ public class AuthController {
         return modelAndView;
     }
 
- */
+
 
     @RequestMapping(method = RequestMethod.POST)
     @PostMapping("/valide")
@@ -81,7 +81,7 @@ public class AuthController {
         }
         return null;
     }
-
+ */
 
 
 }

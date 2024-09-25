@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
     @RequestMapping("/home")
-    public String showHomePage() {
-        return "index";
+    public String showHomePage(Model model) {
+        //model.addAttribute("menu", "home");
+        return "/home";
     }
 
     /*
@@ -17,7 +18,6 @@ public class HomeController {
         model.addAttribute("menu", "home");
         return "/acesso-negado";
     }
-
-     */
+    */
 
 }

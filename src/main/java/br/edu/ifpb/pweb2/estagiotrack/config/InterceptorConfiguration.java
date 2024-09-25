@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class InterceptorConfiguration implements WebMvcConfigurer {
-
+/*
     @Autowired
     AuthInterceptor authInterceptor;
 
@@ -16,8 +16,10 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry){
         registry
                 .addInterceptor(authInterceptor)
-                .addPathPatterns("/**","/alunos/**","/empresas/**")
+                .addPathPatterns("/**")
                 .excludePathPatterns("/auth/**","/css/**");
     }
+
+ */
 
 }

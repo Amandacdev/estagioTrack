@@ -29,7 +29,7 @@ public class WebSecurityConfig {
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/css/**",  "/auth/login", "/acesso-negado").permitAll()
+                        .requestMatchers("/css/**","/auth/login", "/acesso-negado").permitAll()
                         .anyRequest().authenticated())
                 .formLogin((form) -> form
                         .loginPage("/auth")
@@ -48,7 +48,7 @@ public class WebSecurityConfig {
     public UserDetailsService userDetailsService(){
 
         UserDetails amanda = User.withUsername("amanda").password(passwordEncoder().encode("amanda")).roles("CLIENTE").build();
-        UserDetails admin = User.withUsername("admin").password(passwordEncoder().encode("adm")).roles("CLIENTE", "ADMIN").build();
+        UserDetails admin = User.withUsername("admin").password(passwordEncoder().encode("admin")).roles("CLIENTE", "ADMIN").build();
         UserDetails george = User.withUsername("george").password(passwordEncoder().encode("george")).roles("CLIENTE").build();
         UserDetails brian = User.withUsername("brian").password(passwordEncoder().encode("brian")).roles("CLIENTE").build();
         UserDetails olivia = User.withUsername("olivia").password(passwordEncoder().encode("olivia")).roles("CLIENTE").build();
