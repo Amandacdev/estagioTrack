@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,10 +25,10 @@ public class AuthController {
     @Autowired
     private AlunoRepository alunoRepositorio;
 
-
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getForm(ModelAndView modelAndView) {
         modelAndView.setViewName("auth/login");
+        modelAndView.addObject("usuario", new Aluno());
         return modelAndView;
     }
 /*
@@ -46,11 +47,15 @@ public class AuthController {
  */
 
     @RequestMapping(method = RequestMethod.POST)
+    @PostMapping("/valide")
     public ModelAndView valide(Aluno aluno, HttpSession session, ModelAndView modelAndView, RedirectAttributes redirectAttrs) {
+
         if ((aluno = this.isValido(aluno)) != null){
+            System.out.println("Tentativa de login com email - VALIDE - :"+ aluno.getEmail());
             session.setAttribute("usuario", aluno);
-            modelAndView.setViewName("redirect:/index");
+            modelAndView.setViewName("redirect:/home");
         } else {
+            System.out.println("Tentativa sem aluno");
             redirectAttrs.addFlashAttribute("mensagem","Login e/ou senha inválidos");
             modelAndView.setViewName("redirect:/auth");
         }
@@ -65,6 +70,7 @@ public class AuthController {
     }
 
     private Aluno isValido(Aluno aluno) {
+        System.out.println("Tentativa de login com email: - ISVALIDE - "+ aluno.getEmail());
         Optional<Aluno> alunoBDOptional = alunoRepositorio.findByEmail(aluno.getEmail());
 
         if (alunoBDOptional.isPresent()) {
