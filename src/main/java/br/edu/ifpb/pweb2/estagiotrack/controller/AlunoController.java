@@ -66,7 +66,6 @@ public class AlunoController {
         return "alunos/list";
     }
 
-
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String cadastroAluno(@RequestParam(required = false, defaultValue = "") List<String> competencias,
             @Valid Aluno aluno,

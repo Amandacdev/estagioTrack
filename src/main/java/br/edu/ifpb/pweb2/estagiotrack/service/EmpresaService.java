@@ -1,8 +1,11 @@
 package br.edu.ifpb.pweb2.estagiotrack.service;
 
+import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
 import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
 import br.edu.ifpb.pweb2.estagiotrack.repository.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +16,10 @@ public class EmpresaService {
 
     @Autowired
     private EmpresaRepository empresaRepository;
+
+    public Page<Empresa> listAll(Pageable pageable) {
+        return EmpresaRepository.findAll(pageable);
+    }
 
     public List<Empresa> findAll() {
         return empresaRepository.findAll();
