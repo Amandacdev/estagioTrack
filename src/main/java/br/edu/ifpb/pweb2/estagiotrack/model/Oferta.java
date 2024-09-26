@@ -1,13 +1,20 @@
 package br.edu.ifpb.pweb2.estagiotrack.model;
 
+import java.util.List;
+
 import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusOferta;
-import jakarta.persistence.*;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.*;
-
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
@@ -45,11 +52,7 @@ public class Oferta {
     private List<String> competencias;
 
     @Enumerated(EnumType.STRING)
-    private StatusOferta statusOferta = StatusOferta.ABERTA;
-
-    public void encerrar() {
-        this.statusOferta = StatusOferta.ENCERRADA;
-    }
+    public StatusOferta statusOferta = StatusOferta.ABERTA;
 
     public StatusOferta getStatus() {
         return this.statusOferta;

@@ -7,6 +7,9 @@
         <div th:if="${success}" class="alert alert-success" id="successPopup">
             <p th:text="${success}"></p>
         </div>
+        <div th:if="${jaEstagiaError}" class="alert">
+            <p th:text="${jaEstagiaError}"></p>
+        </div>
 
         <h1 class="title">Detalhes da Oferta</h1>
         <div class="details">
@@ -14,7 +17,7 @@
             <p><strong>Empresa:</strong> <span th:text="${oferta.ofertante.razaoSocial}"></span></p>
             <p><strong>Email:</strong> <span th:text="${oferta.emailOfertante}"></span></p>
             <p><strong>Atividade principal:</strong> <span th:text="${oferta.atividadePrincipal}"></span></p>
-            <p><strong>Valor da bolsa:</strong> <span th:text="${oferta.valorBolsa} + ' R$'"></span></p>
+            <p><strong>Valor da bolsa:</strong> <span th:text="' R$' + ${oferta.valorBolsa}"></span></p>
             <p><strong>Carga horária:</strong> <span th:text="${oferta.cargaHoraria} + ' horas'"></span></p>
             <p><strong>Vale-transporte:</strong> <span th:text="${oferta.valeTransporte}"></span></p>
             <p><strong>Requisitos:</strong> <span th:text="${oferta.requisitos}"></span></p>
@@ -23,21 +26,36 @@
         </div>
 
         <div th:if="${!#lists.isEmpty(candidaturas)}">
-            <h2>Candidatos</h2>
+            <h2  style="font-size: 20px; text-align: center;">Candidatos</h2>
             <div class="candidatos">
-                <ul>
-                    <li th:each="candidatura : ${candidaturas}">
-                        <p><strong>Nome:</strong> <span th:text="${candidatura.alunoCandidato.nome}"></span></p>
-                        <p><strong>Email:</strong> <span th:text="${candidatura.emailCandidato}"></span></p>
-                        <p><strong>Status:</strong> <span th:text="${candidatura.statusCandidatura}"></span></p>
-                    </li>
-                </ul>
+                <table class="offers-table listofertas">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="candidatura: ${candidaturas}">
+                            <td th:text="${candidatura.alunoCandidato.nome}"></td>
+                            <td th:text="${candidatura.emailCandidato}"></td>
+                            <td th:text="${candidatura.statusCandidatura}"></td>
+                            <td th:if="${candidatura.statusCandidatura.name() == 'PENDENTE'}">
+                                <a th:href="@{/estagios/form/{candidaturaId}(candidaturaId=${candidatura.id})}">
+                                    <button type="submit" class="form-button listofertas" th:if="${oferta.statusOferta.name() == 'ABERTA'}">Aprovar</button>
+                                </a>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
         </div>
-        <button class="form-button-cancel">
-            <a th:href="@{/ofertas/listOfertasAbertas}" class="cancel-link">Voltar para lista</a>
-        </button>
+        <button class="form-button-cancel listofertas"><a th:href="@{/ofertas/listOfertasAbertas}"
+                                                          class="cancel-link listofertas">Voltar para lista</a></button>
     </div>
 </body>
 

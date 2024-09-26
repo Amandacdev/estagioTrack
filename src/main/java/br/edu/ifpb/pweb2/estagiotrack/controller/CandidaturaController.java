@@ -6,15 +6,16 @@ import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
 import br.edu.ifpb.pweb2.estagiotrack.service.AlunoService;
 import br.edu.ifpb.pweb2.estagiotrack.service.CandidaturaService;
 import br.edu.ifpb.pweb2.estagiotrack.service.OfertaService;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.util.List;
 
 @Controller
@@ -71,8 +72,6 @@ public class CandidaturaController {
         }
     }
 
-    // Esse método recebe um objeto aluno, obtem as candidaturas desse usuário
-    // fornecido e direciona à página de visualização dessas candidaturas
     @RequestMapping("/paginaUsuario")
     public String getListCandidaturasUsuario(Model model, Aluno aluno) {
         List<Candidatura> candidaturas = candidaturaService.findAll();
@@ -86,6 +85,20 @@ public class CandidaturaController {
 
         return "paginaUsuario/candidaturasEstudante";
 
+    }
+
+    @RequestMapping("/aprovar/{id}")
+    public String aprovarCandidatura(@PathVariable("id") Integer id, RedirectAttributes attr) {
+        Optional<Candidatura> candidaturaOptional = Optional.ofNullable(candidaturaService.findById(id));
+
+        if (candidaturaOptional.isPresent()) {
+            // Redireciona para o formulário de cadastro de estágio com a candidatura
+            // selecionada
+            return "redirect:/estagios/form/" + id;
+        } else {
+            attr.addFlashAttribute("alert", "Candidatura não encontrada");
+            return "redirect:/candidaturas";
+        }
     }
 
 }

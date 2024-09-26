@@ -1,13 +1,14 @@
 package br.edu.ifpb.pweb2.estagiotrack.repository;
 
-import br.edu.ifpb.pweb2.estagiotrack.model.CompetenciaTemplate;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import br.edu.ifpb.pweb2.estagiotrack.model.CompetenciaTemplate;
 
 @Repository
-public interface CompetenciasTemplateRepository extends JpaRepository<CompetenciaTemplate, String> {
+public interface CompetenciasTemplateRepository extends JpaRepository<CompetenciaTemplate, Integer> {
 
     List<CompetenciaTemplate> findAll();
 }

@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}"
+      th:with="titulo='Cadastro de Estágio'">
+
+<body>
+    <div layout:fragment="content" class="container">
+
+        <h1 class="title">Cadastro de Estágio</h1>
+
+        <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+        <div th:if="${alert}" class="alert alert-danger" th:text="${alert}"></div>
+
+        <form th:action="@{/estagios/save}" th:object="${estagio}" method="post">
+            <!-- Campo oculto, usado apenas para que o controlador tenha visibilidade da candidatura e possa alterar seu status -->
+            <input class="form-input" type="text" hidden th:value="${estagio.candidaturaSelecionada.id}" required
+                th:field="${estagio.candidaturaSelecionada.id}">
+
+            <label class="form-label" for="aluno">Estudante selecionado</label>
+            <select id="aluno" name="alunoAprovado.id" class="form-select form-select-sm" aria-label=".form-select-sm example" required>
+                <option th:value="${estagio.alunoAprovado.id}" th:text="${estagio.alunoAprovado.nome}" selected>
+                </option>
+            </select>
+            <br>
+
+            <label class="form-label" for="oferta">Oferta</label>
+            <select id="oferta" name="ofertaSelecionada.id" class="form-select form-select-sm" aria-label=".form-select-sm example" required>
+                <option th:value="${estagio.ofertaSelecionada.id}" th:text="|${estagio.ofertaSelecionada.tituloCargo} - ${estagio.ofertaSelecionada.ofertante.razaoSocial}|"
+                    selected></option>
+            </select>
+            <br>
+
+            <label class="form-label" for="dataInicio">Data de Início</label>
+            <input class="form-input" type="date" id="dataInicio" th:field="*{dataInicio}" required/>
+            <br>
+
+            <label class="form-label" for="dataFim">Data de Término</label>
+            <input class="form-input" type="date" id="dataFim" th:field="*{dataFim}" required/>
+            <br>
+
+            <div data-mdb-input-init class="form-outline mb-4">
+                <label class="form-label" for="observacoes">Observações</label>
+                <textarea class="form-control form-input" id="observacoes"  rows="4" th:field="*{observacoes}"></textarea>
+            </div>
+
+            <button class="form-button" type="submit">Salvar Estágio</button>
+
+        </form>
+
+    </div>
+</body>
+
+</html>
