@@ -233,7 +233,8 @@ body {
 
 /* Subtitle */
 .subtitle {
-  margin-top: 10px;
+  text-align: center;
+  margin-top: 5px;
   font-size: 1.2rem;
   color: #ffffff;
 }
