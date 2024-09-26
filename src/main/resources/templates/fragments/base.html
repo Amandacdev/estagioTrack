@@ -13,8 +13,9 @@
     <th:block th:replace="${links}" />
 </head>
 
+
 <!--Fragmento com menu-->
-<div class="logo-bar mb-3 p-3 menu" th:fragment="menu" th:if="${session.user != null}">
+<div class="logo-bar mb-3 p-3 menu" th:fragment="menu">
     <a th:href="@{/}"><img th:src="@{/css/assets/ic_estagiotracker.png}" alt="Logotipo" width="200" height="100"></a>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">

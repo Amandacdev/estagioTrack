@@ -1,5 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/layout}" th:with="titulo='Home'">
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout/layout}" th:with="titulo='Home'">
 
 <body>
     <div layout:fragment="content" class="container container-start" style="position: relative;">
@@ -9,7 +10,7 @@
         </div>
 
         <!-- Conteúdo da div -->
-        <h3 class="title" style="position: relative; z-index: 2;">Encontre hoje mesmo o seu estágio em tecnologia! <span th:text="${session.user}"></span></h3>
+        <h3 class="title" style="position: relative; z-index: 2;">Encontre hoje mesmo o seu estágio em tecnologia! <span sec:authentication="name"></span></h3>
         <button class="start-button" style="position: relative; z-index: 2;">
             <a th:href="@{/alunos/form}" class="start-button-link">Comece Aqui</a>
         </button>
