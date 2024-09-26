@@ -1,9 +1,8 @@
 <!doctype html>
 <html lang="pt_BR" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<head>
+<head th:replace="~{/fragments/base :: headfiles(${titulo}, ~{::link})}">
     <link rel="icon" th:href="@{/css/assets/pin.png}" type="image/png">
-    <meta th:replace="~{/fragments/base ::headfiles(${titulo}, ~{::links})}">
     <link rel="stylesheet" href="">
 </head>
 
