@@ -20,7 +20,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         HttpSession httpSession = request.getSession(false);
 
         if(httpSession != null
-            && ((Aluno) httpSession.getAttribute("usuario")) != null){
+            && ((Aluno) httpSession.getAttribute("user")) != null){
             allowed = true;
         } else {
             String baseUrl = request.getContextPath();
