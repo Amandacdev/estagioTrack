@@ -14,7 +14,7 @@
 </head>
 
 <!--Fragmento com menu-->
-<div class="logo-bar mb-3 p-3 menu" th:fragment="menu">
+<div class="logo-bar mb-3 p-3 menu" th:fragment="menu" th:if="${session.user != null}">
     <a th:href="@{/}"><img th:src="@{/css/assets/ic_estagiotracker.png}" alt="Logotipo" width="200" height="100"></a>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -42,7 +42,7 @@
                                 <hr class="dropdown-divider">
                             </li>
                             -->
-                            <li><a th:if="${session.usuario != null and session.usuario.admin}" class="dropdown-item" href="#" th:href="@{/ofertas/form}">Cadastrar uma Oferta</a>
+                            <li><a th:if="${session.user != null and session.user.admin}" class="dropdown-item" href="#" th:href="@{/ofertas/form}">Cadastrar uma Oferta</a>
                             </li>
                         </ul>
                     </li>
@@ -52,7 +52,7 @@
                             Consulta
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#" th:if="${session.usuario != null and session.usuario.admin}" th:href="@{/empresas}">Empresas cadastradas</a></li>
+                            <li><a class="dropdown-item" href="#" th:if="${session.user != null and session.user.admin}" th:href="@{/empresas}">Empresas cadastradas</a></li>
                             <li><a class="dropdown-item" href="#" th:href="@{/ofertas/listOfertasAbertas}">Ofertas
                                     cadastradas</a></li>
                             <li>
@@ -80,7 +80,7 @@
                                 class="bi bi-cup-hot-fill icon"></i>Login</a>
                     </li>
                     <div>
-                        <span th:if="${session.usuario != null}" th:text="${session.usuario.email}"></span>
+                        <span th:if="${session.user != null}" th:text="${session.user.username}"></span>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#" th:href="@{/auth/logout}">Sair</a>
                         </li>

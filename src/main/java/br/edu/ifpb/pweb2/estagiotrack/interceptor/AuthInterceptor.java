@@ -1,6 +1,7 @@
 package br.edu.ifpb.pweb2.estagiotrack.interceptor;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
+import br.edu.ifpb.pweb2.estagiotrack.model.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -20,7 +21,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         HttpSession httpSession = request.getSession(false);
 
         if(httpSession != null
-            && ((Aluno) httpSession.getAttribute("user")) != null){
+            && ((User) httpSession.getAttribute("user")) != null){
             allowed = true;
         } else {
             String baseUrl = request.getContextPath();

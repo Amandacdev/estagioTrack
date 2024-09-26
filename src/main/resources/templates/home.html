@@ -9,7 +9,7 @@
         </div>
 
         <!-- Conteúdo da div -->
-        <h3 class="title" style="position: relative; z-index: 2;">Encontre hoje mesmo o seu estágio em tecnologia!</h3>
+        <h3 class="title" style="position: relative; z-index: 2;">Encontre hoje mesmo o seu estágio em tecnologia! <span th:text="${session.user}"></span></h3>
         <button class="start-button" style="position: relative; z-index: 2;">
             <a th:href="@{/alunos/form}" class="start-button-link">Comece Aqui</a>
         </button>

@@ -1,6 +1,7 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
+import br.edu.ifpb.pweb2.estagiotrack.model.User;
 import br.edu.ifpb.pweb2.estagiotrack.repository.AlunoRepository;
 import br.edu.ifpb.pweb2.estagiotrack.util.PasswordUtil;
 import jakarta.servlet.http.HttpSession;
@@ -28,7 +29,7 @@ public class AuthController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getForm(ModelAndView modelAndView) {
         modelAndView.setViewName("auth/login");
-        //modelAndView.addObject("usuario", new Aluno());
+        modelAndView.addObject("user", new User());
         return modelAndView;
     }
 /*

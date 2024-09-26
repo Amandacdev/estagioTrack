@@ -6,7 +6,7 @@
 <body class="text-center">
 
 
-<form class="form-signin" th:action="@{/auth}" method="POST">
+<form class="form-signin" th:action="@{/auth}" method="POST" th:object="${user}">
         <div class="row d-flex justify-content-center align-items-center h-50">
             <div class="col col-xl-20">
 
@@ -35,17 +35,17 @@
 
                                     <label class="sr-only" style="text-align: left; display: block;">Login</label>
                                     <input type="text" class="form-control input-login" placeholder="Login" required autofocus
-                                           name="username">
+                                           name="username" th:field="*{username}">
                                     <label  class="sr-only mt-3" style="text-align: left; display: block;">Senha</label>
                                     <input type="password" class="form-control input-login" placeholder="Senha" required
-                                           name="password">
+                                           name="password" th:field="*{password}">
 
                                     <!--
                                     <div data-mdb-input-init class="form-outline mb-4">
                                         <input type="email" id="form2Example17" class="form-control form-control-lg" required autofocus th:field="*{email}" name="email" placeholder="Email"/>
-                                    </div>
+                                    </div>field="*{senha}"
                                     <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="password" id="form2Example27" class="form-control form-control-lg" placeholder="Senha" required th:field="*{senha}"  name="password"/>
+                                        <input type="password" id="form2Example27" class="form-control form-control-lg" placeholder="Senha" required th:  name="password"/>
                                     </div>
                                     -->
 
