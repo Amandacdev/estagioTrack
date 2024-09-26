@@ -22,7 +22,7 @@
             </thead>
             <tbody>
                 <tr th:each="aluno : ${alunos}">
-                    <td><a th:href="@{/alunos/detalhes/}+${aluno.id}" th:text="${aluno.nome}"></a></td>
+                    <td><a th:href="@{/alunos/detalhes/} + ${aluno.id}" th:text="${aluno.nome}"></a></td>
                     <td th:text="${aluno.email}"></td>
                     <td th:text="${aluno.nomeUsuario}"></td>
                     <td th:text="${aluno.genero}"></td>
@@ -34,6 +34,24 @@
                 </tr>
             </tbody>
         </table>
+        <div>
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${paginador.currentPage == 0} ? 'disabled'">
+                    <a class="page-link" th:href="@{/alunos(page=${paginador.currentPage - 1}, size=${paginador.pageSize})}">
+                        Anterior
+                    </a>
+                </li>
+                <li class="page-item" th:each="i : ${#numbers.sequence(0, paginador.totalPages - 1)}"
+                    th:classappend="${i == paginador.currentPage} ? 'active'">
+                    <a class="page-link" th:href="@{/alunos(page=${i}, size=${paginador.pageSize})}" th:text="${i + 1}">1</a>
+                </li>
+                <li class="page-item" th:classappend="${paginador.currentPage == paginador.totalPages - 1} ? 'disabled'">
+                    <a class="page-link" th:href="@{/alunos(page=${paginador.currentPage + 1}, size=${paginador.pageSize})}">
+                        Próximo
+                    </a>
+                </li>
+            </ul>
+        </div>
 
         <button class="form-button-cancel"><a th:href="@{/coordenador/dashboard}">Voltar</a></button>
     </div>
