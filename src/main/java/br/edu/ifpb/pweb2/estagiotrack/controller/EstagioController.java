@@ -18,6 +18,7 @@ import br.edu.ifpb.pweb2.estagiotrack.model.Estagio;
 import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
 import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusCandidatura;
 import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusOferta;
+import br.edu.ifpb.pweb2.estagiotrack.repository.CandidaturaRepository;
 import br.edu.ifpb.pweb2.estagiotrack.service.CandidaturaService;
 import br.edu.ifpb.pweb2.estagiotrack.service.EstagioService;
 import br.edu.ifpb.pweb2.estagiotrack.service.OfertaService;
@@ -28,6 +29,9 @@ public class EstagioController {
 
     @Autowired
     private CandidaturaService candidaturaService;
+
+    @Autowired
+    private CandidaturaRepository candidaturaRepository;
 
     @Autowired
     private EstagioService estagioService;
@@ -79,6 +83,14 @@ public class EstagioController {
         if (oferta != null) {
             oferta.statusOferta = StatusOferta.FINALIZADA;
             ofertaService.save(oferta);
+
+            List<Candidatura> candidaturas = candidaturaRepository.findByOfertaSelecionada(oferta);
+            if (!candidaturas.isEmpty()) {
+                for (Candidatura candidatura : candidaturas) {
+                    candidatura.setStatusCandidatura(StatusCandidatura.REJEITADA);
+                    candidaturaRepository.save(candidatura);
+                }
+            }
 
             Candidatura candidaturaSelecionada = candidaturaService
                     .findById(estagio.getCandidaturaSelecionada().getId());

@@ -44,7 +44,7 @@
                             <td th:text="${candidatura.statusCandidatura}"></td>
                             <td th:if="${candidatura.statusCandidatura.name() == 'PENDENTE'}">
                                 <a th:href="@{/estagios/form/{candidaturaId}(candidaturaId=${candidatura.id})}">
-                                    <button type="submit" class="form-button listofertas">Aprovar</button>
+                                    <button type="submit" class="form-button listofertas" th:if="${oferta.statusOferta.name() == 'ABERTA'}">Aprovar</button>
                                 </a>
                             </td>
 
