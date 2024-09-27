@@ -1,9 +1,6 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
-import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
-import br.edu.ifpb.pweb2.estagiotrack.model.CompetenciaTemplate;
-import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
-import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
+import br.edu.ifpb.pweb2.estagiotrack.model.*;
 import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusCandidatura;
 import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusOferta;
 import br.edu.ifpb.pweb2.estagiotrack.repository.CandidaturaRepository;
@@ -12,12 +9,12 @@ import br.edu.ifpb.pweb2.estagiotrack.service.CompetenciasTemplateService;
 import br.edu.ifpb.pweb2.estagiotrack.service.OfertaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -49,8 +46,8 @@ public class OfertaController {
         return "ofertas/form";
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String getList(@RequestParam(value = "competencias", required = false) List<String> competencias,
+    /*@RequestMapping(method = RequestMethod.GET)
+    public String getListCompetencias(@RequestParam(value = "competencias", required = false) List<String> competencias,
             Model model) {
         List<Oferta> ofertas;
         if (competencias == null || competencias.isEmpty()) {
@@ -61,6 +58,27 @@ public class OfertaController {
         List<CompetenciaTemplate> competenciasTemplate = competenciasTemplateService.findAll();
         model.addAttribute("competenciasTemplate", competenciasTemplate);
         model.addAttribute("ofertas", ofertas);
+        return "ofertas/list";
+    }*/
+
+    @GetMapping
+    public String getList(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            Model model) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Oferta> ofertasPage = ofertaService.listAll(pageable);
+
+        Paginador paginador = new Paginador(
+                ofertasPage.getNumber(),
+                ofertasPage.getSize(),
+                (int) ofertasPage.getTotalElements()
+        );
+
+        model.addAttribute("paginador", paginador);
+        model.addAttribute("ofertas", ofertasPage.getContent());
+
         return "ofertas/list";
     }
 
