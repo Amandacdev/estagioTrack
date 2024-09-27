@@ -1,18 +1,16 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
-import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
-import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
-import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
+import br.edu.ifpb.pweb2.estagiotrack.model.*;
 import br.edu.ifpb.pweb2.estagiotrack.service.AlunoService;
 import br.edu.ifpb.pweb2.estagiotrack.service.CandidaturaService;
 import br.edu.ifpb.pweb2.estagiotrack.service.OfertaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -44,9 +42,30 @@ public class CandidaturaController {
         return "candidaturas/form";
     }
 
-    @RequestMapping()
-    public String getList(Model model) {
-        model.addAttribute("candidaturas", candidaturaService.findAll());
+    @GetMapping
+    public String getList(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            Model model) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Candidatura> candidaturasPage = candidaturaService.listAll(pageable);
+
+        if (candidaturasPage == null || candidaturasPage.isEmpty()) {
+            Paginador paginador = new Paginador(0, size, 0);
+            model.addAttribute("paginador", paginador);
+            model.addAttribute("candidaturas", List.of());
+            model.addAttribute("error", "Nenhuma candidatura encontrada.");
+        } else {
+            Paginador paginador = new Paginador(
+                    candidaturasPage.getNumber(),
+                    candidaturasPage.getSize(),
+                    candidaturasPage.getTotalPages() // Corrigido para usar getTotalPages()
+            );
+            model.addAttribute("paginador", paginador);
+            model.addAttribute("candidaturas", candidaturasPage.getContent());
+        }
+
         return "candidaturas/list";
     }
 
