@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import br.edu.ifpb.pweb2.estagiotrack.model.CompetenciaTemplate;
 
 @Repository
-public interface CompetenciasTemplateRepository extends JpaRepository<CompetenciaTemplate, String> {
+public interface CompetenciasTemplateRepository extends JpaRepository<CompetenciaTemplate, Integer> {
 
     List<CompetenciaTemplate> findAll();
 }
