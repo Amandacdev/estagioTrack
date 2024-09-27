@@ -47,7 +47,11 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li sec:authorize="hasRole('ROLE_ADMIN')"><a class="dropdown-item" href="#" th:href="@{/empresas}">Empresas cadastradas</a></li>
-                            <li sec:authorize="hasRole('ROLE_ALUNO')"><a class="dropdown-item" href="#" th:href="@{/ofertas/listOfertasAbertas}">Ofertas cadastradas</a></li>
+                            <li sec:authorize="hasRole('ROLE_ADMIN')"><a class="dropdown-item" href="#" th:href="@{/aluno}">Alunos cadastradas</a></li>
+                            <li sec:authorize="hasRole('ROLE_ADMIN')"><a class="dropdown-item" href="#" th:href="@{/ofertas}">Ofertas cadastradas</a></li>
+                            <li sec:authorize="hasRole('ROLE_ADMIN')"><a class="dropdown-item" href="#" th:href="@{/coordenador/candidaturas}">Candidaturas cadastradas</a></li>
+                            <hr class="dropdown-divider" sec:authorize="hasRole('ROLE_ADMIN') and hasRole('ROLE_ALUNO')">
+                            <li sec:authorize="hasRole('ROLE_ALUNO')"><a class="dropdown-item" href="#" th:href="@{/ofertas/listOfertasAbertas}">Ofertas abertas</a></li>
                             <li sec:authorize="hasRole('ROLE_ALUNO')"><a class="dropdown-item" href="#" th:href="@{/paginaUsuario/formParaFiltroPesquisa}">Minhas candidaturas</a></li>
 
                             <li sec:authorize="hasRole('ROLE_EMPRESA')"><a class="dropdown-item" href="#" th:href="@{/paginaUsuario/formParaFiltroPesquisa}">Minhas ofertas</a></li>
@@ -55,19 +59,14 @@
                     </li>
 
                     <li class="nav-item" sec:authorize="hasRole('ROLE_ALUNO')">
-                        <a class="nav-link active" aria-current="page" href="#" style="background-color: #31d2f2; border-radius: 20px;" th:href="@{/ofertas/listOfertasAbertas}"><i class="bi bi-laptop icon"></i>Candidatar-se</a>
-                    </li>
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#" th:href="@{/coordenador/acesso}"><i
-                                class="bi bi-cup-hot-fill icon"></i>Acesso à Coordenação</a>
+                        <a class="nav-link active" aria-current="page" href="#" style="background-color: #31d2f2; border-radius: 20px; padding-right: 20px;" th:href="@{/ofertas/listOfertasAbertas}"><i class="bi bi-laptop icon"></i>Candidatar-se</a>
                     </li>
 
-                   -->
                     <div style="margin-right: 5px;">
-                        <span sec:authorize="isAuthenticated()" sec:authentication="name" style="margin-right: 3px; font-size: 0.8em;"></span>
-                        <a href="#" onclick="document.querySelector('#form-logout').submit()" class="btn btn-outline-secondary my-2 my-sm-0">Sair</a>
-                        <form id="form-logout" th:action="@{/auth/logout}" method="POST"></form>
+                        <li>
+                            <a class="nav-link active" aria-current="page" href="#" style="background-color: #46464630; border-radius: 20px; padding-right: 20px;" onclick="document.querySelector('#form-logout').submit()"><i class="bi bi-box-arrow-right icon"></i>Sair</a>
+                            <form id="form-logout" th:action="@{/auth/logout}" method="POST"></form>
+                        </li>
                     </div>
                 </ul>
             </div>

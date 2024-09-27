@@ -49,7 +49,7 @@ public class WebSecurityConfig {
     public UserDetailsService userDetailsService(){
 
         UserDetails admin = User.withUsername("admin").password(passwordEncoder().encode("admin")).roles("ADMIN","ALUNO","EMPRESA").build();
-        UserDetails estagioTrack = User.withUsername("estagioTrack").password(passwordEncoder().encode("estagioTrack")).roles("ADMIN","ALUNO","EMPRESA").build();
+        UserDetails estagioTrack = User.withUsername("estagioTrack").password(passwordEncoder().encode("estagioTrack")).roles("ADMIN").build();
         UserDetails amanda = User.withUsername("amanda").password(passwordEncoder().encode("amanda")).roles("ALUNO").build();
         UserDetails george = User.withUsername("george").password(passwordEncoder().encode("george")).roles("ALUNO").build();
         UserDetails brian = User.withUsername("brian").password(passwordEncoder().encode("brian")).roles("ALUNO").build();
