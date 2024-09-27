@@ -1,11 +1,8 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
-import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
-import br.edu.ifpb.pweb2.estagiotrack.model.Estagio;
-import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
-import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusCandidatura;
-import br.edu.ifpb.pweb2.estagiotrack.service.CandidaturaService;
-import br.edu.ifpb.pweb2.estagiotrack.service.EstagioService;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Optional;
+import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
+import br.edu.ifpb.pweb2.estagiotrack.model.Estagio;
+import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
+import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusCandidatura;
+import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusOferta;
+import br.edu.ifpb.pweb2.estagiotrack.repository.CandidaturaRepository;
+import br.edu.ifpb.pweb2.estagiotrack.service.CandidaturaService;
+import br.edu.ifpb.pweb2.estagiotrack.service.EstagioService;
+import br.edu.ifpb.pweb2.estagiotrack.service.OfertaService;
 
 @Controller
 @RequestMapping("/estagios")
@@ -26,10 +31,13 @@ public class EstagioController {
     private CandidaturaService candidaturaService;
 
     @Autowired
+    private CandidaturaRepository candidaturaRepository;
+
+    @Autowired
     private EstagioService estagioService;
 
     @Autowired
-    private OfertaController ofertaController;
+    private OfertaService ofertaService;
 
     @RequestMapping("/form/{candidaturaId}")
     public String getForm(@PathVariable("candidaturaId") Integer candidaturaId, Model model) {
@@ -61,9 +69,29 @@ public class EstagioController {
 
     @PostMapping("/save")
     public String salvarEstagio(@ModelAttribute Estagio estagio, RedirectAttributes attr, Model model) {
-        Oferta oferta = estagio.getOfertaSelecionada();
+        List<Estagio> estagios = estagioService.findAll();
+        Optional<Estagio> estagioExistente = estagios.stream()
+                .filter(estagioVerificado -> estagio.getAlunoAprovado().getId()
+                        .equals(estagioVerificado.getAlunoAprovado().getId()))
+                .findFirst();
+
+        if (estagioExistente.isPresent()) {
+            attr.addFlashAttribute("jaEstagiaError", "Este estudante já possui um estágio cadastrado!");
+            return "redirect:/ofertas/detalhes/" + estagio.getOfertaSelecionada().getId();
+        }
+        Oferta oferta = ofertaService.findById(estagio.getOfertaSelecionada().getId()).orElse(null);
         if (oferta != null) {
-            ofertaController.desativarOferta(oferta.getId(), attr, model);
+            oferta.statusOferta = StatusOferta.FINALIZADA;
+            ofertaService.save(oferta);
+
+            List<Candidatura> candidaturas = candidaturaRepository.findByOfertaSelecionada(oferta);
+            if (!candidaturas.isEmpty()) {
+                for (Candidatura candidatura : candidaturas) {
+                    candidatura.setStatusCandidatura(StatusCandidatura.REJEITADA);
+                    candidaturaRepository.save(candidatura);
+                }
+            }
+
             Candidatura candidaturaSelecionada = candidaturaService
                     .findById(estagio.getCandidaturaSelecionada().getId());
             candidaturaSelecionada.setStatusCandidatura(StatusCandidatura.APROVADA);

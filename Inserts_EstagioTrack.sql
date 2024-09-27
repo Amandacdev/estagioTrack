@@ -21,7 +21,7 @@ INSERT INTO competencia_template (id, nome, icone_url) VALUES
 INSERT INTO aluno values
 (1,'amanda@gmail.com','Feminino','Amanda Cruz','amandaCruz','123'),
 (2,'george@gmail.com','Masculino','George Barbosa','georgeD','123'),
-(3,'brian.com','Masculino','Brian Rafael','brian','123'),
+(3,'brian@gmail.com','Masculino','Brian Rafael','brian','123'),
 (4,'olivia@gmail.com','Feminino','Olivia Oliva','oliviaO','123'),
 (5, 'mariana@gmail.com', 'Feminino', 'Mariana Oliveira', 'marianaO', '123'),
 (6, 'daniel@gmail.com', 'Masculino', 'Daniel Costa', 'danielCosta', '123'),
@@ -62,7 +62,7 @@ INSERT into empresa VALUES
 
 INSERT INTO oferta VALUES
 (1,	'Desenvolvimento de Software', '28', 'havaianas@gmail.com', null, 'ABERTA', 'Desenvolvedor', 'Sim', '500.00', 1),
-(2,	'Computação em Nuvem', '25', 'apple@gmail.com', 'Disponibilidade para viagens', 'ENCERRADA', 'Suporte', 'Sim', '600.00', 4),
+(2,	'Computação em Nuvem', '25', 'apple@gmail.com', 'Disponibilidade para viagens', 'INTERROMPIDA', 'Suporte', 'Sim', '600.00', 4),
 (3,	'Big Data e Analytics', '20', 'amazon@gmail.com', null, 'ABERTA', 'Analista', 'Não', '750.00', 6);
 
 INSERT INTO oferta_competencias values
@@ -81,7 +81,7 @@ INSERT INTO candidatura VALUES
 (4,'mariana@gmail.com','PENDENTE',5,3),
 (5,'mariana@gmail.com','PENDENTE',5,1),
 (6,'luana@gmail.com','PENDENTE',10,3),
-(7,'brian.com','PENDENTE',3,3),
+(7,'brian@gmail.com','PENDENTE',3,3),
 (8,'olivia@gmail.com','PENDENTE',4,1),
 (9,'olivia@gmail.com','REJEITADA',4,2);
 

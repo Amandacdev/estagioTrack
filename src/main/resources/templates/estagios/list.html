@@ -25,7 +25,7 @@
                 <tbody>
                     <tr th:each="estagio : ${estagios}">
                         <td th:text="${estagio.alunoAprovado.nome}"></td>
-                        <td th:text="${estagio.ofertaSelecionada.tituloCargo}"></td>
+                        <td th:text="|${estagio.ofertaSelecionada.tituloCargo} - ${estagio.ofertaSelecionada.ofertante.razaoSocial}|"></td>
                         <td th:text="${#temporals.format(estagio.dataInicio, 'dd/MM/yyyy')}"></td>
                         <td th:text="${#temporals.format(estagio.dataFim, 'dd/MM/yyyy')}"></td>
                         <td>

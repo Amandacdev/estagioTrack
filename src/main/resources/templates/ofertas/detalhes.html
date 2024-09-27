@@ -7,6 +7,9 @@
         <div th:if="${success}" class="alert alert-success" id="successPopup">
             <p th:text="${success}"></p>
         </div>
+        <div th:if="${jaEstagiaError}" class="alert">
+            <p th:text="${jaEstagiaError}"></p>
+        </div>
 
         <h1 class="title">Detalhes da Oferta</h1>
         <div class="details">
@@ -41,7 +44,7 @@
                             <td th:text="${candidatura.statusCandidatura}"></td>
                             <td th:if="${candidatura.statusCandidatura.name() == 'PENDENTE'}">
                                 <a th:href="@{/estagios/form/{candidaturaId}(candidaturaId=${candidatura.id})}">
-                                    <button type="submit" class="form-button listofertas">Aprovar</button>
+                                    <button type="submit" class="form-button listofertas" th:if="${oferta.statusOferta.name() == 'ABERTA'}">Aprovar</button>
                                 </a>
                             </td>
 
