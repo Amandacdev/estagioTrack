@@ -16,7 +16,7 @@
 
 <!--Fragmento com menu-->
 <div class="logo-bar mb-3 p-3 menu" th:fragment="menu">
-    <a th:href="@{/}"><img th:src="@{/css/assets/ic_estagiotracker.png}" alt="Logotipo" width="200" height="100"></a>
+    <a th:href="@{/home}"><img th:src="@{/css/assets/ic_estagiotracker.png}" alt="Logotipo" width="200" height="100"></a>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -26,62 +26,45 @@
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                    <li class="nav-item dropdown">
+                    <li style="align-content: center;">
+                        <h3 style="font-size: large; padding: initial;">Bem vindo, <span sec:authentication="name"></span>!</h3>
+                    </li>
+                    <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_EMPRESA')">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false"><i class="bi bi-cursor-fill icon"></i>
                             Cadastro
                         </a>
 
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <!--
-                            <li><a class="dropdown-item" href="#" th:href="@{/empresas/form}">Cadastrar-se como
-                                    Empresa</a></li>
-                            <li><a class="dropdown-item" href="#" th:href="@{/alunos/form}">Cadastrar-se como
-                                    Estudante</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            -->
-                            <li><a th:if="${session.user != null and session.user.admin}" class="dropdown-item" href="#" th:href="@{/ofertas/form}">Cadastrar uma Oferta</a>
+                            <li><a class="dropdown-item" href="#" th:href="@{/ofertas/form}">Cadastrar uma Oferta</a>
                             </li>
                         </ul>
                     </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false"><i class="bi bi-book-half icon"></i>
                             Consulta
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#" th:if="${session.user != null and session.user.admin}" th:href="@{/empresas}">Empresas cadastradas</a></li>
-                            <li><a class="dropdown-item" href="#" th:href="@{/ofertas/listOfertasAbertas}">Ofertas
-                                    cadastradas</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#"
-                                    th:href="@{/paginaUsuario/formParaFiltroPesquisa}">Minhas candidaturas</a></li>
-                           <!--Candidaturas do aluno, informando uma identificação (email)-->
-                            <li><a class="dropdown-item" href="#"
-                                    th:href="@{/paginaUsuario/formParaFiltroPesquisa}">Minhas ofertas</a></li>
-                            <!--Ofertas da empresa, informando uma identificação (email)-->
+                            <li sec:authorize="hasRole('ROLE_ADMIN')"><a class="dropdown-item" href="#" th:href="@{/empresas}">Empresas cadastradas</a></li>
+                            <li sec:authorize="hasRole('ROLE_ALUNO')"><a class="dropdown-item" href="#" th:href="@{/ofertas/listOfertasAbertas}">Ofertas cadastradas</a></li>
+                            <li sec:authorize="hasRole('ROLE_ALUNO')"><a class="dropdown-item" href="#" th:href="@{/paginaUsuario/formParaFiltroPesquisa}">Minhas candidaturas</a></li>
+
+                            <li sec:authorize="hasRole('ROLE_EMPRESA')"><a class="dropdown-item" href="#" th:href="@{/paginaUsuario/formParaFiltroPesquisa}">Minhas ofertas</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#"
-                            style="background-color: #31d2f2; border-radius: 20px;"
-                            th:href="@{/ofertas/listOfertasAbertas}"><i class="bi bi-laptop icon"></i>Candidatar-se</a>
+
+                    <li class="nav-item" sec:authorize="hasRole('ROLE_ALUNO')">
+                        <a class="nav-link active" aria-current="page" href="#" style="background-color: #31d2f2; border-radius: 20px;" th:href="@{/ofertas/listOfertasAbertas}"><i class="bi bi-laptop icon"></i>Candidatar-se</a>
                     </li>
+                    <!--
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#" th:href="@{/coordenador/acesso}"><i
                                 class="bi bi-cup-hot-fill icon"></i>Acesso à Coordenação</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#" th:href="@{/auth/login}"><i
-                                class="bi bi-cup-hot-fill icon"></i>Login</a>
-                    </li>
+                    -->
                     <div>
-                        <span th:if="${session.user != null}" th:text="${session.user.username}"></span>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#" th:href="@{/auth/logout}">Sair</a>
                         </li>

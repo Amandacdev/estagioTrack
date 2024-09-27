@@ -47,19 +47,25 @@ public class WebSecurityConfig {
     @Bean
     public UserDetailsService userDetailsService(){
 
-        UserDetails amanda = User.withUsername("amanda").password(passwordEncoder().encode("amanda")).roles("CLIENTE").build();
-        UserDetails admin = User.withUsername("admin").password(passwordEncoder().encode("admin")).roles("CLIENTE", "ADMIN").build();
-        UserDetails george = User.withUsername("george").password(passwordEncoder().encode("george")).roles("CLIENTE").build();
-        UserDetails brian = User.withUsername("brian").password(passwordEncoder().encode("brian")).roles("CLIENTE").build();
-        UserDetails olivia = User.withUsername("olivia").password(passwordEncoder().encode("olivia")).roles("CLIENTE").build();
+        UserDetails amanda = User.withUsername("amanda").password(passwordEncoder().encode("amanda")).roles("ALUNO").build();
+        UserDetails admin = User.withUsername("admin").password(passwordEncoder().encode("admin")).roles("ADMIN","ALUNO","EMPRESA").build();
+        UserDetails george = User.withUsername("george").password(passwordEncoder().encode("george")).roles("ALUNO").build();
+        UserDetails brian = User.withUsername("brian").password(passwordEncoder().encode("brian")).roles("ALUNO").build();
+        UserDetails olivia = User.withUsername("olivia").password(passwordEncoder().encode("olivia")).roles("ALUNO").build();
+        UserDetails leitura = User.withUsername("leitura").password(passwordEncoder().encode("leitura")).roles("EMPRESA").build();
+        UserDetails techled = User.withUsername("techled").password(passwordEncoder().encode("techled")).roles("EMPRESA").build();
+        UserDetails estagioTrack = User.withUsername("estagioTrack").password(passwordEncoder().encode("estagioTrack")).roles("ADMIN","ALUNO","EMPRESA").build();
 
         JdbcUserDetailsManager users = new JdbcUserDetailsManager(dataSource);
-        if(!users.userExists(amanda.getUsername())){
+        if(!users.userExists(leitura.getUsername())){
             users.createUser(amanda);
             users.createUser(admin);
             users.createUser(george);
             users.createUser(brian);
             users.createUser(olivia);
+            users.createUser(leitura);
+            users.createUser(techled);
+            users.createUser(estagioTrack);
         }
         return users;
     }

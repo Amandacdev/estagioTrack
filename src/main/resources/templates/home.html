@@ -10,9 +10,14 @@
         </div>
 
         <!-- Conteúdo da div -->
-        <h3 class="title" style="position: relative; z-index: 2;">Encontre hoje mesmo o seu estágio em tecnologia! <span sec:authentication="name"></span></h3>
-        <button class="start-button" style="position: relative; z-index: 2;">
-            <a th:href="@{/alunos/form}" class="start-button-link">Comece Aqui</a>
+        <h3 sec:authorize="hasRole('ROLE_ALUNO')" class="title" style="position: relative; z-index: 2;"><span sec:authentication="name"></span>, encontre hoje mesmo o seu estágio!</h3>
+
+        <button class="start-button" style="position: relative; z-index: 2;" sec:authorize="hasRole('ROLE_ALUNO')">
+            <a class="start-button-link" href="#" th:href="@{/ofertas/listOfertasAbertas}">Encontre seu estágio!</a>
+        </button>
+
+        <button class="start-button" style="position: relative; z-index: 2;"  sec:authorize="hasRole('ROLE_EMPRESA')">
+            <a class="start-button-link" href="#" th:href="@{/paginaUsuario/formParaFiltroPesquisa}">Veja suas ofertas de estágio!</a>
         </button>
     </div>
 </body>
