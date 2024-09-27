@@ -17,6 +17,8 @@
                         <th>Razão social</th>
                         <th>Responsável</th>
                         <th>Atividade principal</th>
+                        <!-- Exibir coluna de edição apenas para coordenadores (th:if="${#authorization.expression('hasRole(''ROLE_COORDENADOR'')')}") -->
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,13 +26,17 @@
                         <td><a th:href="@{/empresas/detalhes/}+${empresa.id}" th:text="${empresa.razaoSocial}"></a></td>
                         <td th:text="${empresa.responsavel}"></td>
                         <td th:text="${empresa.atividadePrincipal}"></td>
+
+                        <!-- Exibir botão de editar apenas para coordenadores (th:if="${#authorization.expression('hasRole(''ROLE_COORDENADOR'')')}")-->
+                        <td>
+                            <a th:href="@{/empresas/editar/{id}(id=${empresa.id})}" class="btn btn-primary">Editar</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <button class="form-button-cancel"><a th:href="@{/coordenador/dashboard}"
-                class="cancel-link">Voltar</a></button>
+        <button class="form-button-cancel"><a th:href="@{/coordenador/dashboard}" class="cancel-link">Voltar</a></button>
     </div>
 </body>
 

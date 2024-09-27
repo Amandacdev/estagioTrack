@@ -26,15 +26,8 @@ public class EmpresaService {
         return empresaRepository.findByEmail(email);
     }
 
-    public boolean existsByEmail(String email) {
-        return empresaRepository.findByEmail(email).isPresent();
-    }
-
-    public boolean existsByCnpj(String cnpj) {
-        return empresaRepository.findByCnpj(cnpj).isPresent();
-    }
-
     public Empresa save(Empresa empresa) {
+        // Salva ou atualiza a empresa, já que o JpaRepository faz o controle automático de ID
         return empresaRepository.save(empresa);
     }
 
@@ -42,8 +35,12 @@ public class EmpresaService {
         empresaRepository.deleteById(id);
     }
 
-    public boolean existsById(Integer id) {
-        return empresaRepository.existsById(id);
+    public boolean existsByEmail(String email) {
+        return empresaRepository.existsByEmail(email);
+    }
+
+    public boolean existsByCnpj(String cnpj) {
+        return empresaRepository.existsByCnpj(cnpj);
     }
 
     public Integer findMaxId() {

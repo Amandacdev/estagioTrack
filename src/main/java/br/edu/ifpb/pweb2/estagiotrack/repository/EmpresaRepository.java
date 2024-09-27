@@ -10,8 +10,8 @@ import java.util.Optional;
 @Repository
 public interface EmpresaRepository extends JpaRepository<Empresa, Integer> {
     Optional<Empresa> findByEmail(String email);
-
-    Optional<Empresa> findByCnpj(String cnpj);
+    boolean existsByEmail(String email);
+    boolean existsByCnpj(String cnpj);
 
     @Query("SELECT COALESCE(MAX(e.id), 0) FROM Empresa e")
     Integer findMaxId();
