@@ -45,7 +45,7 @@ public class EmpresaController {
         );
 
         model.addAttribute("paginador", paginador);
-        model.addAttribute("empresas", alunosPage.getContent());
+        model.addAttribute("empresas", empresasPage.getContent());
 
         return "empresas/list";
     }

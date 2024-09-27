@@ -18,7 +18,7 @@ public class EmpresaService {
     private EmpresaRepository empresaRepository;
 
     public Page<Empresa> listAll(Pageable pageable) {
-        return EmpresaRepository.findAll(pageable);
+        return empresaRepository.findAll(pageable);
     }
 
     public List<Empresa> findAll() {
