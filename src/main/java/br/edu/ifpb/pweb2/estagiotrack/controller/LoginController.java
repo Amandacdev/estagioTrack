@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/")
@@ -19,14 +17,10 @@ public class LoginController {
     @Autowired
     private EmpresaController empresaController;
 
-
     @GetMapping("/login")
     public String showLoginPage() {
-        //return "login";
         return "auth/login";
     }
-
-
 
     @RequestMapping("/formParaFiltroPesquisa")
     public String showFiltroPage() {
@@ -54,18 +48,8 @@ public class LoginController {
     }
 
     @PostMapping("/validar")
-    public String login(@RequestParam String email, @RequestParam String senha, ModelAndView modelAndView, RedirectAttributes attr) {
+    public String login() {
       return "auth/login";
-        /*
-        if (usuarioService.validarLogin(email, senha)) {
-            return "";
-        } else {
-            // Login falhou, mostrar erro
-            attr.addFlashAttribute("erro", "Email ou senha inválidos");
-            return "";
-        }
-
-       */
     }
 
 }

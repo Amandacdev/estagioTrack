@@ -13,9 +13,8 @@
     <th:block th:replace="${links}" />
 </head>
 
-
 <!--Fragmento com menu-->
-<div class="logo-bar mb-3 p-3 menu" th:fragment="menu">
+<div class="logo-bar mb-3 p-3 menu" th:fragment="menu" sec:authorize="isAuthenticated()">
     <a th:href="@{/home}"><img th:src="@{/css/assets/ic_estagiotracker.png}" alt="Logotipo" width="200" height="100"></a>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -63,13 +62,13 @@
                         <a class="nav-link active" aria-current="page" href="#" th:href="@{/coordenador/acesso}"><i
                                 class="bi bi-cup-hot-fill icon"></i>Acesso à Coordenação</a>
                     </li>
-                    -->
-                    <div>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#" th:href="@{/auth/logout}">Sair</a>
-                        </li>
-                    </div>
 
+                   -->
+                    <div style="margin-right: 5px;">
+                        <span sec:authorize="isAuthenticated()" sec:authentication="name" style="margin-right: 3px; font-size: 0.8em;"></span>
+                        <a href="#" onclick="document.querySelector('#form-logout').submit()" class="btn btn-outline-secondary my-2 my-sm-0">Sair</a>
+                        <form id="form-logout" th:action="@{/auth/logout}" method="POST"></form>
+                    </div>
                 </ul>
             </div>
         </div>

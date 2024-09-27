@@ -7,17 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
     @RequestMapping("/home")
-    public String showHomePage(Model model) {
-        //model.addAttribute("menu", "home");
+    public String showHomePage() {
         return "/home";
     }
-
-    /*
-    @RequestMapping("/acesso-negado")
-    public String getAcessoNegado(Model model) {
-        model.addAttribute("menu", "home");
-        return "/acesso-negado";
-    }
-    */
-
 }
