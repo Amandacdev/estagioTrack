@@ -11,6 +11,9 @@
 
 <body class="text-center">
 <div layout:fragment="content" class="container container-start">
+    <div th:if="${success}" class="alert alert-success" id="successPopup">
+        <p th:text="${success}"></p>
+    </div>
     <form class="form-signin" th:action="@{/auth}" method="POST" th:object="${user}">
             <div class="row d-flex justify-content-center align-items-center h-50">
                 <div class="col col-xl-20" >
@@ -40,7 +43,7 @@
                                             Login e/ou senha inválidos!
                                         </div>
 
-                                        <label class="sr-only" style="text-align: left; display: block;">Login</label>
+                                        <label class="sr-only" style="text-align: left; display: block;">Email</label>
                                         <input type="text" class="form-control input-login" placeholder="Login" required autofocus
                                                name="username" th:field="*{username}">
                                         <label  class="sr-only mt-3" style="text-align: left; display: block;">Senha</label>

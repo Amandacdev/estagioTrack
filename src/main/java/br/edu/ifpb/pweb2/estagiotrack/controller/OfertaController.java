@@ -1,5 +1,6 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +44,9 @@ public class OfertaController {
     private CompetenciasTemplateService competenciasTemplateService;
 
     @RequestMapping("/form")
-    public String getForm(Oferta oferta, Model model) {
+    public String getForm(Oferta oferta, Model model, Principal principal) {
+        System.out.println(principal);
+        System.out.println(principal.getName());
         List<CompetenciaTemplate> competenciasTemplate = competenciasTemplateService.findAll();
         model.addAttribute("competenciasTemplate", competenciasTemplate);
         return "ofertas/form";

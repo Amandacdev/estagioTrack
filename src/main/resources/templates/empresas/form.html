@@ -19,8 +19,11 @@
                 <label for="cnpj" class="form-label">CNPJ:</label>
                 <input type="text" th:field="*{cnpj}" class="form-input" placeholder="Apenas os 14 dígitos numéricos"
                     required minlength="14" maxlength="14" pattern="\d{14}"
-                    title="O CNPJ deve ter exatamente 14 dígitos numéricos" />
+                    title="O CNPJ deve ter exatamente 14 dígitos numéricos" id="cnpj" />
             </div>
+
+            <!-- Campo oculto para nomeUsuario -->
+            <input type="hidden" th:field="*{nomeUsuario}" id="nomeUsuario" />
 
             <div class="form-group">
                 <label for="responsavel" class="form-label">Nome da pessoa responsável:</label>
@@ -214,6 +217,14 @@
             }
 
             document.getElementById('telefone').addEventListener('input', applyPhoneMask);
+        </script>
+        
+        <!-- Este código passa o mesmo valor do CNPJ para o  -->
+        <script>
+            document.getElementById('cnpj').addEventListener('input', function () {
+                let cnpjValue = this.value;
+                document.getElementById('nomeUsuario').value = cnpjValue;
+            });
         </script>
     </div>
 </body>

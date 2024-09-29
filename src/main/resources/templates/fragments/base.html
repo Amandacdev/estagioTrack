@@ -47,9 +47,9 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li sec:authorize="hasRole('ROLE_ADMIN')"><a class="dropdown-item" href="#" th:href="@{/empresas}">Empresas cadastradas</a></li>
-                            <li sec:authorize="hasRole('ROLE_ADMIN')"><a class="dropdown-item" href="#" th:href="@{/aluno}">Alunos cadastradas</a></li>
+                            <li sec:authorize="hasRole('ROLE_ADMIN')"><a class="dropdown-item" href="#" th:href="@{/alunos}">Estudantes cadastrados</a></li>
                             <li sec:authorize="hasRole('ROLE_ADMIN')"><a class="dropdown-item" href="#" th:href="@{/ofertas}">Ofertas cadastradas</a></li>
-                            <li sec:authorize="hasRole('ROLE_ADMIN')"><a class="dropdown-item" href="#" th:href="@{/coordenador/candidaturas}">Candidaturas cadastradas</a></li>
+                            <li sec:authorize="hasRole('ROLE_ADMIN')"><a class="dropdown-item" href="#" th:href="@{/candidaturas}">Candidaturas cadastradas</a></li>
                             <hr class="dropdown-divider" sec:authorize="hasRole('ROLE_ADMIN') and hasRole('ROLE_ALUNO')">
                             <li sec:authorize="hasRole('ROLE_ALUNO')"><a class="dropdown-item" href="#" th:href="@{/ofertas/listOfertasAbertas}">Ofertas abertas</a></li>
                             <li sec:authorize="hasRole('ROLE_ALUNO')"><a class="dropdown-item" href="#" th:href="@{/paginaUsuario/formParaFiltroPesquisa}">Minhas candidaturas</a></li>

@@ -55,8 +55,8 @@ public class EmpresaController {
         }
 
         empresaService.save(empresa);
-        attr.addFlashAttribute("success", "Empresa cadastrada com sucesso!");
-        return "redirect:/empresas/detalhes/" + empresa.getId();
+        attr.addFlashAttribute("success", "Empresa cadastrada com sucesso. Faça login para continuar.");
+        return "redirect:/auth";
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
