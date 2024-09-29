@@ -1,0 +1,43 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}" th:with="titulo='Meus estagiários'">>>
+
+<body class="listofertas">
+    <div layout:fragment="content" class="container listofertas">
+        <h1 class="page-title listofertas">Meus estagiários | <span th:text="${empresa.razaoSocial}"></span></h1>
+
+        <h2 class="listofertas">Dados da Empresa</h2>
+        <p class="listofertas">CNPJ: <span th:text="${empresa.cnpj}"></span></p>
+        <p class="listofertas">Email: <span th:text="${empresa.email}"></span></p>
+        <table class="offers-table listofertas" th:if="${!#lists.isEmpty(estagiarios)}">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Função</th>
+                    <th>Data de início</th>
+                    <th>Data de término</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${#lists.isEmpty(estagiarios)}">
+                    <td colspan="4">Nenhuma oferta encontrada</td>
+                </tr>
+                <tr th:each="estagio : ${estagiarios}">
+                    <td th:text="${estagio.alunoAprovado.nome}"></td>
+                    <td th:text="${estagio.ofertaSelecionada.tituloCargo}"></td>
+                    <td th:text="${#temporals.format(estagio.dataInicio, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${#temporals.format(estagio.dataFim, 'dd/MM/yyyy')}"></td>
+                    <td th:if="${estagio.candidaturaSelecionada.statusCandidatura.name() == 'APROVADA'}">
+                        <a th:text="'Baixar termo'" th:href="TODO">
+                            <span class="material-symbols-outlined">Baixar termo</span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button class="form-button-cancel"><a th:href="@{/home}" class="cancel-link">Voltar</a></button>
+    </div>
+</body>
+
+</html>

@@ -183,13 +183,14 @@ public class OfertaController {
     // Esse método recebe um objeto empresa, obtem as ofertas desse usuário
     // fornecido e direciona à página de visualização dessas ofertas
     @RequestMapping("/paginaUsuario")
-    public String getListOfertasUsuario(Model model, Empresa empresa) {
+    public String getListOfertasUsuario(Model model, Principal principal) {
         List<Oferta> ofertas = ofertaService.findAll();
 
         List<Oferta> ofertasUsuario = ofertas.stream()
-                .filter(oferta -> oferta.getEmailOfertante().equals(empresa.getEmail()))
+                .filter(oferta -> oferta.getEmailOfertante().equals(principal.getName()))
                 .toList();
 
+        Empresa empresa = empresaController.buscarPorEmail(principal.getName());
         model.addAttribute("ofertas", ofertasUsuario);
         model.addAttribute("empresa", empresa);
 
