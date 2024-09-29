@@ -6,7 +6,11 @@
 
         <h1 class="title">Candidaturas</h1>
 
-        <table class="table">
+<div th:if="${candidaturas.isEmpty()}">
+    <p>Nenhuma candidatura encontrada</p>
+</div>
+
+        <table class="table" th:if="${!#lists.isEmpty(candidaturas)}">
             <thead>
                 <tr>
                     <th>Aluno</th>
@@ -16,8 +20,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:if="${candidaturas.isEmpty()}">
-                    <td colspan="4" class="no-data">Nenhuma candidatura encontrada</td>
+                <tr>
                 </tr>
                 <tr th:each="candidatura : ${candidaturas}">
                     <td><a th:href="@{/alunos/detalhes/}+${candidatura.alunoCandidato.id}"

@@ -35,7 +35,6 @@
                     <th>Vale Transporte</th>
                     <th>Requisitos específicos</th>
                     <th>Competências</th>
-                    <th>Status</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -51,7 +50,6 @@
                             <li th:each="competencia : ${oferta.competencias}" th:text="${competencia}"></li>
                         </ul>
                     </td>
-                    <td th:text="${oferta.statusOferta}"></td>
                     <td>
                         <form th:action="@{/candidaturas/form(ofertaId=${oferta.id})}" method="post"
                             class="action-form listofertas">

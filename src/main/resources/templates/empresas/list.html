@@ -4,9 +4,9 @@
 <body>
     <div layout:fragment="content" class="container">
         <h1 class="title">Empresas Cadastradas</h1>
-        <h2 class="subtitle">Clique no nome da empresa para ver suas informações completas.</h2>
-
-        <div th:if="${#lists.isEmpty(empresas)}" class="alert">
+        
+        <div th:if="${#lists.isEmpty(empresas)}">
+            <h2 class="subtitle" style="display: none;">Clique no nome da empresa para ver suas informações completas.</h2>
             <p>Nenhuma empresa cadastrada</p>
         </div>
 

@@ -46,8 +46,8 @@ public class OfertaController {
         return "ofertas/form";
     }
 
-    /*@RequestMapping(method = RequestMethod.GET)
-    public String getListCompetencias(@RequestParam(value = "competencias", required = false) List<String> competencias,
+    @RequestMapping(method = RequestMethod.GET)
+    public String getList(@RequestParam(value = "competencias", required = false) List<String> competencias,
             Model model) {
         List<Oferta> ofertas;
         if (competencias == null || competencias.isEmpty()) {
@@ -59,7 +59,7 @@ public class OfertaController {
         model.addAttribute("competenciasTemplate", competenciasTemplate);
         model.addAttribute("ofertas", ofertas);
         return "ofertas/list";
-    }*/
+    }
 
     @GetMapping
     public String getList(
@@ -124,6 +124,29 @@ public class OfertaController {
             ofertaRepository.save(oferta);
 
             attr.addFlashAttribute("success", "Oferta de estágio desativada com sucesso!");
+            return getDetalhesOferta(oferta.getId(), model);
+        } else {
+            attr.addFlashAttribute("alert", "Oferta de estágio não encontrada.");
+        }
+        return "redirect:/ofertas";
+    }
+
+    @RequestMapping(value = "/encerrar", method = RequestMethod.POST)
+    public String encerrarOferta(Integer ofertaId, RedirectAttributes attr, Model model) {
+        Optional<Oferta> ofertaOptional = ofertaRepository.findById(ofertaId);
+        if (ofertaOptional.isPresent()) {
+            Oferta oferta = ofertaOptional.get();
+            List<Candidatura> candidaturas = candidaturaRepository.findByOfertaSelecionada(oferta);
+            if (!candidaturas.isEmpty()) {
+                for (Candidatura candidatura : candidaturas) {
+                    candidatura.setStatusCandidatura(StatusCandidatura.REJEITADA);
+                    candidaturaRepository.save(candidatura);
+                }
+            }
+            oferta.setStatusOferta(StatusOferta.FINALIZADA);
+            ofertaRepository.save(oferta);
+
+            attr.addFlashAttribute("success", "Oferta de estágio encerrada com sucesso!");
             return getDetalhesOferta(oferta.getId(), model);
         } else {
             attr.addFlashAttribute("alert", "Oferta de estágio não encontrada.");
