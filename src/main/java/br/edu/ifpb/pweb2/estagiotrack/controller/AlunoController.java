@@ -9,8 +9,11 @@ import lombok.RequiredArgsConstructor;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Controller;
@@ -39,9 +42,6 @@ public class AlunoController {
 
     @Autowired
     private JdbcUserDetailsManager jdbcUserDetailsManager;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/form")
     public ModelAndView showForm(ModelAndView modelAndView) {
@@ -77,12 +77,14 @@ public class AlunoController {
             aluno.setId(maxId + 1);
         }
         alunoService.salvarAluno(aluno, competencias);
-        UserDetails novoUsuario = User.withUsername(aluno.getEmail()).password(passwordEncoder.encode(aluno.getSenha()))
-                .roles("ALUNO").build();
+
+        UserDetails novoUsuario = User.withUsername(aluno.getEmail()).password(aluno.getSenha()).roles("ALUNO").build();
         if (!jdbcUserDetailsManager.userExists(aluno.getEmail())) {
             jdbcUserDetailsManager.createUser(novoUsuario); // Salva o novo usuário no banco de dados
         }
         attr.addFlashAttribute("success", "Estudante cadastrado com sucesso. Faça login para continuar.");
+
+
         return "redirect:/auth";
     }
 
@@ -101,4 +103,6 @@ public class AlunoController {
             return "redirect:/alunos";
         }
     }
+
+
 }

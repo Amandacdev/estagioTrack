@@ -7,6 +7,8 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
@@ -43,6 +45,24 @@ public class WebSecurityConfig {
     public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource) {
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
         jdbcUserDetailsManager.setDataSource(dataSource);
+
+        UserDetails admin = User.withUsername("admin").password(passwordEncoder().encode("admin")).roles("ADMIN","ALUNO","EMPRESA").build();
+        UserDetails estagioTrack = User.withUsername("estagioTrack").password(passwordEncoder().encode("estagioTrack")).roles("ADMIN").build();
+        UserDetails amanda = User.withUsername("amanda").password(passwordEncoder().encode("amanda")).roles("ALUNO").build();
+        UserDetails george = User.withUsername("george").password(passwordEncoder().encode("george")).roles("ALUNO").build();
+        UserDetails brian = User.withUsername("brian").password(passwordEncoder().encode("brian")).roles("ALUNO").build();
+        UserDetails olivia = User.withUsername("olivia").password(passwordEncoder().encode("olivia")).roles("ALUNO").build();
+
+        if(!jdbcUserDetailsManager.userExists(admin.getUsername())){
+            jdbcUserDetailsManager.createUser(admin);
+            jdbcUserDetailsManager.createUser(estagioTrack);
+            jdbcUserDetailsManager.createUser(amanda);
+            jdbcUserDetailsManager.createUser(george);
+            jdbcUserDetailsManager.createUser(brian);
+            jdbcUserDetailsManager.createUser(olivia);
+
+        }
+
         return jdbcUserDetailsManager;
     }
 
