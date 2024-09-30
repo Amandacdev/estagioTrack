@@ -1,20 +1,22 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
+import java.security.Principal;
 import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
 import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
 import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
 import br.edu.ifpb.pweb2.estagiotrack.service.AlunoService;
 import br.edu.ifpb.pweb2.estagiotrack.service.CandidaturaService;
 import br.edu.ifpb.pweb2.estagiotrack.service.OfertaService;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.util.List;
 
 @Controller
@@ -51,7 +53,7 @@ public class CandidaturaController {
     }
 
     @PostMapping("/save")
-    public String cadastroCandidatura(@ModelAttribute Candidatura candidatura, Model model, RedirectAttributes attr) {
+    public String cadastroCandidatura(@ModelAttribute Candidatura candidatura, Model model, RedirectAttributes attr, Principal principal) {
         Aluno aluno = alunoService.findByEmail(candidatura.getEmailCandidato()).orElse(null);
         Oferta oferta = ofertaService.findById(candidatura.getOfertaSelecionada().getId()).orElse(null);
 
@@ -64,28 +66,41 @@ public class CandidaturaController {
             }
             candidaturaService.save(candidatura);
             attr.addFlashAttribute("success", "Candidatura realizada com sucesso!");
-            return getListCandidaturasUsuario(model, aluno);
+            return getListCandidaturasUsuario(model, principal);
         } else {
             model.addAttribute("alert", "Email inválido ou oferta não encontrada.");
             return "candidaturas/form";
         }
     }
 
-    // Esse método recebe um objeto aluno, obtem as candidaturas desse usuário
-    // fornecido e direciona à página de visualização dessas candidaturas
     @RequestMapping("/paginaUsuario")
-    public String getListCandidaturasUsuario(Model model, Aluno aluno) {
+    public String getListCandidaturasUsuario(Model model, Principal principal) {
         List<Candidatura> candidaturas = candidaturaService.findAll();
 
         List<Candidatura> candidaturasUsuario = candidaturas.stream()
-                .filter(candidatura -> candidatura.getEmailCandidato().equals(aluno.getEmail()))
+                .filter(candidatura -> candidatura.getEmailCandidato().equals(principal.getName()))
                 .toList();
-
+        
+        Aluno aluno = alunoService.findByEmail(principal.getName()).orElse(null);
         model.addAttribute("candidaturas", candidaturasUsuario);
         model.addAttribute("aluno", aluno);
 
         return "paginaUsuario/candidaturasEstudante";
 
+    }
+
+    @RequestMapping("/aprovar/{id}")
+    public String aprovarCandidatura(@PathVariable("id") Integer id, RedirectAttributes attr) {
+        Optional<Candidatura> candidaturaOptional = Optional.ofNullable(candidaturaService.findById(id));
+
+        if (candidaturaOptional.isPresent()) {
+            // Redireciona para o formulário de cadastro de estágio com a candidatura
+            // selecionada
+            return "redirect:/estagios/form/" + id;
+        } else {
+            attr.addFlashAttribute("alert", "Candidatura não encontrada");
+            return "redirect:/candidaturas";
+        }
     }
 
 }

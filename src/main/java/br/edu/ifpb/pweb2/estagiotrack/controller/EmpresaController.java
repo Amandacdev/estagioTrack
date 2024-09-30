@@ -1,8 +1,11 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
-import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
-import br.edu.ifpb.pweb2.estagiotrack.service.EmpresaService;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Optional;
+import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
+import br.edu.ifpb.pweb2.estagiotrack.service.EmpresaService;
 
 @Controller
 @RequestMapping("/empresas")
@@ -19,6 +23,9 @@ public class EmpresaController {
 
     @Autowired
     private EmpresaService empresaService;
+
+    @Autowired
+    private JdbcUserDetailsManager jdbcUserDetailsManager;
 
     @RequestMapping("/form")
     public String getForm(Empresa empresa, Model model) {
@@ -46,7 +53,25 @@ public class EmpresaController {
             return "empresas/form";
         }
 
-        return "redirect:/empresas/detalhes/" + empresa.getId();
+        if (empresaService.existsByEmail(empresa.getEmail()) || empresaService.existsByCnpj(empresa.getCnpj())) {
+            model.addAttribute("alert", "Email ou CNPJ já cadastrado.");
+            return "empresas/form";
+        }
+        if (empresa.getId() == null) {
+            Integer maxId = empresaService.findMaxId();
+            empresa.setId(maxId + 1);
+        }
+
+        empresaService.save(empresa);
+
+
+        UserDetails novoUsuario = User.withUsername(empresa.getEmail()).password(empresa.getSenha()).roles("EMPRESA").build();
+        if (!jdbcUserDetailsManager.userExists(empresa.getEmail())) {
+            jdbcUserDetailsManager.createUser(novoUsuario); // Salva o novo usuário no banco de dados
+        }
+
+        attr.addFlashAttribute("success", "Empresa cadastrada com sucesso. Faça login para continuar.");
+        return "redirect:/auth";
     }
 
     // Método para deletar a empresa

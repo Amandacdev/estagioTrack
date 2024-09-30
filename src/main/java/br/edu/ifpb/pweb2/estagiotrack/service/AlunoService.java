@@ -2,6 +2,7 @@ package br.edu.ifpb.pweb2.estagiotrack.service;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
 import br.edu.ifpb.pweb2.estagiotrack.repository.AlunoRepository;
+import br.edu.ifpb.pweb2.estagiotrack.util.PasswordUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ public class AlunoService {
 
     public void salvarAluno(Aluno aluno, List<String> competencias) {
         aluno.setCompetencias(competencias);
+        aluno.setSenha(PasswordUtil.hashPassword(aluno.getSenha()));
         alunoRepository.save(aluno);
     }
 

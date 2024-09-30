@@ -1,12 +1,13 @@
 package br.edu.ifpb.pweb2.estagiotrack.service;
 
-import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
-import br.edu.ifpb.pweb2.estagiotrack.repository.EmpresaRepository;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
+import br.edu.ifpb.pweb2.estagiotrack.repository.EmpresaRepository;
 
 @Service
 public class EmpresaService {
@@ -27,7 +28,7 @@ public class EmpresaService {
     }
 
     public Empresa save(Empresa empresa) {
-        // Salva ou atualiza a empresa, já que o JpaRepository faz o controle automático de ID
+        empresa.setSenha(PasswordUtil.hashPassword(empresa.getSenha()));
         return empresaRepository.save(empresa);
     }
 

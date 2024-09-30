@@ -33,7 +33,7 @@
                     <td th:text="${oferta.requisitos}"></td>
                     <td>
                         <ul class="competencies-list listofertas">
-                            <li th:each="competencia : ${oferta.competencias}" th:text="${competencia}"></li>
+                            <li style="color: white;" th:each="competencia : ${oferta.competencias}" th:text="${competencia}"></li>
                         </ul>
                     </td>
                     <td th:text="${oferta.status}"></td>
@@ -43,7 +43,7 @@
                             <button type="submit" class="form-button listofertas">Encerrar</button>
                         </form>
                     </td>
-                    <td th:if="${oferta.statusOferta.name() == 'ENCERRADA'}">
+                    <td th:if="${oferta.statusOferta.name() == 'INTERROMPIDA'}">
                         <form th:action="@{/ofertas/reativar}" method="post" class="action-form listofertas">
                             <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
                             <button type="submit" class="form-button listofertas">Reativar</button>
@@ -53,7 +53,7 @@
             </tbody>
         </table>
 
-        <button class="form-button-cancel listofertas"><a th:href="@{/form}"
+        <button class="form-button-cancel listofertas"><a th:href="@{/home}"
                 class="cancel-link listofertas">Voltar</a></button>
     </div>
 </body>

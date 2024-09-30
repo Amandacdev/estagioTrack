@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class Aluno {
     @Column(unique = true, nullable = false)
     private String nomeUsuario;
 
+    @Size(max = 60)
     @NotBlank(message = "A senha é obrigatória e não pode estar vazia.")
     private String senha;
 
@@ -38,4 +40,5 @@ public class Aluno {
     @ElementCollection
     @NotEmpty(message = "Pelo menos uma competência deve ser selecionada.")
     private List<String> competencias;
+
 }

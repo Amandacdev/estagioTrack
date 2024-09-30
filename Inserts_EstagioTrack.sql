@@ -18,17 +18,17 @@ INSERT INTO competencia_template (id, nome, icone_url) VALUES
 
 --SELECT * FROM competencia_template
 
-INSERT INTO aluno values
-(1,'amanda@gmail.com','Feminino','Amanda Cruz','amandaCruz','123'),
-(2,'george@gmail.com','Masculino','George Barbosa','georgeD','123'),
-(3,'brian.com','Masculino','Brian Rafael','brian','123'),
-(4,'olivia@gmail.com','Feminino','Olivia Oliva','oliviaO','123'),
-(5, 'mariana@gmail.com', 'Feminino', 'Mariana Oliveira', 'marianaO', '123'),
-(6, 'daniel@gmail.com', 'Masculino', 'Daniel Costa', 'danielCosta', '123'),
-(7, 'sofia@gmail.com', 'Feminino', 'Sofia Almeida', 'sofiaAlmeida', '123'),
-(8, 'andre@gmail.com', 'Masculino', 'André Pereira', 'andrePereira', '123'),
-(9, 'patricia@gmail.com', 'Feminino', 'Patricia Santos', 'patriciaSantos', '123'),
-(10, 'luana@gmail.com', 'Feminino', 'Luana Silva', 'luanaSilva', '123');
+INSERT INTO aluno (id, email, nome, nome_usuario, senha, genero) VALUES
+(1, 'amanda@gmail.com', 'Amanda Cruz', 'amandaCruz', '123', 'Feminino'),
+(2, 'george@gmail.com', 'George Barbosa', 'georgeD', '123', 'Masculino'),
+(3, 'brian@gmail.com', 'Brian Rafael', 'brian', '123', 'Masculino'),
+(4, 'olivia@gmail.com', 'Olivia Oliva', 'oliviaO', '123', 'Feminino'),
+(5, 'mariana@gmail.com', 'Mariana Oliveira', 'marianaO', '123', 'Feminino'),
+(6, 'daniel@gmail.com', 'Daniel Costa', 'danielCosta', '123', 'Masculino'),
+(7, 'sofia@gmail.com', 'Sofia Almeida', 'sofiaAlmeida', '123', 'Feminino'),
+(8, 'andre@gmail.com', 'André Pereira', 'andrePereira', '123', 'Masculino'),
+(9, 'patricia@gmail.com', 'Patricia Santos', 'patriciaSantos', '123', 'Feminino'),
+(10, 'luana@gmail.com', 'Luana Silva', 'luanaSilva', '123', 'Feminino');
 
 INSERT INTO aluno_competencias values
 ( 1, 'Java'),
@@ -51,18 +51,19 @@ INSERT INTO aluno_competencias values
 ( 10, 'CSS'),
 ( 10, 'JavaScript');
 
-INSERT into empresa VALUES
-(1,'Desenvolvimento de Software','Expedicionários', '58041060','João Pessoa','74512589678541','' ,'havaianas@gmail.com','PB','Avenida Capitão João FreirE','4','Havaianas','Carla','123'),
-(2,'Big Data e Analytics','Expedicionários', '58041060','João Pessoa','74512589678542','' ,'lg@gmail.com','PB','Avenida Capitão João FreirE','4','LG','Fernadno','123'),
-(3,'Inteligência Artificial','Expedicionários', '58041060','João Pessoa','74512589678543','' ,'google@gmail.com','PB','Avenida Capitão João FreirE','4','Google','Henry','123'),
-(4, 'Computação em Núvem', 'Tambaú', '58039070', 'João Pessoa', '74512589678904', '', 'apple@gmail.com', 'PB', 'Rua das Acácias', '50', 'Apple', 'John', '124'),
-(5, 'Suporte Técnico', 'Manaíra', '58038100', 'João Pessoa', '74512589678895', '', 'ibm@gmail.com', 'PB', 'Rua do Sol', '12', 'IBM', 'Alice', '125'),
-(6, 'Segurança da Informação', 'Cabo Branco', '58045200', 'João Pessoa', '74512589678886', '', 'amazon@gmail.com', 'PB', 'Avenida Atlântica', '30', 'Amazon', 'Sophia', '126'),
-(7, 'Inteligência Artificial', 'Altiplano', '58045100', 'João Pessoa', '74512589678777', '', 'nintendo@gmail.com', 'PB', 'Rua das Flores', '120', 'Nintendo', 'Luigi', '127');
+INSERT INTO empresa (id, cnpj, nome_usuario, cep, logradouro, numero_imovel, bairro, cidade, estado, telefone, atividade_principal, site, comprovante_endereco, razao_social, responsavel, email, senha) 
+VALUES 
+(1, '12345678000199', '12345678000199', '58000000', 'Rua das Startups', '101', 'Centro', 'João Pessoa', 'PB', '(83) 99999-9999', 'Desenvolvimento de Software', 'https://www.techinnovate.com', null, 'Tech Innovate LTDA', 'Lucas Souza', 'contato@techinnovate.com', 'senhaSegura123'),
+(2, '98765432000187', '98765432000187', '58001000', 'Av. Epitácio Pessoa', '305', 'Tambaú', 'João Pessoa', 'PB', '(83) 98888-8888', 'Serviços de Web Design', 'https://www.websolutions.com', null, 'Web Solutions LTDA', 'Maria Silva', 'contato@websolutions.com', 'senhaSegura456'),
+(3, '45612378000177', '45612378000177', '58002000', 'Rua da Tecnologia', '500', 'Bessa', 'João Pessoa', 'PB', '(83) 98777-7777', 'Computação em Nuvem', 'https://www.clouddata.com', null, 'Cloud Data SA', 'João Carvalho', 'contato@clouddata.com', 'senhaSegura789'),
+(4, '32165498000155', '32165498000155', '58003000', 'Av. Cabo Branco', '123', 'Cabo Branco', 'João Pessoa', 'PB', '(83) 98666-6666', 'Consultoria em TI', 'https://www.nextgenit.com', null, 'NextGen IT LTDA', 'Ana Santos', 'contato@nextgenit.com', 'senhaSegura101'),
+(5, '78912345000166', '78912345000166', '58004000', 'Rua das Inovações', '200', 'Altiplano', 'João Pessoa', 'PB', '(83) 98555-5555', 'Segurança Cibernética', 'https://www.cybertech.com', null, 'CyberTech Security LTDA', 'Carlos Lima', 'contato@cybertech.com', 'senhaSegura202'),
+(6, '65432109000144', '65432109000144', '58005000', 'Av. Dom Pedro II', '450', 'Torre', 'João Pessoa', 'PB', '(83) 98444-4444', 'Desenvolvimento de Aplicações Móveis', 'https://www.devmasters.com', null, 'Dev Masters LTDA', 'Paulo Oliveira', 'contato@devmasters.com', 'senhaSegura303'),
+(7, '15975368000133', '15975368000133', '58006000', 'Rua do Big Data', '789', 'Bancários', 'João Pessoa', 'PB', '(83) 98333-3333', 'Análise de Dados', 'https://www.dataanalytics.com', null, 'Data Analytics LTDA', 'Juliana Costa', 'contato@dataanalytics.com', 'senhaSegura404');
 
 INSERT INTO oferta VALUES
 (1,	'Desenvolvimento de Software', '28', 'havaianas@gmail.com', null, 'ABERTA', 'Desenvolvedor', 'Sim', '500.00', 1),
-(2,	'Computação em Nuvem', '25', 'apple@gmail.com', 'Disponibilidade para viagens', 'ENCERRADA', 'Suporte', 'Sim', '600.00', 4),
+(2,	'Computação em Nuvem', '25', 'apple@gmail.com', 'Disponibilidade para viagens', 'INTERROMPIDA', 'Suporte', 'Sim', '600.00', 4),
 (3,	'Big Data e Analytics', '20', 'amazon@gmail.com', null, 'ABERTA', 'Analista', 'Não', '750.00', 6);
 
 INSERT INTO oferta_competencias values
@@ -81,7 +82,7 @@ INSERT INTO candidatura VALUES
 (4,'mariana@gmail.com','PENDENTE',5,3),
 (5,'mariana@gmail.com','PENDENTE',5,1),
 (6,'luana@gmail.com','PENDENTE',10,3),
-(7,'brian.com','PENDENTE',3,3),
+(7,'brian@gmail.com','PENDENTE',3,3),
 (8,'olivia@gmail.com','PENDENTE',4,1),
 (9,'olivia@gmail.com','REJEITADA',4,2);
 
