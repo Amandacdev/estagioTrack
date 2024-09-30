@@ -17,6 +17,7 @@
                     <th>Oferta</th>
                     <th>Empresa</th>
                     <th>Status</th>
+                    <th>Ação</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,6 +37,11 @@
                             th:text="${candidatura.ofertaSelecionada.ofertante.razaoSocial}"></a>
                     </td>
                     <td th:text="${candidatura.statusCandidatura}">Status</td>
+                    <td th:if="${candidatura.statusCandidatura.name() == 'APROVADA'}">
+                        <a th:text="'Baixar termo'" th:href="TODO">
+                            <span class="material-symbols-outlined">Baixar termo</span>
+                        </a>
+                    </td>
                 </tr>
             </tbody>
         </table>

@@ -1,7 +1,6 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.User;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

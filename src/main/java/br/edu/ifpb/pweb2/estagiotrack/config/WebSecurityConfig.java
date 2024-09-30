@@ -7,16 +7,12 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-
 import javax.sql.DataSource;
 
 @Configuration
@@ -30,7 +26,7 @@ public class WebSecurityConfig {
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/css/**","/auth/login", "/acesso-negado","/alunos/form","/empresas/form").permitAll()
+                    .requestMatchers("/css/**","/auth/login", "/acesso-negado","/alunos/form","/empresas/form","/alunos/save","/empresas/save").permitAll()
                         .anyRequest().authenticated())
                 .formLogin((form) -> form
                         .loginPage("/auth")
@@ -46,7 +42,9 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(){
+    public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource) {
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
+        jdbcUserDetailsManager.setDataSource(dataSource);
 
         UserDetails admin = User.withUsername("admin").password(passwordEncoder().encode("admin")).roles("ADMIN","ALUNO","EMPRESA").build();
         UserDetails estagioTrack = User.withUsername("estagioTrack").password(passwordEncoder().encode("estagioTrack")).roles("ADMIN").build();
@@ -54,29 +52,24 @@ public class WebSecurityConfig {
         UserDetails george = User.withUsername("george").password(passwordEncoder().encode("george")).roles("ALUNO").build();
         UserDetails brian = User.withUsername("brian").password(passwordEncoder().encode("brian")).roles("ALUNO").build();
         UserDetails olivia = User.withUsername("olivia").password(passwordEncoder().encode("olivia")).roles("ALUNO").build();
-        UserDetails leitura = User.withUsername("leitura").password(passwordEncoder().encode("leitura")).roles("EMPRESA").build();
-        UserDetails techled = User.withUsername("techled").password(passwordEncoder().encode("techled")).roles("EMPRESA").build();
 
-
-        JdbcUserDetailsManager users = new JdbcUserDetailsManager(dataSource);
-        if(!users.userExists(admin.getUsername())){
-            users.createUser(admin);
-            users.createUser(estagioTrack);
-            users.createUser(amanda);
-            users.createUser(george);
-            users.createUser(brian);
-            users.createUser(olivia);
-            users.createUser(leitura);
-            users.createUser(techled);
+        if(!jdbcUserDetailsManager.userExists(admin.getUsername())){
+            jdbcUserDetailsManager.createUser(admin);
+            jdbcUserDetailsManager.createUser(estagioTrack);
+            jdbcUserDetailsManager.createUser(amanda);
+            jdbcUserDetailsManager.createUser(george);
+            jdbcUserDetailsManager.createUser(brian);
+            jdbcUserDetailsManager.createUser(olivia);
 
         }
-        return users;
+
+        return jdbcUserDetailsManager;
     }
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService());
+        provider.setUserDetailsService(jdbcUserDetailsManager(dataSource)); // Usar o JdbcUserDetailsManager aqui
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }

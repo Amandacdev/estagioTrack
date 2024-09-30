@@ -4,6 +4,9 @@ import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
 import br.edu.ifpb.pweb2.estagiotrack.service.EmpresaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +24,9 @@ public class EmpresaController {
 
     @Autowired
     private EmpresaService empresaService;
+
+    @Autowired
+    private JdbcUserDetailsManager jdbcUserDetailsManager;
 
     @RequestMapping("/form")
     public String getForm(Empresa empresa, Model model) {
@@ -55,8 +61,15 @@ public class EmpresaController {
         }
 
         empresaService.save(empresa);
-        attr.addFlashAttribute("success", "Empresa cadastrada com sucesso!");
-        return "redirect:/empresas/detalhes/" + empresa.getId();
+
+
+        UserDetails novoUsuario = User.withUsername(empresa.getEmail()).password(empresa.getSenha()).roles("EMPRESA").build();
+        if (!jdbcUserDetailsManager.userExists(empresa.getEmail())) {
+            jdbcUserDetailsManager.createUser(novoUsuario); // Salva o novo usuário no banco de dados
+        }
+
+        attr.addFlashAttribute("success", "Empresa cadastrada com sucesso. Faça login para continuar.");
+        return "redirect:/auth";
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)

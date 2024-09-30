@@ -1,5 +1,6 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
+import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
 import br.edu.ifpb.pweb2.estagiotrack.model.Estagio;
 import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
 import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusCandidatura;
@@ -38,6 +40,9 @@ public class EstagioController {
 
     @Autowired
     private OfertaService ofertaService;
+
+    @Autowired
+    private EmpresaController empresaController;
 
     @RequestMapping("/form/{candidaturaId}")
     public String getForm(@PathVariable("candidaturaId") Integer candidaturaId, Model model) {
@@ -115,5 +120,19 @@ public class EstagioController {
         }
         model.addAttribute("alert", "Estágio não encontrado");
         return "redirect:/estagios";
+    }
+
+    @RequestMapping("/estagiarios")
+    public String getListEstagiariosUsuario(Model model, Principal principal) {
+        List<Estagio> estagios = estagioService.findAll();
+
+        List<Estagio> estagiarios = estagios.stream()
+                .filter(estagio -> estagio.getOfertaSelecionada().getOfertante().getEmail().equals(principal.getName()))
+                .toList();
+        
+        Empresa empresa = empresaController.buscarPorEmail(principal.getName());
+        model.addAttribute("estagiarios", estagiarios);
+        model.addAttribute("empresa", empresa);
+        return "paginaUsuario/estagiariosEmpresa";
     }
 }

@@ -1,5 +1,6 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +44,9 @@ public class OfertaController {
     private CompetenciasTemplateService competenciasTemplateService;
 
     @RequestMapping("/form")
-    public String getForm(Oferta oferta, Model model) {
+    public String getForm(Oferta oferta, Model model, Principal principal) {
+        System.out.println(principal);
+        System.out.println(principal.getName());
         List<CompetenciaTemplate> competenciasTemplate = competenciasTemplateService.findAll();
         model.addAttribute("competenciasTemplate", competenciasTemplate);
         return "ofertas/form";
@@ -180,13 +183,14 @@ public class OfertaController {
     // Esse método recebe um objeto empresa, obtem as ofertas desse usuário
     // fornecido e direciona à página de visualização dessas ofertas
     @RequestMapping("/paginaUsuario")
-    public String getListOfertasUsuario(Model model, Empresa empresa) {
+    public String getListOfertasUsuario(Model model, Principal principal) {
         List<Oferta> ofertas = ofertaService.findAll();
 
         List<Oferta> ofertasUsuario = ofertas.stream()
-                .filter(oferta -> oferta.getEmailOfertante().equals(empresa.getEmail()))
+                .filter(oferta -> oferta.getEmailOfertante().equals(principal.getName()))
                 .toList();
 
+        Empresa empresa = empresaController.buscarPorEmail(principal.getName());
         model.addAttribute("ofertas", ofertasUsuario);
         model.addAttribute("empresa", empresa);
 

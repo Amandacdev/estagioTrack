@@ -1,5 +1,6 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
+import java.security.Principal;
 import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
 import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
 import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
@@ -52,7 +53,7 @@ public class CandidaturaController {
     }
 
     @PostMapping("/save")
-    public String cadastroCandidatura(@ModelAttribute Candidatura candidatura, Model model, RedirectAttributes attr) {
+    public String cadastroCandidatura(@ModelAttribute Candidatura candidatura, Model model, RedirectAttributes attr, Principal principal) {
         Aluno aluno = alunoService.findByEmail(candidatura.getEmailCandidato()).orElse(null);
         Oferta oferta = ofertaService.findById(candidatura.getOfertaSelecionada().getId()).orElse(null);
 
@@ -65,7 +66,7 @@ public class CandidaturaController {
             }
             candidaturaService.save(candidatura);
             attr.addFlashAttribute("success", "Candidatura realizada com sucesso!");
-            return getListCandidaturasUsuario(model, aluno);
+            return getListCandidaturasUsuario(model, principal);
         } else {
             model.addAttribute("alert", "Email inválido ou oferta não encontrada.");
             return "candidaturas/form";
@@ -73,13 +74,14 @@ public class CandidaturaController {
     }
 
     @RequestMapping("/paginaUsuario")
-    public String getListCandidaturasUsuario(Model model, Aluno aluno) {
+    public String getListCandidaturasUsuario(Model model, Principal principal) {
         List<Candidatura> candidaturas = candidaturaService.findAll();
 
         List<Candidatura> candidaturasUsuario = candidaturas.stream()
-                .filter(candidatura -> candidatura.getEmailCandidato().equals(aluno.getEmail()))
+                .filter(candidatura -> candidatura.getEmailCandidato().equals(principal.getName()))
                 .toList();
-
+        
+        Aluno aluno = alunoService.findByEmail(principal.getName()).orElse(null);
         model.addAttribute("candidaturas", candidaturasUsuario);
         model.addAttribute("aluno", aluno);
 
