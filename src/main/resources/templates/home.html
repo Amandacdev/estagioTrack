@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout/layout}" th:with="titulo='Home'">
+
+<body>
+    <div layout:fragment="content" class="container container-start" style="position: relative;">
+        <div
+            style="background-image: url('https://img.freepik.com/fotos-gratis/instrutor-ajudando-novos-funcionarios-com-software-corporativo_74855-2188.jpg?t=st=1724889299~exp=1724892899~hmac=33bf96a9457bad1b619e8e42ed7227ddd35980e3c03ba94ab63f2c6566120f0e&w=740'); background-size: cover; background-position: center; opacity: 0.5; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
+        </div>
+
+        <h3 sec:authorize="hasRole('ROLE_ALUNO')" class="title" style="position: relative; z-index: 2;"><span sec:authentication="name"></span>, encontre hoje mesmo o seu estágio!</h3>
+
+        <button class="start-button" style="position: relative; z-index: 2;" sec:authorize="hasRole('ROLE_ALUNO')">
+            <a class="start-button-link" href="#" th:href="@{/ofertas/listOfertasAbertas}">Encontre seu estágio!</a>
+        </button>
+
+        <button class="start-button" style="position: relative; z-index: 2;"  sec:authorize="hasRole('ROLE_EMPRESA')">
+            <a class="start-button-link" href="#" th:href="@{/paginaUsuario/formParaFiltroPesquisa}">Veja suas ofertas de estágio!</a>
+        </button>
+    </div>
+</body>
+
+</html>
