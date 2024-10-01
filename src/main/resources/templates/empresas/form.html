@@ -20,7 +20,9 @@
                 <label for="cnpj" class="form-label">CNPJ:</label>
                 <input type="text" th:field="*{cnpj}" class="form-input" placeholder="Apenas os 14 dígitos numéricos"
                     required minlength="14" maxlength="14" pattern="\d{14}"
-                    title="O CNPJ deve ter exatamente 14 dígitos numéricos" id="cnpj" />
+                    title="O CNPJ deve ter exatamente 14 dígitos numéricos" id="cnpj"
+                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+                    th:disabled="true" th:attr="title='Este campo não pode ser alterado'" />
             </div>
 
             <!-- Campo oculto para nomeUsuario -->
@@ -33,17 +35,23 @@
 
             <div class="form-group">
                 <label for="email" class="form-label">Email da pessoa responsável:</label>
-                <input type="email" th:field="*{email}" class="form-input" required />
+                <input type="email" th:field="*{email}" class="form-input" required
+                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+                    th:disabled="true" th:attr="title='Este campo não pode ser alterado'" />
             </div>
 
             <!-- Campo de senha dinâmico: obrigatório no cadastro, opcional na edição -->
             <div class="form-group" th:if="${empresa.id == null}">
                 <label for="senha" class="form-label">Senha:</label>
-                <input type="password" th:field="*{senha}" class="form-input" required />
+                <input type="password" th:field="*{senha}" class="form-input" required
+                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+                    th:disabled="true" th:attr="title='Este campo não pode ser alterado'" />
             </div>
             <div class="form-group" th:if="${empresa.id != null}">
                 <label for="senha" class="form-label">Alterar Senha (opcional):</label>
-                <input type="password" th:field="*{senha}" class="form-input" />
+                <input type="password" th:field="*{senha}" class="form-input"
+                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+                    th:disabled="true" th:attr="title='Este campo não pode ser alterado'" />
             </div>
 
             <div class="form-group">
