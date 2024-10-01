@@ -17,8 +17,8 @@
                         <th>Razão social</th>
                         <th>Responsável</th>
                         <th>Atividade principal</th>
-                        <!-- Exibir coluna de edição apenas para coordenadores (th:if="${#authorization.expression('hasRole(''ROLE_COORDENADOR'')')}") -->
-                        <th>Ações</th>
+                        <!-- Exibir coluna de edição e bloqueio apenas para coordenadores -->
+                        <th th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,9 +27,20 @@
                         <td th:text="${empresa.responsavel}"></td>
                         <td th:text="${empresa.atividadePrincipal}"></td>
 
-                        <!-- Exibir botão de editar apenas para coordenadores (th:if="${#authorization.expression('hasRole(''ROLE_COORDENADOR'')')}")-->
-                        <td>
-                            <a th:href="@{/empresas/editar/{id}(id=${empresa.id})}" class="btn btn-primary">Editar</a>
+                        <!-- Exibir botões apenas para coordenadores -->
+                        <td th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                            <!-- Botão de editar -->
+                             <div class="actions">
+                                <a th:href="@{/empresas/editar/{id}(id=${empresa.id})}" class="btn btn-primary">Editar</a>
+
+                                <!-- Verifica se a empresa está bloqueada e alterna os botões -->
+                                <form th:action="@{/empresas/bloquear/{id}(id=${empresa.id})}" method="post" th:if="${!empresa.isBloqueada}">
+                                    <button type="submit" class="btn btn-danger">Bloquear</button>
+                                </form>
+                                <form th:action="@{/empresas/desbloquear/{id}(id=${empresa.id})}" method="post" th:if="${empresa.isBloqueada}">
+                                    <button type="submit" class="btn btn-success">Desbloquear</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

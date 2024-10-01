@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
 import br.edu.ifpb.pweb2.estagiotrack.repository.EmpresaRepository;
+import br.edu.ifpb.pweb2.estagiotrack.util.PasswordUtil;
 
 @Service
 public class EmpresaService {

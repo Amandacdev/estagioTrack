@@ -40,30 +40,21 @@ public class EmpresaController {
 
     // Método para criar ou editar a empresa
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String salvarEmpresa(
-            Empresa empresa,
-            Model model,
-            RedirectAttributes attr) {
-    
-        try {
-            empresaService.save(empresa);
-            attr.addFlashAttribute("success", "Empresa cadastrada/atualizada com sucesso!");
-        } catch (IllegalArgumentException e) {
-            model.addAttribute("alert", e.getMessage());
-            return "empresas/form";
-        }
+    public String salvarEmpresa(Empresa empresa, Model model, RedirectAttributes attr) {
 
         if (empresaService.existsByEmail(empresa.getEmail()) || empresaService.existsByCnpj(empresa.getCnpj())) {
             model.addAttribute("alert", "Email ou CNPJ já cadastrado.");
             return "empresas/form";
         }
+
         if (empresa.getId() == null) {
             Integer maxId = empresaService.findMaxId();
             empresa.setId(maxId + 1);
         }
 
-        empresaService.save(empresa);
+        // A empresa já deve ser criada com `isBloqueada = false` por padrão no campo de entidade.
 
+        empresaService.save(empresa);
 
         UserDetails novoUsuario = User.withUsername(empresa.getEmail()).password(empresa.getSenha()).roles("EMPRESA").build();
         if (!jdbcUserDetailsManager.userExists(empresa.getEmail())) {
@@ -106,6 +97,35 @@ public class EmpresaController {
             model.addAttribute("alert", "Empresa não encontrada.");
             return "redirect:/empresas";
         }
+    }
+
+      // Adicionando o método de bloquear empresa
+    @RequestMapping(value = "/bloquear/{id}", method = RequestMethod.POST)
+    public String bloquearEmpresa(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
+        Optional<Empresa> empresaOpt = empresaService.findById(id);
+        if (empresaOpt.isPresent()) {
+            Empresa empresa = empresaOpt.get();
+            empresa.setBloqueada(true);
+            empresaService.save(empresa); // Atualiza a empresa
+            redirectAttributes.addFlashAttribute("success", "Empresa bloqueada com sucesso!");
+        } else {
+            redirectAttributes.addFlashAttribute("alert", "Empresa não encontrada.");
+        }
+        return "redirect:/empresas";
+    }
+
+    @RequestMapping(value = "/desbloquear/{id}", method = RequestMethod.POST)
+    public String desbloquearEmpresa(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
+        Optional<Empresa> empresaOpt = empresaService.findById(id);
+        if (empresaOpt.isPresent()) {
+            Empresa empresa = empresaOpt.get();
+            empresa.setBloqueada(false); // Desbloqueia a empresa
+            empresaService.save(empresa); // Atualiza a empresa
+            redirectAttributes.addFlashAttribute("success", "Empresa desbloqueada com sucesso!");
+        } else {
+            redirectAttributes.addFlashAttribute("alert", "Empresa não encontrada.");
+        }
+        return "redirect:/empresas";
     }
 
     // Método para buscar empresa por email (mantido para compatibilidade)
