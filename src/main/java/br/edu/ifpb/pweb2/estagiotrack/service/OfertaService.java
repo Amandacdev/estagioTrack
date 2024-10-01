@@ -34,6 +34,8 @@ public class OfertaService {
         return ofertaRepository.findById(id);
     }
 
+    public Page<Oferta> findByEmailOfertante(String emailOfertante, Pageable pageable) { return ofertaRepository.findByEmailOfertante(emailOfertante, pageable); }
+
     public Oferta save(Oferta oferta) {
         return ofertaRepository.save(oferta);
     }

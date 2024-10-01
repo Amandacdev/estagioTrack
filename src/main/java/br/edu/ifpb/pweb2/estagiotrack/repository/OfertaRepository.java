@@ -22,4 +22,6 @@ public interface OfertaRepository extends JpaRepository<Oferta, Integer> {
 
     @Query("SELECT COALESCE(MAX(o.id), 0) FROM Oferta o")
     Integer findMaxId();
+
+    Page<Oferta> findByEmailOfertante(String emailOfertante, Pageable pageable);
 }

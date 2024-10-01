@@ -53,6 +53,25 @@
             </tbody>
         </table>
 
+        <div>
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${paginador.currentPage == 0} ? 'disabled'">
+                    <a class="page-link" th:href="@{/ofertas/paginaUsuario(page=${paginador.currentPage - 1}, size=${paginador.pageSize})}">
+                        Anterior
+                    </a>
+                </li>
+                <li class="page-item" th:each="i : ${#numbers.sequence(0, paginador.totalPages - 1)}"
+                    th:classappend="${i == paginador.currentPage} ? 'active'">
+                    <a class="page-link" th:href="@{/ofertas/paginaUsuario(page=${i}, size=${paginador.pageSize})}" th:text="${i + 1}">1</a>
+                </li>
+                <li class="page-item" th:classappend="${paginador.currentPage == paginador.totalPages - 1} ? 'disabled'">
+                    <a class="page-link" th:href="@{/ofertas/paginaUsuario(page=${paginador.currentPage + 1}, size=${paginador.pageSize})}">
+                        Próximo
+                    </a>
+                </li>
+            </ul>
+        </div>
+
         <button class="form-button-cancel listofertas"><a th:href="@{/home}"
                 class="cancel-link listofertas">Voltar</a></button>
     </div>
