@@ -1,5 +1,6 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
+import java.security.Principal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
 import br.edu.ifpb.pweb2.estagiotrack.service.EmpresaService;
-import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/empresas")
@@ -39,40 +39,47 @@ public class EmpresaController {
         return "empresas/list";
     }
 
-    // Método para criar ou editar a empresa
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String cadastroEmpresa(
-            @Valid Empresa empresa,
-            BindingResult bindingResult,
-            Model model,
-            RedirectAttributes attr) {
+    public String cadastroEmpresa(Empresa empresa, Model model, RedirectAttributes attr, Principal principal) {
         System.out.println(empresa);
+        Empresa empresaExistente = null;
 
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("alert", "Por favor, preencha todos os campos corretamente.");
-            return "empresas/form";
+        if (empresa.getId() != null) {
+            empresaExistente = empresaService.findById(empresa.getId()).orElse(null);
         }
 
-        if (empresaService.existsByEmail(empresa.getEmail()) || empresaService.existsByCnpj(empresa.getCnpj())) {
+        // Verificar se o email ou CNPJ já existem, excluindo a própria empresa (caso
+        // seja edição)
+        if ((empresaService.existsByEmail(empresa.getEmail())
+                && (empresaExistente == null || !empresaExistente.getEmail().equals(empresa.getEmail()))) ||
+                (empresaService.existsByCnpj(empresa.getCnpj())
+                        && (empresaExistente == null || !empresaExistente.getCnpj().equals(empresa.getCnpj())))) {
             model.addAttribute("alert", "Email ou CNPJ já cadastrado.");
             return "empresas/form";
         }
 
+        // Se é uma nova empresa, definimos o ID
         if (empresa.getId() == null) {
             Integer maxId = empresaService.findMaxId();
             empresa.setId(maxId + 1);
         }
 
-        // A empresa já deve ser criada com `isBloqueada = false` por padrão no campo de entidade.
         empresaService.save(empresa);
 
-        UserDetails novoUsuario = User.withUsername(empresa.getEmail()).password(empresa.getSenha()).roles("EMPRESA").build();
-        if (!jdbcUserDetailsManager.userExists(empresa.getEmail())) {
-            jdbcUserDetailsManager.createUser(novoUsuario); // Salva o novo usuário no banco de dados
+        // Lógica de usuário no caso de criação de uma nova empresa
+        if (empresaExistente == null) {
+            UserDetails novoUsuario = User.withUsername(empresa.getEmail()).password(empresa.getSenha())
+                    .roles("EMPRESA").build();
+            if (!jdbcUserDetailsManager.userExists(empresa.getEmail())) {
+                jdbcUserDetailsManager.createUser(novoUsuario);
+            }
+            attr.addFlashAttribute("success", "Empresa cadastrada com sucesso. Faça login para continuar.");
+            return "redirect:/auth";
+        } else {
+            attr.addFlashAttribute("success", "Empresa atualizada com sucesso.");
+            return "redirect:/empresas/detalhes/" + empresa.getId();
         }
 
-        attr.addFlashAttribute("success", "Empresa cadastrada com sucesso. Faça login para continuar.");
-        return "redirect:/auth";
     }
 
     // Método para deletar a empresa
@@ -109,7 +116,7 @@ public class EmpresaController {
         }
     }
 
-      // Adicionando o método de bloquear empresa
+    // Adicionando o método de bloquear empresa
     @RequestMapping(value = "/bloquear/{id}", method = RequestMethod.POST)
     public String bloquearEmpresa(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
         Optional<Empresa> empresaOpt = empresaService.findById(id);
