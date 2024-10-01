@@ -66,6 +66,7 @@ public class EmpresaController {
             BindingResult bindingResult,
             Model model,
             RedirectAttributes attr) {
+        System.out.println(empresa);
 
         if (bindingResult.hasErrors()) {
             System.out.println(empresa);
@@ -84,8 +85,8 @@ public class EmpresaController {
 
         empresaService.save(empresa);
 
-
-        UserDetails novoUsuario = User.withUsername(empresa.getEmail()).password(empresa.getSenha()).roles("EMPRESA").build();
+        UserDetails novoUsuario = User.withUsername(empresa.getEmail()).password(empresa.getSenha()).roles("EMPRESA")
+                .build();
         if (!jdbcUserDetailsManager.userExists(empresa.getEmail())) {
             jdbcUserDetailsManager.createUser(novoUsuario); // Salva o novo usuário no banco de dados
         }
