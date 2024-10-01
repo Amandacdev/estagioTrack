@@ -3,6 +3,7 @@ package br.edu.ifpb.pweb2.estagiotrack.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -47,6 +48,8 @@ public class Empresa implements Serializable {
 
         private String site;
 
+        @Lob
+        @Column(name = "comprovante_endereco")
         private byte[] comprovanteEndereco;
 
         @NotBlank(message = "A razão social é obrigatória.")

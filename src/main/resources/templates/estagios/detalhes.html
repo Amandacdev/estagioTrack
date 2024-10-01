@@ -14,7 +14,9 @@
             <p><strong>Data de Término:</strong> <span th:text="${#temporals.format(estagio.dataFim, 'dd/MM/yyyy')}"></span></p>
             <p><strong>Observações:</strong> <span th:text="${estagio.observacoes}"></span></p>
         </div>
-
+        <div>
+            <a th:href="@{/empresas/downloadTermoEstagio/{id}(id=${empresa.id})}">Download Termo de Estágio</a>
+        </div>
         <a  th:href="@{/estagios}">
             <button  class="form-button-cancel">Voltar para lista</button>
         </a>
