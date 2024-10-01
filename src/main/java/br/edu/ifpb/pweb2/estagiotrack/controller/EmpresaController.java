@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
 import br.edu.ifpb.pweb2.estagiotrack.service.EmpresaService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/empresas")
@@ -40,7 +41,17 @@ public class EmpresaController {
 
     // Método para criar ou editar a empresa
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String salvarEmpresa(Empresa empresa, Model model, RedirectAttributes attr) {
+    public String cadastroEmpresa(
+            @Valid Empresa empresa,
+            BindingResult bindingResult,
+            Model model,
+            RedirectAttributes attr) {
+        System.out.println(empresa);
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("alert", "Por favor, preencha todos os campos corretamente.");
+            return "empresas/form";
+        }
 
         if (empresaService.existsByEmail(empresa.getEmail()) || empresaService.existsByCnpj(empresa.getCnpj())) {
             model.addAttribute("alert", "Email ou CNPJ já cadastrado.");
@@ -53,7 +64,6 @@ public class EmpresaController {
         }
 
         // A empresa já deve ser criada com `isBloqueada = false` por padrão no campo de entidade.
-
         empresaService.save(empresa);
 
         UserDetails novoUsuario = User.withUsername(empresa.getEmail()).password(empresa.getSenha()).roles("EMPRESA").build();
