@@ -1,8 +1,7 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
-import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
-import br.edu.ifpb.pweb2.estagiotrack.service.EmpresaService;
-import jakarta.validation.Valid;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Optional;
+import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
+import br.edu.ifpb.pweb2.estagiotrack.service.EmpresaService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/empresas")
@@ -45,6 +46,7 @@ public class EmpresaController {
             BindingResult bindingResult,
             Model model,
             RedirectAttributes attr) {
+        System.out.println(empresa);
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("alert", "Por favor, preencha todos os campos corretamente.");
@@ -62,8 +64,8 @@ public class EmpresaController {
 
         empresaService.save(empresa);
 
-
-        UserDetails novoUsuario = User.withUsername(empresa.getEmail()).password(empresa.getSenha()).roles("EMPRESA").build();
+        UserDetails novoUsuario = User.withUsername(empresa.getEmail()).password(empresa.getSenha()).roles("EMPRESA")
+                .build();
         if (!jdbcUserDetailsManager.userExists(empresa.getEmail())) {
             jdbcUserDetailsManager.createUser(novoUsuario); // Salva o novo usuário no banco de dados
         }
