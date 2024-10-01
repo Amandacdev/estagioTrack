@@ -52,7 +52,6 @@ public class Empresa implements Serializable {
 
         private String site;
 
-        @Lob
         @Column(name = "comprovante_endereco")
         private byte[] comprovanteEndereco;
 
