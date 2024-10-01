@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CandidaturaService {
@@ -32,8 +33,8 @@ public class CandidaturaService {
         return candidaturaRepository.findById(id).orElse(null);
     }
 
-    public Candidatura findByEmail(String email) {
-        return (Candidatura) candidaturaRepository.findByEmail(email);
+    public Optional<Candidatura> findByEmail(String email) {
+        return candidaturaRepository.findByEmail(email);
     }
 
     public Integer findMaxId() {

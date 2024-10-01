@@ -48,37 +48,20 @@ public class OfertaController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String getList(@RequestParam(value = "competencias", required = false) List<String> competencias,
+                          @RequestParam(defaultValue = "0") int page,
+                          @RequestParam(defaultValue = "5") int size,
             Model model) {
-        List<Oferta> ofertas;
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Oferta> ofertas;
         if (competencias == null || competencias.isEmpty()) {
-            ofertas = ofertaRepository.findAll();
+            ofertas = ofertaService.listAll(pageable);
         } else {
-            ofertas = ofertaRepository.findByCompetencias(competencias);
+            ofertas = ofertaService.findByCompetencias(String.valueOf(competencias), pageable);
         }
         List<CompetenciaTemplate> competenciasTemplate = competenciasTemplateService.findAll();
         model.addAttribute("competenciasTemplate", competenciasTemplate);
         model.addAttribute("ofertas", ofertas);
-        return "ofertas/list";
-    }
-
-    @GetMapping
-    public String getList(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "5") int size,
-            Model model) {
-
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Oferta> ofertasPage = ofertaService.listAll(pageable);
-
-        Paginador paginador = new Paginador(
-                ofertasPage.getNumber(),
-                ofertasPage.getSize(),
-                (int) ofertasPage.getTotalElements()
-        );
-
-        model.addAttribute("paginador", paginador);
-        model.addAttribute("ofertas", ofertasPage.getContent());
-
         return "ofertas/list";
     }
 
@@ -120,7 +103,7 @@ public class OfertaController {
                     candidaturaRepository.save(candidatura);
                 }
             }
-            oferta.encerrar();
+            oferta.setStatusOferta(StatusOferta.INTERROMPIDA);
             ofertaRepository.save(oferta);
 
             attr.addFlashAttribute("success", "Oferta de estágio desativada com sucesso!");

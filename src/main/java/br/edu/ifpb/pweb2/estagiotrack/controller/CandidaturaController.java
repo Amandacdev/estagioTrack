@@ -11,11 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -65,7 +61,7 @@ public class CandidaturaController {
             Paginador paginador = new Paginador(
                     candidaturasPage.getNumber(),
                     candidaturasPage.getSize(),
-                    candidaturasPage.getTotalPages() // Corrigido para usar getTotalPages()
+                    candidaturasPage.getTotalPages()
             );
             model.addAttribute("paginador", paginador);
             model.addAttribute("candidaturas", candidaturasPage.getContent());
