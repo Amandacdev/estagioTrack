@@ -68,6 +68,7 @@ public class EmpresaController {
             RedirectAttributes attr) {
 
         if (bindingResult.hasErrors()) {
+            System.out.println(empresa);
             model.addAttribute("alert", "Por favor, preencha todos os campos corretamente.");
             return "empresas/form";
         }
