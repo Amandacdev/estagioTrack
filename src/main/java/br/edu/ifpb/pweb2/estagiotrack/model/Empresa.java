@@ -23,6 +23,10 @@ public class Empresa implements Serializable {
         @Column(unique = true, nullable = false)
         private String cnpj;
 
+        @NotBlank
+        @Column(unique = true, nullable = false)
+        private String nomeUsuario;
+
         @NotBlank(message = "O CEP é obrigatório.")
         private String cep;
 

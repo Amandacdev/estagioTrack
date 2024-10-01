@@ -1,18 +1,15 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
-import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
-import br.edu.ifpb.pweb2.estagiotrack.model.Paginador;
-import br.edu.ifpb.pweb2.estagiotrack.service.AlunoService;
-import br.edu.ifpb.pweb2.estagiotrack.service.CompetenciasTemplateService;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -24,7 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
+import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
+import br.edu.ifpb.pweb2.estagiotrack.model.Paginador;
+import br.edu.ifpb.pweb2.estagiotrack.service.AlunoService;
+import br.edu.ifpb.pweb2.estagiotrack.service.CompetenciasTemplateService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/alunos")
@@ -36,6 +38,9 @@ public class AlunoController {
 
     @Autowired
     private CompetenciasTemplateService competenciasTemplateService;
+
+    @Autowired
+    private JdbcUserDetailsManager jdbcUserDetailsManager;
 
     @GetMapping("/form")
     public ModelAndView showForm(ModelAndView modelAndView) {
@@ -86,8 +91,15 @@ public class AlunoController {
             aluno.setId(maxId + 1);
         }
         alunoService.salvarAluno(aluno, competencias);
-        attr.addFlashAttribute("success", "Aluno cadastrado com sucesso!");
-        return "redirect:/alunos/detalhes/" + aluno.getId();
+
+        UserDetails novoUsuario = User.withUsername(aluno.getEmail()).password(aluno.getSenha()).roles("ALUNO").build();
+        if (!jdbcUserDetailsManager.userExists(aluno.getEmail())) {
+            jdbcUserDetailsManager.createUser(novoUsuario); // Salva o novo usuário no banco de dados
+        }
+        attr.addFlashAttribute("success", "Estudante cadastrado com sucesso. Faça login para continuar.");
+
+
+        return "redirect:/auth";
     }
 
     public Aluno buscarPorEmail(String email) {
@@ -105,4 +117,6 @@ public class AlunoController {
             return "redirect:/alunos";
         }
     }
+
+
 }

@@ -1,12 +1,8 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
-import br.edu.ifpb.pweb2.estagiotrack.model.*;
-import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusCandidatura;
-import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusOferta;
-import br.edu.ifpb.pweb2.estagiotrack.repository.CandidaturaRepository;
-import br.edu.ifpb.pweb2.estagiotrack.repository.OfertaRepository;
-import br.edu.ifpb.pweb2.estagiotrack.service.CompetenciasTemplateService;
-import br.edu.ifpb.pweb2.estagiotrack.service.OfertaService;
+import java.security.Principal;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,11 +10,22 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
-import java.util.Optional;
+import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
+import br.edu.ifpb.pweb2.estagiotrack.model.CompetenciaTemplate;
+import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
+import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
+import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusCandidatura;
+import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusOferta;
+import br.edu.ifpb.pweb2.estagiotrack.repository.CandidaturaRepository;
+import br.edu.ifpb.pweb2.estagiotrack.repository.OfertaRepository;
+import br.edu.ifpb.pweb2.estagiotrack.service.CompetenciasTemplateService;
+import br.edu.ifpb.pweb2.estagiotrack.service.OfertaService;
 
 @Controller
 @RequestMapping("/ofertas")
@@ -40,7 +47,9 @@ public class OfertaController {
     private CompetenciasTemplateService competenciasTemplateService;
 
     @RequestMapping("/form")
-    public String getForm(Oferta oferta, Model model) {
+    public String getForm(Oferta oferta, Model model, Principal principal) {
+        System.out.println(principal);
+        System.out.println(principal.getName());
         List<CompetenciaTemplate> competenciasTemplate = competenciasTemplateService.findAll();
         model.addAttribute("competenciasTemplate", competenciasTemplate);
         return "ofertas/form";
@@ -181,13 +190,14 @@ public class OfertaController {
     // Esse método recebe um objeto empresa, obtem as ofertas desse usuário
     // fornecido e direciona à página de visualização dessas ofertas
     @RequestMapping("/paginaUsuario")
-    public String getListOfertasUsuario(Model model, Empresa empresa) {
+    public String getListOfertasUsuario(Model model, Principal principal) {
         List<Oferta> ofertas = ofertaService.findAll();
 
         List<Oferta> ofertasUsuario = ofertas.stream()
-                .filter(oferta -> oferta.getEmailOfertante().equals(empresa.getEmail()))
+                .filter(oferta -> oferta.getEmailOfertante().equals(principal.getName()))
                 .toList();
 
+        Empresa empresa = empresaController.buscarPorEmail(principal.getName());
         model.addAttribute("ofertas", ofertasUsuario);
         model.addAttribute("empresa", empresa);
 

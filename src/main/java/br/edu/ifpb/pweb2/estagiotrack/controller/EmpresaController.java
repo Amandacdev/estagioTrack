@@ -1,21 +1,28 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
-import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
-import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
-import br.edu.ifpb.pweb2.estagiotrack.model.Paginador;
-import br.edu.ifpb.pweb2.estagiotrack.service.EmpresaService;
-import jakarta.validation.Valid;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Optional;
+import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
+import br.edu.ifpb.pweb2.estagiotrack.model.Paginador;
+import br.edu.ifpb.pweb2.estagiotrack.service.EmpresaService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/empresas")
@@ -23,6 +30,9 @@ public class EmpresaController {
 
     @Autowired
     private EmpresaService empresaService;
+
+    @Autowired
+    private JdbcUserDetailsManager jdbcUserDetailsManager;
 
     @RequestMapping("/form")
     public String getForm(Empresa empresa, Model model) {
@@ -72,8 +82,15 @@ public class EmpresaController {
         }
 
         empresaService.save(empresa);
-        attr.addFlashAttribute("success", "Empresa cadastrada com sucesso!");
-        return "redirect:/empresas/detalhes/" + empresa.getId();
+
+
+        UserDetails novoUsuario = User.withUsername(empresa.getEmail()).password(empresa.getSenha()).roles("EMPRESA").build();
+        if (!jdbcUserDetailsManager.userExists(empresa.getEmail())) {
+            jdbcUserDetailsManager.createUser(novoUsuario); // Salva o novo usuário no banco de dados
+        }
+
+        attr.addFlashAttribute("success", "Empresa cadastrada com sucesso. Faça login para continuar.");
+        return "redirect:/auth";
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)

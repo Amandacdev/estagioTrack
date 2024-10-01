@@ -1,6 +1,5 @@
 package br.edu.ifpb.pweb2.estagiotrack.model;
 
-import br.edu.ifpb.pweb2.estagiotrack.model.Authority;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -26,5 +25,5 @@ public class User {
 
     @OneToMany(mappedBy = "username")
     @ToString.Exclude
-    List<Authority> authories;
+    List<Authority> authorities;
 }
