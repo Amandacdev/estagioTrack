@@ -218,11 +218,25 @@ public class OfertaController {
     }
 
     @RequestMapping("/listOfertasAbertas")
-    public String getOfertasAbertas(Model model) {
-        List<Oferta> ofertasAbertas = ofertaService.listarOfertasAbertas();
+    public String getOfertasAbertas(@RequestParam(defaultValue = "0") int page,
+                                    @RequestParam(defaultValue = "5") int size,
+                                    Model model) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<Oferta> ofertasAbertas = ofertaService.listarOfertasAbertas(pageable);
+
         List<CompetenciaTemplate> competenciasTemplate = competenciasTemplateService.findAll();
+
+        Paginador paginador = new Paginador(
+                ofertasAbertas.getNumber(),
+                ofertasAbertas.getSize(),
+                (int) ofertasAbertas.getTotalElements()
+        );
+
         model.addAttribute("competenciasTemplate", competenciasTemplate);
         model.addAttribute("ofertas", ofertasAbertas);
+        model.addAttribute("paginador", paginador);
+
         return "ofertas/listOfertasAbertas";
     }
 }

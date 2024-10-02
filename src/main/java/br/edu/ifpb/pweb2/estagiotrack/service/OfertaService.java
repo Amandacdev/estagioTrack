@@ -40,8 +40,8 @@ public class OfertaService {
         return ofertaRepository.save(oferta);
     }
 
-    public List<Oferta> listarOfertasAbertas() {
-        return ofertaRepository.findByStatusOferta(StatusOferta.ABERTA);
+    public Page<Oferta> listarOfertasAbertas(Pageable pageable) {
+        return ofertaRepository.findByStatusOferta(StatusOferta.ABERTA, pageable);
     }
 
     public Integer findMaxId() {
