@@ -233,7 +233,8 @@ body {
 
 /* Subtitle */
 .subtitle {
-  margin-top: 10px;
+  text-align: center;
+  margin-top: 5px;
   font-size: 1.2rem;
   color: #ffffff;
 }
@@ -475,6 +476,78 @@ body.listofertas {
   list-style: none;
 }
 
+/* Aluno Details */
+
+
+.details-curriculo {
+  margin-top: 20px;
+  padding: 20px;
+  color: #ffffff;
+}
+
+/* Estilo para o nome do estudante */
+.student-name {
+  font-size: 35px;
+  text-align: center;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+/* Estilo para cada seção */
+.section {
+  margin-bottom: 20px;
+}
+
+/* Estilo para os títulos das seções */
+.section h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #333;
+  /* Linha divisória */
+  padding-bottom: 5px;
+}
+
+/* Estilo para cada item de detalhe */
+.detail-item {
+  margin: 5px 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Estilo para o título principal */
+.detail-title {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffffff;
+  /* Título em branco */
+}
+
+/* Estilo para o botão */
+.form-button-cancel {
+  display: inline-block;
+  text-align: center;
+  padding: 10px 20px;
+  background-color: transparent;
+  color: #007bff;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.form-button-cancel a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.form-button-cancel:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+
 /* Form Button */
 .form-button.listofertas {
   padding: 8px 16px;
@@ -521,6 +594,61 @@ body.listofertas {
 
 .form-button-cancel.listofertas:hover a {
   color: #ffffff;
+}
+
+/* Error Button */
+.error-button{
+  width: 250px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  border: 2px solid #7dd3fc;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 20px;
+  font-size: 1.2rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Estilos para a mensagem de suporte */
+.support-message {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #334155;
+  border: 1px solid #7dd3fc;
+  border-radius: 10px;
+  text-align: center;
+  color: #ffffff;
+}
+
+/* Estilo para links de suporte */
+.support-message a {
+  color: #7dd3fc;
+  text-decoration: none;
+}
+
+.support-message a:hover {
+  text-decoration: underline;
+}
+
+.btn.btn-primary {
+  color: white;
+  background-color: #135296;
+  border: 2px solid #135296;
+  text-decoration: none;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
 }
 
 /* Cancel Link */

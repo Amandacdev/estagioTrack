@@ -1,13 +1,14 @@
 package br.edu.ifpb.pweb2.estagiotrack.service;
 
-import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
-import br.edu.ifpb.pweb2.estagiotrack.repository.EmpresaRepository;
-import br.edu.ifpb.pweb2.estagiotrack.util.PasswordUtil;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
+import br.edu.ifpb.pweb2.estagiotrack.repository.EmpresaRepository;
+import br.edu.ifpb.pweb2.estagiotrack.util.PasswordUtil;
 
 @Service
 public class EmpresaService {
@@ -27,14 +28,6 @@ public class EmpresaService {
         return empresaRepository.findByEmail(email);
     }
 
-    public boolean existsByEmail(String email) {
-        return empresaRepository.findByEmail(email).isPresent();
-    }
-
-    public boolean existsByCnpj(String cnpj) {
-        return empresaRepository.findByCnpj(cnpj).isPresent();
-    }
-
     public Empresa save(Empresa empresa) {
         empresa.setSenha(PasswordUtil.hashPassword(empresa.getSenha()));
         return empresaRepository.save(empresa);
@@ -44,8 +37,12 @@ public class EmpresaService {
         empresaRepository.deleteById(id);
     }
 
-    public boolean existsById(Integer id) {
-        return empresaRepository.existsById(id);
+    public boolean existsByEmail(String email) {
+        return empresaRepository.existsByEmail(email);
+    }
+
+    public boolean existsByCnpj(String cnpj) {
+        return empresaRepository.existsByCnpj(cnpj);
     }
 
     public Integer findMaxId() {

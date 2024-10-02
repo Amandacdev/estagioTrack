@@ -36,35 +36,36 @@ INSERT INTO aluno (id, email, nome, nome_usuario, senha, genero) VALUES
                                                                      (10, 'luana@gmail.com', 'Luana Silva', 'luanaSilva', '123', 'Feminino');
 
 INSERT INTO aluno_competencias values
-                                   ( 1, 'Java'),
-                                   ( 1, 'HTML'),
-                                   ( 1, 'JavaScript'),
-                                   ( 2, 'Java'),
-                                   ( 2, 'SQL'),
-                                   ( 3, 'C++'),
-                                   ( 3, 'Python'),
-                                   ( 4, 'Ruby'),
-                                   ( 4, 'SQL'),
-                                   ( 5, 'C#'),
-                                   ( 5, 'CSS'),
-                                   ( 6, 'Ruby'),
-                                   ( 7, 'C'),
-                                   ( 7, 'HTML'),
-                                   ( 7, 'Ruby'),
-                                   ( 8, 'Python'),
-                                   ( 9, 'Ruby'),
-                                   ( 10, 'CSS'),
-                                   ( 10, 'JavaScript');
+( 1, 'Java'),
+( 1, 'HTML'),
+( 1, 'JavaScript'),
+( 2, 'Java'),
+( 2, 'SQL'),
+( 3, 'C++'),
+( 3, 'Python'),
+( 4, 'Ruby'),
+( 4, 'SQL'),
+( 5, 'C#'),
+( 5, 'CSS'),
+( 6, 'Ruby'),
+( 7, 'C'),
+( 7, 'HTML'),
+( 7, 'Ruby'),
+( 8, 'Python'),
+( 9, 'Ruby'),
+( 10, 'CSS'),
+( 10, 'JavaScript');
 
-INSERT INTO empresa (id, cnpj, nome_usuario, cep, logradouro, numero_imovel, bairro, cidade, estado, telefone, atividade_principal, site, comprovante_endereco, razao_social, responsavel, email, senha)
-VALUES
-    (1, '12345678000199', '12345678000199', '58000000', 'Rua das Startups', '101', 'Centro', 'João Pessoa', 'PB', '(83) 99999-9999', 'Desenvolvimento de Software', 'https://www.techinnovate.com', null, 'Tech Innovate LTDA', 'Lucas Souza', 'contato@techinnovate.com', 'senhaSegura123'),
-    (2, '98765432000187', '98765432000187', '58001000', 'Av. Epitácio Pessoa', '305', 'Tambaú', 'João Pessoa', 'PB', '(83) 98888-8888', 'Serviços de Web Design', 'https://www.websolutions.com', null, 'Web Solutions LTDA', 'Maria Silva', 'contato@websolutions.com', 'senhaSegura456'),
-    (3, '45612378000177', '45612378000177', '58002000', 'Rua da Tecnologia', '500', 'Bessa', 'João Pessoa', 'PB', '(83) 98777-7777', 'Computação em Nuvem', 'https://www.clouddata.com', null, 'Cloud Data SA', 'João Carvalho', 'contato@clouddata.com', 'senhaSegura789'),
-    (4, '32165498000155', '32165498000155', '58003000', 'Av. Cabo Branco', '123', 'Cabo Branco', 'João Pessoa', 'PB', '(83) 98666-6666', 'Consultoria em TI', 'https://www.nextgenit.com', null, 'NextGen IT LTDA', 'Ana Santos', 'contato@nextgenit.com', 'senhaSegura101'),
-    (5, '78912345000166', '78912345000166', '58004000', 'Rua das Inovações', '200', 'Altiplano', 'João Pessoa', 'PB', '(83) 98555-5555', 'Segurança Cibernética', 'https://www.cybertech.com', null, 'CyberTech Security LTDA', 'Carlos Lima', 'contato@cybertech.com', 'senhaSegura202'),
-    (6, '65432109000144', '65432109000144', '58005000', 'Av. Dom Pedro II', '450', 'Torre', 'João Pessoa', 'PB', '(83) 98444-4444', 'Desenvolvimento de Aplicações Móveis', 'https://www.devmasters.com', null, 'Dev Masters LTDA', 'Paulo Oliveira', 'contato@devmasters.com', 'senhaSegura303'),
-    (7, '15975368000133', '15975368000133', '58006000', 'Rua do Big Data', '789', 'Bancários', 'João Pessoa', 'PB', '(83) 98333-3333', 'Análise de Dados', 'https://www.dataanalytics.com', null, 'Data Analytics LTDA', 'Juliana Costa', 'contato@dataanalytics.com', 'senhaSegura404');
+INSERT INTO empresa (id, cnpj, nome_usuario, cep, logradouro, numero_imovel, bairro, cidade, estado, telefone, atividade_principal, site, comprovante_endereco, razao_social, responsavel, email, senha, is_bloqueada) 
+VALUES 
+(1, '12345678000199', '12345678000199', '58000000', 'Rua das Startups', '101', 'Centro', 'João Pessoa', 'PB', '(83) 99999-9999', 'Desenvolvimento de Software', 'https://www.techinnovate.com', null, 'Tech Innovate LTDA', 'Lucas Souza', 'contato@techinnovate.com', 'senhaSegura123', false),
+(2, '98765432000187', '98765432000187', '58001000', 'Av. Epitácio Pessoa', '305', 'Tambaú', 'João Pessoa', 'PB', '(83) 98888-8888', 'Serviços de Web Design', 'https://www.websolutions.com', null, 'Web Solutions LTDA', 'Maria Silva', 'contato@websolutions.com', 'senhaSegura456', false),
+(3, '45612378000177', '45612378000177', '58002000', 'Rua da Tecnologia', '500', 'Bessa', 'João Pessoa', 'PB', '(83) 98777-7777', 'Computação em Nuvem', 'https://www.clouddata.com', null, 'Cloud Data SA', 'João Carvalho', 'contato@clouddata.com', 'senhaSegura789', false),
+(4, '32165498000155', '32165498000155', '58003000', 'Av. Cabo Branco', '123', 'Cabo Branco', 'João Pessoa', 'PB', '(83) 98666-6666', 'Consultoria em TI', 'https://www.nextgenit.com', null, 'NextGen IT LTDA', 'Ana Santos', 'contato@nextgenit.com', 'senhaSegura101', false),
+(5, '78912345000166', '78912345000166', '58004000', 'Rua das Inovações', '200', 'Altiplano', 'João Pessoa', 'PB', '(83) 98555-5555', 'Segurança Cibernética', 'https://www.cybertech.com', null, 'CyberTech Security LTDA', 'Carlos Lima', 'contato@cybertech.com', 'senhaSegura202', false),
+(6, '65432109000144', '65432109000144', '58005000', 'Av. Dom Pedro II', '450', 'Torre', 'João Pessoa', 'PB', '(83) 98444-4444', 'Desenvolvimento de Aplicações Móveis', 'https://www.devmasters.com', null, 'Dev Masters LTDA', 'Paulo Oliveira', 'contato@devmasters.com', 'senhaSegura303', false),
+(7, '15975368000133', '15975368000133', '58006000', 'Rua do Big Data', '789', 'Bancários', 'João Pessoa', 'PB', '(83) 98333-3333', 'Análise de Dados', 'https://www.dataanalytics.com', null, 'Data Analytics LTDA', 'Juliana Costa', 'contato@dataanalytics.com', 'senhaSegura404', false);
+
 
 INSERT INTO oferta VALUES
                        (1,	'Desenvolvimento de Software', '28', 'havaianas@gmail.com', null, 'ABERTA', 'Desenvolvedor', 'Sim', '500.00', 1),
