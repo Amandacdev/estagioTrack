@@ -19,14 +19,14 @@
             <p>Atividade principal: <strong><span th:text="${oferta.atividadePrincipal}"></span></strong></p>
             <p>Valor da bolsa: <strong><span th:text="' R$' + ${oferta.valorBolsa}"></span></strong></p>
             <p>Carga horária: <strong><span th:text="${oferta.cargaHoraria} + ' horas'"></span></strong></p>
-            <p>Vale-transporte:<strong><span th:text="${oferta.valeTransporte}"></span></strong></p>
+            <p>Vale-transporte: <strong><span th:text="${oferta.valeTransporte}"></span></strong></p>
             <p>Requisitos: <strong><span th:text="${oferta.requisitos}"></span></strong></p>
             <p>Competências necessárias: <strong><span th:text="${oferta.competencias}"></span></strong></p>
             <p>Status: <strong><span th:text="${oferta.statusOferta}"></span></strong></p>
         </div>
 
         <div th:if="${!#lists.isEmpty(candidaturas)}">
-            <h2  style="font-size: 20px; text-align: center;">Candidatos</h2>
+            <h2  style="font-size: 26px; text-align: center;">Candidatos</h2>
             <div class="candidatos">
                 <table class="offers-table listofertas">
                     <thead>
@@ -42,10 +42,11 @@
                             <td th:text="${candidatura.alunoCandidato.nome}"></td>
                             <td th:text="${candidatura.emailCandidato}"></td>
                             <td th:text="${candidatura.statusCandidatura}"></td>
-                            <td sec:authorize="hasRole('ROLE_EMPRESA')" th:if="${candidatura.statusCandidatura.name() == 'PENDENTE'}">
-                                <a th:href="@{/estagios/form/{candidaturaId}(candidaturaId=${candidatura.id})}">
+                            <td sec:authorize="hasRole('ROLE_EMPRESA')" style="text-align: center">
+                                <a th:if="${candidatura.statusCandidatura.name() == 'PENDENTE'}" th:href="@{/estagios/form/{candidaturaId}(candidaturaId=${candidatura.id})}">
                                     <button type="submit" class="form-button listofertas" th:if="${oferta.statusOferta.name() == 'ABERTA'}">Aprovar</button>
                                 </a>
+                                <span th:if="${candidatura.statusCandidatura.name() != 'PENDENTE'}" >-</span>
                             </td>
 
                         </tr>
@@ -54,8 +55,8 @@
             </div>
 
         </div>
-        <button class="form-button-cancel listofertas"><a th:href="@{/ofertas/listOfertasAbertas}"
-                                                          class="cancel-link listofertas">Voltar para lista</a></button>
+        <button class="form-button-cancel listofertas"><a th:href="@{/home}"
+                                                          class="cancel-link listofertas">Voltar</a></button>
     </div>
 </body>
 
