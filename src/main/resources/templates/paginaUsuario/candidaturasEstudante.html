@@ -38,9 +38,11 @@
                     </td>
                     <td th:text="${candidatura.statusCandidatura}">Status</td>
                     <td th:if="${candidatura.statusCandidatura.name() == 'APROVADA'}">
-                        <a th:text="'Baixar termo'" th:href="TODO">
-                            <span class="material-symbols-outlined">Baixar termo</span>
-                        </a>
+                        <button class="form-button">
+                            <a th:href="@{/files/download/termo/{id}(id=${estagio.id})}">
+                                Baixar termo
+                            </a>
+                        </button>
                     </td>
                 </tr>
             </tbody>

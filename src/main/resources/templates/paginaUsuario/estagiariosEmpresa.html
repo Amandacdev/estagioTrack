@@ -29,9 +29,11 @@
                     <td th:text="${#temporals.format(estagio.dataInicio, 'dd/MM/yyyy')}"></td>
                     <td th:text="${#temporals.format(estagio.dataFim, 'dd/MM/yyyy')}"></td>
                     <td th:if="${estagio.candidaturaSelecionada.statusCandidatura.name() == 'APROVADA'}">
-                        <a th:text="'Baixar termo'" th:href="TODO">
-                            <span class="material-symbols-outlined">Baixar termo</span>
-                        </a>
+                        <button class="form-button">
+                            <a th:href="@{/files/download/termo/{id}(id=${estagio.id})}">
+                                Baixar Termo
+                            </a>
+                        </button>
                     </td>
                 </tr>
             </tbody>
