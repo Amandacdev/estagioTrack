@@ -28,7 +28,7 @@
         <div th:if="${!#lists.isEmpty(candidaturas)}">
             <h2  style="font-size: 20px; text-align: center;">Candidatos</h2>
             <div class="candidatos">
-                <table class="offers-table listofertas">
+                <table class="offers-table list">
                     <thead>
                         <tr>
                             <th>Nome</th>
@@ -54,8 +54,11 @@
             </div>
 
         </div>
-        <button class="form-button-cancel listofertas"><a th:href="@{/ofertas/listOfertasAbertas}"
-                                                          class="cancel-link listofertas">Voltar para lista</a></button>
+        <button class="form-button-cancel listofertas">
+            <a th:href="@{/ofertas/listOfertasAbertas}" class="cancel-link listofertas">
+                Voltar para lista
+            </a>
+        </button>
     </div>
 </body>
 

@@ -15,11 +15,17 @@
             <p><strong>Observações:</strong> <span th:text="${estagio.observacoes}"></span></p>
         </div>
         <div>
-            <a th:href="@{/empresas/downloadTermoEstagio/{id}(id=${empresa.id})}">Download Termo de Estágio</a>
+            <button class="form-button">
+                <a th:href="@{/files/download/termo/{id}(id=${estagio.id})}">
+                    Download Termo de Estágio
+                </a>
+            </button>
         </div>
-        <a  th:href="@{/estagios}">
-            <button  class="form-button-cancel">Voltar para lista</button>
-        </a>
+        <button  class="form-button-cancel">
+            <a  th:href="@{/estagios}">
+                Voltar para lista
+            </a>
+        </button>
     </div>
 </body>
 </html>

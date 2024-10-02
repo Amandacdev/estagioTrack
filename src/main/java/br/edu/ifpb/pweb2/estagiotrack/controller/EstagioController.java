@@ -6,9 +6,11 @@ import java.util.Optional;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +41,8 @@ public class EstagioController {
 
     @Autowired
     private EmpresaController empresaController;
+    @Autowired
+    private FileController fileController;
 
     @RequestMapping("/form/{candidaturaId}")
     public String getForm(@PathVariable("candidaturaId") Integer candidaturaId, Model model) {
@@ -122,6 +126,9 @@ public class EstagioController {
     public String getDetalhesEstagio(@PathVariable("id") Integer id, Model model) {
         Optional<Estagio> estagioOptional = estagioService.findById(id);
         if (estagioOptional.isPresent()) {
+            ResponseEntity<ByteArrayResource> download = fileController.downloadTermoDeEstagio(id);
+
+            model.addAttribute("download", download);
             model.addAttribute("estagio", estagioOptional.get());
             return "estagios/detalhes";
         }
