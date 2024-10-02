@@ -435,26 +435,26 @@ body.listofertas {
 }
 
 /* Offers Table */
-.offers-table.listofertas {
+.offers-table.list {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
   text-align: left;
 }
 
-.offers-table.listofertas th,
-.offers-table.listofertas td {
+.offers-table.list th,
+.offers-table.list td {
   border: 2px solid #0f1728;
   padding: 10px;
   text-align: left;
   word-wrap: break-word;
 }
 
-.offers-table.listofertas th {
+.offers-table.list th {
   background-color: #3c4858;
 }
 
-.offers-table.listofertas tbody tr:nth-child(even) {
+.offers-table.list tbody tr:nth-child(even) {
   background-color: #282b36;
 }
 
