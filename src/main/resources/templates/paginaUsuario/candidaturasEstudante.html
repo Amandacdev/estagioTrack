@@ -6,11 +6,11 @@
     <div layout:fragment="content" class="container">
         <h1 class="title">Minhas Aplicações | Estudante</h1>
 
-        <h2 class="subtitle">Dados do Estudante</h2>
-        <p><strong>Nome:</strong> <span th:text="${aluno.nome}"></span></p>
-        <p><strong>Email:</strong> <span th:text="${aluno.email}"></span></p>
+        <h2 class="subtitle" style="font-size: 26px;">Dados do Estudante</h2>
+        <p>Nome: <strong><span th:text="${aluno.nome}"></span></strong></p>
+        <p>Email: <strong><span th:text="${aluno.email}"></span></strong></p>
 
-        <h2 class="subtitle">Candidaturas</h2>
+        <h2 class="subtitle" style="font-size: 26px;">Candidaturas</h2>
         <table class="table">
             <thead>
                 <tr>
@@ -47,6 +47,7 @@
                 </tr>
             </tbody>
         </table>
+        <button class="form-button-cancel"><a th:href="@{/home}" class="cancel-link">Voltar</a></button>
     </div>
 </body>
 
