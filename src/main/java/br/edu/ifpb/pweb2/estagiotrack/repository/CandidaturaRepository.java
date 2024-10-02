@@ -1,7 +1,7 @@
 package br.edu.ifpb.pweb2.estagiotrack.repository;
 
-import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
-import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,8 +10,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
+import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
+import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
 
 @Repository
 public interface CandidaturaRepository extends JpaRepository<Candidatura, Integer> {

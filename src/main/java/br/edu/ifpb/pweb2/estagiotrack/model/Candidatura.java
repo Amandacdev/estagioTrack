@@ -1,9 +1,15 @@
 package br.edu.ifpb.pweb2.estagiotrack.model;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusCandidatura;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Email;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity

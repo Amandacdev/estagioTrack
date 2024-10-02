@@ -478,7 +478,6 @@ body.listofertas {
 
 /* Aluno Details */
 
-
 .details-curriculo {
   margin-top: 20px;
   padding: 20px;
@@ -547,7 +546,6 @@ body.listofertas {
   color: #fff;
 }
 
-
 /* Form Button */
 .form-button.listofertas {
   padding: 8px 16px;
@@ -597,7 +595,7 @@ body.listofertas {
 }
 
 /* Error Button */
-.error-button{
+.error-button {
   width: 250px;
   padding: 10px 20px;
   background-color: #007bff;

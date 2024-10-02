@@ -10,12 +10,14 @@
 
         <h1 class="title">Cadastro de Ofertas</h1>
 
-         <!-- Verificação se a empresa está bloqueada -->
+        <!-- Verificação se a empresa está bloqueada -->
         <div th:if="${empresa != null and empresa.isBloqueada}">
-            <p class="alert alert-warning">Sua empresa está bloqueada e não pode cadastrar ofertas, entre em contato com o suporte.</p>
+            <p class="alert alert-warning">Sua empresa está bloqueada e não pode cadastrar ofertas, entre em contato com
+                o suporte.</p>
         </div>
 
-        <form  th:if="${empresa != null and !empresa.isBloqueada}" th:action="@{/ofertas/save}" method="POST" th:object="${oferta}" class="form-student student-form-page">
+        <form th:if="${empresa != null and !empresa.isBloqueada}" th:action="@{/ofertas/save}" method="POST"
+            th:object="${oferta}" class="form-student student-form-page">
             <div class="form-group">
                 <label class="form-label" for="emailOfertante">Email da Empresa ofertante:</label>
                 <input required type="email" th:field="*{emailOfertante}" class="form-input">

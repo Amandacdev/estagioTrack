@@ -1,17 +1,23 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
-import br.edu.ifpb.pweb2.estagiotrack.service.FileService;
-import com.lowagie.text.DocumentException;
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
+import com.lowagie.text.DocumentException;
+
+import br.edu.ifpb.pweb2.estagiotrack.service.FileService;
 
 @Controller
 @RequestMapping("/files")
@@ -20,10 +26,9 @@ public class FileController {
     @Autowired
     private FileService fileService;
 
-
     @PostMapping("/upload/comprovante/{empresaId}")
     public String uploadComprovante(@PathVariable Integer empresaId,
-                                    @RequestParam("file") MultipartFile file) {
+            @RequestParam("file") MultipartFile file) {
         try {
             fileService.uploadComprovante(empresaId, file);
             return "redirect:/empresas/detalhes/" + empresaId + "?success=Comprovante enviado com sucesso";
@@ -31,7 +36,6 @@ public class FileController {
             return "redirect:/empresas/detalhes/" + empresaId + "?error=Erro ao enviar comprovante";
         }
     }
-
 
     @GetMapping("/download/comprovante/{empresaId}")
     public ResponseEntity<ByteArrayResource> downloadComprovante(@PathVariable Integer empresaId) {

@@ -1,7 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout}"
-      th:with="titulo='Lista de Estágios'">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}" th:with="titulo='Lista de Estágios'">
 
 <body>
     <div layout:fragment="content" class="container">
@@ -12,7 +10,7 @@
         </div>
 
         <div th:if="${!estagios.isEmpty()}">
-            <table  class="offers-table list"-+>
+            <table class="offers-table list" -+>
                 <thead>
                     <tr>
                         <th>Aluno</th>
@@ -25,12 +23,14 @@
                 <tbody>
                     <tr th:each="estagio : ${estagios}">
                         <td th:text="${estagio.alunoAprovado.nome}"></td>
-                        <td th:text="|${estagio.ofertaSelecionada.tituloCargo} - ${estagio.ofertaSelecionada.ofertante.razaoSocial}|"></td>
+                        <td
+                            th:text="|${estagio.ofertaSelecionada.tituloCargo} - ${estagio.ofertaSelecionada.ofertante.razaoSocial}|">
+                        </td>
                         <td th:text="${#temporals.format(estagio.dataInicio, 'dd/MM/yyyy')}"></td>
                         <td th:text="${#temporals.format(estagio.dataFim, 'dd/MM/yyyy')}"></td>
                         <td>
                             <a th:href="@{/estagios/detalhes/{id}(id=${estagio.id})}">
-                                <button  class="form-button-cancel">Detalhes</button>
+                                <button class="form-button-cancel">Detalhes</button>
                             </a>
                         </td>
                     </tr>
@@ -40,16 +40,20 @@
             <div>
                 <ul class="pagination justify-content-center">
                     <li class="page-item" th:classappend="${paginador.currentPage == 0} ? 'disabled'">
-                        <a class="page-link" th:href="@{/estagios(page=${paginador.currentPage - 1}, size=${paginador.pageSize})}">
+                        <a class="page-link"
+                            th:href="@{/estagios(page=${paginador.currentPage - 1}, size=${paginador.pageSize})}">
                             Anterior
                         </a>
                     </li>
                     <li class="page-item" th:each="i : ${#numbers.sequence(0, paginador.totalPages - 1)}"
                         th:classappend="${i == paginador.currentPage} ? 'active'">
-                        <a class="page-link" th:href="@{/estagios(page=${i}, size=${paginador.pageSize})}" th:text="${i + 1}">1</a>
+                        <a class="page-link" th:href="@{/estagios(page=${i}, size=${paginador.pageSize})}"
+                            th:text="${i + 1}">1</a>
                     </li>
-                    <li class="page-item" th:classappend="${paginador.currentPage == paginador.totalPages - 1} ? 'disabled'">
-                        <a class="page-link" th:href="@{/estagios(page=${paginador.currentPage + 1}, size=${paginador.pageSize})}">
+                    <li class="page-item"
+                        th:classappend="${paginador.currentPage == paginador.totalPages - 1} ? 'disabled'">
+                        <a class="page-link"
+                            th:href="@{/estagios(page=${paginador.currentPage + 1}, size=${paginador.pageSize})}">
                             Próximo
                         </a>
                     </li>

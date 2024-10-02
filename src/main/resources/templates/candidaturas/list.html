@@ -6,9 +6,9 @@
 
         <h1 class="title">Candidaturas</h1>
 
-<div th:if="${candidaturas.isEmpty()}">
-    <p>Nenhuma candidatura encontrada</p>
-</div>
+        <div th:if="${candidaturas.isEmpty()}">
+            <p>Nenhuma candidatura encontrada</p>
+        </div>
 
         <table class="offers-table list" th:if="${!#lists.isEmpty(candidaturas)}">
             <thead>
@@ -37,16 +37,20 @@
         <div>
             <ul class="pagination justify-content-center">
                 <li class="page-item" th:classappend="${paginador.currentPage == 0} ? 'disabled'">
-                    <a class="page-link" th:href="@{/candidaturas(page=${paginador.currentPage - 1}, size=${paginador.pageSize})}">
+                    <a class="page-link"
+                        th:href="@{/candidaturas(page=${paginador.currentPage - 1}, size=${paginador.pageSize})}">
                         Anterior
                     </a>
                 </li>
                 <li class="page-item" th:each="i : ${#numbers.sequence(0, paginador.totalPages - 1)}"
                     th:classappend="${i == paginador.currentPage} ? 'active'">
-                    <a class="page-link" th:href="@{/candidaturas(page=${i}, size=${paginador.pageSize})}" th:text="${i + 1}">1</a>
+                    <a class="page-link" th:href="@{/candidaturas(page=${i}, size=${paginador.pageSize})}"
+                        th:text="${i + 1}">1</a>
                 </li>
-                <li class="page-item" th:classappend="${paginador.currentPage == paginador.totalPages - 1} ? 'disabled'">
-                    <a class="page-link" th:href="@{/candidaturas(page=${paginador.currentPage + 1}, size=${paginador.pageSize})}">
+                <li class="page-item"
+                    th:classappend="${paginador.currentPage == paginador.totalPages - 1} ? 'disabled'">
+                    <a class="page-link"
+                        th:href="@{/candidaturas(page=${paginador.currentPage + 1}, size=${paginador.pageSize})}">
                         Próximo
                     </a>
                 </li>

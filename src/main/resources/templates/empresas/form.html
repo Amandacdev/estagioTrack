@@ -9,8 +9,9 @@
 
         <h1 class="title" th:text="${empresa.id == null} ? 'Cadastro de Empresas' : 'Edição de Cadastro Empresa'"></h1>
 
-        <form th:action="@{/empresas/save}" method="POST" th:object="${empresa}" id="form" class="form-empresa" enctype="multipart/form-data">
-      
+        <form th:action="@{/empresas/save}" method="POST" th:object="${empresa}" id="form" class="form-empresa"
+            enctype="multipart/form-data">
+
             <input th:if="*{id}" th:field="*{id}" style="display: none;">
 
             <div class="form-group">
@@ -23,8 +24,8 @@
                 <input type="text" th:field="*{cnpj}" class="form-input" placeholder="Apenas os 14 dígitos numéricos"
                     required minlength="14" maxlength="14" pattern="\d{14}"
                     title="O CNPJ deve ter exatamente 14 dígitos numéricos" id="cnpj"
-                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
-                    th:disabled="true" th:attr="title='Este campo não pode ser alterado'" />
+                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:disabled="true"
+                    th:attr="title='Este campo não pode ser alterado'" />
             </div>
 
             <!-- Campo oculto para nomeUsuario -->
@@ -38,22 +39,22 @@
             <div class="form-group">
                 <label for="email" class="form-label">Email da pessoa responsável:</label>
                 <input type="email" th:field="*{email}" class="form-input" required
-                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
-                    th:disabled="true" th:attr="title='Este campo não pode ser alterado'" />
+                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:disabled="true"
+                    th:attr="title='Este campo não pode ser alterado'" />
             </div>
 
             <!-- Campo de senha dinâmico: obrigatório no cadastro, opcional na edição -->
             <div class="form-group" th:if="${empresa.id == null}">
                 <label for="senha" class="form-label">Senha:</label>
                 <input type="password" th:field="*{senha}" class="form-input" required
-                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
-                    th:disabled="true" th:attr="title='Este campo não pode ser alterado'" />
+                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:disabled="true"
+                    th:attr="title='Este campo não pode ser alterado'" />
             </div>
             <div class="form-group" th:if="${empresa.id != null}">
                 <label for="senha" class="form-label">Alterar Senha (opcional):</label>
                 <input type="password" th:field="*{senha}" class="form-input"
-                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
-                    th:disabled="true" th:attr="title='Este campo não pode ser alterado'" />
+                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:disabled="true"
+                    th:attr="title='Este campo não pode ser alterado'" />
             </div>
 
             <div class="form-group">
@@ -119,7 +120,8 @@
 
             <div class="form-group">
                 <label for="telefone" class="form-label">Telefone:</label>
-                <input type="text" th:field="*{telefone}" id="telefone" class="form-input" placeholder="(00) 00000-0000" required />
+                <input type="text" th:field="*{telefone}" id="telefone" class="form-input" placeholder="(00) 00000-0000"
+                    required />
             </div>
 
             <div class="form-group">
@@ -234,8 +236,8 @@
 
             document.getElementById('telefone').addEventListener('input', applyPhoneMask);
         </script>
-        
-        <!-- Este código passa o mesmo valor do CNPJ para o  -->
+
+        <!-- Este código passa o mesmo valor do CNPJ para o nomeUsuario -->
         <script>
             document.getElementById('cnpj').addEventListener('input', function () {
                 let cnpjValue = this.value;

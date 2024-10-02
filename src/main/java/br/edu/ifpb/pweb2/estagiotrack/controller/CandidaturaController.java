@@ -1,10 +1,8 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
 import java.security.Principal;
-import java.util.List;
 import java.util.Optional;
 
-import br.edu.ifpb.pweb2.estagiotrack.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
+import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
+import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
+import br.edu.ifpb.pweb2.estagiotrack.model.Paginador;
 import br.edu.ifpb.pweb2.estagiotrack.service.AlunoService;
 import br.edu.ifpb.pweb2.estagiotrack.service.CandidaturaService;
 import br.edu.ifpb.pweb2.estagiotrack.service.OfertaService;
@@ -62,8 +64,7 @@ public class CandidaturaController {
         Paginador paginador = new Paginador(
                 candidaturasPage.getNumber(),
                 candidaturasPage.getSize(),
-                candidaturasPage.getTotalPages()
-        );
+                candidaturasPage.getTotalPages());
 
         model.addAttribute("paginador", paginador);
         model.addAttribute("candidaturas", candidaturasPage.getContent());
@@ -72,7 +73,8 @@ public class CandidaturaController {
     }
 
     @PostMapping("/save")
-    public String cadastroCandidatura(@ModelAttribute Candidatura candidatura, Model model, RedirectAttributes attr, Principal principal) {
+    public String cadastroCandidatura(@ModelAttribute Candidatura candidatura, Model model, RedirectAttributes attr,
+            Principal principal) {
         Aluno aluno = alunoService.findByEmail(candidatura.getEmailCandidato()).orElse(null);
         Oferta oferta = ofertaService.findById(candidatura.getOfertaSelecionada().getId()).orElse(null);
 
@@ -85,7 +87,7 @@ public class CandidaturaController {
             }
             candidaturaService.save(candidatura);
             attr.addFlashAttribute("success", "Candidatura realizada com sucesso!");
-            return getListCandidaturasUsuario(0, 5,model, principal);
+            return getListCandidaturasUsuario(0, 5, model, principal);
         } else {
             model.addAttribute("alert", "Email inválido ou oferta não encontrada.");
             return "candidaturas/form";
@@ -94,8 +96,8 @@ public class CandidaturaController {
 
     @RequestMapping("/paginaUsuario")
     public String getListCandidaturasUsuario(@RequestParam(defaultValue = "0") int page,
-                                             @RequestParam(defaultValue = "5") int size,
-                                             Model model, Principal principal) {
+            @RequestParam(defaultValue = "5") int size,
+            Model model, Principal principal) {
 
         Pageable pageable = PageRequest.of(page, size);
         Page<Candidatura> candidaturasPage = candidaturaService.listAll(pageable);
@@ -106,10 +108,8 @@ public class CandidaturaController {
         Paginador paginador = new Paginador(
                 candidaturasPage.getNumber(),
                 candidaturasPage.getSize(),
-                (int) candidaturasPage.getTotalElements()
-        );
+                (int) candidaturasPage.getTotalElements());
 
-        
         Aluno aluno = alunoService.findByEmail(principal.getName()).orElse(null);
         model.addAttribute("candidaturas", candidaturas);
         model.addAttribute("aluno", aluno);

@@ -62,8 +62,7 @@ public class AlunoController {
         Paginador paginador = new Paginador(
                 alunosPage.getNumber(),
                 alunosPage.getSize(),
-                (int) alunosPage.getTotalElements()
-        );
+                (int) alunosPage.getTotalElements());
 
         model.addAttribute("paginador", paginador);
         model.addAttribute("alunos", alunosPage.getContent());
@@ -98,7 +97,6 @@ public class AlunoController {
         }
         attr.addFlashAttribute("success", "Estudante cadastrado com sucesso. Faça login para continuar.");
 
-
         return "redirect:/auth";
     }
 
@@ -117,6 +115,5 @@ public class AlunoController {
             return "redirect:/alunos";
         }
     }
-
 
 }

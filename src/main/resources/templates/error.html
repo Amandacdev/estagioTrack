@@ -1,11 +1,12 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layout/layout}" th:with="titulo='Erro - Empresa Bloqueada'">
 
-    <div layout:fragment="content" class="container">
+<div layout:fragment="content" class="container">
     <h1 class="title">Oops! Sua Empresa está Bloqueada</h1>
 
     <div class="alert">
-        <p th:text="${message}">Sua empresa está bloqueada e não pode cadastrar ofertas. Entre em contato com o suporte.</p>
+        <p th:text="${message}">Sua empresa está bloqueada e não pode cadastrar ofertas. Entre em contato com o suporte.
+        </p>
     </div>
 
     <div class="support-message">
@@ -18,4 +19,5 @@
         <a class="error-button" th:href="@{/home}">Voltar para a página inicial</a>
     </div>
 </div>
+
 </html>

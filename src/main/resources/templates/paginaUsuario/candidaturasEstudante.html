@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{layout/layout}" th:with="titulo='Aplicações Estudante'">>
+    xmlns:sec="http://www.w3.org/1999/xhtml" layout:decorate="~{layout/layout}" th:with="titulo='Aplicações Estudante'">
+>
 
 <body>
     <div layout:fragment="content" class="container">
@@ -13,11 +13,11 @@
         <table class="offers-table list">
             <thead>
                 <tr>
-                    <th  style="text-align: center;">Aluno</th>
-                    <th  style="text-align: center;">Oferta</th>
-                    <th  style="text-align: center;">Empresa</th>
-                    <th  style="text-align: center;">Status</th>
-                    <th  style="text-align: center;">Ação</th>
+                    <th style="text-align: center;">Aluno</th>
+                    <th style="text-align: center;">Oferta</th>
+                    <th style="text-align: center;">Empresa</th>
+                    <th style="text-align: center;">Status</th>
+                    <th style="text-align: center;">Ação</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,7 +42,7 @@
                             <a th:href="@{/files/download/termo/{id}(id=${estagio.id})}">
                                 Baixar termo
                             </a>
-                          <span th:if="${candidatura.statusCandidatura.name() != 'APROVADA'}">-</span>
+                            <span th:if="${candidatura.statusCandidatura.name() != 'APROVADA'}">-</span>
                         </button>
                     </td>
                 </tr>
@@ -52,16 +52,21 @@
         <div>
             <ul class="pagination justify-content-center">
                 <li class="page-item" th:classappend="${paginador.currentPage == 0} ? 'disabled'">
-                    <a class="page-link" th:href="@{paginaUsuario/candidaturasEstudante(page=${paginador.currentPage - 1}, size=${paginador.pageSize})}">
+                    <a class="page-link"
+                        th:href="@{paginaUsuario/candidaturasEstudante(page=${paginador.currentPage - 1}, size=${paginador.pageSize})}">
                         Anterior
                     </a>
                 </li>
                 <li class="page-item" th:each="i : ${#numbers.sequence(0, paginador.totalPages - 1)}"
                     th:classappend="${i == paginador.currentPage} ? 'active'">
-                    <a class="page-link" th:href="@{/paginaUsuario/candidaturasEstudante(page=${i}, size=${paginador.pageSize})}" th:text="${i + 1}">1</a>
+                    <a class="page-link"
+                        th:href="@{/paginaUsuario/candidaturasEstudante(page=${i}, size=${paginador.pageSize})}"
+                        th:text="${i + 1}">1</a>
                 </li>
-                <li class="page-item" th:classappend="${paginador.currentPage == paginador.totalPages - 1} ? 'disabled'">
-                    <a class="page-link" th:href="@{/paginaUsuario/candidaturasEstudante(page=${paginador.currentPage + 1}, size=${paginador.pageSize})}">
+                <li class="page-item"
+                    th:classappend="${paginador.currentPage == paginador.totalPages - 1} ? 'disabled'">
+                    <a class="page-link"
+                        th:href="@{/paginaUsuario/candidaturasEstudante(page=${paginador.currentPage + 1}, size=${paginador.pageSize})}">
                         Próximo
                     </a>
                 </li>
@@ -72,7 +77,7 @@
             <a th:href="@{/home}" class="cancel-link listofertas">Voltar</a>
         </button>
     </div>
-  
+
 </body>
 
 </html>

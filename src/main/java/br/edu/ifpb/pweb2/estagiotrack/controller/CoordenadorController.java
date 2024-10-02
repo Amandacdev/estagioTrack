@@ -1,29 +1,24 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
-import java.util.List;
-
-import br.edu.ifpb.pweb2.estagiotrack.model.Paginador;
-import br.edu.ifpb.pweb2.estagiotrack.service.CandidaturaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
-import br.edu.ifpb.pweb2.estagiotrack.repository.CandidaturaRepository;
+import br.edu.ifpb.pweb2.estagiotrack.model.Paginador;
+import br.edu.ifpb.pweb2.estagiotrack.service.CandidaturaService;
 
 @Controller
 public class CoordenadorController {
 
     private final String PIN_CORRETO = "1234"; // PIN mockado
 
-    @Autowired
-    private CandidaturaRepository candidaturaRepository;
     @Autowired
     private CandidaturaService candidaturaService;
 
@@ -49,8 +44,8 @@ public class CoordenadorController {
 
     @GetMapping("/coordenador/candidaturas")
     public String listarCandidaturas(@RequestParam(defaultValue = "0") int page,
-                                     @RequestParam(defaultValue = "5") int size,
-                                     Model model) {
+            @RequestParam(defaultValue = "5") int size,
+            Model model) {
         Pageable pageable = PageRequest.of(page, size);
 
         Page<Candidatura> candidaturasPage = candidaturaService.listAll(pageable);
@@ -58,8 +53,7 @@ public class CoordenadorController {
         Paginador paginador = new Paginador(
                 candidaturasPage.getNumber(),
                 candidaturasPage.getSize(),
-                (int) candidaturasPage.getTotalElements()
-        );
+                (int) candidaturasPage.getTotalElements());
 
         model.addAttribute("candidaturas", candidaturasPage);
         model.addAttribute("paginador", paginador);

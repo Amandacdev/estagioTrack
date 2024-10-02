@@ -1,16 +1,17 @@
 package br.edu.ifpb.pweb2.estagiotrack.service;
 
-import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusOferta;
-import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
-import br.edu.ifpb.pweb2.estagiotrack.repository.OfertaRepository;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
+import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusOferta;
+import br.edu.ifpb.pweb2.estagiotrack.repository.OfertaRepository;
 
 @Service
 public class OfertaService {
@@ -34,7 +35,9 @@ public class OfertaService {
         return ofertaRepository.findById(id);
     }
 
-    public Page<Oferta> findByEmailOfertante(String emailOfertante, Pageable pageable) { return ofertaRepository.findByEmailOfertante(emailOfertante, pageable); }
+    public Page<Oferta> findByEmailOfertante(String emailOfertante, Pageable pageable) {
+        return ofertaRepository.findByEmailOfertante(emailOfertante, pageable);
+    }
 
     public Oferta save(Oferta oferta) {
         return ofertaRepository.save(oferta);

@@ -1,28 +1,25 @@
 <!doctype html>
-<html lang="pt_BR"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout}"
-      th:with="titulo='Login'">
+<html lang="pt_BR" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}" th:with="titulo='Login'">
 
 <head th:replace="~{/fragments/base :: headfiles('Autenticação', ~{::link})}">
     <link th:href="@{/css/auth.css}" rel="stylesheet">
 </head>
 
 <body class="text-center">
-<div layout:fragment="content" class="container container-start">
-    <div th:if="${success}" class="alert alert-success" id="successPopup">
-        <p th:text="${success}"></p>
-    </div>
-    <form class="form-signin" th:action="@{/auth}" method="POST" th:object="${user}">
+    <div layout:fragment="content" class="container container-start">
+        <div th:if="${success}" class="alert alert-success" id="successPopup">
+            <p th:text="${success}"></p>
+        </div>
+        <form class="form-signin" th:action="@{/auth}" method="POST" th:object="${user}">
             <div class="row d-flex justify-content-center align-items-center h-50">
-                <div class="col col-xl-20" >
+                <div class="col col-xl-20">
 
                     <div class="card" style="border-radius: 1rem;">
                         <div style="display: flex;">
                             <div class="col-md-6 col-lg-7 d-none d-md-block">
                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
-                                     alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+                                    alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
                             </div>
 
 
@@ -36,19 +33,21 @@
                                             <span class="h1 fw-bold mb-0">EstagioTrack</span>
                                         </div>
 
-                                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Entre na sua conta</h5>
+                                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Entre na sua conta
+                                        </h5>
 
-                                        <div class="alert alert-danger alert-dismissible fade show"
-                                             role="alert" th:if="${param.error} ">
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                                            th:if="${param.error} ">
                                             Login e/ou senha inválidos!
                                         </div>
 
                                         <label class="sr-only" style="text-align: left; display: block;">Email</label>
-                                        <input type="text" class="form-control input-login" placeholder="Login" required autofocus
-                                               name="username" th:field="*{username}">
-                                        <label  class="sr-only mt-3" style="text-align: left; display: block;">Senha</label>
-                                        <input type="password" class="form-control input-login" placeholder="Senha" required
-                                               name="password" th:field="*{password}">
+                                        <input type="text" class="form-control input-login" placeholder="Login" required
+                                            autofocus name="username" th:field="*{username}">
+                                        <label class="sr-only mt-3"
+                                            style="text-align: left; display: block;">Senha</label>
+                                        <input type="password" class="form-control input-login" placeholder="Senha"
+                                            required name="password" th:field="*{password}">
 
                                         <!--
                                         <div data-mdb-input-init class="form-outline mb-4">
@@ -68,12 +67,15 @@
                                         </div>
 
                                         <div class="pt-1 mb-4">
-                                            <button type="submit" data-mdb-button-init data-mdb-ripple-init class="form-control form-control-lg btn btn-dark btn-lg btn-block" >Login</button>
+                                            <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                                                class="form-control form-control-lg btn btn-dark btn-lg btn-block">Login</button>
                                         </div>
 
                                         <p class="mb-5 pb-lg-2" style="color: #393f81; display: grid;">Não possui conta?
-                                            <a href="#" th:href="@{/empresas/form}" style="color: #393f81;">Cadastrar-se como Empresa</a>
-                                            <a href="#" th:href="@{/alunos/form}" style="color: #393f81;">Cadastrar-se como Estudante</a>
+                                            <a href="#" th:href="@{/empresas/form}" style="color: #393f81;">Cadastrar-se
+                                                como Empresa</a>
+                                            <a href="#" th:href="@{/alunos/form}" style="color: #393f81;">Cadastrar-se
+                                                como Estudante</a>
                                         </p>
                                     </div>
                                 </div>
@@ -82,8 +84,9 @@
                     </div>
                 </div>
             </div>
-    </form>
-</div>
+        </form>
+    </div>
 
 </body>
+
 </html>

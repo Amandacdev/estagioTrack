@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,8 +50,7 @@ public class EmpresaController {
         Paginador paginador = new Paginador(
                 empresasPage.getNumber(),
                 empresasPage.getSize(),
-                (int) empresasPage.getTotalElements()
-        );
+                (int) empresasPage.getTotalElements());
 
         model.addAttribute("paginador", paginador);
         model.addAttribute("empresas", empresasPage.getContent());

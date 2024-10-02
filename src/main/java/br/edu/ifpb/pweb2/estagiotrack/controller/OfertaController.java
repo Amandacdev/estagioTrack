@@ -4,7 +4,6 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
-import br.edu.ifpb.pweb2.estagiotrack.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
+import br.edu.ifpb.pweb2.estagiotrack.model.CompetenciaTemplate;
+import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
+import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
+import br.edu.ifpb.pweb2.estagiotrack.model.Paginador;
 import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusCandidatura;
 import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusOferta;
 import br.edu.ifpb.pweb2.estagiotrack.repository.CandidaturaRepository;
@@ -43,7 +47,7 @@ public class OfertaController {
     @Autowired
     private CompetenciasTemplateService competenciasTemplateService;
 
-   @RequestMapping("/form")
+    @RequestMapping("/form")
     public String getForm(Oferta oferta, Model model, Principal principal) {
         // Verifica se o usuário está autenticado
         if (principal == null || principal.getName() == null) {
@@ -56,13 +60,13 @@ public class OfertaController {
 
         if (empresa == null) {
             model.addAttribute("message", "Empresa não encontrada. Verifique suas credenciais.");
-            return "error"; 
+            return "error";
         }
 
         // Verifica se a empresa está bloqueada
         if (empresa.isBloqueada()) {
             model.addAttribute("message", "Sua empresa está bloqueada e não pode cadastrar ofertas.");
-            return "error"; 
+            return "error";
         }
 
         // Passa a empresa e a oferta para o modelo
@@ -74,11 +78,10 @@ public class OfertaController {
         return "ofertas/form";
     }
 
-
     @RequestMapping(method = RequestMethod.GET)
     public String getList(@RequestParam(value = "competencias", required = false) List<String> competencias,
-                          @RequestParam(defaultValue = "0") int page,
-                          @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
             Model model) {
 
         Pageable pageable = PageRequest.of(page, size);
@@ -92,8 +95,7 @@ public class OfertaController {
         Paginador paginador = new Paginador(
                 ofertasPage.getNumber(),
                 ofertasPage.getSize(),
-                (int) ofertasPage.getTotalElements()
-        );
+                (int) ofertasPage.getTotalElements());
 
         List<CompetenciaTemplate> competenciasTemplate = competenciasTemplateService.findAll();
         model.addAttribute("competenciasTemplate", competenciasTemplate);
@@ -113,7 +115,8 @@ public class OfertaController {
             Empresa empresa = empresaController.buscarPorEmail(oferta.getEmailOfertante());
             if (empresa != null) {
                 if (empresa.isBloqueada()) {
-                    model.addAttribute("alert", "Sua empresa está bloqueada e não pode cadastrar ofertas, entre em contato com o suporte.");
+                    model.addAttribute("alert",
+                            "Sua empresa está bloqueada e não pode cadastrar ofertas, entre em contato com o suporte.");
                     return "ofertas/form";
                 }
 
@@ -126,7 +129,8 @@ public class OfertaController {
                 attr.addFlashAttribute("success", "Oferta de estágio cadastrada com sucesso!");
                 return "redirect:/ofertas/detalhes/" + oferta.getId();
             } else {
-                model.addAttribute("alert", "Email inválido. O email deve corresponder ao informado no cadastro da empresa.");
+                model.addAttribute("alert",
+                        "Email inválido. O email deve corresponder ao informado no cadastro da empresa.");
                 return "ofertas/form";
             }
         }
@@ -223,8 +227,8 @@ public class OfertaController {
     // fornecido e direciona à página de visualização dessas ofertas
     @RequestMapping("/paginaUsuario")
     public String getListOfertasUsuario(@RequestParam(defaultValue = "0") int page,
-                                        @RequestParam(defaultValue = "5") int size,
-                                        Model model, Principal principal) {
+            @RequestParam(defaultValue = "5") int size,
+            Model model, Principal principal) {
         Pageable pageable = PageRequest.of(page, size);
 
         Page<Oferta> ofertasPage = ofertaService.findByEmailOfertante(principal.getName(), pageable);
@@ -233,8 +237,7 @@ public class OfertaController {
         Paginador paginador = new Paginador(
                 ofertasPage.getNumber(),
                 ofertasPage.getSize(),
-                (int) ofertasPage.getTotalElements()
-        );
+                (int) ofertasPage.getTotalElements());
 
         model.addAttribute("empresa", empresa);
         model.addAttribute("ofertas", ofertasPage);
@@ -246,8 +249,8 @@ public class OfertaController {
 
     @RequestMapping("/listOfertasAbertas")
     public String getOfertasAbertas(@RequestParam(defaultValue = "0") int page,
-                                    @RequestParam(defaultValue = "5") int size,
-                                    Model model) {
+            @RequestParam(defaultValue = "5") int size,
+            Model model) {
         Pageable pageable = PageRequest.of(page, size);
 
         Page<Oferta> ofertasAbertas = ofertaService.listarOfertasAbertas(pageable);
@@ -257,8 +260,7 @@ public class OfertaController {
         Paginador paginador = new Paginador(
                 ofertasAbertas.getNumber(),
                 ofertasAbertas.getSize(),
-                (int) ofertasAbertas.getTotalElements()
-        );
+                (int) ofertasAbertas.getTotalElements());
 
         model.addAttribute("competenciasTemplate", competenciasTemplate);
         model.addAttribute("ofertas", ofertasAbertas);

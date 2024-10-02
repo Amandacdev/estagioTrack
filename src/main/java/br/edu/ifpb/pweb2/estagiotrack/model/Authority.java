@@ -1,11 +1,17 @@
 package br.edu.ifpb.pweb2.estagiotrack.model;
 
-import jakarta.persistence.*;
+import java.io.Serializable;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
 
 @Entity
 @Table(name = "authorities")
@@ -18,10 +24,7 @@ public class Authority {
     private AuthorityId id;
 
     @ManyToOne
-    @JoinColumn(name = "username",
-                referencedColumnName = "username",
-                insertable = false,
-                updatable = false)
+    @JoinColumn(name = "username", referencedColumnName = "username", insertable = false, updatable = false)
 
     private User username;
 

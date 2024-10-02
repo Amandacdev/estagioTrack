@@ -4,9 +4,10 @@
 <body>
     <div layout:fragment="content" class="container">
         <h1 class="title">Empresas Cadastradas</h1>
-        
+
         <div th:if="${#lists.isEmpty(empresas)}">
-            <h2 class="subtitle" style="display: none;">Clique no nome da empresa para ver suas informações completas.</h2>
+            <h2 class="subtitle" style="display: none;">Clique no nome da empresa para ver suas informações completas.
+            </h2>
             <p>Nenhuma empresa cadastrada</p>
         </div>
 
@@ -30,14 +31,17 @@
                         <!-- Exibir botões apenas para coordenadores -->
                         <td th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
                             <!-- Botão de editar -->
-                             <div class="actions">
-                                <a th:href="@{/empresas/editar/{id}(id=${empresa.id})}" class="btn btn-primary">Editar</a>
+                            <div class="actions">
+                                <a th:href="@{/empresas/editar/{id}(id=${empresa.id})}"
+                                    class="btn btn-primary">Editar</a>
 
                                 <!-- Verifica se a empresa está bloqueada e alterna os botões -->
-                                <form th:action="@{/empresas/bloquear/{id}(id=${empresa.id})}" method="post" th:if="${!empresa.isBloqueada}">
+                                <form th:action="@{/empresas/bloquear/{id}(id=${empresa.id})}" method="post"
+                                    th:if="${!empresa.isBloqueada}">
                                     <button type="submit" class="btn btn-danger">Bloquear</button>
                                 </form>
-                                <form th:action="@{/empresas/desbloquear/{id}(id=${empresa.id})}" method="post" th:if="${empresa.isBloqueada}">
+                                <form th:action="@{/empresas/desbloquear/{id}(id=${empresa.id})}" method="post"
+                                    th:if="${empresa.isBloqueada}">
                                     <button type="submit" class="btn btn-success">Desbloquear</button>
                                 </form>
                             </div>
@@ -50,16 +54,20 @@
         <div>
             <ul class="pagination justify-content-center">
                 <li class="page-item" th:classappend="${paginador.currentPage == 0} ? 'disabled'">
-                    <a class="page-link" th:href="@{/empresas(page=${paginador.currentPage - 1}, size=${paginador.pageSize})}">
+                    <a class="page-link"
+                        th:href="@{/empresas(page=${paginador.currentPage - 1}, size=${paginador.pageSize})}">
                         Anterior
                     </a>
                 </li>
                 <li class="page-item" th:each="i : ${#numbers.sequence(0, paginador.totalPages - 1)}"
                     th:classappend="${i == paginador.currentPage} ? 'active'">
-                    <a class="page-link" th:href="@{/empresas(page=${i}, size=${paginador.pageSize})}" th:text="${i + 1}">1</a>
+                    <a class="page-link" th:href="@{/empresas(page=${i}, size=${paginador.pageSize})}"
+                        th:text="${i + 1}">1</a>
                 </li>
-                <li class="page-item" th:classappend="${paginador.currentPage == paginador.totalPages - 1} ? 'disabled'">
-                    <a class="page-link" th:href="@{/empresas(page=${paginador.currentPage + 1}, size=${paginador.pageSize})}">
+                <li class="page-item"
+                    th:classappend="${paginador.currentPage == paginador.totalPages - 1} ? 'disabled'">
+                    <a class="page-link"
+                        th:href="@{/empresas(page=${paginador.currentPage + 1}, size=${paginador.pageSize})}">
                         Próximo
                     </a>
                 </li>

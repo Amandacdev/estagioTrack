@@ -9,6 +9,7 @@ import br.edu.ifpb.pweb2.estagiotrack.model.CompetenciaTemplate;
 
 @Repository
 public interface CompetenciasTemplateRepository extends JpaRepository<CompetenciaTemplate, Integer> {
-
+    
+    @Override
     List<CompetenciaTemplate> findAll();
 }
