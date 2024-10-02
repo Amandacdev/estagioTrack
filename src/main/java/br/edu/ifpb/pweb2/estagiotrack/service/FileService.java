@@ -14,6 +14,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -88,10 +89,12 @@ public class FileService {
             document.add(new Paragraph("\n"));
 
 
-            String date = "Joao Pessoa (PB), " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' yyyy")) + ".";
+            String date = "Joao Pessoa (PB), " + DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' yyyy", new Locale("pt", "BR")) + ".";
             Paragraph footer = new Paragraph(date, normalFont);
             footer.setAlignment(Element.ALIGN_RIGHT);
             document.add(footer);
+
+
 
             document.close();
             return byteArrayOutputStream.toByteArray();
