@@ -14,11 +14,11 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Aluno</th>
-                    <th>Oferta</th>
-                    <th>Empresa</th>
-                    <th>Status</th>
-                    <th>Ação</th>
+                    <th  style="text-align: center;">Aluno</th>
+                    <th  style="text-align: center;">Oferta</th>
+                    <th  style="text-align: center;">Empresa</th>
+                    <th  style="text-align: center;">Status</th>
+                    <th  style="text-align: center;">Ação</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,10 +38,11 @@
                             th:text="${candidatura.ofertaSelecionada.ofertante.razaoSocial}"></a>
                     </td>
                     <td th:text="${candidatura.statusCandidatura}">Status</td>
-                    <td th:if="${candidatura.statusCandidatura.name() == 'APROVADA'}">
-                        <a th:text="'Baixar termo'" th:href="TODO">
+                    <td  style="text-align: center;">
+                        <a th:if="${candidatura.statusCandidatura.name() == 'APROVADA'}" th:text="'Baixar termo'" th:href="TODO">
                             <span class="material-symbols-outlined">Baixar termo</span>
                         </a>
+                        <span th:if="${candidatura.statusCandidatura.name() != 'APROVADA'}">-</span>
                     </td>
                 </tr>
             </tbody>
