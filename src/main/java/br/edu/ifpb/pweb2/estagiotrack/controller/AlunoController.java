@@ -1,14 +1,12 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
-import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
-import br.edu.ifpb.pweb2.estagiotrack.service.AlunoService;
-import br.edu.ifpb.pweb2.estagiotrack.service.CompetenciasTemplateService;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
@@ -23,7 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
+import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
+import br.edu.ifpb.pweb2.estagiotrack.model.Paginador;
+import br.edu.ifpb.pweb2.estagiotrack.service.AlunoService;
+import br.edu.ifpb.pweb2.estagiotrack.service.CompetenciasTemplateService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/alunos")
@@ -47,9 +50,24 @@ public class AlunoController {
         return modelAndView;
     }
 
-    @RequestMapping()
-    public String getList(Model model) {
-        model.addAttribute("alunos", alunoService.listAll());
+    @GetMapping
+    public String getList(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            Model model) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Aluno> alunosPage = alunoService.listAll(pageable);
+
+        Paginador paginador = new Paginador(
+                alunosPage.getNumber(),
+                alunosPage.getSize(),
+                (int) alunosPage.getTotalElements()
+        );
+
+        model.addAttribute("paginador", paginador);
+        model.addAttribute("alunos", alunosPage.getContent());
+
         return "alunos/list";
     }
 

@@ -4,6 +4,8 @@ import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
 import br.edu.ifpb.pweb2.estagiotrack.repository.AlunoRepository;
 import br.edu.ifpb.pweb2.estagiotrack.util.PasswordUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +23,8 @@ public class AlunoService {
         alunoRepository.save(aluno);
     }
 
-    public List<Aluno> listAll() {
-        return alunoRepository.findAll();
+    public Page<Aluno> listAll(Pageable pageable) {
+        return alunoRepository.findAll(pageable);
     }
 
     public Optional<Aluno> findById(Integer id) {
@@ -38,7 +40,7 @@ public class AlunoService {
     }
 
     public boolean existsByNomeUsuario(String nomeUsuario) {
-        return alunoRepository.findBynomeUsuario(nomeUsuario).isPresent();
+        return alunoRepository.findByNomeUsuario(nomeUsuario).isPresent();
     }
 
     public void deleteAluno(Integer id) {

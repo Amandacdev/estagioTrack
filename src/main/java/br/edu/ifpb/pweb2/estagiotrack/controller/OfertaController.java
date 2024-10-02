@@ -4,7 +4,11 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
+import br.edu.ifpb.pweb2.estagiotrack.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,10 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
-import br.edu.ifpb.pweb2.estagiotrack.model.CompetenciaTemplate;
-import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
-import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
 import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusCandidatura;
 import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusOferta;
 import br.edu.ifpb.pweb2.estagiotrack.repository.CandidaturaRepository;
@@ -77,16 +77,28 @@ public class OfertaController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String getList(@RequestParam(value = "competencias", required = false) List<String> competencias,
+                          @RequestParam(defaultValue = "0") int page,
+                          @RequestParam(defaultValue = "5") int size,
             Model model) {
-        List<Oferta> ofertas;
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Oferta> ofertasPage;
         if (competencias == null || competencias.isEmpty()) {
-            ofertas = ofertaRepository.findAll();
+            ofertasPage = ofertaService.listAll(pageable);
         } else {
-            ofertas = ofertaRepository.findByCompetencias(competencias);
+            ofertasPage = ofertaService.findByCompetencias(String.valueOf(competencias), pageable);
         }
+
+        Paginador paginador = new Paginador(
+                ofertasPage.getNumber(),
+                ofertasPage.getSize(),
+                (int) ofertasPage.getTotalElements()
+        );
+
         List<CompetenciaTemplate> competenciasTemplate = competenciasTemplateService.findAll();
         model.addAttribute("competenciasTemplate", competenciasTemplate);
-        model.addAttribute("ofertas", ofertas);
+        model.addAttribute("ofertas", ofertasPage);
+        model.addAttribute("paginador", paginador);
         return "ofertas/list";
     }
 
@@ -210,27 +222,48 @@ public class OfertaController {
     // Esse método recebe um objeto empresa, obtem as ofertas desse usuário
     // fornecido e direciona à página de visualização dessas ofertas
     @RequestMapping("/paginaUsuario")
-    public String getListOfertasUsuario(Model model, Principal principal) {
-        List<Oferta> ofertas = ofertaService.findAll();
+    public String getListOfertasUsuario(@RequestParam(defaultValue = "0") int page,
+                                        @RequestParam(defaultValue = "5") int size,
+                                        Model model, Principal principal) {
+        Pageable pageable = PageRequest.of(page, size);
 
-        List<Oferta> ofertasUsuario = ofertas.stream()
-                .filter(oferta -> oferta.getEmailOfertante().equals(principal.getName()))
-                .toList();
-
+        Page<Oferta> ofertasPage = ofertaService.findByEmailOfertante(principal.getName(), pageable);
         Empresa empresa = empresaController.buscarPorEmail(principal.getName());
-        model.addAttribute("ofertas", ofertasUsuario);
+
+        Paginador paginador = new Paginador(
+                ofertasPage.getNumber(),
+                ofertasPage.getSize(),
+                (int) ofertasPage.getTotalElements()
+        );
+
         model.addAttribute("empresa", empresa);
+        model.addAttribute("ofertas", ofertasPage);
+        model.addAttribute("paginador", paginador);
 
         return "paginaUsuario/ofertasEmpresa";
 
     }
 
     @RequestMapping("/listOfertasAbertas")
-    public String getOfertasAbertas(Model model) {
-        List<Oferta> ofertasAbertas = ofertaService.listarOfertasAbertas();
+    public String getOfertasAbertas(@RequestParam(defaultValue = "0") int page,
+                                    @RequestParam(defaultValue = "5") int size,
+                                    Model model) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<Oferta> ofertasAbertas = ofertaService.listarOfertasAbertas(pageable);
+
         List<CompetenciaTemplate> competenciasTemplate = competenciasTemplateService.findAll();
+
+        Paginador paginador = new Paginador(
+                ofertasAbertas.getNumber(),
+                ofertasAbertas.getSize(),
+                (int) ofertasAbertas.getTotalElements()
+        );
+
         model.addAttribute("competenciasTemplate", competenciasTemplate);
         model.addAttribute("ofertas", ofertasAbertas);
+        model.addAttribute("paginador", paginador);
+
         return "ofertas/listOfertasAbertas";
     }
 }

@@ -9,8 +9,10 @@
 
         <h1 class="title" th:text="${empresa.id == null} ? 'Cadastro de Empresas' : 'Edição de Cadastro Empresa'"></h1>
 
-        <form th:action="@{/empresas/save}" method="POST" th:object="${empresa}" id="form" class="form-empresa">
+        <form th:action="@{/empresas/save}" method="POST" th:object="${empresa}" id="form" class="form-empresa" enctype="multipart/form-data">
+      
             <input th:if="*{id}" th:field="*{id}" style="display: none;">
+
             <div class="form-group">
                 <label for="razaoSocial" class="form-label">Nome da Empresa:</label>
                 <input type="text" th:field="*{razaoSocial}" class="form-input" required />
@@ -143,8 +145,8 @@
             </div>
 
             <div class="form-group">
-                <label for="comprovanteEndereco" class="form-label">Comprovante de endereço(apenas PDF):</label>
-                <input type="file" th:field="*{comprovanteEndereco}" class="form-input" accept=".pdf" />
+                <label for="comprovanteEndereco" class="form-label">Comprovante de endereço (apenas PDF):</label>
+                <input type="file" name="comprovanteEndereco" class="form-input" accept=".pdf" />
             </div>
 
             <button type="submit" class="form-button">Salvar</button>

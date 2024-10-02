@@ -9,9 +9,8 @@
         <h2 class="subtitle" style="font-size: 26px;">Dados do Estudante</h2>
         <p>Nome: <strong><span th:text="${aluno.nome}"></span></strong></p>
         <p>Email: <strong><span th:text="${aluno.email}"></span></strong></p>
-
         <h2 class="subtitle" style="font-size: 26px;">Candidaturas</h2>
-        <table class="table">
+        <table class="offers-table list">
             <thead>
                 <tr>
                     <th  style="text-align: center;">Aluno</th>
@@ -38,17 +37,42 @@
                             th:text="${candidatura.ofertaSelecionada.ofertante.razaoSocial}"></a>
                     </td>
                     <td th:text="${candidatura.statusCandidatura}">Status</td>
-                    <td  style="text-align: center;">
-                        <a th:if="${candidatura.statusCandidatura.name() == 'APROVADA'}" th:text="'Baixar termo'" th:href="TODO">
-                            <span class="material-symbols-outlined">Baixar termo</span>
-                        </a>
-                        <span th:if="${candidatura.statusCandidatura.name() != 'APROVADA'}">-</span>
+                    <td style="text-align: center;" th:if="${candidatura.statusCandidatura.name() == 'APROVADA'}">
+                        <button class="form-button">
+                            <a th:href="@{/files/download/termo/{id}(id=${estagio.id})}">
+                                Baixar termo
+                            </a>
+                          <span th:if="${candidatura.statusCandidatura.name() != 'APROVADA'}">-</span>
+                        </button>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <button class="form-button-cancel"><a th:href="@{/home}" class="cancel-link">Voltar</a></button>
+
+        <div>
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${paginador.currentPage == 0} ? 'disabled'">
+                    <a class="page-link" th:href="@{paginaUsuario/candidaturasEstudante(page=${paginador.currentPage - 1}, size=${paginador.pageSize})}">
+                        Anterior
+                    </a>
+                </li>
+                <li class="page-item" th:each="i : ${#numbers.sequence(0, paginador.totalPages - 1)}"
+                    th:classappend="${i == paginador.currentPage} ? 'active'">
+                    <a class="page-link" th:href="@{/paginaUsuario/candidaturasEstudante(page=${i}, size=${paginador.pageSize})}" th:text="${i + 1}">1</a>
+                </li>
+                <li class="page-item" th:classappend="${paginador.currentPage == paginador.totalPages - 1} ? 'disabled'">
+                    <a class="page-link" th:href="@{/paginaUsuario/candidaturasEstudante(page=${paginador.currentPage + 1}, size=${paginador.pageSize})}">
+                        Próximo
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <button class="form-button-cancel listofertas">
+            <a th:href="@{/home}" class="cancel-link listofertas">Voltar</a>
+        </button>
     </div>
+  
 </body>
 
 </html>

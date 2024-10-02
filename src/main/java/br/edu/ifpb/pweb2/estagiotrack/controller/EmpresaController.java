@@ -4,11 +4,16 @@ import java.security.Principal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
+import br.edu.ifpb.pweb2.estagiotrack.model.Paginador;
 import br.edu.ifpb.pweb2.estagiotrack.service.EmpresaService;
 
 @Controller
@@ -33,9 +39,24 @@ public class EmpresaController {
         return "empresas/form";
     }
 
-    @RequestMapping()
-    public String getList(Model model) {
-        model.addAttribute("empresas", empresaService.findAll());
+    @GetMapping
+    public String getList(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            Model model) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Empresa> empresasPage = empresaService.listAll(pageable);
+
+        Paginador paginador = new Paginador(
+                empresasPage.getNumber(),
+                empresasPage.getSize(),
+                (int) empresasPage.getTotalElements()
+        );
+
+        model.addAttribute("paginador", paginador);
+        model.addAttribute("empresas", empresasPage.getContent());
+
         return "empresas/list";
     }
 

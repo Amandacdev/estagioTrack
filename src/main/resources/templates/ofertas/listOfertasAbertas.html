@@ -26,7 +26,7 @@
             <p>Nenhuma oferta disponível, volte em outro momento!</p>
         </div>
 
-        <table class="offers-table listofertas" th:if="${!#lists.isEmpty(ofertas)}">
+        <table class="offers-table list" th:if="${!#lists.isEmpty(ofertas)}">
             <thead>
                 <tr>
                     <th>Cargo</th>
@@ -61,6 +61,25 @@
                 </tr>
             </tbody>
         </table>
+
+        <div>
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${paginador.currentPage == 0} ? 'disabled'">
+                    <a class="page-link" th:href="@{/ofertas/listOfertasAbertas(page=${paginador.currentPage - 1}, size=${paginador.pageSize})}">
+                        Anterior
+                    </a>
+                </li>
+                <li class="page-item" th:each="i : ${#numbers.sequence(0, paginador.totalPages - 1)}"
+                    th:classappend="${i == paginador.currentPage} ? 'active'">
+                    <a class="page-link" th:href="@{/ofertas/listOfertasAbertas(page=${i}, size=${paginador.pageSize})}" th:text="${i + 1}">1</a>
+                </li>
+                <li class="page-item" th:classappend="${paginador.currentPage == paginador.totalPages - 1} ? 'disabled'">
+                    <a class="page-link" th:href="@{/ofertas/listOfertasAbertas(page=${paginador.currentPage + 1}, size=${paginador.pageSize})}">
+                        Próximo
+                    </a>
+                </li>
+            </ul>
+        </div>
 
         <button class="form-button-cancel listofertas"><a th:href="@{/home}"
                 class="cancel-link listofertas">Voltar</a></button>
