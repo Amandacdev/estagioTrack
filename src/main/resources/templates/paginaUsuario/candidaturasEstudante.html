@@ -1,23 +1,24 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/layout}" th:with="titulo='Aplicações Estudante'">>
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout/layout}" th:with="titulo='Aplicações Estudante'">>
 
 <body>
     <div layout:fragment="content" class="container">
         <h1 class="title">Minhas Aplicações | Estudante</h1>
 
-        <h2 class="subtitle">Dados do Estudante</h2>
-        <p><strong>Nome:</strong> <span th:text="${aluno.nome}"></span></p>
-        <p><strong>Email:</strong> <span th:text="${aluno.email}"></span></p>
+        <h2 class="subtitle" style="font-size: 26px;">Dados do Estudante</h2>
+        <p>Nome: <strong><span th:text="${aluno.nome}"></span></strong></p>
+        <p>Email: <strong><span th:text="${aluno.email}"></span></strong></p>
 
-        <h2 class="subtitle">Candidaturas</h2>
+        <h2 class="subtitle" style="font-size: 26px;">Candidaturas</h2>
         <table class="table">
             <thead>
                 <tr>
-                    <th>Aluno</th>
-                    <th>Oferta</th>
-                    <th>Empresa</th>
-                    <th>Status</th>
-                    <th>Ação</th>
+                    <th  style="text-align: center;">Aluno</th>
+                    <th  style="text-align: center;">Oferta</th>
+                    <th  style="text-align: center;">Empresa</th>
+                    <th  style="text-align: center;">Status</th>
+                    <th  style="text-align: center;">Ação</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,14 +38,16 @@
                             th:text="${candidatura.ofertaSelecionada.ofertante.razaoSocial}"></a>
                     </td>
                     <td th:text="${candidatura.statusCandidatura}">Status</td>
-                    <td th:if="${candidatura.statusCandidatura.name() == 'APROVADA'}">
-                        <a th:text="'Baixar termo'" th:href="TODO">
+                    <td  style="text-align: center;">
+                        <a th:if="${candidatura.statusCandidatura.name() == 'APROVADA'}" th:text="'Baixar termo'" th:href="TODO">
                             <span class="material-symbols-outlined">Baixar termo</span>
                         </a>
+                        <span th:if="${candidatura.statusCandidatura.name() != 'APROVADA'}">-</span>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <button class="form-button-cancel"><a th:href="@{/home}" class="cancel-link">Voltar</a></button>
     </div>
 </body>
 
