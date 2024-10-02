@@ -46,12 +46,30 @@ public class WebSecurityConfig {
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
         jdbcUserDetailsManager.setDataSource(dataSource);
 
-        UserDetails admin = User.withUsername("admin").password(passwordEncoder().encode("admin")).roles("ADMIN","ALUNO","EMPRESA").build();
-        UserDetails estagioTrack = User.withUsername("estagioTrack").password(passwordEncoder().encode("estagioTrack")).roles("ADMIN").build();
-        UserDetails amanda = User.withUsername("amanda").password(passwordEncoder().encode("amanda")).roles("ALUNO").build();
-        UserDetails george = User.withUsername("george").password(passwordEncoder().encode("george")).roles("ALUNO").build();
-        UserDetails brian = User.withUsername("brian").password(passwordEncoder().encode("brian")).roles("ALUNO").build();
-        UserDetails olivia = User.withUsername("olivia").password(passwordEncoder().encode("olivia")).roles("ALUNO").build();
+        UserDetails admin = User.withUsername("admin@gmail.com").password(passwordEncoder().encode("admin")).roles("ADMIN","ALUNO","EMPRESA").build();
+        UserDetails estagioTrack = User.withUsername("estagiotrack@gmail.com").password(passwordEncoder().encode("estagioTrack")).roles("ADMIN").build();
+
+        //Inserindo em Users alunos do insert
+        UserDetails amanda = User.withUsername("amanda@gmail.com").password(passwordEncoder().encode("123")).roles("ALUNO").build();
+        UserDetails george = User.withUsername("george@gmail.com").password(passwordEncoder().encode("123")).roles("ALUNO").build();
+        UserDetails brian = User.withUsername("brian@gmail.com").password(passwordEncoder().encode("123")).roles("ALUNO").build();
+        UserDetails olivia = User.withUsername("olivia@gmail.com").password(passwordEncoder().encode("123")).roles("ALUNO").build();
+        UserDetails mariana = User.withUsername("mariana@gmail.com").password(passwordEncoder().encode("123")).roles("ALUNO").build();
+        UserDetails daniel = User.withUsername("daniel@gmail.com").password(passwordEncoder().encode("123")).roles("ALUNO").build();
+        UserDetails sofia = User.withUsername("sofia@gmail.com").password(passwordEncoder().encode("123")).roles("ALUNO").build();
+        UserDetails andre = User.withUsername("andre@gmail.com").password(passwordEncoder().encode("123")).roles("ALUNO").build();
+        UserDetails patricia = User.withUsername("patricia@gmail.com").password(passwordEncoder().encode("123")).roles("ALUNO").build();
+        UserDetails luana = User.withUsername("luana@gmail.com").password(passwordEncoder().encode("123")).roles("ALUNO").build();
+
+        //Inserindo em Users empresas do insert
+        UserDetails TechInnovateLTDA = User.withUsername("contato@techinnovate.com").password(passwordEncoder().encode("senhaSegura123")).roles("EMPRESA").build();
+        UserDetails WebSolutionsLTDA = User.withUsername("contato@websolutions.com").password(passwordEncoder().encode("senhaSegura456")).roles("EMPRESA").build();
+        UserDetails CloudDataSA = User.withUsername("contato@clouddata.com").password(passwordEncoder().encode("senhaSegura789")).roles("EMPRESA").build();
+        UserDetails NextGenITLTDA = User.withUsername("contato@nextgenit.com").password(passwordEncoder().encode("senhaSegura101")).roles("EMPRESA").build();
+        UserDetails CyberTechSecurityLTDA = User.withUsername("contato@cybertech.com").password(passwordEncoder().encode("senhaSegura202")).roles("EMPRESA").build();
+        UserDetails DevMastersLTDA = User.withUsername("contato@devmasters.com").password(passwordEncoder().encode("senhaSegura303")).roles("EMPRESA").build();
+        UserDetails DataAnalyticsLTDA = User.withUsername("contato@dataanalytics.com").password(passwordEncoder().encode("senhaSegura404")).roles("EMPRESA").build();
+
 
         if(!jdbcUserDetailsManager.userExists(admin.getUsername())){
             jdbcUserDetailsManager.createUser(admin);
@@ -60,7 +78,19 @@ public class WebSecurityConfig {
             jdbcUserDetailsManager.createUser(george);
             jdbcUserDetailsManager.createUser(brian);
             jdbcUserDetailsManager.createUser(olivia);
-
+            jdbcUserDetailsManager.createUser(mariana);
+            jdbcUserDetailsManager.createUser(daniel);
+            jdbcUserDetailsManager.createUser(sofia);
+            jdbcUserDetailsManager.createUser(andre);
+            jdbcUserDetailsManager.createUser(patricia);
+            jdbcUserDetailsManager.createUser(luana);
+            jdbcUserDetailsManager.createUser(TechInnovateLTDA);
+            jdbcUserDetailsManager.createUser(WebSolutionsLTDA);
+            jdbcUserDetailsManager.createUser(CloudDataSA);
+            jdbcUserDetailsManager.createUser(NextGenITLTDA);
+            jdbcUserDetailsManager.createUser(CyberTechSecurityLTDA);
+            jdbcUserDetailsManager.createUser(DevMastersLTDA);
+            jdbcUserDetailsManager.createUser(DataAnalyticsLTDA);
         }
 
         return jdbcUserDetailsManager;
