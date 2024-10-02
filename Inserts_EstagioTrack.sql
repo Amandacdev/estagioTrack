@@ -84,7 +84,8 @@ INSERT INTO candidatura VALUES
 (6,'luana@gmail.com','PENDENTE',10,3),
 (7,'brian@gmail.com','PENDENTE',3,3),
 (8,'olivia@gmail.com','PENDENTE',4,1),
-(9,'olivia@gmail.com','REJEITADA',4,2);
+(9,'olivia@gmail.com','REJEITADA',4,2),
+(10,'brian@gmail.com','PENDENTE',3,2);
 
 select * from aluno;
 select * from aluno_competencias;

@@ -8,7 +8,7 @@
         <h2 class="listofertas">Dados da Empresa</h2>
         <p class="listofertas">CNPJ: <span th:text="${empresa.cnpj}"></span></p>
         <p class="listofertas">Email: <span th:text="${empresa.email}"></span></p>
-        <table class="offers-table listofertas" th:if="${!#lists.isEmpty(ofertas)}">
+        <table class="offers-table list" th:if="${!#lists.isEmpty(ofertas)}">
             <thead>
                 <tr>
                     <th>Cargo</th>

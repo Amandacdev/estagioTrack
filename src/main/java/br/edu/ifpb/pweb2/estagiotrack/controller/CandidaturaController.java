@@ -59,20 +59,14 @@ public class CandidaturaController {
         Pageable pageable = PageRequest.of(page, size);
         Page<Candidatura> candidaturasPage = candidaturaService.listAll(pageable);
 
-        if (candidaturasPage == null || candidaturasPage.isEmpty()) {
-            Paginador paginador = new Paginador(0, size, 0);
-            model.addAttribute("paginador", paginador);
-            model.addAttribute("candidaturas", List.of());
-            model.addAttribute("error", "Nenhuma candidatura encontrada.");
-        } else {
-            Paginador paginador = new Paginador(
-                    candidaturasPage.getNumber(),
-                    candidaturasPage.getSize(),
-                    candidaturasPage.getTotalPages()
-            );
-            model.addAttribute("paginador", paginador);
-            model.addAttribute("candidaturas", candidaturasPage.getContent());
-        }
+        Paginador paginador = new Paginador(
+                candidaturasPage.getNumber(),
+                candidaturasPage.getSize(),
+                candidaturasPage.getTotalPages()
+        );
+
+        model.addAttribute("paginador", paginador);
+        model.addAttribute("candidaturas", candidaturasPage.getContent());
 
         return "candidaturas/list";
     }
