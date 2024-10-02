@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
+import br.edu.ifpb.pweb2.estagiotrack.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,10 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
-import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
-import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
-import br.edu.ifpb.pweb2.estagiotrack.model.Paginador;
 import br.edu.ifpb.pweb2.estagiotrack.service.AlunoService;
 import br.edu.ifpb.pweb2.estagiotrack.service.CandidaturaService;
 import br.edu.ifpb.pweb2.estagiotrack.service.OfertaService;
@@ -94,7 +91,7 @@ public class CandidaturaController {
             }
             candidaturaService.save(candidatura);
             attr.addFlashAttribute("success", "Candidatura realizada com sucesso!");
-            return getListCandidaturasUsuario(model, principal);
+            return getListCandidaturasUsuario(0, 5,model, principal);
         } else {
             model.addAttribute("alert", "Email inválido ou oferta não encontrada.");
             return "candidaturas/form";
@@ -102,16 +99,27 @@ public class CandidaturaController {
     }
 
     @RequestMapping("/paginaUsuario")
-    public String getListCandidaturasUsuario(Model model, Principal principal) {
-        List<Candidatura> candidaturas = candidaturaService.findAll();
+    public String getListCandidaturasUsuario(@RequestParam(defaultValue = "0") int page,
+                                             @RequestParam(defaultValue = "5") int size,
+                                             Model model, Principal principal) {
 
-        List<Candidatura> candidaturasUsuario = candidaturas.stream()
-                .filter(candidatura -> candidatura.getEmailCandidato().equals(principal.getName()))
-                .toList();
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Candidatura> candidaturasPage = candidaturaService.listAll(pageable);
+
+        String email = principal.getName();
+        Page<Candidatura> candidaturas = candidaturaService.findByEmailCandidato(email, pageable);
+
+        Paginador paginador = new Paginador(
+                candidaturasPage.getNumber(),
+                candidaturasPage.getSize(),
+                (int) candidaturasPage.getTotalElements()
+        );
+
         
         Aluno aluno = alunoService.findByEmail(principal.getName()).orElse(null);
-        model.addAttribute("candidaturas", candidaturasUsuario);
+        model.addAttribute("candidaturas", candidaturas);
         model.addAttribute("aluno", aluno);
+        model.addAttribute("paginador", paginador);
 
         return "paginaUsuario/candidaturasEstudante";
 

@@ -25,6 +25,10 @@ public class CandidaturaService {
         return candidaturaRepository.findAll();
     }
 
+    public Page<Candidatura> findByEmailCandidato(String emailCandidato, Pageable pageable) {
+        return candidaturaRepository.findByEmailCandidato(emailCandidato, pageable);
+    }
+
     public Candidatura save(Candidatura candidatura) {
         return candidaturaRepository.save(candidatura);
     }
