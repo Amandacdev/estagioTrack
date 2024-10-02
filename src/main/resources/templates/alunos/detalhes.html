@@ -8,23 +8,28 @@
             <p th:text="${success}"></p>
         </div>
 
-        <h1 class="title">Detalhes do Estudante</h1>
-
-        <div class="details">
-            <p><strong>Nome:</strong> <span th:text="${aluno.nome}"></span></p>
-            <p><strong>Email:</strong> <span th:text="${aluno.email}"></span></p>
-            <p><strong>Usuário:</strong> <span th:text="${aluno.nomeUsuario}"></span></p>
-            <p><strong>Gênero:</strong> <span th:text="${aluno.genero}"></span></p>
-            <p><strong>Competências:</strong>
-                <span th:each="competencia, iterStat : ${aluno.competencias}">
-                    <span th:text="${competencia}"></span><span th:if="${!iterStat.last}">, </span>
-                </span>
-            </p>
-
+        <h1 class="detail-title">Detalhes do Aluno</h1>
+        <div class="details-curriculo">
+            <div class="student-name">
+                <p th:text="${aluno.nome}"></p>
+            </div>
+            <div class="section">
+                <h2>Informações Pessoais</h2>
+                <p class="detail-item">Email: <span th:text="${aluno.email}"></span></p>
+                <p class="detail-item">Usuário: <span th:text="${aluno.nomeUsuario}"></span></p>
+                <p class="detail-item">Gênero: <span th:text="${aluno.genero}"></span></p>
+            </div>
+            <div class="section">
+                <h2>Competências</h2>
+                <p class="detail-item">
+                    <span th:each="competencia, iterStat : ${aluno.competencias}">
+                        <span th:text="${competencia}"></span><span th:if="${!iterStat.last}">, </span>
+                    </span>
+                </p>
+            </div>
         </div>
 
-        <button class="form-button-cancel"><a th:href="@{/ofertas/listOfertasAbertas}" class="cancel-link">Ir para
-                ofertas</a></button>
+        <button class="form-button-cancel"><a th:href="@{/ofertas/listOfertasAbertas}" class="cancel-link">Ir para ofertas</a></button>
     </div>
 </body>
 

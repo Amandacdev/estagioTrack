@@ -70,4 +70,6 @@ public class Empresa implements Serializable {
         @NotBlank(message = "A senha é obrigatória.")
         private String senha;
 
+        @Column(nullable = false)
+        private boolean isBloqueada = false;
 }

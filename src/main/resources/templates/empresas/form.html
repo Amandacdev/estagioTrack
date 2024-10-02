@@ -7,9 +7,11 @@
             <p th:text="${alert}"></p>
         </div>
 
-        <h1 class="title">Cadastro de Empresas</h1>
+        <h1 class="title" th:text="${empresa.id == null} ? 'Cadastro de Empresas' : 'Edição de Cadastro Empresa'"></h1>
 
         <form th:action="@{/empresas/save}" method="POST" th:object="${empresa}" id="form" class="form-empresa" enctype="multipart/form-data">
+      
+            <input th:if="*{id}" th:field="*{id}" style="display: none;">
 
             <div class="form-group">
                 <label for="razaoSocial" class="form-label">Nome da Empresa:</label>
@@ -20,7 +22,9 @@
                 <label for="cnpj" class="form-label">CNPJ:</label>
                 <input type="text" th:field="*{cnpj}" class="form-input" placeholder="Apenas os 14 dígitos numéricos"
                     required minlength="14" maxlength="14" pattern="\d{14}"
-                    title="O CNPJ deve ter exatamente 14 dígitos numéricos" id="cnpj" />
+                    title="O CNPJ deve ter exatamente 14 dígitos numéricos" id="cnpj"
+                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+                    th:disabled="true" th:attr="title='Este campo não pode ser alterado'" />
             </div>
 
             <!-- Campo oculto para nomeUsuario -->
@@ -33,12 +37,23 @@
 
             <div class="form-group">
                 <label for="email" class="form-label">Email da pessoa responsável:</label>
-                <input type="email" th:field="*{email}" class="form-input" required />
+                <input type="email" th:field="*{email}" class="form-input" required
+                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+                    th:disabled="true" th:attr="title='Este campo não pode ser alterado'" />
             </div>
 
-            <div class="form-group">
+            <!-- Campo de senha dinâmico: obrigatório no cadastro, opcional na edição -->
+            <div class="form-group" th:if="${empresa.id == null}">
                 <label for="senha" class="form-label">Senha:</label>
-                <input type="password" th:field="*{senha}" class="form-input" required />
+                <input type="password" th:field="*{senha}" class="form-input" required
+                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+                    th:disabled="true" th:attr="title='Este campo não pode ser alterado'" />
+            </div>
+            <div class="form-group" th:if="${empresa.id != null}">
+                <label for="senha" class="form-label">Alterar Senha (opcional):</label>
+                <input type="password" th:field="*{senha}" class="form-input"
+                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+                    th:disabled="true" th:attr="title='Este campo não pode ser alterado'" />
             </div>
 
             <div class="form-group">
@@ -135,7 +150,7 @@
             </div>
 
             <button type="submit" class="form-button">Salvar</button>
-            <button class="form-button-cancel"><a th:href="@{/form}" class="cancel-link">Cancelar</a></button>
+            <button class="form-button-cancel"><a th:href="@{/empresas}" class="cancel-link">Cancelar</a></button>
         </form>
 
         <style>

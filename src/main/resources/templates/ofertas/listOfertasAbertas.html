@@ -23,7 +23,7 @@
         </form>
 
         <div th:if="${#lists.isEmpty(ofertas)}">
-            <p>Nenhuma oferta cadastrada</p>
+            <p>Nenhuma oferta disponível, volte em outro momento!</p>
         </div>
 
         <table class="offers-table list" th:if="${!#lists.isEmpty(ofertas)}">
