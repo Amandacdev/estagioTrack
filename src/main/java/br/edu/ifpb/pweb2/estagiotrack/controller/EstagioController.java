@@ -4,20 +4,16 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
+import br.edu.ifpb.pweb2.estagiotrack.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
-import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
-import br.edu.ifpb.pweb2.estagiotrack.model.Estagio;
-import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
 import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusCandidatura;
 import br.edu.ifpb.pweb2.estagiotrack.model.enums.StatusOferta;
 import br.edu.ifpb.pweb2.estagiotrack.repository.CandidaturaRepository;
@@ -66,9 +62,20 @@ public class EstagioController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getList(Model model) {
-        java.util.List<Estagio> estagios = estagioService.findAll();
-        model.addAttribute("estagios", estagios);
+    public String getList(@RequestParam(defaultValue = "0") int page,
+                          @RequestParam(defaultValue = "5") int size,
+                          Model model) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Estagio> estagiosPage = estagioService.listAll(pageable);
+
+        Paginador paginador = new Paginador(
+                estagiosPage.getNumber(),
+                estagiosPage.getSize(),
+                (int) estagiosPage.getTotalElements()
+        );
+
+        model.addAttribute("paginador", paginador);
+        model.addAttribute("estagios", estagiosPage);
         return "estagios/list";
     }
 
@@ -123,16 +130,26 @@ public class EstagioController {
     }
 
     @RequestMapping("/estagiarios")
-    public String getListEstagiariosUsuario(Model model, Principal principal) {
-        List<Estagio> estagios = estagioService.findAll();
+    public String getListEstagiariosUsuario(@RequestParam(defaultValue = "0") int page,
+                                            @RequestParam(defaultValue = "5") int size,
+                                            Model model, Principal principal) {
 
-        List<Estagio> estagiarios = estagios.stream()
-                .filter(estagio -> estagio.getOfertaSelecionada().getOfertante().getEmail().equals(principal.getName()))
-                .toList();
-        
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Estagio> estagiosPage = estagioService.listAll(pageable);
+
+        String email = principal.getName();
+        Page<Estagio> estagiarios = estagioService.buscarEstagiosPorEmailOfertante(email, pageable);
+
+        Paginador paginador = new Paginador(
+                estagiosPage.getNumber(),
+                estagiosPage.getSize(),
+                (int) estagiosPage.getTotalElements()
+        );
+
         Empresa empresa = empresaController.buscarPorEmail(principal.getName());
         model.addAttribute("estagiarios", estagiarios);
         model.addAttribute("empresa", empresa);
+        model.addAttribute("paginador", paginador);
         return "paginaUsuario/estagiariosEmpresa";
     }
 }
