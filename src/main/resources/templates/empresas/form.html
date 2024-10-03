@@ -13,7 +13,7 @@
 
             <div class="form-group">
                 <label for="razaoSocial" class="form-label">Nome da Empresa:</label>
-                <input type="text" th:field="*{razaoSocial}" class="form-input" required />
+                <input type="text" th:field="*{razaoSocial}" class="form-input" id="razaoSocial" required />
             </div>
 
             <div class="form-group">
@@ -28,17 +28,17 @@
 
             <div class="form-group">
                 <label for="responsavel" class="form-label">Nome da pessoa responsável:</label>
-                <input type="text" th:field="*{responsavel}" class="form-input" required />
+                <input type="text" th:field="*{responsavel}" class="form-input" id="responsavel" required />
             </div>
 
             <div class="form-group">
                 <label for="email" class="form-label">Email da pessoa responsável:</label>
-                <input type="email" th:field="*{email}" class="form-input" required />
+                <input type="email" th:field="*{email}" class="form-input" id="email" required />
             </div>
 
             <div class="form-group">
                 <label for="senha" class="form-label">Senha:</label>
-                <input type="password" th:field="*{senha}" class="form-input" required />
+                <input type="password" th:field="*{senha}" class="form-input" id="senha" required />
             </div>
 
             <div class="form-group">
@@ -55,7 +55,7 @@
 
             <div class="form-group">
                 <label for="numeroImovel" class="form-label">Número do imóvel:</label>
-                <input type="number" th:field="*{numeroImovel}" class="form-input" required />
+                <input type="number" th:field="*{numeroImovel}" class="form-input" id="numeroImovel" required />
             </div>
 
             <div class="form-group">
@@ -109,7 +109,7 @@
 
             <div class="form-group">
                 <label for="atividadePrincipal" class="form-label">Atividade principal:</label>
-                <select th:field="*{atividadePrincipal}" class="form-input" required>
+                <select th:field="*{atividadePrincipal}" class="form-input" id="atividadePrincipal" required>
                     <option value="" disabled selected>Selecione a atividade principal</option>
                     <option value="Desenvolvimento de Software">Desenvolvimento de Software</option>
                     <option value="Consultoria em TI">Consultoria em TI</option>
@@ -126,12 +126,12 @@
 
             <div class="form-group">
                 <label for="site" class="form-label">Site:</label>
-                <input type="text" th:field="*{site}" class="form-input" />
+                <input type="text" th:field="*{site}" class="form-input" id="site" />
             </div>
 
             <div class="form-group">
                 <label for="comprovanteEndereco" class="form-label">Comprovante de endereço (apenas PDF):</label>
-                <input type="file" name="comprovanteEndereco" class="form-input" accept=".pdf" />
+                <input type="file" name="comprovante" class="form-input" accept=".pdf" id="comprovanteEndereco" required />
             </div>
 
             <button type="submit" class="form-button">Salvar</button>

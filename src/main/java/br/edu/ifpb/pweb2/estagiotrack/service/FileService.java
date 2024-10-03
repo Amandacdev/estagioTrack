@@ -55,15 +55,20 @@ public class FileService {
             Font normalFont = new Font(Font.HELVETICA, 12, Font.NORMAL);
             Font titleFont = new Font(Font.HELVETICA, 16, Font.BOLD);
 
-            Image headerImage = Image.getInstance("assets/logo-ifpb-com-borda.png");
-            headerImage.setAlignment(Element.ALIGN_CENTER);
-            headerImage.scaleToFit(500, 150);
-            document.add(headerImage);
-
+            // Tente carregar a imagem do cabeçalho
+            try {
+                Image headerImage = Image.getInstance("assets/logo-ifpb-com-borda.png");
+                headerImage.setAlignment(Element.ALIGN_CENTER);
+                headerImage.scaleToFit(500, 150);
+                document.add(headerImage);
+            } catch (Exception e) {
+                // Log o erro ou notifique de alguma forma
+                System.err.println("Erro ao carregar a imagem do cabeçalho: " + e.getMessage());
+            }
 
             document.add(new Paragraph("\n"));
 
-
+            // Adiciona título e conteúdo
             Paragraph title = new Paragraph("DECLARAÇÃO", titleFont);
             title.setAlignment(Element.ALIGN_CENTER);
             document.add(title);
@@ -85,16 +90,13 @@ public class FileService {
             paragraph.add(new Chunk(content, normalFont));
             document.add(paragraph);
 
-
             document.add(new Paragraph("\n"));
 
-
-            String date = "Joao Pessoa (PB), " + DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' yyyy", new Locale("pt", "BR")) + ".";
-            Paragraph footer = new Paragraph(date, normalFont);
+            // Adiciona rodapé com a data formatada corretamente
+            String date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' yyyy", new Locale("pt", "BR")));
+            Paragraph footer = new Paragraph("João Pessoa (PB), " + date + ".", normalFont);
             footer.setAlignment(Element.ALIGN_RIGHT);
             document.add(footer);
-
-
 
             document.close();
             return byteArrayOutputStream.toByteArray();
@@ -102,5 +104,4 @@ public class FileService {
 
         return null;
     }
-
 }

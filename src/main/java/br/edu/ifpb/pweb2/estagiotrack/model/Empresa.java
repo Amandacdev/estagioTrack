@@ -1,15 +1,15 @@
 package br.edu.ifpb.pweb2.estagiotrack.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+import java.io.Serializable;
+
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.*;
-
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Generated;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
@@ -18,7 +18,9 @@ import java.io.Serializable;
 public class Empresa implements Serializable {
 
         @Id
+        @GeneratedValue(strategy = GenerationType.SEQUENCE)
         private Integer id;
+
         @NotBlank(message = "O CNPJ é obrigatório.")
         @Column(unique = true, nullable = false)
         private String cnpj;
@@ -70,4 +72,6 @@ public class Empresa implements Serializable {
         @NotBlank(message = "A senha é obrigatória.")
         private String senha;
 
+        @Column(nullable = false)
+        private boolean isBloqueada = false;
 }
