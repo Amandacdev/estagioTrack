@@ -85,12 +85,6 @@ public class EmpresaController {
             return "empresas/form";
         }
 
-        // Se é uma nova empresa, definimos o ID
-        if (empresa.getId() == null) {
-            Integer maxId = empresaService.findMaxId();
-            empresa.setId(maxId + 1);
-        }
-
         empresaService.save(empresa);
 
         // Lógica de usuário no caso de criação de uma nova empresa

@@ -37,7 +37,7 @@
 
             <div class="form-group">
                 <label for="email" class="form-label">Email da pessoa responsável:</label>
-                <input type="email" th:field="*{email}" class="form-input" required
+                <input type="email" th:field="*{email}" class="form-input"  id="email" required
                     th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
                     th:disabled="true" th:attr="title='Este campo não pode ser alterado'" />
             </div>
@@ -45,7 +45,7 @@
             <!-- Campo de senha dinâmico: obrigatório no cadastro, opcional na edição -->
             <div class="form-group" th:if="${empresa.id == null}">
                 <label for="senha" class="form-label">Senha:</label>
-                <input type="password" th:field="*{senha}" class="form-input" required
+                <input type="password" th:field="*{senha}" class="form-input" id="senha" required
                     th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
                     th:disabled="true" th:attr="title='Este campo não pode ser alterado'" />
             </div>
@@ -238,8 +238,7 @@
         <!-- Este código passa o mesmo valor do CNPJ para o  -->
         <script>
             document.getElementById('cnpj').addEventListener('input', function () {
-                let cnpjValue = this.value;
-                document.getElementById('nomeUsuario').value = cnpjValue;
+                document.getElementById('nomeUsuario').value = this.value;
             });
         </script>
     </div>
