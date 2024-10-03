@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.validation.ValidationErrors;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,11 +18,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
 import br.edu.ifpb.pweb2.estagiotrack.model.Paginador;
 import br.edu.ifpb.pweb2.estagiotrack.service.EmpresaService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/empresas")
@@ -33,8 +36,12 @@ public class EmpresaController {
     @Autowired
     private JdbcUserDetailsManager jdbcUserDetailsManager;
 
+    @Autowired
+    private FileController fileController;
+
     @RequestMapping("/form")
     public String getForm(Empresa empresa, Model model) {
+        model.addAttribute("empresa", empresa);
         return "empresas/form";
     }
 
@@ -59,12 +66,31 @@ public class EmpresaController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String cadastroEmpresa(Empresa empresa, Model model, RedirectAttributes attr, Principal principal) {
+    public String cadastroEmpresa(@RequestParam(value="comprovante") MultipartFile comprovante,
+                                  @Valid Empresa empresa, BindingResult bindingResult,
+                                  Model model, RedirectAttributes attr) {
         System.out.println(empresa);
         Empresa empresaExistente = null;
 
         if (empresa.getId() != null) {
             empresaExistente = empresaService.findById(empresa.getId()).orElse(null);
+        }
+
+        // Debug: Imprime informações do MultipartFile
+        System.out.println("Nome do arquivo: " + comprovante.getOriginalFilename());
+        System.out.println("Tamanho do arquivo: " + comprovante.getSize());
+
+        // Verifica se o comprovante foi enviado
+        if (comprovante.isEmpty()) {
+            model.addAttribute("alert", "Por favor, envie um comprovante de endereço.");
+            return "empresas/form";
+        }
+
+        // Verifica se há erros de validação no formulário
+        if (bindingResult.hasErrors()) {
+            System.out.println("Erros de validação: " + bindingResult.getAllErrors());
+            model.addAttribute("alert", "Por favor, preencha todos os campos corretamente.");
+            return "empresas/form";
         }
 
         // Verificar se o email ou CNPJ já existem, excluindo a própria empresa (caso
@@ -77,13 +103,12 @@ public class EmpresaController {
             return "empresas/form";
         }
 
-        // Se é uma nova empresa, definimos o ID
-        if (empresa.getId() == null) {
-            Integer maxId = empresaService.findMaxId();
-            empresa.setId(maxId + 1);
-        }
-
         empresaService.save(empresa);
+        System.out.println("Empresa salva: " + empresa);
+
+        // Salva o comprovante no banco usando o serviço de arquivo
+        fileController.uploadComprovante(empresa.getId(), comprovante);
+        System.out.println("Comprovante salvo: " + comprovante);
 
         // Lógica de usuário no caso de criação de uma nova empresa
         if (empresaExistente == null) {

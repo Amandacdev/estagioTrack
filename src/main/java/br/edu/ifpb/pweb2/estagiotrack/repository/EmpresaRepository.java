@@ -15,7 +15,7 @@ public interface EmpresaRepository extends JpaRepository<Empresa, Integer> {
     Optional<Empresa> findByEmail(@Param("email") String email);
 
     Optional<Empresa> findByCnpj(String cnpj);
-
+  
     boolean existsByEmail(String email);
 
     boolean existsByCnpj(String cnpj);

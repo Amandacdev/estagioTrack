@@ -3,6 +3,8 @@ package br.edu.ifpb.pweb2.estagiotrack.controller;
 import java.security.Principal;
 import java.util.Optional;
 
+import br.edu.ifpb.pweb2.estagiotrack.model.*;
+import br.edu.ifpb.pweb2.estagiotrack.service.EstagioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,10 +21,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Aluno;
 import br.edu.ifpb.pweb2.estagiotrack.model.Candidatura;
+import br.edu.ifpb.pweb2.estagiotrack.model.Estagio;
 import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
 import br.edu.ifpb.pweb2.estagiotrack.model.Paginador;
 import br.edu.ifpb.pweb2.estagiotrack.service.AlunoService;
 import br.edu.ifpb.pweb2.estagiotrack.service.CandidaturaService;
+import br.edu.ifpb.pweb2.estagiotrack.service.EstagioService;
 import br.edu.ifpb.pweb2.estagiotrack.service.OfertaService;
 
 @Controller
@@ -37,6 +41,9 @@ public class CandidaturaController {
 
     @Autowired
     private OfertaService ofertaService;
+
+    @Autowired
+    private EstagioService estagioService;
 
     @RequestMapping("/form")
     public String getForm(@RequestParam("ofertaId") Integer ofertaId, Model model) {
@@ -108,11 +115,17 @@ public class CandidaturaController {
         Paginador paginador = new Paginador(
                 candidaturasPage.getNumber(),
                 candidaturasPage.getSize(),
-                (int) candidaturasPage.getTotalElements());
+                (int) candidaturasPage.getTotalElements()
+        );
 
         Aluno aluno = alunoService.findByEmail(principal.getName()).orElse(null);
+
+        Optional<Estagio> estagioOptional = estagioService.buscarEstagioPorAlunoId(aluno.getId());
+        Estagio estagio = estagioOptional.orElse(null);
+
         model.addAttribute("candidaturas", candidaturas);
         model.addAttribute("aluno", aluno);
+        model.addAttribute("estagio", estagio);
         model.addAttribute("paginador", paginador);
 
         return "paginaUsuario/candidaturasEstudante";

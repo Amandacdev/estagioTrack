@@ -9,10 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Estagio;
+import br.edu.ifpb.pweb2.estagiotrack.model.ResultadoEstagio;
 import br.edu.ifpb.pweb2.estagiotrack.repository.EstagioRepository;
-
-@Service
-public class EstagioService {
     
     @Autowired
     private EstagioRepository estagioRepository;
@@ -21,6 +19,14 @@ public class EstagioService {
 
     public Page<Estagio> buscarEstagiosPorEmailOfertante(String email, Pageable pageable) {
         return estagioRepository.findEstagiosByOfertanteEmail(email, pageable);
+    }
+
+    public Optional<Estagio> buscarEstagioPorAlunoId(Integer alunoId) {
+        return estagioRepository.findEstagioByAlunoId(alunoId);
+    }
+
+    public ResultadoEstagio obterDadosEstagio(Integer estagioId) {
+        return estagioRepository.findDadosEstagioPorId(estagioId);
     }
 
     public List<Estagio> findAll() {
