@@ -4,18 +4,27 @@
 <body>
     <div layout:fragment="content" class="container">
 
-        <div th:if="${alert}" class="alert" id="alertPopup">
-            <p th:text="${alert}"></p>
-        </div>
-
-        <h1 class="title">Cadastro de Ofertas</h1>
-
-        <!-- Verificação se a empresa está bloqueada -->
+        <!-- Verifica se a empresa está bloqueada -->
         <div th:if="${empresa != null and empresa.isBloqueada}">
-            <p class="alert alert-warning">Sua empresa está bloqueada e não pode cadastrar ofertas, entre em contato com
-                o suporte.</p>
+            <h1 class="title">Oops! Sua Empresa está Bloqueada</h1>
+
+            <div class="alert">
+                <p th:text="${message}">Sua empresa está bloqueada e não pode cadastrar ofertas. Entre em contato com o
+                    suporte.</p>
+            </div>
+
+            <div class="support-message">
+                <p>Entre em contato com o suporte para mais informações:</p>
+                <p>Email: <a href="mailto:suporte@estagiotracker.com">suporte@estagiotracker.com</a></p>
+                <p>Telefone: (00) 0000-0000</p>
+            </div>
+
+            <div class="center-container">
+                <a class="error-button" th:href="@{/home}">Voltar para a página inicial</a>
+            </div>
         </div>
 
+        <!-- Caso a empresa não esteja bloqueada, mostra o formulário de cadastro -->
         <form th:if="${empresa != null and !empresa.isBloqueada}" th:action="@{/ofertas/save}" method="POST"
             th:object="${oferta}" class="form-student student-form-page">
             <div class="form-group">
@@ -66,35 +75,31 @@
                 </select>
             </div>
 
-
             <div style="grid-column: 1 / -1;">
                 <label class="form-label" for="requisitos">Requisitos específicos:</label>
                 <textarea th:field="*{requisitos}" name="requisitosEspecificos" rows="5" cols="50"
                     class="form-input"></textarea>
             </div>
 
-            <!-- Competências -->
             <div style="grid-column: 1 / -1;">
-                <!-- Competências -->
-                <div style="grid-column: 1 / -1;">
-                    <label class="form-label">Competências:</label>
-                    <div class="form-checkbox-group">
-                        <div class="checkbox-item" th:each="competencia : ${competenciasTemplate}">
-                            <input type="checkbox" th:field="*{competencias}" th:id="${competencia.nome}"
-                                th:value="${competencia.nome}" class="form-checkbox">
-                            <label th:for="${competencia.nome}" class="form-checkbox-label">
-                                <img th:src="${competencia.iconeUrl}" th:alt="${competencia.nome}"
-                                    th:title="${competencia.nome}">
-                            </label>
-                        </div>
+                <label class="form-label">Competências:</label>
+                <div class="form-checkbox-group">
+                    <div class="checkbox-item" th:each="competencia : ${competenciasTemplate}">
+                        <input type="checkbox" th:field="*{competencias}" th:id="${competencia.nome}"
+                            th:value="${competencia.nome}" class="form-checkbox">
+                        <label th:for="${competencia.nome}" class="form-checkbox-label">
+                            <img th:src="${competencia.iconeUrl}" th:alt="${competencia.nome}"
+                                th:title="${competencia.nome}">
+                        </label>
                     </div>
                 </div>
             </div>
+
             <input type="submit" value="Salvar" class="form-button" />
             <button class="form-button-cancel"><a th:href="@{/home}" class="cancel-link">Cancelar</a></button>
         </form>
     </div>
-    </div>
+
     <style>
         /* Remove os botões de alteração de valor nos inputs type number */
         input[type=number]::-webkit-outer-spin-button,
@@ -106,15 +111,12 @@
         input[type=number] {
             appearance: textfield;
             -webkit-appearance: textfield;
-            /* Safari and Chrome */
             -moz-appearance: textfield;
-            /* Firefox */
             -ms-appearance: textfield;
-            /* Internet Explorer and Edge Legacy */
         }
     </style>
+
     <script>
-        // Código para verificar se ao menos uma competência foi selecionada e evitar whitelabel error caso seja enviado um list vazio de competências.
         document.querySelector('form').addEventListener('submit', function (event) {
             const checkboxes = document.querySelectorAll('input[type="checkbox"][name="competencias"]');
             let isChecked = false;
@@ -126,7 +128,7 @@
             });
 
             if (!isChecked) {
-                event.preventDefault(); // Impede o envio do formulário
+                event.preventDefault();
                 alert('Por favor, selecione ao menos uma competência.');
             }
         });

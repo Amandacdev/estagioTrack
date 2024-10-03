@@ -12,56 +12,51 @@
         <form th:action="@{/empresas/save}" method="POST" th:object="${empresa}" id="form" class="form-empresa"
             enctype="multipart/form-data">
 
-            <input th:if="*{id}" th:field="*{id}" style="display: none;">
+            <input type="hidden" name="id" th:value="${empresa.id}" />
 
+             <!-- Nome da Empresa -->
             <div class="form-group">
                 <label for="razaoSocial" class="form-label">Nome da Empresa:</label>
                 <input type="text" th:field="*{razaoSocial}" class="form-input" required />
             </div>
 
+            <!-- CNPJ (desabilitado na edição) -->
             <div class="form-group">
                 <label for="cnpj" class="form-label">CNPJ:</label>
-                <input type="text" th:field="*{cnpj}" class="form-input" placeholder="Apenas os 14 dígitos numéricos"
-                    required minlength="14" maxlength="14" pattern="\d{14}"
-                    title="O CNPJ deve ter exatamente 14 dígitos numéricos" id="cnpj"
-                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:disabled="true"
-                    th:attr="title='Este campo não pode ser alterado'" />
+                <input type="text" th:field="*{cnpj}" class="form-input"
+                    th:disabled="${empresa.id != null}" 
+                    placeholder="Apenas os 14 dígitos numéricos" required minlength="14" maxlength="14" 
+                    pattern="\d{14}" title="O CNPJ deve ter exatamente 14 dígitos numéricos" id="cnpj"/>
             </div>
 
-            <!-- Campo oculto para nomeUsuario -->
-            <input type="hidden" th:field="*{nomeUsuario}" id="nomeUsuario" />
-
+            <!-- Nome do Responsável -->
             <div class="form-group">
                 <label for="responsavel" class="form-label">Nome da pessoa responsável:</label>
                 <input type="text" th:field="*{responsavel}" class="form-input" required />
             </div>
 
+            <!-- Email (desabilitado na edição) -->
             <div class="form-group">
                 <label for="email" class="form-label">Email da pessoa responsável:</label>
-                <input type="email" th:field="*{email}" class="form-input" required
-                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:disabled="true"
-                    th:attr="title='Este campo não pode ser alterado'" />
+                <input type="email" th:field="*{email}" class="form-input" required 
+                    th:disabled="${empresa.id != null}"/>
+                <input type="hidden" th:field="*{email}" /> <!-- Campo oculto para enviar o valor do email desabilitado -->
             </div>
 
-            <!-- Campo de senha dinâmico: obrigatório no cadastro, opcional na edição -->
+            <!-- Senha -->
             <div class="form-group" th:if="${empresa.id == null}">
                 <label for="senha" class="form-label">Senha:</label>
-                <input type="password" th:field="*{senha}" class="form-input" required
-                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:disabled="true"
-                    th:attr="title='Este campo não pode ser alterado'" />
+                <input type="password" th:field="*{senha}" class="form-input" required />
             </div>
             <div class="form-group" th:if="${empresa.id != null}">
                 <label for="senha" class="form-label">Alterar Senha (opcional):</label>
-                <input type="password" th:field="*{senha}" class="form-input"
-                    th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:disabled="true"
-                    th:attr="title='Este campo não pode ser alterado'" />
+                <input type="password" th:field="*{senha}" class="form-input" />
             </div>
 
+            <!-- CEP -->
             <div class="form-group">
                 <label for="cep" class="form-label">CEP:</label>
-                <input type="number" th:field="*{cep}" class="form-input" placeholder="Apenas números" id="cep"
-                    required />
-                <label for="cep" class="form-label">Digite um CEP válido para autocompletar o endereço.</label>
+                <input type="text" th:field="*{cep}" class="form-input" required />
             </div>
 
             <div class="form-group">
@@ -146,7 +141,8 @@
                 <input type="text" th:field="*{site}" class="form-input" />
             </div>
 
-            <div class="form-group">
+            <!-- Exibir o campo comprovanteEndereco apenas no cadastro -->
+            <div class="form-group" th:if="${empresa.id == null}">
                 <label for="comprovanteEndereco" class="form-label">Comprovante de endereço (apenas PDF):</label>
                 <input type="file" name="comprovanteEndereco" class="form-input" accept=".pdf" />
             </div>

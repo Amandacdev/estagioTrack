@@ -1,5 +1,6 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Empresa;
@@ -59,33 +61,54 @@ public class EmpresaController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String cadastroEmpresa(Empresa empresa, Model model, RedirectAttributes attr, Principal principal) {
-        System.out.println(empresa);
+    public String cadastroEmpresa(@RequestParam(value = "comprovanteEndereco", required = false) MultipartFile comprovanteEnderecoFile,
+                                Empresa empresa, Model model, RedirectAttributes attr, Principal principal) {
+
         Empresa empresaExistente = null;
 
+        // Verifica se é uma edição (empresa já existente)
         if (empresa.getId() != null) {
             empresaExistente = empresaService.findById(empresa.getId()).orElse(null);
+
+            if (empresaExistente != null) {
+                // Se o arquivo não foi enviado, mantenha o comprovante anterior
+                if (comprovanteEnderecoFile == null || comprovanteEnderecoFile.isEmpty()) {
+                    empresa.setComprovanteEndereco(empresaExistente.getComprovanteEndereco());
+                } else {
+                    try {
+                        // Armazena o novo arquivo, se enviado
+                        empresa.setComprovanteEndereco(comprovanteEnderecoFile.getBytes());
+                    } catch (IOException e) {
+                        model.addAttribute("alert", "Erro ao processar o comprovante de endereço.");
+                        return "empresas/form";
+                    }
+                }
+            }
+        } else if (comprovanteEnderecoFile != null && !comprovanteEnderecoFile.isEmpty()) {
+            try {
+                // Conversão do arquivo para byte[] ao criar nova empresa
+                empresa.setComprovanteEndereco(comprovanteEnderecoFile.getBytes());
+            } catch (IOException e) {
+                model.addAttribute("alert", "Erro ao processar o comprovante de endereço.");
+                return "empresas/form";
+            }
         }
 
-        // Verificar se o email ou CNPJ já existem, excluindo a própria empresa (caso
-        // seja edição)
+        // Demais verificações e salvamento de empresa
         if ((empresaService.existsByEmail(empresa.getEmail())
-                && (empresaExistente == null || !empresaExistente.getEmail().equals(empresa.getEmail()))) ||
-                (empresaService.existsByCnpj(empresa.getCnpj())
-                        && (empresaExistente == null || !empresaExistente.getCnpj().equals(empresa.getCnpj())))) {
+                && (empresaExistente == null || !empresaExistente.getEmail().equals(empresa.getEmail())))
+                || (empresaService.existsByCnpj(empresa.getCnpj())
+                && (empresaExistente == null || !empresaExistente.getCnpj().equals(empresa.getCnpj())))) {
             model.addAttribute("alert", "Email ou CNPJ já cadastrado.");
             return "empresas/form";
         }
 
-        // Se é uma nova empresa, definimos o ID
-        if (empresa.getId() == null) {
-            Integer maxId = empresaService.findMaxId();
-            empresa.setId(maxId + 1);
+        if (empresaExistente != null && (empresa.getSenha() == null || empresa.getSenha().isBlank())) {
+            empresa.setSenha(empresaExistente.getSenha());
         }
 
         empresaService.save(empresa);
 
-        // Lógica de usuário no caso de criação de uma nova empresa
         if (empresaExistente == null) {
             UserDetails novoUsuario = User.withUsername(empresa.getEmail()).password(empresa.getSenha())
                     .roles("EMPRESA").build();
@@ -98,29 +121,8 @@ public class EmpresaController {
             attr.addFlashAttribute("success", "Empresa atualizada com sucesso.");
             return "redirect:/empresas/detalhes/" + empresa.getId();
         }
-
     }
 
-    // Método para deletar a empresa
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public String deletarEmpresa(@RequestParam Integer empresaId, RedirectAttributes attr) {
-        empresaService.deleteById(empresaId);
-        attr.addFlashAttribute("mensagem", "Empresa excluída com sucesso!");
-        return "redirect:/empresas";
-    }
-
-    // Detalhes da empresa
-    @RequestMapping("/detalhes/{id}")
-    public String getDetalhesEmpresa(@PathVariable("id") Integer id, Model model) {
-        Optional<Empresa> empresa = empresaService.findById(id);
-        if (empresa.isPresent()) {
-            model.addAttribute("empresa", empresa.get());
-            return "empresas/detalhes";
-        } else {
-            model.addAttribute("alert", "Empresa não encontrada.");
-            return "redirect:/empresas";
-        }
-    }
 
     // Exibir o formulário de edição de uma empresa
     @RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
