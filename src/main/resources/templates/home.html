@@ -16,6 +16,10 @@
         <button class="start-button" style="position: relative; z-index: 2;" sec:authorize="hasRole('ROLE_EMPRESA')">
             <a class="start-button-link" href="#" th:href="@{/ofertas/paginaUsuario}">Veja suas ofertas de estágio!</a>
         </button>
+
+        <button class="start-button" style="position: relative; z-index: 2;" sec:authorize="hasRole('ROLE_ADMIN')">
+            <a class="start-button-link" href="#" th:href="@{/coordenador/dashboard}">Ir para área de Coordenação</a>
+        </button>
     </div>
 </body>
 

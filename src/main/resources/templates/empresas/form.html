@@ -34,8 +34,7 @@
 
             <div class="form-group">
                 <label for="email" class="form-label">Email da pessoa responsável:</label>
-                <input type="email" th:field="*{email}" class="form-input" id="email" required
-                       th:disabled="${empresa.id != null}" th:attr="title='Este campo não pode ser alterado'" />
+                <input type="email" th:field="*{email}" class="form-input" id="email" required />
             </div>
 
             <!-- Campo de senha dinâmico: obrigatório no cadastro, opcional na edição -->
