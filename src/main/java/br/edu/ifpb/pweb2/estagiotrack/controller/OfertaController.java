@@ -106,26 +106,36 @@ public class OfertaController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String cadastroOferta(@RequestParam List<String> competencias, Oferta oferta, Model model,
-            RedirectAttributes attr) {
-        if (oferta.getTituloCargo().isEmpty() || oferta.getEmailOfertante().isEmpty()
-                || oferta.getCargaHoraria().isEmpty()) {
+            RedirectAttributes attr, Principal principal) {
+
+        // Verifica se os campos obrigatórios estão preenchidos
+        if (oferta.getTituloCargo().isEmpty() || oferta.getCargaHoraria().isEmpty()) {
             model.addAttribute("alert", "Por favor, preencha todos os campos corretamente.");
             return "ofertas/form";
         } else {
-            Empresa empresa = empresaController.buscarPorEmail(oferta.getEmailOfertante());
+            // Busca a empresa pelo email do usuário autenticado
+            String emailOfertante = principal.getName();
+            Empresa empresa = empresaController.buscarPorEmail(emailOfertante);
+
             if (empresa != null) {
+                // Verifica se a empresa está bloqueada
                 if (empresa.isBloqueada()) {
                     model.addAttribute("alert",
                             "Sua empresa está bloqueada e não pode cadastrar ofertas, entre em contato com o suporte.");
                     return "ofertas/form";
                 }
 
+                // Se for uma nova oferta, define um novo ID
                 if (oferta.getId() == null) {
                     Integer maxId = ofertaService.findMaxId();
                     oferta.setId(maxId + 1);
                 }
+
+                // Define a empresa ofertante e salva a oferta
+                oferta.setEmailOfertante(principal.getName());
                 oferta.setOfertante(empresa);
                 ofertaRepository.save(oferta);
+
                 attr.addFlashAttribute("success", "Oferta de estágio cadastrada com sucesso!");
                 return "redirect:/ofertas/detalhes/" + oferta.getId();
             } else {
@@ -233,8 +243,6 @@ public class OfertaController {
 
         Page<Oferta> ofertasPage = ofertaService.findByEmailOfertante(principal.getName(), pageable);
         Empresa empresa = empresaController.buscarPorEmail(principal.getName());
-
-        System.out.println(empresa);
 
         Paginador paginador = new Paginador(
                 ofertasPage.getNumber(),

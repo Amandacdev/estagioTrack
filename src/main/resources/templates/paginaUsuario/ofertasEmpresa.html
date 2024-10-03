@@ -3,11 +3,14 @@
 
 <body class="listofertas">
     <div layout:fragment="content" class="container listofertas">
-        <h1 class="page-title listofertas">Minhas ofertas | Empresa</h1>
+        <h1 class="page-title listofertas">Minhas ofertas | <span th:text="${empresa.razaoSocial}"></span></h1>
 
         <h2 class="listofertas">Dados da Empresa</h2>
         <p class="listofertas">CNPJ: <span th:text="${empresa.cnpj}"></span></p>
         <p class="listofertas">Email: <span th:text="${empresa.email}"></span></p>
+        <div th:if="${ofertas.isEmpty()}">
+            <p>Nenhum estágio cadastrado.</p>
+        </div>
         <table class="offers-table listofertas" th:if="${!#lists.isEmpty(ofertas)}">
             <thead>
                 <tr>
