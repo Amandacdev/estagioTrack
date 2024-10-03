@@ -80,16 +80,22 @@ public class CandidaturaController {
     @PostMapping("/save")
     public String cadastroCandidatura(@ModelAttribute Candidatura candidatura, Model model, RedirectAttributes attr,
             Principal principal) {
-        Aluno aluno = alunoService.findByEmail(candidatura.getEmailCandidato()).orElse(null);
+
+        // Busca o aluno pelo email do usuário autenticado (não mais pelo campo do form)
+        Aluno aluno = alunoService.findByEmail(principal.getName()).orElse(null);
         Oferta oferta = ofertaService.findById(candidatura.getOfertaSelecionada().getId()).orElse(null);
 
         if (aluno != null && oferta != null) {
+            candidatura.setEmailCandidato(principal.getName());
             candidatura.setAlunoCandidato(aluno);
             candidatura.setOfertaSelecionada(oferta);
+            
+            // Definir o ID apenas se for uma nova candidatura
             if (candidatura.getId() == null) {
                 Integer maxId = candidaturaService.findMaxId();
                 candidatura.setId(maxId + 1);
             }
+            
             candidaturaService.save(candidatura);
             attr.addFlashAttribute("success", "Candidatura realizada com sucesso!");
             return getListCandidaturasUsuario(0, 5, model, principal);
@@ -126,7 +132,6 @@ public class CandidaturaController {
         model.addAttribute("paginador", paginador);
 
         return "paginaUsuario/candidaturasEstudante";
-
     }
 
     @RequestMapping("/aprovar/{id}")
@@ -142,5 +147,4 @@ public class CandidaturaController {
             return "redirect:/candidaturas";
         }
     }
-
 }
