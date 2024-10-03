@@ -3,8 +3,6 @@ package br.edu.ifpb.pweb2.estagiotrack.controller;
 import java.security.Principal;
 import java.util.Optional;
 
-import br.edu.ifpb.pweb2.estagiotrack.model.*;
-import br.edu.ifpb.pweb2.estagiotrack.service.EstagioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -115,8 +113,7 @@ public class CandidaturaController {
         Paginador paginador = new Paginador(
                 candidaturasPage.getNumber(),
                 candidaturasPage.getSize(),
-                (int) candidaturasPage.getTotalElements()
-        );
+                (int) candidaturasPage.getTotalElements());
 
         Aluno aluno = alunoService.findByEmail(principal.getName()).orElse(null);
 

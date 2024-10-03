@@ -1,10 +1,8 @@
 package br.edu.ifpb.pweb2.estagiotrack.controller;
 
-import java.security.Principal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.validation.ValidationErrors;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,9 +65,9 @@ public class EmpresaController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String cadastroEmpresa(@RequestParam(value="comprovante") MultipartFile comprovante,
-                                  @Valid Empresa empresa, BindingResult bindingResult,
-                                  Model model, RedirectAttributes attr) {
+    public String cadastroEmpresa(@RequestParam(value = "comprovante") MultipartFile comprovante,
+            @Valid Empresa empresa, BindingResult bindingResult,
+            Model model, RedirectAttributes attr) {
         System.out.println(empresa);
         Empresa empresaExistente = null;
 
@@ -103,6 +102,13 @@ public class EmpresaController {
             return "empresas/form";
         }
 
+        // Lógica de geração manual de ID para nova empresa
+        if (empresaExistente == null) {
+            Integer novoId = empresaService.findMaxId() + 1;
+            empresa.setId(novoId); // Define o ID manualmente
+        }
+
+        // Salvar a empresa
         empresaService.save(empresa);
         System.out.println("Empresa salva: " + empresa);
 
@@ -123,7 +129,6 @@ public class EmpresaController {
             attr.addFlashAttribute("success", "Empresa atualizada com sucesso.");
             return "redirect:/empresas/detalhes/" + empresa.getId();
         }
-
     }
 
     // Método para deletar a empresa

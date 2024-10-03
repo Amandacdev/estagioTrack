@@ -11,8 +11,11 @@ import org.springframework.stereotype.Service;
 import br.edu.ifpb.pweb2.estagiotrack.model.Estagio;
 import br.edu.ifpb.pweb2.estagiotrack.model.ResultadoEstagio;
 import br.edu.ifpb.pweb2.estagiotrack.repository.EstagioRepository;
-    
-    @Autowired
+
+@Service
+public class EstagioService {
+
+@Autowired
     private EstagioRepository estagioRepository;
 
     public Page<Estagio> listAll(Pageable pageable) { return estagioRepository.findAll(pageable); }
