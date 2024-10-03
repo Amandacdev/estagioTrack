@@ -37,6 +37,7 @@
                         </ul>
                     </td>
                     <td th:text="${oferta.status}"></td>
+
                     <td th:if="${oferta.statusOferta.name() == 'ABERTA'}">
                         <form th:action="@{/ofertas/desativar}" method="post" class="action-form listofertas">
                             <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
@@ -48,6 +49,9 @@
                             <input type="hidden" name="ofertaId" th:value="${oferta.getId()}" />
                             <button type="submit" class="form-button listofertas">Reativar</button>
                         </form>
+                    </td>
+                    <td th:if="${oferta.statusOferta.name() == 'FINALIZADA'}" STYLE="text-align: center">
+                        -
                     </td>
                 </tr>
             </tbody>

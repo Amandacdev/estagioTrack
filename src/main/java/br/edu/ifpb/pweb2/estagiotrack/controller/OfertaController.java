@@ -43,14 +43,37 @@ public class OfertaController {
     @Autowired
     private CompetenciasTemplateService competenciasTemplateService;
 
-    @RequestMapping("/form")
+   @RequestMapping("/form")
     public String getForm(Oferta oferta, Model model, Principal principal) {
-        System.out.println(principal);
-        System.out.println(principal.getName());
+        // Verifica se o usuário está autenticado
+        if (principal == null || principal.getName() == null) {
+            model.addAttribute("message", "Usuário não autenticado.");
+            return "error"; // Redireciona para a página de erro personalizada
+        }
+
+        // Recupera a empresa pelo email do usuário logado
+        Empresa empresa = empresaController.buscarPorEmail(principal.getName());
+
+        if (empresa == null) {
+            model.addAttribute("message", "Empresa não encontrada. Verifique suas credenciais.");
+            return "error"; 
+        }
+
+        // Verifica se a empresa está bloqueada
+        if (empresa.isBloqueada()) {
+            model.addAttribute("message", "Sua empresa está bloqueada e não pode cadastrar ofertas.");
+            return "error"; 
+        }
+
+        // Passa a empresa e a oferta para o modelo
         List<CompetenciaTemplate> competenciasTemplate = competenciasTemplateService.findAll();
         model.addAttribute("competenciasTemplate", competenciasTemplate);
+        model.addAttribute("empresa", empresa);
+        model.addAttribute("oferta", oferta);
+
         return "ofertas/form";
     }
+
 
     @RequestMapping(method = RequestMethod.GET)
     public String getList(@RequestParam(value = "competencias", required = false) List<String> competencias,
@@ -89,6 +112,11 @@ public class OfertaController {
         } else {
             Empresa empresa = empresaController.buscarPorEmail(oferta.getEmailOfertante());
             if (empresa != null) {
+                if (empresa.isBloqueada()) {
+                    model.addAttribute("alert", "Sua empresa está bloqueada e não pode cadastrar ofertas, entre em contato com o suporte.");
+                    return "ofertas/form";
+                }
+
                 if (oferta.getId() == null) {
                     Integer maxId = ofertaService.findMaxId();
                     oferta.setId(maxId + 1);
@@ -98,8 +126,7 @@ public class OfertaController {
                 attr.addFlashAttribute("success", "Oferta de estágio cadastrada com sucesso!");
                 return "redirect:/ofertas/detalhes/" + oferta.getId();
             } else {
-                model.addAttribute("alert",
-                        "Email inválido. O email deve corresponder ao informado no cadastro da empresa.");
+                model.addAttribute("alert", "Email inválido. O email deve corresponder ao informado no cadastro da empresa.");
                 return "ofertas/form";
             }
         }
