@@ -8,7 +8,7 @@
         <h2 class="listofertas">Dados da Empresa</h2>
         <p class="listofertas">CNPJ: <span th:text="${empresa.cnpj}"></span></p>
         <p class="listofertas">Email: <span th:text="${empresa.email}"></span></p>
-        <table class="offers-table list" th:if="${!#lists.isEmpty(estagiarios)}">
+        <table class="offers-table listofertas" th:if="${!#lists.isEmpty(estagiarios)}">
             <thead>
                 <tr>
                     <th>Nome</th>
@@ -29,8 +29,8 @@
                     <td th:text="${#temporals.format(estagio.dataInicio, 'dd/MM/yyyy')}"></td>
                     <td th:text="${#temporals.format(estagio.dataFim, 'dd/MM/yyyy')}"></td>
                     <td th:if="${estagio.candidaturaSelecionada.statusCandidatura.name() == 'APROVADA'}">
-                        <button class="form-button">
-                            <a th:href="@{/files/download/termo/{id}(id=${estagio.id})}">
+                        <button class="form-button-cancel">
+                            <a class="cancel-link" th:href="@{/files/download/termo/{id}(id=${estagio.id})}">
                                 Baixar Termo
                             </a>
                         </button>
@@ -39,7 +39,7 @@
             </tbody>
         </table>
 
-        <div class="paginador" th:classappend="${#lists.isEmpty(estagiarios)} ? 'd-none'">
+        <div class="paginador" th:if="${paginador.totalPages > 0}">
             <ul class="pagination justify-content-center">
                 <li class="page-item" th:classappend="${paginador.currentPage == 0} ? 'disabled'">
                     <a class="page-link" th:href="@{/estagios/estagiarios(page=${paginador.currentPage - 1}, size=${paginador.pageSize})}">

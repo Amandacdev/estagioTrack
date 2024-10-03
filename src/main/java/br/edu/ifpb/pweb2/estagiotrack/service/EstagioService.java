@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Oferta;
+import br.edu.ifpb.pweb2.estagiotrack.model.ResultadoEstagio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +24,10 @@ public class EstagioService {
 
     public Page<Estagio> buscarEstagiosPorEmailOfertante(String email, Pageable pageable) {
         return estagioRepository.findEstagiosByOfertanteEmail(email, pageable);
+    }
+
+    public ResultadoEstagio obterDadosEstagio(Integer estagioId) {
+        return estagioRepository.findDadosEstagioPorId(estagioId);
     }
 
     public List<Estagio> findAll() {
