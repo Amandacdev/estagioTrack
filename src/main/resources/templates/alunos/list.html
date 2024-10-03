@@ -10,7 +10,7 @@
             <p>Nenhum estudante cadastrado</p>
         </div>
 
-        <table class="offers-table list" th:if="${!#lists.isEmpty(alunos)}">
+        <table  class="offers-table listofertas" th:if="${!#lists.isEmpty(alunos)}">
             <thead>
                 <tr>
                     <th>Nome</th>
@@ -28,7 +28,7 @@
                     <td th:text="${aluno.genero}"></td>
                     <td>
                         <ul class="competencies-list listofertas">
-                            <li th:each="competencia : ${aluno.competencias}" th:text="${competencia}"></li>
+                            <li th:each="competencia : ${aluno.competencias}" th:text="${competencia}" style="color:white"></li>
                         </ul>
                     </td>
                 </tr>
