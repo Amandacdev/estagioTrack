@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.Estagio;
 
+import java.util.Optional;
+
 @Repository
 public interface EstagioRepository extends JpaRepository<Estagio, Integer>{
     @Query("SELECT COALESCE(MAX(e.id), 0) FROM Estagio e")
@@ -29,4 +31,8 @@ public interface EstagioRepository extends JpaRepository<Estagio, Integer>{
             "JOIN o.ofertante e " +
             "WHERE est.id = :estagioId")
     ResultadoEstagio findDadosEstagioPorId(@Param("estagioId") Integer estagioId);
+
+    @Query("SELECT e FROM Estagio e WHERE e.alunoAprovado.id = :alunoId")
+    Optional<Estagio> findEstagioByAlunoId(@Param("alunoId") Integer alunoId);
+
 }

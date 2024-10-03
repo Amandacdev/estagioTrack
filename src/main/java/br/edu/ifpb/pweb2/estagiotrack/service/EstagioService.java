@@ -26,6 +26,10 @@ public class EstagioService {
         return estagioRepository.findEstagiosByOfertanteEmail(email, pageable);
     }
 
+    public Optional<Estagio> buscarEstagioPorAlunoId(Integer alunoId) {
+        return estagioRepository.findEstagioByAlunoId(alunoId);
+    }
+
     public ResultadoEstagio obterDadosEstagio(Integer estagioId) {
         return estagioRepository.findDadosEstagioPorId(estagioId);
     }

@@ -26,7 +26,7 @@
             <p>Nenhuma oferta disponível, volte em outro momento!</p>
         </div>
 
-        <table class="offers-table list" th:if="${!#lists.isEmpty(ofertas)}">
+        <table class="offers-table listofertas" th:if="${!#lists.isEmpty(ofertas)}">
             <thead>
                 <tr>
                     <th>Cargo</th>
@@ -62,7 +62,7 @@
             </tbody>
         </table>
 
-        <div>
+        <div th:if="${paginador.totalPages > 0}">
             <ul class="pagination justify-content-center">
                 <li class="page-item" th:classappend="${paginador.currentPage == 0} ? 'disabled'">
                     <a class="page-link" th:href="@{/ofertas/listOfertasAbertas(page=${paginador.currentPage - 1}, size=${paginador.pageSize})}">

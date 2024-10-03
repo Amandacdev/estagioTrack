@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import br.edu.ifpb.pweb2.estagiotrack.model.*;
+import br.edu.ifpb.pweb2.estagiotrack.service.EstagioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,6 +36,9 @@ public class CandidaturaController {
 
     @Autowired
     private OfertaService ofertaService;
+
+    @Autowired
+    private EstagioService estagioService;
 
     @RequestMapping("/form")
     public String getForm(@RequestParam("ofertaId") Integer ofertaId, Model model) {
@@ -109,10 +113,14 @@ public class CandidaturaController {
                 (int) candidaturasPage.getTotalElements()
         );
 
-        
         Aluno aluno = alunoService.findByEmail(principal.getName()).orElse(null);
+
+        Optional<Estagio> estagioOptional = estagioService.buscarEstagioPorAlunoId(aluno.getId());
+        Estagio estagio = estagioOptional.orElse(null);
+
         model.addAttribute("candidaturas", candidaturas);
         model.addAttribute("aluno", aluno);
+        model.addAttribute("estagio", estagio);
         model.addAttribute("paginador", paginador);
 
         return "paginaUsuario/candidaturasEstudante";
