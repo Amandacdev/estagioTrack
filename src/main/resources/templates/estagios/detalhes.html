@@ -14,14 +14,14 @@
             <p><strong>Observações:</strong> <span th:text="${estagio.observacoes}"></span></p>
         </div>
         <div>
-            <button class="form-button-cancel">
-                <a th:href="@{/files/download/termo/{id}(id=${estagio.id})}">
+            <button class="form-button-cancel" >
+                <a style="color:white" th:href="@{/files/download/termo/{id}(id=${estagio.id})}">
                     Download Termo de Estágio
                 </a>
             </button>
         </div>
         <button class="form-button-cancel">
-            <a th:href="@{/estagios}">
+            <a style="color:white" th:href="@{/estagios}">
                 Voltar para lista
             </a>
         </button>
