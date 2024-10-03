@@ -230,11 +230,15 @@ public class OfertaController {
         Page<Oferta> ofertasPage = ofertaService.findByEmailOfertante(principal.getName(), pageable);
         Empresa empresa = empresaController.buscarPorEmail(principal.getName());
 
+        System.out.println(empresa);
+
         Paginador paginador = new Paginador(
                 ofertasPage.getNumber(),
                 ofertasPage.getSize(),
                 (int) ofertasPage.getTotalElements()
         );
+
+        System.out.println(paginador);
 
         model.addAttribute("empresa", empresa);
         model.addAttribute("ofertas", ofertasPage);
